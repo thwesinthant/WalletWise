@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_50"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="32dp">
+
+        <!-- Logo mark: gradient square + wordmark -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_logo_mark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.02"
+                android:text="MoneyMate"
+                android:textColor="@color/text_primary_light"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:text="Welcome back"
+            android:textColor="@color/text_primary_light"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="Sign in to manage your budget and expenses"
+            android:textColor="@color/text_secondary_light"
+            android:textSize="13.5sp" />
+
+        <!-- Form card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            app:cardBackgroundColor="@color/neutral_0"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Segmented tab control -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_segment_outer"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tabSignIn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_segment_active"
+                        android:gravity="center"
+                        android:text="Sign In"
+                        android:textColor="@color/text_primary_light"
+                        android:textStyle="bold"
+                        android:textSize="13.5sp" />
+
+                    <TextView
+                        android:id="@+id/tabCreateAccount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_tab_ripple"
+                        android:gravity="center"
+                        android:text="Create Account"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="13.5sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvSectionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Sign in to continue"
+                    android:textColor="@color/text_primary_light"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSectionSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Access your dashboard, budgets, and expenses."
+                    android:textColor="@color/text_secondary_light"
+                    android:textSize="12.5sp" />
+
+                <!-- ===== SIGN IN FIELDS ===== -->
+                <LinearLayout
+                    android:id="@+id/groupSignIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:id="@+id/boxUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:background="@drawable/bg_input_filled"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_person"
+                            app:tint="@color/neutral_500"
+                            android:contentDescription="Username" />
+
+                        <EditText
+                            android:id="@+id/etUsername"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="admin"
+                            android:textColorHint="@color/neutral_500"
+                            android:textColor="@color/text_primary_light"
+                            android:textSize="14.5sp"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/boxPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_input_filled"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_lock"
+                            app:tint="@color/neutral_500"
+                            android:contentDescription="Password" />
+
+                        <EditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="Password"
+                            android:textColorHint="@color/neutral_500"
+                            android:textColor="@color/text_primary_light"
+                            android:textSize="14.5sp"
+                            android:inputType="textPassword"
+                            android:singleLine="true" />
+
+                        <ImageButton
+                            android:id="@+id/btnTogglePassword"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:background="@null"
+                            android:src="@drawable/ic_eye"
+                            app:tint="@color/neutral_500"
+                            android:contentDescription="Toggle password visibility" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- ===== CREATE ACCOUNT FIELDS ===== -->
+                <LinearLayout
+                    android:id="@+id/groupCreateAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/etFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:background="@drawable/bg_input_filled"
+                        android:paddingHorizontal="16dp"
+                        android:hint="Full name"
+                        android:textColorHint="@color/neutral_500"
+                        android:textColor="@color/text_primary_light"
+                        android:textSize="14.5sp"
+                        android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_input_filled"
+                        android:paddingHorizontal="16dp"
+                        android:hint="Email"
+                        android:textColorHint="@color/neutral_500"
+                        android:textColor="@color/text_primary_light"
+                        android:textSize="14.5sp"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/etNewPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_input_filled"
+                        android:paddingHorizontal="16dp"
+                        android:hint="Password"
+                        android:textColorHint="@color/neutral_500"
+                        android:textColor="@color/text_primary_light"
+                        android:textSize="14.5sp"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_input_filled"
+                        android:paddingHorizontal="16dp"
+                        android:hint="Confirm password"
+                        android:textColorHint="@color/neutral_500"
+                        android:textColor="@color/text_primary_light"
+                        android:textSize="14.5sp"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnPrimaryAction"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/bg_primary_pill_button"
+                    android:elevation="2dp"
+                    android:stateListAnimator="@null"
+                    android:text="Sign In"
+                    android:textAllCaps="false"
+                    android:textColor="@color/neutral_0"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSwitchModeLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="6dp"
+                    android:text="No account yet? Create one"
+                    android:textColor="@color/primary_500"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ===================== PRIMARY (Blue) ===================== -->
+    <color name="primary_50">#E8F0FE</color>
+    <color name="primary_100">#C2D9FC</color>
+    <color name="primary_200">#9BC1FA</color>
+    <color name="primary_300">#6FA8F7</color>
+    <color name="primary_400">#4A93F4</color>
+    <color name="primary_500">#2472F0</color>   <!-- main brand blue -->
+    <color name="primary_600">#1B5CD1</color>
+    <color name="primary_700">#1447A8</color>
+    <color name="primary_800">#0E357F</color>
+    <color name="primary_900">#082456</color>
+
+    <!-- ============ ACCENT (Amber — complementary to blue) ============ -->
+    <!-- Used for CTAs, highlights, savings-goal progress -->
+    <color name="accent_100">#FFE9C2</color>
+    <color name="accent_300">#FFCB66</color>
+    <color name="accent_500">#FFA800</color>   <!-- main accent -->
+    <color name="accent_700">#CC8600</color>
+
+    <!-- ===================== SEMANTIC ===================== -->
+    <color name="income_green">#1FA463</color>
+    <color name="expense_red">#E5484D</color>
+    <color name="warning_amber">#F2A93B</color>
+    <color name="info_blue">@color/primary_500</color>
+
+    <!-- ===================== NEUTRALS ===================== -->
+    <color name="neutral_0">#FFFFFF</color>
+    <color name="neutral_50">#F7F8FA</color>
+    <color name="neutral_100">#EEF0F3</color>
+    <color name="neutral_300">#D3D7DE</color>
+    <color name="neutral_500">#8A909C</color>
+    <color name="neutral_700">#4B5563</color>
+    <color name="neutral_900">#1A1D23</color>
+
+    <!-- ===================== SURFACE / BACKGROUND ===================== -->
+    <color name="surface_light">@color/neutral_0</color>
+    <color name="background_light">@color/neutral_50</color>
+    <color name="surface_dark">#101317</color>
+    <color name="background_dark">#0B0D10</color>
+
+    <!-- ===================== TEXT ===================== -->
+    <color name="text_primary_light">@color/neutral_900</color>
+    <color name="text_secondary_light">@color/neutral_700</color>
+    <color name="text_primary_dark">@color/neutral_0</color>
+    <color name="text_secondary_dark">@color/neutral_300</color>
+
+
+    <color name="action_circle_bg">#F2EEFB</color>
+</resources>

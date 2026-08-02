@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FieldLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:fontFamily">@font/dosis_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_secondary_light</item>
+    </style>
+
+    <style name="FieldInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+        <item name="android:background">@drawable/bg_field</item>
+        <item name="android:fontFamily">@font/molengo_regular</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+</resources>

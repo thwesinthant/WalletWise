@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_light">
+
+    <View
+        android:id="@+id/headerBg"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/bg_gradient_header"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="78dp" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Back"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/neutral_0" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/bg_card_top_rounded"
+        android:clipToOutline="true"
+        android:outlineProvider="background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/formCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card_top_rounded"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="28dp"
+            android:paddingBottom="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="Create Your Account"
+                android:textAlignment="center"
+                android:textColor="@color/primary_500"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/molengo_regular"
+                android:text="Start your journey to smarter spending. Ready?"
+                android:textAlignment="center"
+                android:textColor="@color/text_secondary_light"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etFullName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bg_input_box"
+                android:fontFamily="@font/molengo_regular"
+                android:hint="Enter full name"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="@color/text_primary_light"
+                android:textColorHint="@color/neutral_500" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_input_box"
+                android:fontFamily="@font/molengo_regular"
+                android:hint="Enter email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="@color/text_primary_light"
+                android:textColorHint="@color/neutral_500" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_input_box">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:fontFamily="@font/molengo_regular"
+                    android:hint="Enter password"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="48dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text_primary_light"
+                    android:textColorHint="@color/neutral_500" />
+
+                <ImageButton
+                    android:id="@+id/btnTogglePassword"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="16dp"
+                    android:background="@null"
+                    android:contentDescription="Toggle password visibility"
+                    android:src="@android:drawable/ic_menu_view"
+                    app:tint="@color/neutral_500" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dosis_semibold"
+                android:padding="4dp"
+                android:text="Forgot password?"
+                android:textColor="@color/primary_500"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnGetStarted"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_gradient_pill_button"
+                android:fontFamily="@font/dosis_extrabold"
+                android:stateListAnimator="@null"
+                android:text="Get Started"
+                android:textAllCaps="false"
+                android:textColor="@color/neutral_0"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/neutral_500" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="Sign in with"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/neutral_500" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:background="@drawable/facebook"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:background="@drawable/google"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:background="@drawable/twitter"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="Already have an account? "
+                    android:textColor="@color/neutral_500"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvGoToSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_bold"
+                    android:text="Log In "
+                    android:textColor="@color/primary_500"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

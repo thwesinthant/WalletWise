@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.ExpenceAndBudgetTracker" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_500</item>
+        <item name="colorOnPrimary">@color/neutral_0</item>
+        <item name="colorPrimaryContainer">@color/primary_100</item>
+        <item name="colorOnPrimaryContainer">@color/primary_900</item>
+
+        <item name="colorSecondary">@color/accent_500</item>
+        <item name="colorOnSecondary">@color/neutral_900</item>
+        <item name="colorSecondaryContainer">@color/accent_100</item>
+        <item name="colorOnSecondaryContainer">@color/accent_700</item>
+
+        <item name="colorError">@color/expense_red</item>
+        <item name="colorOnError">@color/neutral_0</item>
+
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/text_primary_light</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary_light</item>
+
+        <item name="android:statusBarColor">@color/primary_700</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+
+    </style>
+
+    <style name="Widget.MoneyMate.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primary_500</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+    </style>
+
+    <style name="KeypadKey">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="Widget.MoneyMate.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/primary_500</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.MoneyMate.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/primary_500</item>
+        <item name="hintTextColor">@color/primary_500</item>
+    </style>
+
+</resources>

@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_phone_gradient">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingTop="46dp"
+            android:paddingBottom="24dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/greetName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello there"
+                        android:fontFamily="@font/dosis_extrabold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="17sp" />
+                    <!-- greetName should be set from ViewModel with the logged-in user's name -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Good morning"
+                        android:fontFamily="@font/molengo_regular"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivNoti"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_bell"
+                    android:contentDescription="Notification" />
+
+                <FrameLayout
+                    android:layout_width="42dp"
+                    android:layout_height="42dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_avatar"
+                        android:gravity="center"
+                        android:text="U"
+                        android:fontFamily="@font/dosis_extrabold"
+                        android:textColor="@color/neutral_0"
+                        android:textSize="14sp" />
+                    <!-- avatar initial should be derived from the logged-in user's name -->
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Tabs -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dashboard"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="12.5sp" />
+
+                    <!-- Active tab indicator, matches reference mockup -->
+                    <View
+                        android:layout_width="64dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@color/primary_500" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Investments"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="12.5sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="Analytics"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="12.5sp" />
+            </LinearLayout>
+
+            <!-- Balance card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_balance_card"
+                android:clipToOutline="true"
+                android:outlineProvider="background"
+                android:padding="20dp"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_badge"
+                        android:gravity="center"
+                        android:text="👛"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet Balance"
+                            android:fontFamily="@font/dosis_semibold"
+                            android:textColor="@color/neutral_0"
+                            android:textSize="13sp"
+                            android:alpha="0.95" />
+
+                        <TextView
+                            android:id="@+id/balanceUpdatedDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Updated 12/03/2025"
+                            android:fontFamily="@font/molengo_regular"
+                            android:textColor="@color/neutral_0"
+                            android:textSize="10.5sp"
+                            android:alpha="0.7"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/balanceAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$2,455.0"
+                    android:fontFamily="@font/dosis_extrabold"
+                    android:textColor="@color/neutral_0"
+                    android:textSize="30sp"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Expense pill -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/bg_white_pill"
+                        android:padding="10dp"
+                        android:layout_marginEnd="6dp">
+
+                        <TextView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:background="@drawable/bg_split_icon"
+                            android:gravity="center"
+                            android:fontFamily="@font/dosis_bold"
+                            android:text="↑"
+                            android:textColor="@color/expense_red"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp">
+
+                            <TextView
+                                android:id="@+id/expenseLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Expense"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_500"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/expenseAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$362.00"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:textColor="@color/neutral_900"
+                                android:textSize="13sp"
+                                android:layout_marginTop="1dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Income pill -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/bg_white_pill"
+                        android:padding="10dp"
+                        android:layout_marginStart="6dp">
+
+                        <TextView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:background="@drawable/bg_split_icon"
+                            android:gravity="center"
+                            android:text="↓"
+                            android:fontFamily="@font/dosis_bold"
+                            android:textColor="@color/income_green"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp">
+
+                            <TextView
+                                android:id="@+id/incomeLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Income"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_500"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/incomeAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$362.00"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:textColor="@color/neutral_900"
+                                android:textSize="13sp"
+                                android:layout_marginTop="1dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- All Expenses -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_expenses_card"
+                android:padding="16dp"
+                android:layout_marginBottom="20dp">
+
+                <!-- Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="14dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="All Expenses"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btnViewAllExpenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_view_all_pill"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="7dp"
+                        android:text="View All"
+                        android:fontFamily="@font/dosis_bold"
+                        android:textColor="@color/primary_500"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Today label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Coffee row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_expense_row"
+                    android:padding="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_nav_active"
+                        android:gravity="center"
+                        android:text="☕"
+                        android:textSize="18sp" />
+                    <!-- swap for a real white vector icon (e.g. ic_coffee) to match the reference exactly -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Coffee"
+                            android:fontFamily="@font/dosis_semibold"
+                            android:textColor="@color/neutral_900"
+                            android:textSize="13.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="with Peter Bower"
+                            android:fontFamily="@font/molengo_regular"
+                            android:textColor="@color/neutral_500"
+                            android:textSize="11sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$50"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+                </LinearLayout>
+
+                <!-- Gift row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_expense_row"
+                    android:padding="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_nav_active"
+                        android:gravity="center"
+                        android:text="🎁"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gift"
+                            android:fontFamily="@font/dosis_semibold"
+                            android:textColor="@color/neutral_900"
+                            android:textSize="13.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="for Audrey Campbell"
+                            android:fontFamily="@font/molengo_regular"
+                            android:textColor="@color/neutral_500"
+                            android:textSize="11sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$1,500"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+                </LinearLayout>
+
+                <!-- Subscription row (today) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_expense_row"
+                    android:padding="10dp"
+                    android:layout_marginBottom="14dp">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_nav_active"
+                        android:gravity="center"
+                        android:text="✉️"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Subscription"
+                            android:fontFamily="@font/dosis_semibold"
+                            android:textColor="@color/neutral_900"
+                            android:textSize="13.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="made with Chapman"
+                            android:fontFamily="@font/molengo_regular"
+                            android:textColor="@color/neutral_500"
+                            android:textSize="11sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$500"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+                </LinearLayout>
+
+                <!-- Yesterday label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yesterday"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Tea & Snacks row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_expense_row"
+                    android:padding="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_nav_active"
+                        android:gravity="center"
+                        android:text="☕"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tea &amp; Snacks"
+                            android:fontFamily="@font/dosis_semibold"
+                            android:textColor="@color/neutral_900"
+                            android:textSize="13.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="with Peter Bower"
+                            android:fontFamily="@font/molengo_regular"
+                            android:textColor="@color/neutral_500"
+                            android:textSize="11sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$50"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+                </LinearLayout>
+
+                <!-- Subscription row (yesterday) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_expense_row"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_nav_active"
+                        android:gravity="center"
+                        android:text="✉️"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Subscription"
+                            android:fontFamily="@font/dosis_semibold"
+                            android:textColor="@color/neutral_900"
+                            android:textSize="13.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="made with Chapman"
+                            android:fontFamily="@font/molengo_regular"
+                            android:textColor="@color/neutral_500"
+                            android:textSize="11sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$500"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Quick actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_actions_card"
+                android:padding="16dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_action_circle"
+                        android:gravity="center"
+                        android:text="＋"
+                        android:textColor="@color/primary_500"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Top-up"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="10.5sp"
+                        android:layout_marginTop="7dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_action_circle"
+                        android:gravity="center"
+                        android:text="↓"
+                        android:textColor="@color/primary_500"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Receive"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="10.5sp"
+                        android:layout_marginTop="7dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_action_circle"
+                        android:gravity="center"
+                        android:text="↗"
+                        android:textColor="@color/primary_500"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Send"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="10.5sp"
+                        android:layout_marginTop="7dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_action_circle"
+                        android:gravity="center"
+                        android:text="⋯"
+                        android:textColor="@color/primary_500"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payments"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_700"
+                        android:textSize="10.5sp"
+                        android:layout_marginTop="7dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Transactions section header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Transactions"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/btnSeeAllTransactions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See all"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="11.5sp" />
+            </LinearLayout>
+
+            <!-- Transaction row: Figma -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp">
+
+                <TextView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_txn_icon"
+                    android:gravity="center"
+                    android:text="🎨"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Figma"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10/03/2024"
+                        android:fontFamily="@font/molengo_regular"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="11sp"
+                        android:layout_marginTop="1dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$42.40"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="13.5sp" />
+            </LinearLayout>
+
+            <!-- Transaction row: Google -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_txn_icon"
+                    android:gravity="center"
+                    android:text="🔍"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="13.5sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09/03/2024"
+                        android:fontFamily="@font/molengo_regular"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="11sp"
+                        android:layout_marginTop="1dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$12.40"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="13.5sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/navShadow"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:background="@drawable/shadow_top"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Bottom nav -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:orientation="horizontal"
+        android:background="@color/neutral_0"
+        android:gravity="center_vertical"
+        android:paddingBottom="14dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_nav_active"
+                android:gravity="center"
+                android:text="🏠"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/neutral_500"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="📋"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/neutral_500"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="💰"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budgets"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/neutral_500"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="🎯"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goals"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/neutral_500"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="⚙️"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/neutral_500"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Floating add button -->
+    <TextView
+        android:id="@+id/fabAdd"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/bg_fab_add"
+        android:gravity="center"
+        android:text="+"
+        android:fontFamily="@font/dosis_extrabold"
+        android:textColor="@color/neutral_0"
+        android:textSize="24sp"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
