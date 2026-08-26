@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+
+    <!-- soft yellow background blob -->
+    <path
+        android:pathData="M120,30 C170,30 205,65 205,115 C205,165 170,205 118,205 C66,205 35,165 35,118 C35,68 70,30 120,30 Z"
+        android:fillColor="#FFF3C2" />
+
+    <!-- piggy body -->
+    <path
+        android:pathData="M65,140 C65,115 90,100 120,100 C150,100 175,115 175,140 C175,165 150,178 120,178 C90,178 65,165 65,140 Z"
+        android:fillColor="@color/colorYellow" />
+
+    <!-- piggy ear -->
+    <path
+        android:pathData="M150,100 L165,85 L165,105 Z"
+        android:fillColor="@color/colorYellow" />
+
+    <!-- piggy snout -->
+    <path
+        android:pathData="M60,132 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M64,138 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0"
+        android:fillColor="@color/colorBlack" />
+    <path
+        android:pathData="M74,138 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0"
+        android:fillColor="@color/colorBlack" />
+
+    <!-- eye -->
+    <path
+        android:pathData="M100,120 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0"
+        android:fillColor="@color/colorBlack" />
+
+    <!-- coin slot -->
+    <path
+        android:pathData="M110,98 L130,98 L128,90 L112,90 Z"
+        android:fillColor="@color/colorBlack" />
+
+    <!-- legs -->
+    <path
+        android:pathData="M85,175 L85,192 M95,175 L95,192 M145,175 L145,192 M155,175 L155,192"
+        android:strokeColor="@color/colorYellow"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- hand dropping coin -->
+    <path
+        android:pathData="M118,45 L118,75"
+        android:strokeColor="#C99A5B"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M108,75 L128,75 L124,60 L112,60 Z"
+        android:fillColor="#C99A5B" />
+
+    <!-- coin -->
+    <path
+        android:pathData="M108,80 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M120,72 L120,88"
+        android:strokeColor="@color/colorBlack"
+        android:strokeWidth="2"
+        android:fillColor="#00000000" />
+
+    <!-- plant -->
+    <path
+        android:pathData="M195,150 L215,150 L212,175 L198,175 Z"
+        android:fillColor="@color/colorBlack" />
+    <path
+        android:pathData="M205,150 C195,135 195,115 205,100 C215,115 215,135 205,150 Z"
+        android:fillColor="@color/colorYellow" />
+
+    <!-- table line -->
+    <path
+        android:pathData="M40,205 L215,205"
+        android:strokeColor="@color/colorDotInactive"
+        android:strokeWidth="3"
+        android:fillColor="#00000000" />
+</vector>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+
+    <!-- soft yellow background blob -->
+    <path
+        android:pathData="M120,30 C170,30 205,65 205,115 C205,165 170,205 118,205 C66,205 35,165 35,118 C35,68 70,30 120,30 Z"
+        android:fillColor="#FFF3C2" />
+
+    <!-- rocket body -->
+    <path
+        android:pathData="M120,55 C140,75 145,110 130,140 L110,140 C95,110 100,75 120,55 Z"
+        android:fillColor="@color/colorBlack" />
+    <path
+        android:pathData="M110,100 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M108,138 L95,160 L112,150 Z"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M132,138 L145,160 L128,150 Z"
+        android:fillColor="@color/colorYellow" />
+
+    <!-- coin 1 -->
+    <path
+        android:pathData="M55,150 a16,16 0 1,0 32,0 a16,16 0 1,0 -32,0"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M67,142 L67,158 M62,146 L72,146 M62,154 L72,154"
+        android:strokeColor="@color/colorBlack"
+        android:strokeWidth="2"
+        android:fillColor="#00000000" />
+
+    <!-- coin 2 -->
+    <path
+        android:pathData="M155,175 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M168,167 L168,183"
+        android:strokeColor="@color/colorBlack"
+        android:strokeWidth="2"
+        android:fillColor="#00000000" />
+
+    <!-- ground shadow -->
+    <path
+        android:pathData="M70,210 L170,210"
+        android:strokeColor="@color/colorDotInactive"
+        android:strokeWidth="3"
+        android:fillColor="#00000000" />
+</vector>

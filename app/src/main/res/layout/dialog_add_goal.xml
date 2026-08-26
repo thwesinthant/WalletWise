@@ -80,6 +80,31 @@
             android:textSize="17dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:hint="Target date"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeColor="#4A90D9"
+        app:hintTextColor="#4A90D9"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_calendar"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etGoalTargetDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:textSize="17dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"

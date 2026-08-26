@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+
+    <!-- soft yellow background blob -->
+    <path
+        android:pathData="M120,30 C170,30 205,65 205,115 C205,165 170,205 118,205 C66,205 35,165 35,118 C35,68 70,30 120,30 Z"
+        android:fillColor="#FFF3C2" />
+
+    <!-- card -->
+    <path
+        android:pathData="M45,95 L90,95 A6,6 0 0,1 96,101 L96,125 A6,6 0 0,1 90,131 L45,131 A6,6 0 0,1 39,125 L39,101 A6,6 0 0,1 45,95 Z"
+        android:fillColor="@color/colorBlack" />
+    <path
+        android:pathData="M39,108 L96,108 L96,115 L39,115 Z"
+        android:fillColor="@color/colorYellow" />
+
+    <!-- cash -->
+    <path
+        android:pathData="M150,80 L195,80 A4,4 0 0,1 199,84 L199,105 A4,4 0 0,1 195,109 L150,109 A4,4 0 0,1 146,105 L146,84 A4,4 0 0,1 150,80 Z"
+        android:fillColor="@color/colorYellow" />
+    <path
+        android:pathData="M172,94 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#FFF3C2" />
+
+    <!-- phone body -->
+    <path
+        android:pathData="M85,110 L155,110 A10,10 0 0,1 165,120 L165,215 A10,10 0 0,1 155,225 L85,225 A10,10 0 0,1 75,215 L75,120 A10,10 0 0,1 85,110 Z"
+        android:fillColor="@color/colorBlack" />
+    <path
+        android:pathData="M83,128 L157,128 L157,205 L83,205 Z"
+        android:fillColor="@color/colorYellow" />
+
+    <!-- screen fingerprint circle -->
+    <path
+        android:pathData="M120,150 a24,24 0 1,0 48,0 a24,24 0 1,0 -48,0"
+        android:fillColor="#00000000"
+        android:strokeColor="@color/colorBlack"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M144,150 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0"
+        android:fillColor="@color/colorBlack" />
+
+    <!-- finger tapping -->
+    <path
+        android:pathData="M175,140 C190,130 200,140 195,155 L188,180 C186,190 176,195 168,190 L150,178"
+        android:fillColor="#EDBE8C" />
+
+    <!-- table line -->
+    <path
+        android:pathData="M40,215 L215,215"
+        android:strokeColor="@color/colorDotInactive"
+        android:strokeWidth="3"
+        android:fillColor="#00000000" />
+</vector>

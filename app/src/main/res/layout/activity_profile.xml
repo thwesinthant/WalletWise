@@ -5,33 +5,32 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_header_bg">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:padding="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="54dp"
-            android:background="@drawable/circle_bg_white"
-            android:src="@drawable/baseline_arrow_back_24"
-            android:contentDescription="Back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/circle_bg_white"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:contentDescription="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:fontFamily="@font/dosis_extrabold"
-            android:textSize="20sp"
-            android:textColor="@color/primary_900"
-            app:layout_constraintTop_toTopOf="@id/btnBack"
-            app:layout_constraintBottom_toBottomOf="@id/btnBack"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:fontFamily="@font/dosis_extrabold"
+        android:textSize="20sp"
+        android:textColor="@color/primary_900"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Scrollable content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -81,7 +80,7 @@
                     android:layout_below="@id/avatarFrame"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
-                    android:text="Hi, Veronica Exema!"
+                    android:text="Hi!"
                     android:textColor="@color/neutral_0"
                     android:fontFamily="@font/dosis_bold"
                     android:textSize="25sp"
@@ -100,7 +99,7 @@
                     android:text="Edit profile photo"
                     android:fontFamily="@font/molengo_regular"
                     android:textColor="@color/primary_500"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"/>
             </RelativeLayout>
 
@@ -115,28 +114,72 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Name row -->
             <LinearLayout
+                android:id="@+id/rowName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Name" android:textColor="@color/text_primary_light" android:textSize="14sp" />
-                <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
-                <TextView android:id="@+id/tvNameValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_value_pill" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="Veronica Exema Jean" android:textColor="@color/primary_600" android:textSize="12sp" />
-                <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginStart="8dp" android:src="@drawable/ic_chevron_right" />
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingVertical="14dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/primary_800"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvNameValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/text_secondary_light"
+                    android:textSize="13sp" />
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_chevron_right" />
             </LinearLayout>
 
+            <!-- Currency row (real DB field, replaces the fake Screen Name row) -->
             <LinearLayout
+                android:id="@+id/rowCurrency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
                 android:paddingVertical="14dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Screen Name" android:textColor="@color/text_primary_light" android:textSize="14sp" />
-                <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
-                <TextView android:id="@+id/tvScreenNameValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_value_pill" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="Veronicaexena" android:textColor="@color/primary_600" android:textSize="12sp" />
-                <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginStart="8dp" android:src="@drawable/ic_chevron_right" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Currency"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/primary_800"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvCurrencyValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/text_secondary_light"
+                    android:textSize="13sp" />
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_chevron_right" />
             </LinearLayout>
 
             <!-- Sign In -->
@@ -149,16 +192,30 @@
                 android:fontFamily="@font/dosis_bold"
                 android:textSize="18sp" />
 
+            <!-- Email row (not clickable — email is locked in EditProfileActivity too) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="14dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email" android:textColor="@color/text_primary_light" android:textSize="14sp" />
-                <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
-                <TextView android:id="@+id/tvEmailValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_value_pill" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="veronica44@gmail.com" android:textColor="@color/primary_600" android:textSize="12sp" />
-                <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginStart="8dp" android:src="@drawable/ic_chevron_right" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/primary_800"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvEmailValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/text_secondary_light"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <!-- Manage Account -->
@@ -172,402 +229,53 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvDeactivate"
+                android:id="@+id/tvLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:paddingVertical="5dp"
+                android:paddingVertical="10dp"
+                android:text="Log Out"
+                android:fontFamily="@font/molengo_regular"
+                android:textColor="@color/primary_600"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/tvDeactivate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:paddingVertical="10dp"
                 android:text="Deactivate Account"
+                android:fontFamily="@font/molengo_regular"
                 android:textColor="@color/expense_red"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom navigation -->
+
+    <!-- Bottom nav -->
     <LinearLayout
         android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
         android:background="@color/neutral_0"
-        android:elevation="8dp"
+        android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
+        android:paddingBottom="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_home" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="@color/text_secondary_light" android:textSize="10sp" android:layout_marginTop="2dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_search" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Search" android:textColor="@color/text_secondary_light" android:textSize="10sp" android:layout_marginTop="2dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_heart" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Favourites" android:textColor="@color/text_secondary_light" android:textSize="10sp" android:layout_marginTop="2dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_manage" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Manage" android:textColor="@color/text_secondary_light" android:textSize="10sp" android:layout_marginTop="2dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_nav_selected"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_person" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="@color/neutral_0" android:textSize="10sp" android:layout_marginTop="2dp" />
-        </LinearLayout>
+        <include layout="@layout/layout_bottom_nav" />
 
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@drawable/gradient_header_bg">-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/btnBack"-->
-<!--        android:layout_width="36dp"-->
-<!--        android:layout_height="36dp"-->
-<!--        android:padding="8dp"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="54dp"-->
-<!--        android:background="@drawable/circle_bg_white"-->
-<!--        android:src="@drawable/baseline_arrow_back_24"-->
-<!--        android:contentDescription="Back"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tvTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Profile"-->
-<!--        android:fontFamily="@font/dosis_extrabold"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textColor="@color/primary_900"-->
-<!--        app:layout_constraintTop_toTopOf="@id/btnBack"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/btnBack"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
-
-
-<!--    &lt;!&ndash; Scrollable content &ndash;&gt;-->
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:fillViewport="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/btnBack">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:paddingHorizontal="20dp"-->
-<!--            android:paddingTop="18dp"-->
-<!--            android:paddingBottom="24dp">-->
-
-<!--            &lt;!&ndash; Purple/brand header card &ndash;&gt;-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/bg_header_gradient"-->
-<!--                android:orientation="vertical"-->
-<!--                android:gravity="center_horizontal"-->
-<!--                android:padding="20dp">-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/avatarFrame"-->
-<!--                    android:layout_width="72dp"-->
-<!--                    android:layout_height="72dp"-->
-<!--                    app:cardCornerRadius="36dp"-->
-<!--                    app:cardElevation="0dp"-->
-<!--                    app:cardBackgroundColor="#D9D9E3">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/ivAvatar"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:padding="18dp"-->
-<!--                        android:src="@drawable/ic_person"-->
-<!--                        app:tint="#8A8A9E" />-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tvGreeting"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="12dp"-->
-<!--                    android:text="Hi, Veronica Exema!"-->
-<!--                    android:textColor="@color/neutral_0"-->
-<!--                    android:fontFamily="@font/dosis_bold"-->
-<!--                    android:textSize="24sp"-->
-<!--                    android:textStyle="bold" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/btnEditPhoto"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="12dp"-->
-<!--                    android:background="@drawable/bg_button_white_pill"-->
-<!--                    android:paddingHorizontal="18dp"-->
-<!--                    android:paddingVertical="8dp"-->
-<!--                    android:fontFamily="@font/molengo_regular"-->
-<!--                    android:text="Edit profile photo"-->
-<!--                    android:textColor="@color/primary_500"-->
-<!--                    android:textSize="15sp" />-->
-<!--            </LinearLayout>-->
-
-<!--            &lt;!&ndash; Personal Information &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="28dp"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textSize="16sp"-->
-<!--                android:text="Personal Information"-->
-<!--                android:textColor="@color/text_primary_light"-->
-<!--                />-->
-
-<!--            <include-->
-<!--                android:id="@+id/rowName"-->
-<!--                layout="@layout/item_profile_row" />-->
-
-<!--            <include-->
-<!--                android:id="@+id/rowScreenName"-->
-<!--                layout="@layout/item_profile_row" />-->
-
-<!--            &lt;!&ndash; Sign In &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:text="Sign In"-->
-<!--                android:textColor="@color/text_primary_light"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textSize="16sp" />-->
-
-<!--            <include-->
-<!--                android:id="@+id/rowEmail"-->
-<!--                layout="@layout/item_profile_row" />-->
-
-<!--            &lt;!&ndash; Manage Account &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:text="Manage Account"-->
-<!--                android:textColor="@color/text_primary_light"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textSize="16sp" />-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:paddingVertical="14dp">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tvDeactivate"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="Deactivate Account"-->
-<!--                    android:textColor="#E14B4B"-->
-<!--                    android:textSize="14sp" />-->
-
-<!--                <ImageView-->
-<!--                    android:layout_width="16dp"-->
-<!--                    android:layout_height="16dp"-->
-<!--                    android:src="@drawable/ic_chevron_right"-->
-<!--                    app:tint="#E14B4B" />-->
-<!--            </LinearLayout>-->
-
-
-<!--        </LinearLayout>-->
-
-<!--    </androidx.core.widget.NestedScrollView>-->
-<!--    <View-->
-<!--        android:id="@+id/navShadow"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="3dp"-->
-<!--        android:background="@drawable/shadow_top"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/bottomNav"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
-<!--    &lt;!&ndash; Bottom nav &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/bottomNav"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="78dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:background="@color/neutral_0"-->
-<!--        android:gravity="center_vertical"-->
-<!--        android:paddingBottom="14dp"-->
-<!--        android:elevation="4dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:gravity="center">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="35dp"-->
-<!--                android:layout_height="34dp"-->
-<!--                android:background="@drawable/bg_nav_active"-->
-<!--                android:gravity="center"-->
-<!--                android:text="🏠"-->
-<!--                android:textSize="15sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Home"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textColor="@color/neutral_500"-->
-<!--                android:textSize="12sp"-->
-<!--                android:layout_marginTop="5dp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:gravity="center">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="34dp"-->
-<!--                android:layout_height="34dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="📋"-->
-<!--                android:textSize="15sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Transaction"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textColor="@color/neutral_500"-->
-<!--                android:textSize="12sp"-->
-<!--                android:layout_marginTop="5dp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:gravity="center">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="34dp"-->
-<!--                android:layout_height="34dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="💰"-->
-<!--                android:textSize="15sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Budgets"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textColor="@color/neutral_500"-->
-<!--                android:textSize="12sp"-->
-<!--                android:layout_marginTop="5dp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:gravity="center">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="34dp"-->
-<!--                android:layout_height="34dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="🎯"-->
-<!--                android:textSize="15sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Goals"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textColor="@color/neutral_500"-->
-<!--                android:textSize="12sp"-->
-<!--                android:layout_marginTop="5dp" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:gravity="center">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="34dp"-->
-<!--                android:layout_height="34dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="⚙️"-->
-<!--                android:textSize="15sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Settings"-->
-<!--                android:fontFamily="@font/dosis_bold"-->
-<!--                android:textColor="@color/neutral_500"-->
-<!--                android:textSize="12sp"-->
-<!--                android:layout_marginTop="5dp" />-->
-<!--        </LinearLayout>-->
-
-<!--    </LinearLayout>-->
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
-

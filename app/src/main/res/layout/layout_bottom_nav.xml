@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/iconHome"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:gravity="center"
+            android:text="🏠"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/labelHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/neutral_500"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/iconTransaction"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:gravity="center"
+            android:text="📋"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/labelTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaction"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/neutral_500"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navBudgets"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/iconBudgets"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:gravity="center"
+            android:text="💰"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/labelBudgets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budgets"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/neutral_500"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navGoals"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/iconGoals"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:gravity="center"
+            android:text="🎯"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/labelGoals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goals"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/neutral_500"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/navSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/iconSettings"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:gravity="center"
+            android:text="⚙️"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/labelSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/neutral_500"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+</merge>

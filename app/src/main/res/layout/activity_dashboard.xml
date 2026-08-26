@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_phone_gradient">
@@ -29,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="14dp">
 
                 <LinearLayout
@@ -70,6 +72,7 @@
                     android:layout_height="42dp">
 
                     <TextView
+                        android:id="@+id/tvAvatarInitial"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_avatar"
@@ -78,7 +81,16 @@
                         android:fontFamily="@font/dosis_extrabold"
                         android:textColor="@color/neutral_0"
                         android:textSize="14sp" />
-                    <!-- avatar initial should be derived from the logged-in user's name -->
+
+                    <ImageView
+                        android:id="@+id/ivHomeAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circle_mask"
+                        android:clipToOutline="true"
+                        android:outlineProvider="background"
+                        android:visibility="gone" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -525,6 +537,7 @@
                         android:orientation="vertical"
                         android:layout_marginStart="12dp">
 
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -851,137 +864,18 @@
     <!-- Bottom nav -->
     <LinearLayout
         android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="78dp"
-        android:orientation="horizontal"
         android:background="@color/neutral_0"
-        android:gravity="center_vertical"
-        android:paddingBottom="14dp"
         android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:background="@drawable/bg_nav_active"
-                android:gravity="center"
-                android:text="🏠"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Home"
-                android:fontFamily="@font/dosis_semibold"
-                android:textColor="@color/primary_500"
-                android:textSize="10sp"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:gravity="center"
-                android:text="📋"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Transaction"
-                android:fontFamily="@font/dosis_semibold"
-                android:textColor="@color/neutral_500"
-                android:textSize="10sp"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:gravity="center"
-                android:text="💰"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Budgets"
-                android:fontFamily="@font/dosis_semibold"
-                android:textColor="@color/neutral_500"
-                android:textSize="10sp"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:gravity="center"
-                android:text="🎯"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Goals"
-                android:fontFamily="@font/dosis_semibold"
-                android:textColor="@color/neutral_500"
-                android:textSize="10sp"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:gravity="center"
-                android:text="⚙️"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:fontFamily="@font/dosis_semibold"
-                android:textColor="@color/neutral_500"
-                android:textSize="10sp"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
+        <include layout="@layout/layout_bottom_nav" />
 
     </LinearLayout>
 

@@ -123,10 +123,11 @@
                     android:id="@+id/cbRememberMe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/primary_500"
+                    android:button="@drawable/checkbox_selector"
+                    app:buttonTint="@null"
                     android:fontFamily="@font/dosis_semibold"
-                    android:text="Remember me"
-                    android:textColor="@color/text_secondary_light"
+                    android:text=" Remember me"
+                    android:textColor="@color/primary_500"
                     android:textSize="14sp" />
 
                 <View

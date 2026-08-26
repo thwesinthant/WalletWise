@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorBackground">#F1F2F6</color>
+    <color name="colorYellow">#FFC800</color>
+    <color name="colorBlack">#1A1A1A</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTextPrimary">#1A1A1A</color>
+    <color name="colorTextSecondary">#8A8A8E</color>
+    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorDotActive">#1A1A1A</color>
+    <color name="colorDotInactive">#D9D9DE</color>
+
 
     <!-- ===================== PRIMARY (Blue) ===================== -->
     <color name="primary_50">#E8F0FE</color>
@@ -49,4 +59,49 @@
 
 
     <color name="action_circle_bg">#F2EEFB</color>
+
+    <color name="category_groceries">#3A9E5F</color>
+    <color name="category_groceries_bg">#E3F5E9</color>
+
+    <color name="category_travel">#3D7BD9</color>
+    <color name="category_travel_bg">#E4EEFC</color>
+
+    <color name="category_car">#3D7BD9</color>
+    <color name="category_car_bg">#E4EEFC</color>
+
+    <color name="category_home">#D9536F</color>
+    <color name="category_home_bg">#FBE5E9</color>
+
+    <color name="category_insurances">#3D7BD9</color>
+    <color name="category_insurances_bg">#E4EEFC</color>
+
+    <color name="category_education">#8A5FD9</color>
+    <color name="category_education_bg">#EEE7FB</color>
+
+    <color name="category_marketing">#D97A3D</color>
+    <color name="category_marketing_bg">#FBEBE0</color>
+
+    <color name="category_shopping">#3A9E5F</color>
+    <color name="category_shopping_bg">#E3F5E9</color>
+
+    <color name="category_internet">#3D7BD9</color>
+    <color name="category_internet_bg">#E4EEFC</color>
+
+    <color name="category_water">#3D7BD9</color>
+    <color name="category_water_bg">#E4EEFC</color>
+
+    <color name="category_rent">#D97A3D</color>
+    <color name="category_rent_bg">#FBEBE0</color>
+
+    <color name="category_gym">#3A9E5F</color>
+    <color name="category_gym_bg">#E3F5E9</color>
+
+    <color name="category_subscription">#3D7BD9</color>
+    <color name="category_subscription_bg">#E4EEFC</color>
+
+    <color name="category_vacation">#3A9E5F</color>
+    <color name="category_vacation_bg">#E3F5E9</color>
+
+    <color name="category_other">#8A5FD9</color>
+    <color name="category_other_bg">#EEE7FB</color>
 </resources>

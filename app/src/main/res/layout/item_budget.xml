@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/budgetCard"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginBottom="12dp"
+
+    app:cardBackgroundColor="@color/neutral_0"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="0dp"
+
+    app:strokeColor="@color/neutral_100"
+    app:strokeWidth="1dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        android:padding="17dp">
+
+
+        <!-- NAME + STATUS -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvBudgetName"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="August Monthly Budget"
+
+                    android:fontFamily="@font/dosis_bold"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="17sp" />
+
+
+                <TextView
+                    android:id="@+id/tvBudgetDate"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="2dp"
+
+                    android:text="Aug 01 - Aug 31"
+
+                    android:fontFamily="@font/dosis_medium"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+
+            <!-- STATUS -->
+
+            <TextView
+                android:id="@+id/tvBudgetStatus"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+
+                android:text="Active"
+
+                android:fontFamily="@font/dosis_semibold"
+                android:textColor="@color/primary_500"
+                android:textSize="10sp"
+
+                android:background="@drawable/bg_active_budget" />
+
+        </LinearLayout>
+
+
+        <!-- TOTAL AMOUNT -->
+
+        <TextView
+            android:id="@+id/tvBudgetAmount"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            android:text="500,000 MMK"
+
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/neutral_900"
+            android:textSize="24sp" />
+
+
+        <!-- PROGRESS BAR -->
+
+        <ProgressBar
+            android:id="@+id/budgetProgress"
+
+            style="?android:attr/progressBarStyleHorizontal"
+
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+
+            android:layout_marginTop="10dp"
+
+            android:max="100"
+            android:progress="62"
+
+            android:progressTint="@color/primary_500"
+            android:backgroundTint="@color/primary_100" />
+
+
+        <!-- SPENT + REMAINING -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="7dp"
+
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvSpent"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:text="Spent 310,000 MMK"
+
+                android:fontFamily="@font/dosis_medium"
+                android:textColor="@color/neutral_500"
+                android:textSize="11sp" />
+
+
+            <TextView
+                android:id="@+id/tvRemaining"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="190,000 MMK left"
+
+                android:fontFamily="@font/dosis_semibold"
+                android:textColor="@color/income_green"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+        <!-- CATEGORY CHIPS -->
+
+        <LinearLayout
+            android:id="@+id/categorySummary"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="14dp"
+
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvCategory1"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:paddingStart="9dp"
+                android:paddingEnd="9dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+
+                android:text="Food 150K"
+
+                android:fontFamily="@font/dosis_medium"
+                android:textColor="@color/primary_700"
+                android:textSize="10sp"
+
+                android:background="@drawable/bg_actions_card"
+
+                android:layout_marginEnd="6dp" />
+
+
+            <TextView
+                android:id="@+id/tvCategory2"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:paddingStart="9dp"
+                android:paddingEnd="9dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+
+                android:text="Transport 80K"
+
+                android:fontFamily="@font/dosis_medium"
+                android:textColor="@color/primary_700"
+                android:textSize="10sp"
+
+                android:background="@drawable/bg_actions_card" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

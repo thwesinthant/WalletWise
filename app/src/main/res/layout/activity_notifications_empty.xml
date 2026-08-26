@@ -69,7 +69,7 @@
         app:layout_constraintBottom_toTopOf="@id/tvEmptySubtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-         />
+        />
 
     <TextView
         android:id="@+id/tvEmptySubtitle"
