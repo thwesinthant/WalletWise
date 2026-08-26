@@ -1,4 +1,4 @@
-package com.example.walletwise.ui.category
+package com.example.walletwise
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -11,16 +11,18 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.example.walletwise.R
+import com.example.walletwise.entity.Category
 
 class CategoryAdapter(
     private val items: MutableList<Category>,
     private val onClick: (Category) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    fun addCategory(category: Category) {
-        items.add(1, category)
-        notifyItemInserted(1)
+    /** Replaces the whole displayed list (including the "Add" tile) with fresh data. */
+    fun submitList(newItems: List<Category>) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

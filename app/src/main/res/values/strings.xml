@@ -10,4 +10,5 @@
     <string name="desc_page_3">Send the money from your internet bank that you want to switch to the eKambia account</string>
     <string name="login">Login</string>
     <string name="create_account">Create Account</string>
+    <string name="icon_option_description">Icon option</string>
 </resources>

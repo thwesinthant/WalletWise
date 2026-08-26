@@ -1,5 +1,4 @@
-package com.example.walletwise.ui.category
-
+package com.example.walletwise.category
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,18 +8,23 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
+import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.walletwise.R
-import com.example.walletwise.ui.category.IconPickerDialogFragment
+import com.example.walletwise.entity.Category
 
+/**
+ * Add/edit category dialog. Pass [existing] to pre-fill the form and switch the button
+ * to "Update Category"; leave it null to create a brand new category.
+ */
 class AddCategoryBottomSheet(
+    private val existing: Category? = null,
     private val onSave: (Category) -> Unit
 ) : DialogFragment() {
 
@@ -81,8 +85,8 @@ class AddCategoryBottomSheet(
         0xFFD97A3D.toInt() to 0xFFFBEBE0.toInt()
     )
 
-    private var selectedIcon = iconOptions.first()
-    private var selectedColor = colorOptions.first()
+    private var selectedIcon = existing?.iconRes ?: iconOptions.first()
+    private var selectedColor = existing?.tintColor ?: colorOptions.first()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -104,7 +108,7 @@ class AddCategoryBottomSheet(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.requestFeature(android.view.Window.FEATURE_NO_TITLE)
         return dialog
     }
 
@@ -116,7 +120,10 @@ class AddCategoryBottomSheet(
         val nameInput = view.findViewById<EditText>(R.id.categoryNameInput)
         val iconRecyclerView = view.findViewById<RecyclerView>(R.id.iconOptionsRecyclerView)
         val colorRecyclerView = view.findViewById<RecyclerView>(R.id.colorSwatchRecyclerView)
-        val saveButton = view.findViewById<View>(R.id.saveCategoryButton)
+        val saveButton = view.findViewById<Button>(R.id.saveCategoryButton)
+
+        nameInput.setText(existing?.label ?: "")
+        saveButton.text = if (existing != null) "Update Category" else "Save Category"
 
         fun updatePreview() {
             val bg = GradientDrawable().apply {
@@ -129,13 +136,18 @@ class AddCategoryBottomSheet(
         }
         updatePreview()
 
-        val stripIcons = iconOptions.take(stripIconCount)
+        val stripIcons = (listOf(selectedIcon) + iconOptions)
+            .distinct()
+            .take(stripIconCount)
 
-        iconRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        // GridLayoutManager with spanCount == item count lays out a single row that
+        // always divides the available width evenly, so the strip can never overflow
+        // or get clipped regardless of screen size.
+        iconRecyclerView.layoutManager = GridLayoutManager(requireContext(), stripIcons.size + 1)
         iconRecyclerView.adapter = IconOptionAdapter(
             icons = stripIcons,
             moreIconRes = R.drawable.ic_plus,
+            initialSelectedIndex = stripIcons.indexOf(selectedIcon).coerceAtLeast(0),
             onSelected = { icon ->
                 selectedIcon = icon
                 updatePreview()
@@ -148,9 +160,11 @@ class AddCategoryBottomSheet(
             }
         )
 
-        colorRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        colorRecyclerView.adapter = ColorSwatchAdapter(colorOptions) { color ->
+        colorRecyclerView.layoutManager = GridLayoutManager(requireContext(), colorOptions.size)
+        colorRecyclerView.adapter = ColorSwatchAdapter(
+            colors = colorOptions,
+            initialSelectedIndex = colorOptions.indexOf(selectedColor).coerceAtLeast(0)
+        ) { color ->
             selectedColor = color
             updatePreview()
         }
@@ -166,7 +180,8 @@ class AddCategoryBottomSheet(
                     label = name,
                     iconRes = selectedIcon,
                     tintColor = selectedColor,
-                    bgColor = colorBgMap[selectedColor] ?: selectedColor
+                    bgColor = colorBgMap[selectedColor] ?: selectedColor,
+                    id = existing?.id ?: 0L
                 )
             )
             dismiss()

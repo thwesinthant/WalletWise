@@ -1,4 +1,4 @@
-package com.example.walletwise.ui.category
+package com.example.walletwise.category
 
 import android.app.Dialog
 import android.graphics.Color

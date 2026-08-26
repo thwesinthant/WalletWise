@@ -1,4 +1,4 @@
-package com.example.walletwise.ui.category
+package com.example.walletwise.category
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +12,12 @@ import com.example.walletwise.R
 class IconOptionAdapter(
     private val icons: List<Int>,
     private val moreIconRes: Int? = null,
+    initialSelectedIndex: Int = 0,
     private val onSelected: (Int) -> Unit,
     private val onMoreClicked: (() -> Unit)? = null
 ) : RecyclerView.Adapter<IconOptionAdapter.ViewHolder>() {
 
-    private var selectedPosition = 0
+    private var selectedPosition = initialSelectedIndex.coerceIn(0, (icons.size - 1).coerceAtLeast(0))
     private val hasMoreTile = moreIconRes != null && onMoreClicked != null
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -51,11 +52,14 @@ class IconOptionAdapter(
         )
 
         holder.itemView.setOnClickListener {
+            val currentPosition = holder.adapterPosition
+            if (currentPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+
             val previous = selectedPosition
-            selectedPosition = position
+            selectedPosition = currentPosition
             notifyItemChanged(previous)
             notifyItemChanged(selectedPosition)
-            onSelected(icons[position])
+            onSelected(icons[currentPosition])
         }
     }
 

@@ -26,4 +26,6 @@ interface NotificationDao {
 
     @Query("DELETE FROM notifications WHERE user_id = :userId")
     suspend fun clearAllNotifications(userId: Int)
+
+
 }

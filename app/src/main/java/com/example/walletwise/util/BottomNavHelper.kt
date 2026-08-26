@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.example.walletwise.R
 import com.example.walletwise.budget.BudgetActivity
+import com.example.walletwise.category.SelectCategoryActivity
 import com.example.walletwise.dashboard.DashboardActivity
 import com.example.walletwise.expense.AddTransactionActivity
 import com.example.walletwise.goal.GoalActivity
@@ -54,7 +55,7 @@ object BottomNavHelper {
                     NavTab.HOME -> DashboardActivity::class.java
                     NavTab.SETTINGS -> ProfileActivity::class.java
                     NavTab.TRANSACTION -> AddTransactionActivity::class.java
-                    NavTab.BUDGETS -> BudgetActivity::class.java
+                    NavTab.BUDGETS -> SelectCategoryActivity::class.java
                     NavTab.GOALS -> GoalActivity::class.java
                 }
 

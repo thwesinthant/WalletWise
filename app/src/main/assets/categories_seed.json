@@ -1,0 +1,17 @@
+[
+  { "label": "Groceries",    "icon": "ic_category_groceries",    "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Travel",       "icon": "ic_category_travel",       "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Car",          "icon": "ic_category_car",          "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Home",         "icon": "ic_category_home",         "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+  { "label": "Insurances",   "icon": "ic_category_insurances",   "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Education",    "icon": "ic_category_education",    "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+  { "label": "Marketing",    "icon": "ic_category_marketing",    "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "shopping",     "icon": "ic_category_shopping",     "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Internet",     "icon": "ic_category_internet",     "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Water",        "icon": "ic_category_water",        "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Rent",         "icon": "ic_category_rent",         "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Gym",          "icon": "ic_category_gym",          "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Subscription", "icon": "ic_category_subscription", "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Vacation",     "icon": "ic_category_vacation",     "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Other",        "icon": "ic_category_other",        "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" }
+]

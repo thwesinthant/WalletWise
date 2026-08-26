@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="dialog_bg">#2B2F38</color>
     <color name="colorBackground">#F1F2F6</color>
     <color name="colorYellow">#FFC800</color>
     <color name="colorBlack">#1A1A1A</color>

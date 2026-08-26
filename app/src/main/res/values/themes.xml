@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="DeleteCategoryDialogTheme" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_dialog_rounded</item>
+        <item name="android:textColorPrimary">@color/neutral_0</item>
+        <item name="android:textColorSecondary">@color/neutral_500</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DeleteCategoryDialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/DeleteCategoryDialogButton</item>
+    </style>
+
+    <style name="DeleteCategoryDialogButton" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary_300</item>
+    </style>
+
     <style name="Theme.ExpenceAndBudgetTracker" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_500</item>
         <item name="colorOnPrimary">@color/neutral_0</item>
