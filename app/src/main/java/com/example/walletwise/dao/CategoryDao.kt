@@ -11,14 +11,30 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CategoryDao {
 
-    @Query("SELECT * FROM categories ORDER BY sortOrder ASC, id ASC")
-    fun observeAll(): Flow<List<CategoryEntity>>
+    @Query("""
+        SELECT * 
+        FROM categories 
+        WHERE userId = :userId
+        ORDER BY sortOrder ASC, id ASC
+    """)
+    fun observeAll(userId: Int): Flow<List<CategoryEntity>>
 
     @Query("SELECT COUNT(*) FROM categories")
     suspend fun count(): Int
 
-    @Query("SELECT MIN(sortOrder) FROM categories")
-    suspend fun minSortOrder(): Int?
+    @Query("""
+        SELECT COUNT(*) 
+        FROM categories 
+        WHERE userId = :userId
+    """)
+    suspend fun countByUserId(userId: Int): Int
+
+    @Query("""
+        SELECT MIN(sortOrder) 
+        FROM categories
+        WHERE userId = :userId
+    """)
+    suspend fun minSortOrder(userId: Int): Int?
 
     @Insert
     suspend fun insertAll(categories: List<CategoryEntity>)

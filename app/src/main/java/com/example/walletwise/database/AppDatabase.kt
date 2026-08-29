@@ -10,9 +10,9 @@ import com.example.walletwise.dao.NotificationDao
 import com.example.walletwise.dao.TransactionDao
 import com.example.walletwise.dao.UserDao
 import com.example.walletwise.entity.Notification
-import com.example.walletwise.entity.Transaction
 import com.example.walletwise.entity.User
 import com.example.walletwise.entity.CategoryEntity
+import com.example.walletwise.entity.Transaction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +21,8 @@ import kotlinx.coroutines.launch
     entities = [
         User::class,
         Notification::class,
-        CategoryEntity::class],
+        CategoryEntity::class,
+        Transaction::class],
     version = 2,
     exportSchema = false
 )
@@ -30,6 +31,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun notificationDao(): NotificationDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun transactionDao(): TransactionDao
 
     companion object {
         @Volatile

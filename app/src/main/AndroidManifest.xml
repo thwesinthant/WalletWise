@@ -64,6 +64,19 @@
             android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Transaction -->
+        <activity
+            android:name=".transactions.TransactionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".transactions.AddTransactionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
+            android:windowSoftInputMode="adjustResize"/>
+
         <!-- Profile -->
         <activity
             android:name=".profile.ProfileActivity"

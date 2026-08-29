@@ -1,93 +1,638 @@
 package com.example.walletwise.dashboard
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.walletwise.R
 import com.example.walletwise.database.AppDatabase
-import com.example.walletwise.databinding.ActivityDashboardBinding
-import com.example.walletwise.profile.EditProfileActivity
-import com.example.walletwise.profile.ProfileActivity
-import kotlinx.coroutines.launch
-import android.net.Uri
-import android.view.View
 import com.example.walletwise.notification.NotificationActivity
+import com.example.walletwise.profile.ProfileActivity
+import com.example.walletwise.transactions.AddTransactionActivity
+import com.example.walletwise.transactions.TransactionActivity
+import com.example.walletwise.transactions.TransactionAdapter
 import com.example.walletwise.util.BottomNavHelper
 import com.example.walletwise.util.NavTab
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 import java.io.File
+
+
 class DashboardActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDashboardBinding
-    private var userId: Int = -1
+    // =============================================================
+    // USER
+    // =============================================================
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var currentUserId: Int = -1
 
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private var userCurrency: String = "MMK"
 
-        userId = intent.getIntExtra("USER_ID", -1)
 
-        if (userId == -1) {
-            Toast.makeText(
-                this,
-                "Dashboard User ID: $userId",
-                Toast.LENGTH_LONG
-            ).show()
+    // =============================================================
+    // FINANCIAL DATA
+    // =============================================================
+
+    private var latestExpense: Double = 0.0
+
+    private var latestIncome: Double = 0.0
+
+    private var latestBalance: Double = 0.0
+
+
+    // =============================================================
+    // DATABASE
+    // =============================================================
+
+    private lateinit var database: AppDatabase
+
+
+    // =============================================================
+    // ADAPTER
+    // =============================================================
+
+    private lateinit var txnAdapter: TransactionAdapter
+
+
+    // =============================================================
+    // VIEWS
+    // =============================================================
+
+    private lateinit var greetName: TextView
+
+    private lateinit var tvAvatarInitial: TextView
+
+    private lateinit var ivDashboardAvatar: ImageView
+
+    private lateinit var balanceAmount: TextView
+
+    private lateinit var expenseAmount: TextView
+
+    private lateinit var incomeAmount: TextView
+
+    private lateinit var rvDashboardTransactions:
+            RecyclerView
+
+
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
+
+        super.onCreate(
+            savedInstanceState
+        )
+
+        setContentView(
+            R.layout.activity_dashboard
+        )
+
+
+        // =========================================================
+        // USER
+        // =========================================================
+
+        currentUserId =
+            intent.getIntExtra(
+                "USER_ID",
+                -1
+            )
+
+
+        if (
+            currentUserId == -1
+        ) {
 
             finish()
+
             return
         }
 
-        loadUserInfo()
-        setupListeners()
+
+        // =========================================================
+        // DATABASE
+        // =========================================================
+
+        database =
+            AppDatabase.getDatabase(
+                applicationContext
+            )
+
+
+        // =========================================================
+        // VIEWS
+        // =========================================================
+
+        greetName =
+            findViewById(
+                R.id.greetName
+            )
+
+
+        tvAvatarInitial =
+            findViewById(
+                R.id.tvAvatarInitial
+            )
+
+
+        ivDashboardAvatar =
+            findViewById(
+                R.id.ivDashboardAvatar
+            )
+
+
+        balanceAmount =
+            findViewById(
+                R.id.balanceAmount
+            )
+
+
+        expenseAmount =
+            findViewById(
+                R.id.expenseAmount
+            )
+
+
+        incomeAmount =
+            findViewById(
+                R.id.incomeAmount
+            )
+
+
+        rvDashboardTransactions =
+            findViewById(
+                R.id.rvDashboardTransactions
+            )
+
+
+        // =========================================================
+        // BOTTOM NAV
+        // =========================================================
+
+        BottomNavHelper.setup(
+            activity = this,
+            root =
+                findViewById(
+                    android.R.id.content
+                ),
+            current = NavTab.HOME,
+            userId = currentUserId
+        )
+
+
+        // =========================================================
+        // RECYCLER VIEW
+        // =========================================================
+
+        rvDashboardTransactions.layoutManager =
+            LinearLayoutManager(
+                this
+            )
+
+
+        txnAdapter =
+            TransactionAdapter(
+                emptyList()
+            )
+
+
+        rvDashboardTransactions.adapter =
+            txnAdapter
+
+
+        // =========================================================
+        // NAVIGATION
+        // =========================================================
+
+        setupNavigation()
+
+
+        // =========================================================
+        // ROOM OBSERVERS
+        // =========================================================
+
+        observeUser()
+
+        observeFinancialData()
+
+        observeRecentTransactions()
     }
 
-    private fun loadUserInfo() {
+
+    // =============================================================
+    // NAVIGATION
+    // =============================================================
+
+    private fun setupNavigation() {
+
+
+        // ---------------------------------------------------------
+        // NOTIFICATION
+        // ---------------------------------------------------------
+
+        findViewById<ImageView>(
+            R.id.ivNoti
+        ).setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    NotificationActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                currentUserId
+            )
+
+            startActivity(
+                intent
+            )
+        }
+
+
+        // ---------------------------------------------------------
+        // ADD TRANSACTION
+        // ---------------------------------------------------------
+
+        findViewById<TextView>(
+            R.id.fabAdd
+        ).setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    AddTransactionActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                currentUserId
+            )
+
+            startActivity(
+                intent
+            )
+        }
+
+
+        // ---------------------------------------------------------
+        // VIEW ALL TRANSACTIONS
+        // ---------------------------------------------------------
+
+        findViewById<TextView>(
+            R.id.btnViewAllExpenses
+        ).setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    TransactionActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                currentUserId
+            )
+
+            startActivity(
+                intent
+            )
+        }
+
+
+        // ---------------------------------------------------------
+        // PROFILE
+        // ---------------------------------------------------------
+
+        findViewById<View>(
+            R.id.avatarContainer
+        ).setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    ProfileActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                currentUserId
+            )
+
+            startActivity(
+                intent
+            )
+        }
+    }
+
+
+    // =============================================================
+    // OBSERVE USER
+    // =============================================================
+
+    private fun observeUser() {
+
         lifecycleScope.launch {
-            val database = AppDatabase.getDatabase(this@DashboardActivity)
-            database.userDao().getUserById(userId).collect { user ->
-                if (user == null) {
-                    Toast.makeText(
-                        this@DashboardActivity,
-                        "Unable to load user data",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    finish()
-                    return@collect
-                }
 
-                binding.greetName.text = getString(
-                    R.string.greet_name, user.fullName)
+            database
+                .userDao()
+                .getUserById(
+                    currentUserId
+                )
+                .collect { user ->
 
-                // Show profile photo if it exists, otherwise keep the initial-letter badge
-                user.profileImage?.let { path ->
-                    val imgFile = File(path)
-                    if (imgFile.exists()) {
-                        binding.ivHomeAvatar.setImageURI(Uri.fromFile(imgFile))
-                        binding.ivHomeAvatar.visibility = View.VISIBLE
-                        binding.tvAvatarInitial.visibility = View.GONE
+                    user ?: return@collect
+
+
+                    // =============================================
+                    // GREETING
+                    // =============================================
+
+                    greetName.text =
+                        "Hello, ${user.fullName}"
+
+
+                    // =============================================
+                    // AVATAR INITIAL
+                    // =============================================
+
+                    if (
+                        user.fullName.isNotEmpty()
+                    ) {
+
+                        tvAvatarInitial.text =
+                            user.fullName
+                                .first()
+                                .uppercase()
                     }
-                }
 
-                // TODO: wire balanceAmount / expenseAmount / incomeAmount
-            }
+
+                    // =============================================
+                    // PROFILE IMAGE
+                    // =============================================
+
+                    val imagePath =
+                        user.profileImage
+
+
+                    if (
+                        !imagePath.isNullOrEmpty()
+                    ) {
+
+                        val imageFile =
+                            File(
+                                imagePath
+                            )
+
+
+                        if (
+                            imageFile.exists()
+                        ) {
+
+                            ivDashboardAvatar.visibility =
+                                View.VISIBLE
+
+
+                            tvAvatarInitial.visibility =
+                                View.GONE
+
+
+                            ivDashboardAvatar.imageTintList =
+                                null
+
+
+                            ivDashboardAvatar.scaleType =
+                                ImageView.ScaleType.CENTER_CROP
+
+
+                            ivDashboardAvatar.setImageURI(
+                                Uri.fromFile(
+                                    imageFile
+                                )
+                            )
+
+                        } else {
+
+                            ivDashboardAvatar.visibility =
+                                View.GONE
+
+
+                            tvAvatarInitial.visibility =
+                                View.VISIBLE
+                        }
+
+                    } else {
+
+                        ivDashboardAvatar.visibility =
+                            View.GONE
+
+
+                        tvAvatarInitial.visibility =
+                            View.VISIBLE
+                    }
+
+
+                    // =============================================
+                    // CURRENCY
+                    // =============================================
+
+                    userCurrency =
+                        user.currency
+                            .ifBlank {
+                                "MMK"
+                            }
+
+
+                    // =============================================
+                    // PASS CURRENCY TO ADAPTER
+                    // =============================================
+
+                    txnAdapter.updateCurrency(
+                        userCurrency
+                    )
+
+
+                    // =============================================
+                    // UPDATE FINANCIAL UI
+                    // =============================================
+
+                    updateFinancialUI()
+                }
         }
     }
 
-    private fun setupListeners() {
-        BottomNavHelper.setup(this, binding.root, NavTab.HOME, userId)
 
-        binding.ivNoti.setOnClickListener {
-            val intent = Intent(this, NotificationActivity::class.java)
-            intent.putExtra("USER_ID", userId)
-            startActivity(intent)
+    // =============================================================
+    // FORMAT CURRENCY
+    // =============================================================
+
+    private fun formatCurrency(
+        amount: Double
+    ): String {
+
+        return "$userCurrency ${
+            String.format(
+                "%,.2f",
+                amount
+            )
+        }"
+    }
+
+
+    // =============================================================
+    // UPDATE FINANCIAL UI
+    // =============================================================
+
+    private fun updateFinancialUI() {
+
+        expenseAmount.text =
+            formatCurrency(
+                latestExpense
+            )
+
+
+        incomeAmount.text =
+            formatCurrency(
+                latestIncome
+            )
+
+
+        balanceAmount.text =
+            formatCurrency(
+                latestBalance
+            )
+    }
+
+
+    // =============================================================
+    // FINANCIAL DATA
+    // =============================================================
+
+    private fun observeFinancialData() {
+
+        lifecycleScope.launch {
+
+            val expenseFlow =
+                database
+                    .transactionDao()
+                    .getTotalExpense(
+                        currentUserId
+                    )
+
+
+            val incomeFlow =
+                database
+                    .transactionDao()
+                    .getTotalIncome(
+                        currentUserId
+                    )
+
+
+            expenseFlow
+                .combine(
+                    incomeFlow
+                ) {
+                        expense,
+                        income ->
+
+
+                    val exp =
+                        expense ?: 0.0
+
+
+                    val inc =
+                        income ?: 0.0
+
+
+                    val balance =
+                        inc - exp
+
+
+                    Triple(
+                        exp,
+                        inc,
+                        balance
+                    )
+                }
+                .collect {
+                        (exp, inc, balance) ->
+
+
+                    latestExpense =
+                        exp
+
+
+                    latestIncome =
+                        inc
+
+
+                    latestBalance =
+                        balance
+
+
+                    updateFinancialUI()
+                }
         }
+    }
 
-        binding.btnViewAllExpenses.setOnClickListener { /* TODO */ }
-        binding.btnSeeAllTransactions.setOnClickListener { /* TODO */ }
-        binding.fabAdd.setOnClickListener { /* TODO */ }
+
+    // =============================================================
+    // RECENT TRANSACTIONS
+    // =============================================================
+
+    private fun observeRecentTransactions() {
+
+        lifecycleScope.launch {
+
+            val transactionFlow =
+                database
+                    .transactionDao()
+                    .getRecent10Transactions(
+                        currentUserId
+                    )
+
+
+            val categoryFlow =
+                database
+                    .categoryDao()
+                    .observeAll(
+                        currentUserId
+                    )
+
+
+            transactionFlow
+                .combine(
+                    categoryFlow
+                ) {
+                        transactions,
+                        categories ->
+
+                    Pair(
+                        transactions,
+                        categories
+                    )
+                }
+                .collect {
+                        (transactions, categories) ->
+
+
+                    txnAdapter
+                        .updateCategories(
+                            categories
+                        )
+
+
+                    txnAdapter
+                        .updateList(
+                            transactions
+                        )
+                }
+        }
     }
 }

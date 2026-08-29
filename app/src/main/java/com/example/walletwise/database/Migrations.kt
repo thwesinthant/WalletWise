@@ -19,8 +19,22 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
             )
             """.trimIndent()
         )
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_categories_userId` ON `categories` (`userId`)")
+
         db.execSQL(
-            "CREATE INDEX IF NOT EXISTS `index_categories_userId` ON `categories` (`userId`)"
+            """
+            CREATE TABLE IF NOT EXISTS `transactions` (
+                `transaction_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                `user_id` INTEGER NOT NULL,
+                `title` TEXT NOT NULL,
+                `amount` REAL NOT NULL,
+                `type` TEXT NOT NULL,
+                `category` TEXT NOT NULL,
+                `payment_method` TEXT NOT NULL,
+                `note` TEXT,
+                `created_at` INTEGER NOT NULL
+            )
+            """.trimIndent()
         )
     }
 }

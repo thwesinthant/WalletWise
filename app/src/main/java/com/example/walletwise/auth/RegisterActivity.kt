@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.walletwise.databinding.ActivityRegisterBinding
 import androidx.lifecycle.lifecycleScope
 import com.example.walletwise.database.AppDatabase
+import com.example.walletwise.database.CategorySeedLoader
 import com.example.walletwise.entity.User
 import com.example.walletwise.util.PasswordUtils
 import kotlinx.coroutines.launch
@@ -123,8 +124,14 @@ class RegisterActivity : AppCompatActivity() {
                         password = PasswordUtils.hash(password)
                     )
 
-                    database.userDao().insertUser(user)
+                    val insertedUserId = database.userDao().insertUser(user).toInt()
 
+                    val categories = CategorySeedLoader.loadDefaultEntities(
+                        this@RegisterActivity,
+                        insertedUserId
+                    )
+
+                    database.categoryDao().insertAll(categories)
                     Toast.makeText(
                         this@RegisterActivity,
                         "Account created for $fullName",

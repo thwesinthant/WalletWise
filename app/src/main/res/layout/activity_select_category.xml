@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,45 +24,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/searchLayout"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        app:hintEnabled="false"
-        app:boxBackgroundColor="@android:color/white"
-        app:boxCornerRadiusTopStart="28dp"
-        app:boxCornerRadiusTopEnd="28dp"
-        app:boxCornerRadiusBottomStart="28dp"
-        app:boxCornerRadiusBottomEnd="28dp"
-        app:boxStrokeWidth="0dp"
-        app:startIconDrawable="@drawable/ic_search"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Search for categories"
-            android:textColorHint="#999999"
-            android:imeOptions="actionSearch" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingHorizontal="8dp"
         android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="4"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
