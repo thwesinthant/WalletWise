@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_header_bg"
+    android:fitsSystemWindows="true">
+
+
+    <!-- TOP BAR -->
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="18dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <include
+            android:id="@+id/btnBack"
+            layout="@layout/view_back_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp" />
+
+
+        <TextView
+            android:id="@+id/tvPageTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text="Add Account"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/neutral_900"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+
+    <!-- CONTENT -->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <!-- ACCOUNT NAME -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Name"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/neutral_900"
+            android:textSize="15sp" />
+
+
+        <EditText
+            android:id="@+id/etAccountName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_filter_unselected"
+            android:paddingHorizontal="16dp"
+            android:hint="e.g. Cash, KBZ Bank, Wave Money"
+            android:fontFamily="@font/molengo_regular"
+            android:textColor="@color/neutral_900"
+            android:textColorHint="@color/neutral_500"
+            android:textSize="13sp"
+            android:singleLine="true" />
+
+
+        <!-- OPENING BALANCE -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Opening Balance"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/neutral_900"
+            android:textSize="15sp" />
+
+
+        <EditText
+            android:id="@+id/etOpeningBalance"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_filter_unselected"
+            android:paddingHorizontal="16dp"
+            android:hint="0.00"
+            android:fontFamily="@font/molengo_regular"
+            android:textColor="@color/neutral_900"
+            android:textColorHint="@color/neutral_500"
+            android:textSize="13sp"
+            android:inputType="numberDecimal"
+            android:singleLine="true" />
+
+
+        <!-- SAVE BUTTON -->
+
+        <TextView
+            android:id="@+id/btnSaveAccount"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_add_budget_button"
+            android:gravity="center"
+            android:text="Save Account"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/neutral_0"
+            android:textSize="15sp"
+            android:clickable="true"
+            android:focusable="true" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,12 +6,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.walletwise.R
+import com.example.walletwise.account.AccountActivity
+import com.example.walletwise.account.AccountAdapter
+import com.example.walletwise.account.AddEditAccountActivity
+import com.example.walletwise.account.DashboardAccountAdapter
 import com.example.walletwise.database.AppDatabase
+import com.example.walletwise.entity.Transaction
 import com.example.walletwise.notification.NotificationActivity
 import com.example.walletwise.profile.ProfileActivity
 import com.example.walletwise.transactions.AddTransactionActivity
@@ -19,8 +25,10 @@ import com.example.walletwise.transactions.TransactionActivity
 import com.example.walletwise.transactions.TransactionAdapter
 import com.example.walletwise.util.BottomNavHelper
 import com.example.walletwise.util.NavTab
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 
@@ -54,10 +62,12 @@ class DashboardActivity : AppCompatActivity() {
 
 
     // =============================================================
-    // ADAPTER
+    // ADAPTERS
     // =============================================================
 
     private lateinit var txnAdapter: TransactionAdapter
+
+    private lateinit var accountAdapter: DashboardAccountAdapter
 
 
     // =============================================================
@@ -76,17 +86,26 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var incomeAmount: TextView
 
-    private lateinit var rvDashboardTransactions:
-            RecyclerView
+    private lateinit var rvDashboardTransactions: RecyclerView
 
+    private lateinit var rvDashboardAccounts: RecyclerView
+
+    private lateinit var tvAccountSummary: TextView
+
+    private lateinit var emptyDashboardAccounts: View
+
+    private lateinit var emptyBalanceState: View
+
+
+    // =============================================================
+    // ON CREATE
+    // =============================================================
 
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
 
-        super.onCreate(
-            savedInstanceState
-        )
+        super.onCreate(savedInstanceState)
 
         setContentView(
             R.layout.activity_dashboard
@@ -94,7 +113,7 @@ class DashboardActivity : AppCompatActivity() {
 
 
         // =========================================================
-        // USER
+        // USER ID
         // =========================================================
 
         currentUserId =
@@ -104,9 +123,7 @@ class DashboardActivity : AppCompatActivity() {
             )
 
 
-        if (
-            currentUserId == -1
-        ) {
+        if (currentUserId == -1) {
 
             finish()
 
@@ -125,7 +142,7 @@ class DashboardActivity : AppCompatActivity() {
 
 
         // =========================================================
-        // VIEWS
+        // FIND VIEWS
         // =========================================================
 
         greetName =
@@ -133,42 +150,66 @@ class DashboardActivity : AppCompatActivity() {
                 R.id.greetName
             )
 
-
         tvAvatarInitial =
             findViewById(
                 R.id.tvAvatarInitial
             )
-
 
         ivDashboardAvatar =
             findViewById(
                 R.id.ivDashboardAvatar
             )
 
-
         balanceAmount =
             findViewById(
                 R.id.balanceAmount
             )
-
 
         expenseAmount =
             findViewById(
                 R.id.expenseAmount
             )
 
-
         incomeAmount =
             findViewById(
                 R.id.incomeAmount
             )
-
 
         rvDashboardTransactions =
             findViewById(
                 R.id.rvDashboardTransactions
             )
 
+        rvDashboardAccounts =
+            findViewById(
+                R.id.rvDashboardAccounts
+            )
+
+        tvAccountSummary =
+            findViewById(
+                R.id.tvAccountSummary
+            )
+
+        emptyDashboardAccounts =
+            findViewById(
+                R.id.emptyDashboardAccounts
+            )
+
+        emptyBalanceState =
+            findViewById(
+                R.id.emptyBalanceState
+            )
+
+        emptyDashboardAccounts.setOnClickListener {
+
+            openAccounts()
+        }
+
+
+        emptyBalanceState.setOnClickListener {
+
+            openAccounts()
+        }
 
         // =========================================================
         // BOTTOM NAV
@@ -176,28 +217,90 @@ class DashboardActivity : AppCompatActivity() {
 
         BottomNavHelper.setup(
             activity = this,
-            root =
-                findViewById(
-                    android.R.id.content
-                ),
+            root = findViewById(
+                android.R.id.content
+            ),
             current = NavTab.HOME,
             userId = currentUserId
         )
 
 
         // =========================================================
-        // RECYCLER VIEW
+        // TRANSACTIONS RECYCLER VIEW
         // =========================================================
 
         rvDashboardTransactions.layoutManager =
+            LinearLayoutManager(this)
+
+
+        // =========================================================
+        // ACCOUNTS RECYCLER VIEW
+        // =========================================================
+
+        rvDashboardAccounts.layoutManager =
             LinearLayoutManager(
-                this
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
             )
 
 
+        // =========================================================
+        // ACCOUNT ADAPTER
+        // =========================================================
+
+        accountAdapter =
+            DashboardAccountAdapter(
+                accounts = emptyList(),
+                currency = userCurrency,
+
+                onAddAccountClick = {
+
+                    openAccounts()
+                }
+            )
+
+
+        rvDashboardAccounts.adapter =
+            accountAdapter
+
+
+        // =========================================================
+        // TRANSACTION ADAPTER
+        // =========================================================
+
         txnAdapter =
             TransactionAdapter(
-                emptyList()
+                rawList = emptyList(),
+                currency = userCurrency,
+
+                onEditClick = { transaction ->
+
+                    val intent =
+                        Intent(
+                            this,
+                            AddTransactionActivity::class.java
+                        )
+
+                    intent.putExtra(
+                        "USER_ID",
+                        currentUserId
+                    )
+
+                    intent.putExtra(
+                        "TRANSACTION_ID",
+                        transaction.transactionId
+                    )
+
+                    startActivity(intent)
+                },
+
+                onDeleteClick = { transaction ->
+
+                    showDeleteConfirmation(
+                        transaction
+                    )
+                }
             )
 
 
@@ -220,15 +323,244 @@ class DashboardActivity : AppCompatActivity() {
 
         observeFinancialData()
 
+        observeAccounts()
+
         observeRecentTransactions()
     }
 
 
     // =============================================================
+    // OBSERVE ACCOUNTS
+    // =============================================================
+
+    private fun observeAccounts() {
+
+        lifecycleScope.launch {
+
+            database
+                .accountDao()
+                .getAccountBalances(
+                    currentUserId
+                )
+                .collect { accounts ->
+
+
+                    // =============================================
+                    // UPDATE ACCOUNT LIST
+                    // =============================================
+
+                    accountAdapter.updateList(
+                        accounts
+                    )
+
+                    accountAdapter.updateCurrency(
+                        userCurrency
+                    )
+
+
+                    rvDashboardAccounts.visibility =
+                        View.VISIBLE
+
+                    emptyDashboardAccounts.visibility =
+                        View.GONE
+
+
+                    // =============================================
+                    // NO ACCOUNTS
+                    // =============================================
+
+                    if (accounts.isEmpty()) {
+
+                        latestBalance =
+                            0.0
+
+
+                        balanceAmount.visibility =
+                            View.GONE
+
+                        emptyBalanceState.visibility =
+                            View.VISIBLE
+
+
+                        tvAccountSummary.text =
+                            "No accounts yet"
+
+                        return@collect
+                    }
+
+
+                    // =============================================
+                    // CALCULATE TOTAL WALLET BALANCE
+                    // =============================================
+
+                    val totalWalletBalance =
+                        accounts.sumOf {
+                            it.currentBalance
+                        }
+
+
+                    // =============================================
+                    // SAVE TOTAL BALANCE
+                    // =============================================
+
+                    latestBalance =
+                        totalWalletBalance
+
+
+                    // =============================================
+                    // SHOW BALANCE
+                    // =============================================
+
+                    balanceAmount.visibility =
+                        View.VISIBLE
+
+                    emptyBalanceState.visibility =
+                        View.GONE
+
+
+                    updateWalletBalanceUI()
+
+
+                    // =============================================
+                    // ACCOUNT SUMMARY
+                    // =============================================
+
+                    tvAccountSummary.text =
+                        "${accounts.size} accounts · " +
+                                formatCurrency(
+                                    totalWalletBalance
+                                )
+                }
+        }
+    }
+
+
+    // =============================================================
+    // DELETE TRANSACTION
+    // =============================================================
+
+    private fun deleteTransaction(
+        transaction: Transaction
+    ) {
+
+        lifecycleScope.launch(
+            Dispatchers.IO
+        ) {
+
+            try {
+
+                database
+                    .transactionDao()
+                    .deleteTransaction(
+                        transactionId =
+                            transaction.transactionId,
+
+                        userId =
+                            currentUserId
+                    )
+
+            } catch (e: Exception) {
+
+                e.printStackTrace()
+
+                withContext(
+                    Dispatchers.Main
+                ) {
+
+                    android.widget.Toast.makeText(
+                        this@DashboardActivity,
+                        "Error deleting transaction: ${e.localizedMessage}",
+                        android.widget.Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+
+
+    // =============================================================
+    // DELETE CONFIRMATION
+    // =============================================================
+
+    private fun showDeleteConfirmation(
+        transaction: Transaction
+    ) {
+
+        AlertDialog.Builder(this)
+
+            .setTitle(
+                "Delete Transaction"
+            )
+
+            .setMessage(
+                "Are you sure you want to delete this transaction?"
+            )
+
+            .setNegativeButton(
+                "Cancel",
+                null
+            )
+
+            .setPositiveButton(
+                "Delete"
+            ) { _, _ ->
+
+                deleteTransaction(
+                    transaction
+                )
+            }
+
+            .show()
+    }
+
+
+    private fun openAccounts() {
+
+        val intent =
+            Intent(
+                this,
+                AddEditAccountActivity::class.java
+            )
+
+        intent.putExtra(
+            "USER_ID",
+            currentUserId
+        )
+
+        startActivity(
+            intent
+        )
+    }
+
+    // =============================================================
     // NAVIGATION
     // =============================================================
 
+
     private fun setupNavigation() {
+
+
+        // ---------------------------------------------------------
+        // ACCOUNTS - SEE ALL
+        // ---------------------------------------------------------
+
+        findViewById<TextView>(
+            R.id.btnViewAllAccounts
+        ).setOnClickListener {
+
+            val intent =
+                Intent(
+                    this@DashboardActivity,
+                    AccountActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                currentUserId
+            )
+
+            startActivity(intent)
+        }
 
 
         // ---------------------------------------------------------
@@ -241,7 +573,7 @@ class DashboardActivity : AppCompatActivity() {
 
             val intent =
                 Intent(
-                    this,
+                    this@DashboardActivity,
                     NotificationActivity::class.java
                 )
 
@@ -250,9 +582,7 @@ class DashboardActivity : AppCompatActivity() {
                 currentUserId
             )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
 
 
@@ -266,7 +596,7 @@ class DashboardActivity : AppCompatActivity() {
 
             val intent =
                 Intent(
-                    this,
+                    this@DashboardActivity,
                     AddTransactionActivity::class.java
                 )
 
@@ -275,9 +605,7 @@ class DashboardActivity : AppCompatActivity() {
                 currentUserId
             )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
 
 
@@ -291,7 +619,7 @@ class DashboardActivity : AppCompatActivity() {
 
             val intent =
                 Intent(
-                    this,
+                    this@DashboardActivity,
                     TransactionActivity::class.java
                 )
 
@@ -300,9 +628,7 @@ class DashboardActivity : AppCompatActivity() {
                 currentUserId
             )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
 
 
@@ -316,7 +642,7 @@ class DashboardActivity : AppCompatActivity() {
 
             val intent =
                 Intent(
-                    this,
+                    this@DashboardActivity,
                     ProfileActivity::class.java
                 )
 
@@ -325,9 +651,7 @@ class DashboardActivity : AppCompatActivity() {
                 currentUserId
             )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
     }
 
@@ -350,17 +674,17 @@ class DashboardActivity : AppCompatActivity() {
                     user ?: return@collect
 
 
-                    // =============================================
+                    // -------------------------------------------------
                     // GREETING
-                    // =============================================
+                    // -------------------------------------------------
 
                     greetName.text =
                         "Hello, ${user.fullName}"
 
 
-                    // =============================================
+                    // -------------------------------------------------
                     // AVATAR INITIAL
-                    // =============================================
+                    // -------------------------------------------------
 
                     if (
                         user.fullName.isNotEmpty()
@@ -373,9 +697,9 @@ class DashboardActivity : AppCompatActivity() {
                     }
 
 
-                    // =============================================
+                    // -------------------------------------------------
                     // PROFILE IMAGE
-                    // =============================================
+                    // -------------------------------------------------
 
                     val imagePath =
                         user.profileImage
@@ -386,9 +710,7 @@ class DashboardActivity : AppCompatActivity() {
                     ) {
 
                         val imageFile =
-                            File(
-                                imagePath
-                            )
+                            File(imagePath)
 
 
                         if (
@@ -398,18 +720,14 @@ class DashboardActivity : AppCompatActivity() {
                             ivDashboardAvatar.visibility =
                                 View.VISIBLE
 
-
                             tvAvatarInitial.visibility =
                                 View.GONE
-
 
                             ivDashboardAvatar.imageTintList =
                                 null
 
-
                             ivDashboardAvatar.scaleType =
                                 ImageView.ScaleType.CENTER_CROP
-
 
                             ivDashboardAvatar.setImageURI(
                                 Uri.fromFile(
@@ -422,7 +740,6 @@ class DashboardActivity : AppCompatActivity() {
                             ivDashboardAvatar.visibility =
                                 View.GONE
 
-
                             tvAvatarInitial.visibility =
                                 View.VISIBLE
                         }
@@ -432,35 +749,37 @@ class DashboardActivity : AppCompatActivity() {
                         ivDashboardAvatar.visibility =
                             View.GONE
 
-
                         tvAvatarInitial.visibility =
                             View.VISIBLE
                     }
 
 
-                    // =============================================
+                    // -------------------------------------------------
                     // CURRENCY
-                    // =============================================
+                    // -------------------------------------------------
 
                     userCurrency =
-                        user.currency
-                            .ifBlank {
-                                "MMK"
-                            }
+                        user.currency.ifBlank {
+                            "MMK"
+                        }
 
 
-                    // =============================================
-                    // PASS CURRENCY TO ADAPTER
-                    // =============================================
+                    // -------------------------------------------------
+                    // UPDATE ADAPTER CURRENCY
+                    // -------------------------------------------------
 
                     txnAdapter.updateCurrency(
                         userCurrency
                     )
 
+                    accountAdapter.updateCurrency(
+                        userCurrency
+                    )
 
-                    // =============================================
+
+                    // -------------------------------------------------
                     // UPDATE FINANCIAL UI
-                    // =============================================
+                    // -------------------------------------------------
 
                     updateFinancialUI()
                 }
@@ -496,12 +815,13 @@ class DashboardActivity : AppCompatActivity() {
                 latestExpense
             )
 
-
         incomeAmount.text =
             formatCurrency(
                 latestIncome
             )
+    }
 
+    private fun updateWalletBalanceUI() {
 
         balanceAmount.text =
             formatCurrency(
@@ -511,7 +831,7 @@ class DashboardActivity : AppCompatActivity() {
 
 
     // =============================================================
-    // FINANCIAL DATA
+    // OBSERVE FINANCIAL DATA
     // =============================================================
 
     private fun observeFinancialData() {
@@ -537,44 +857,44 @@ class DashboardActivity : AppCompatActivity() {
             expenseFlow
                 .combine(
                     incomeFlow
-                ) {
-                        expense,
-                        income ->
-
+                ) { expense, income ->
 
                     val exp =
                         expense ?: 0.0
-
 
                     val inc =
                         income ?: 0.0
 
 
-                    val balance =
-                        inc - exp
-
-
-                    Triple(
+                    Pair(
                         exp,
-                        inc,
-                        balance
+                        inc
                     )
                 }
-                .collect {
-                        (exp, inc, balance) ->
+                .collect { (exp, inc) ->
 
+
+                    // =============================================
+                    // SAVE TOTAL EXPENSE
+                    // =============================================
 
                     latestExpense =
                         exp
 
 
+                    // =============================================
+                    // SAVE TOTAL INCOME
+                    // =============================================
+
                     latestIncome =
                         inc
 
 
-                    latestBalance =
-                        balance
-
+                    // =============================================
+                    // DO NOT CALCULATE BALANCE HERE
+                    //
+                    // Wallet balance comes from Account balances.
+                    // =============================================
 
                     updateFinancialUI()
                 }
@@ -583,7 +903,7 @@ class DashboardActivity : AppCompatActivity() {
 
 
     // =============================================================
-    // RECENT TRANSACTIONS
+    // OBSERVE RECENT TRANSACTIONS
     // =============================================================
 
     private fun observeRecentTransactions() {
@@ -609,29 +929,23 @@ class DashboardActivity : AppCompatActivity() {
             transactionFlow
                 .combine(
                     categoryFlow
-                ) {
-                        transactions,
-                        categories ->
+                ) { transactions, categories ->
 
                     Pair(
                         transactions,
                         categories
                     )
+
                 }
-                .collect {
-                        (transactions, categories) ->
+                .collect { (transactions, categories) ->
 
+                    txnAdapter.updateCategories(
+                        categories
+                    )
 
-                    txnAdapter
-                        .updateCategories(
-                            categories
-                        )
-
-
-                    txnAdapter
-                        .updateList(
-                            transactions
-                        )
+                    txnAdapter.updateList(
+                        transactions
+                    )
                 }
         }
     }

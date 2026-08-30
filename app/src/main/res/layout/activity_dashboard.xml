@@ -186,15 +186,73 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/balanceAmount"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/balanceContent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$0.00"
-                    android:fontFamily="@font/dosis_semibold"
-                    android:textColor="@color/neutral_0"
-                    android:textSize="30sp"
-                    android:layout_marginBottom="16dp" />
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Normal balance -->
+                    <TextView
+                        android:id="@+id/balanceAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MMK 0.00"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_0"
+                        android:textSize="30sp" />
+
+                    <!-- Empty account message -->
+                    <LinearLayout
+                        android:id="@+id/emptyBalanceState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:visibility="gone"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="@color/neutral_0"
+                            android:textSize="24sp"
+                            android:fontFamily="@font/dosis_extrabold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add your first account"
+                                android:fontFamily="@font/dosis_extrabold"
+                                android:textColor="@color/neutral_0"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Start tracking your money"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_0"
+                                android:alpha="0.75"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -298,126 +356,233 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Quick actions -->
+            <!-- ACCOUNTS -->
             <LinearLayout
+                android:id="@+id/accountsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_actions_card"
-                android:padding="16dp"
+                android:orientation="vertical"
                 android:layout_marginBottom="20dp">
 
+                <!-- Accounts header -->
+
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Accounts"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btnViewAllAccounts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See all"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_0"
+                        android:background="@drawable/bg_view_all_pill"
+                        android:textSize="12sp"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="7dp" />
+
+                </LinearLayout>
+
+
+                <!-- Account summary -->
+
+                <TextView
+                    android:id="@+id/tvAccountSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 accounts · MMK 0.00"
+                    android:fontFamily="@font/molengo_regular"
+                    android:textColor="@color/neutral_500"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="10dp" />
+
+
+                <!-- Horizontal account list -->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDashboardAccounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <!-- Empty account add box -->
+                <LinearLayout
+                    android:id="@+id/emptyDashboardAccounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_add_account_box"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:visibility="gone"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp">
 
                     <TextView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
-                        android:background="@drawable/bg_action_circle"
                         android:gravity="center"
-                        android:text="＋"
+                        android:text="+"
+                        android:fontFamily="@font/dosis_extrabold"
                         android:textColor="@color/primary_500"
-                        android:textSize="16sp" />
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Top-up"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textColor="@color/neutral_700"
-                        android:textSize="10.5sp"
-                        android:layout_marginTop="7dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/bg_action_circle"
-                        android:gravity="center"
-                        android:text="↓"
-                        android:textColor="@color/primary_500"
-                        android:textSize="16sp" />
+                        android:layout_marginTop="4dp"
+                        android:text="Add your first account"
+                        android:fontFamily="@font/dosis_extrabold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Receive"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textColor="@color/neutral_700"
-                        android:textSize="10.5sp"
-                        android:layout_marginTop="7dp" />
+                        android:layout_marginTop="2dp"
+                        android:text="Cash, bank or mobile wallet"
+                        android:fontFamily="@font/molengo_regular"
+                        android:textColor="@color/neutral_500"
+                        android:textSize="10sp" />
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/bg_action_circle"
-                        android:gravity="center"
-                        android:text="↗"
-                        android:textColor="@color/primary_500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Send"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textColor="@color/neutral_700"
-                        android:textSize="10.5sp"
-                        android:layout_marginTop="7dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/bg_action_circle"
-                        android:gravity="center"
-                        android:text="⋯"
-                        android:textColor="@color/primary_500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Payments"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textColor="@color/neutral_700"
-                        android:textSize="10.5sp"
-                        android:layout_marginTop="7dp" />
-                </LinearLayout>
             </LinearLayout>
+
+            <!-- Quick actions -->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:background="@drawable/bg_actions_card"-->
+<!--                android:layout_marginBottom="20dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:gravity="center">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="42dp"-->
+<!--                        android:layout_height="42dp"-->
+<!--                        android:background="@drawable/bg_action_circle"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="＋"-->
+<!--                        android:textColor="@color/primary_500"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Top-up"-->
+<!--                        android:fontFamily="@font/dosis_semibold"-->
+<!--                        android:textColor="@color/neutral_700"-->
+<!--                        android:textSize="10.5sp"-->
+<!--                        android:layout_marginTop="7dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:gravity="center">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="42dp"-->
+<!--                        android:layout_height="42dp"-->
+<!--                        android:background="@drawable/bg_action_circle"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="↓"-->
+<!--                        android:textColor="@color/primary_500"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Receive"-->
+<!--                        android:fontFamily="@font/dosis_semibold"-->
+<!--                        android:textColor="@color/neutral_700"-->
+<!--                        android:textSize="10.5sp"-->
+<!--                        android:layout_marginTop="7dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:gravity="center">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="42dp"-->
+<!--                        android:layout_height="42dp"-->
+<!--                        android:background="@drawable/bg_action_circle"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="↗"-->
+<!--                        android:textColor="@color/primary_500"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Send"-->
+<!--                        android:fontFamily="@font/dosis_semibold"-->
+<!--                        android:textColor="@color/neutral_700"-->
+<!--                        android:textSize="10.5sp"-->
+<!--                        android:layout_marginTop="7dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:gravity="center">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="42dp"-->
+<!--                        android:layout_height="42dp"-->
+<!--                        android:background="@drawable/bg_action_circle"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="⋯"-->
+<!--                        android:textColor="@color/primary_500"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Payments"-->
+<!--                        android:fontFamily="@font/dosis_semibold"-->
+<!--                        android:textColor="@color/neutral_700"-->
+<!--                        android:textSize="10.5sp"-->
+<!--                        android:layout_marginTop="7dp" />-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
 
             <!-- Recent Transactions (dynamic) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp"
+
                 android:layout_marginBottom="15dp">
 
                 <LinearLayout

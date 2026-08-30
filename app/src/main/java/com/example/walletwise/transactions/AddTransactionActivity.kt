@@ -19,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.walletwise.R
 import com.example.walletwise.category.SelectCategoryActivity
 import com.example.walletwise.database.AppDatabase
+import com.example.walletwise.entity.Account
 import com.example.walletwise.entity.CategoryEntity
 import com.example.walletwise.entity.Notification
 import com.example.walletwise.entity.Transaction
@@ -54,9 +55,21 @@ class AddTransactionActivity : AppCompatActivity() {
 
     private var currentAmountStr = ""
 
-    private var selectedCategory = ""
 
-    private var selectedPaymentMethod = "Cash"
+    private var editingTransactionId: Int = -1
+
+    private var isEditMode = false
+
+    private var editingCreatedAt: Long = 0L
+
+
+    // ============================================================
+    // SELECTED CATEGORY
+    // ============================================================
+
+    private var selectedCategoryId: Long? = null
+
+    private var selectedCategoryLabel = ""
 
 
     // ============================================================
@@ -68,6 +81,16 @@ class AddTransactionActivity : AppCompatActivity() {
     private lateinit var categoryChipContainer: LinearLayout
 
     private lateinit var tvSelectedCategory: TextView
+
+    // ============================================================
+    // SELECTED ACCOUNT / PAYMENT METHOD
+    // ============================================================
+
+    private var selectedAccountId: Int? = null
+
+    private var accountList: List<Account> = emptyList()
+
+    private lateinit var paymentChipContainer: LinearLayout
 
 
     // ============================================================
@@ -84,6 +107,8 @@ class AddTransactionActivity : AppCompatActivity() {
 
     private lateinit var etNote: EditText
 
+    private lateinit var tvTitle: TextView
+
 
     // ============================================================
     // INTENT EXTRA
@@ -91,9 +116,17 @@ class AddTransactionActivity : AppCompatActivity() {
 
     companion object {
 
-        const val EXTRA_USER_ID = "USER_ID"
+        const val EXTRA_USER_ID =
+            "USER_ID"
+
+        const val EXTRA_TRANSACTION_ID =
+            "TRANSACTION_ID"
     }
 
+
+    // ============================================================
+    // LOAD USER CURRENCY
+    // ============================================================
 
     private fun loadUserCurrency() {
 
@@ -116,6 +149,7 @@ class AddTransactionActivity : AppCompatActivity() {
         }
     }
 
+
     // ============================================================
     // CATEGORY RESULT
     // ============================================================
@@ -130,14 +164,29 @@ class AddTransactionActivity : AppCompatActivity() {
                 result.data != null
             ) {
 
+                val categoryId =
+                    result.data?.getLongExtra(
+                        SelectCategoryActivity.RESULT_CATEGORY_ID,
+                        -1L
+                    ) ?: -1L
+
+
                 val categoryLabel =
                     result.data?.getStringExtra(
                         SelectCategoryActivity.RESULT_CATEGORY_LABEL
                     )
 
-                if (!categoryLabel.isNullOrEmpty()) {
 
-                    selectedCategory = categoryLabel
+                if (
+                    categoryId != -1L &&
+                    !categoryLabel.isNullOrEmpty()
+                ) {
+
+                    selectedCategoryId =
+                        categoryId
+
+                    selectedCategoryLabel =
+                        categoryLabel
 
                     updateSelectedCategoryText()
 
@@ -195,8 +244,8 @@ class AddTransactionActivity : AppCompatActivity() {
 
 
         // ========================================================
-        // USER
-        // ========================================================
+// USER
+// ========================================================
 
         currentUserId =
             intent.getIntExtra(
@@ -204,7 +253,10 @@ class AddTransactionActivity : AppCompatActivity() {
                 -1
             )
 
-        if (currentUserId == -1) {
+
+        if (
+            currentUserId == -1
+        ) {
 
             Toast.makeText(
                 this,
@@ -216,6 +268,21 @@ class AddTransactionActivity : AppCompatActivity() {
 
             return
         }
+
+
+        // ========================================================
+        // EDIT MODE
+        // ========================================================
+
+        editingTransactionId =
+            intent.getIntExtra(
+                EXTRA_TRANSACTION_ID,
+                -1
+            )
+
+
+        isEditMode =
+            editingTransactionId != -1
 
 
         // ========================================================
@@ -262,6 +329,15 @@ class AddTransactionActivity : AppCompatActivity() {
                 R.id.tvSelectedCategory
             )
 
+        tvTitle =
+            findViewById(
+                R.id.tvTitle
+            )
+
+        paymentChipContainer =
+            findViewById(
+                R.id.paymentChipContainer
+            )
 
         // ========================================================
         // BACK
@@ -277,6 +353,8 @@ class AddTransactionActivity : AppCompatActivity() {
         // INITIAL UI
         // ========================================================
 
+        loadUserCurrency()
+
         updateAmountDisplay()
 
         updateSelectedCategoryText()
@@ -289,6 +367,21 @@ class AddTransactionActivity : AppCompatActivity() {
 
         setupCustomKeypad()
 
+        if (
+            isEditMode
+        ) {
+
+            tvTitle.text =
+                "Edit Transaction"
+
+            loadTransactionForEditing()
+
+        } else {
+
+            tvTitle.text =
+                "Add Expense"
+        }
+
 
         // ========================================================
         // SAVE
@@ -296,111 +389,502 @@ class AddTransactionActivity : AppCompatActivity() {
 
         btnAdd.setOnClickListener {
 
-            saveTransactionAndNotify()
+            if (
+                isEditMode
+            ) {
+
+                updateTransaction()
+
+            } else {
+
+                saveTransactionAndNotify()
+            }
         }
     }
 
+    // ============================================================
+// UPDATE TRANSACTION
+// ============================================================
+
+    private fun updateTransaction() {
+
+        val amount =
+            currentAmountStr
+                .toDoubleOrNull()
+
+
+        // ========================================================
+        // VALIDATE AMOUNT
+        // ========================================================
+
+        if (
+            amount == null ||
+            amount <= 0.0
+        ) {
+
+            Toast.makeText(
+                this,
+                "Please enter an amount greater than 0",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+
+        // ========================================================
+        // VALIDATE CATEGORY
+        // ========================================================
+
+        if (
+            selectedCategoryId == null
+        ) {
+
+            Toast.makeText(
+                this,
+                "Please select a category",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        // ========================================================
+        // VALIDATE ACCOUNT
+        // ========================================================
+
+        if (
+            accountList.isEmpty()
+        ) {
+
+            Toast.makeText(
+                this,
+                "Please add a payment account first",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+
+        if (
+            selectedAccountId == null
+        ) {
+
+            Toast.makeText(
+                this,
+                "Please select a payment account",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        // ========================================================
+        // NOTE
+        // ========================================================
+
+        val note =
+            etNote.text
+                .toString()
+                .trim()
+
+
+        // ========================================================
+        // TITLE
+        // ========================================================
+
+        val title =
+            if (
+                note.isNotEmpty()
+            ) {
+
+                note
+
+            } else {
+
+                selectedCategoryLabel
+            }
+
+
+        // ========================================================
+        // TYPE
+        // ========================================================
+
+        val txnType =
+            if (
+                isExpense
+            ) {
+
+                "EXPENSE"
+
+            } else {
+
+                "INCOME"
+            }
+
+
+        // ========================================================
+        // DATABASE UPDATE
+        // ========================================================
+
+        lifecycleScope.launch(
+            Dispatchers.IO
+        ) {
+
+            try {
+
+                database
+                    .transactionDao()
+                    .updateTransaction(
+                        transactionId =
+                            editingTransactionId,
+
+                        userId =
+                            currentUserId,
+
+                        title =
+                            title,
+
+                        amount =
+                            amount,
+
+                        type =
+                            txnType,
+
+                        categoryId =
+                            selectedCategoryId,
+
+                        accountId =
+                            selectedAccountId,
+
+                        note =
+                            note.ifEmpty {
+                                null
+                            }
+                    )
+
+
+                withContext(
+                    Dispatchers.Main
+                ) {
+
+                    Toast.makeText(
+                        this@AddTransactionActivity,
+                        "Transaction updated successfully!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+
+                    finish()
+                }
+
+            } catch (
+                e: Exception
+            ) {
+
+                e.printStackTrace()
+
+
+                withContext(
+                    Dispatchers.Main
+                ) {
+
+                    Toast.makeText(
+                        this@AddTransactionActivity,
+                        "Error updating transaction: ${e.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
 
     // ============================================================
-    // EXPENSE / INCOME SELECTOR
+// LOAD TRANSACTION FOR EDITING
+// ============================================================
+
+    private fun loadTransactionForEditing() {
+
+        lifecycleScope.launch(
+            Dispatchers.IO
+        ) {
+
+            val transaction =
+                database
+                    .transactionDao()
+                    .getTransactionById(
+                        editingTransactionId,
+                        currentUserId
+                    )
+
+
+            if (
+                transaction == null
+            ) {
+
+                withContext(
+                    Dispatchers.Main
+                ) {
+
+                    Toast.makeText(
+                        this@AddTransactionActivity,
+                        "Transaction not found",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    finish()
+                }
+
+                return@launch
+            }
+
+
+            withContext(
+                Dispatchers.Main
+            ) {
+
+                // ====================================================
+                // AMOUNT
+                // ====================================================
+
+                currentAmountStr =
+                    transaction.amount
+                        .toString()
+
+
+                // Remove unnecessary .0
+
+                if (
+                    currentAmountStr.endsWith(
+                        ".0"
+                    )
+                ) {
+
+                    currentAmountStr =
+                        currentAmountStr
+                            .removeSuffix(
+                                ".0"
+                            )
+                }
+
+
+                updateAmountDisplay()
+
+
+                // ====================================================
+                // TYPE
+                // ====================================================
+
+                isExpense =
+                    transaction.type ==
+                            "EXPENSE"
+
+
+                updateTypeUI()
+
+
+                // ====================================================
+                // CATEGORY
+                // ====================================================
+
+                selectedCategoryId =
+                    transaction.categoryId
+
+
+                selectedCategoryLabel =
+                    categoryList
+                        .firstOrNull {
+                            it.id ==
+                                    selectedCategoryId
+                        }
+                        ?.label
+                        ?: ""
+
+
+                updateSelectedCategoryText()
+
+                updateCategoryChips()
+
+                // ====================================================
+                // ACCOUNT / PAYMENT METHOD
+                // ====================================================
+
+                selectedAccountId =
+                    transaction.accountId
+
+
+                // ====================================================
+                // REFRESH PAYMENT CHIPS
+                // ====================================================
+
+                updatePaymentChips()
+
+
+                // ====================================================
+                // NOTE
+                // ====================================================
+
+                etNote.setText(
+                    transaction.note
+                        ?: ""
+                )
+
+
+                // ====================================================
+                // CREATED DATE
+                // ====================================================
+
+                editingCreatedAt =
+                    transaction.createdAt
+
+
+                // ====================================================
+                // BUTTON
+                // ====================================================
+
+                btnAdd.text =
+                    if (
+                        isExpense
+                    ) {
+
+                        "Update Expense"
+
+                    } else {
+
+                        "Update Income"
+                    }
+            }
+        }
+    }
+
     // ============================================================
+// UPDATE TYPE UI
+// ============================================================
+
+    private fun updateTypeUI() {
+
+        if (
+            isExpense
+        ) {
+
+            tvExpense.setBackgroundResource(
+                R.drawable.selector_selected_bg
+            )
+
+            tvExpense.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.neutral_0
+                )
+            )
+
+
+            tvIncome.background =
+                null
+
+
+            tvIncome.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.neutral_500
+                )
+            )
+
+
+            btnAdd.text =
+                if (
+                    isEditMode
+                ) {
+
+                    "Update Expense"
+
+                } else {
+
+                    "Add Expense"
+                }
+
+        } else {
+
+            tvIncome.setBackgroundResource(
+                R.drawable.selector_selected_bg
+            )
+
+            tvIncome.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.neutral_0
+                )
+            )
+
+
+            tvExpense.background =
+                null
+
+
+            tvExpense.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.neutral_500
+                )
+            )
+
+
+            btnAdd.text =
+                if (
+                    isEditMode
+                ) {
+
+                    "Update Income"
+
+                } else {
+
+                    "Add Income"
+                }
+        }
+    }
+
+    // ============================================================
+// EXPENSE / INCOME SELECTOR
+// ============================================================
 
     private fun setupTypeSelector() {
 
         tvExpense.setOnClickListener {
 
-            if (!isExpense) {
+            if (
+                !isExpense
+            ) {
 
-                isExpense = true
+                isExpense =
+                    true
 
-                tvExpense.setBackgroundResource(
-                    R.drawable.selector_selected_bg
-                )
-
-                tvExpense.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.neutral_0
-                    )
-                )
-
-                tvIncome.background = null
-
-                tvIncome.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.neutral_500
-                    )
-                )
-
-                btnAdd.text =
-                    "Add Expense"
+                updateTypeUI()
             }
         }
 
 
         tvIncome.setOnClickListener {
 
-            if (isExpense) {
+            if (
+                isExpense
+            ) {
 
-                isExpense = false
+                isExpense =
+                    false
 
-                tvIncome.setBackgroundResource(
-                    R.drawable.selector_selected_bg
-                )
-
-                tvIncome.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.neutral_0
-                    )
-                )
-
-                tvExpense.background = null
-
-                tvExpense.setTextColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.neutral_500
-                    )
-                )
-
-                btnAdd.text =
-                    "Add Income"
+                updateTypeUI()
             }
         }
 
 
-        // Initial state
-
-        tvExpense.setBackgroundResource(
-            R.drawable.selector_selected_bg
-        )
-
-        tvExpense.setTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.neutral_0
-            )
-        )
-
-        tvIncome.background = null
-
-        tvIncome.setTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.neutral_500
-            )
-        )
-
-        btnAdd.text =
-            "Add Expense"
+        updateTypeUI()
     }
 
 
     // ============================================================
-    // CATEGORY OBSERVER
-    // ============================================================
+// CATEGORY OBSERVER
+// ============================================================
 
     private fun setupCategoryChips() {
 
@@ -408,11 +892,38 @@ class AddTransactionActivity : AppCompatActivity() {
 
             database
                 .categoryDao()
-                .observeAll(currentUserId)
+                .observeAll(
+                    currentUserId
+                )
                 .collectLatest { categories ->
 
                     categoryList =
                         categories
+
+
+                    // =================================================
+                    // FIX EDIT CATEGORY LABEL
+                    // =================================================
+
+                    if (
+                        isEditMode &&
+                        selectedCategoryId != null &&
+                        selectedCategoryLabel.isEmpty()
+                    ) {
+
+                        selectedCategoryLabel =
+                            categoryList
+                                .firstOrNull {
+
+                                    it.id ==
+                                            selectedCategoryId
+                                }
+                                ?.label
+                                ?: ""
+                    }
+
+
+                    updateSelectedCategoryText()
 
                     updateCategoryChips()
                 }
@@ -429,28 +940,25 @@ class AddTransactionActivity : AppCompatActivity() {
         categoryChipContainer.removeAllViews()
 
 
-        // ============================================================
-        // DISPLAY CATEGORIES
-        // ============================================================
-
         val displayCategories =
             mutableListOf<CategoryEntity>()
 
 
-        // ------------------------------------------------------------
+        // ========================================================
         // FIND SELECTED CATEGORY
-        // ------------------------------------------------------------
+        // ========================================================
 
         val selectedCategoryEntity =
             categoryList.firstOrNull { category ->
 
-                category.label == selectedCategory
+                category.id ==
+                        selectedCategoryId
             }
 
 
-        // ------------------------------------------------------------
+        // ========================================================
         // PUT SELECTED CATEGORY FIRST
-        // ------------------------------------------------------------
+        // ========================================================
 
         if (selectedCategoryEntity != null) {
 
@@ -460,20 +968,20 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
 
-        // ------------------------------------------------------------
+        // ========================================================
         // ADD OTHER CATEGORIES
-        //
-        // Maximum visible category chips = 3
-        // Selected category is already first.
-        // ------------------------------------------------------------
+        // ========================================================
 
         categoryList
             .filter { category ->
 
-                category.label != selectedCategory
+                category.id !=
+                        selectedCategoryId
             }
             .take(
-                if (selectedCategoryEntity != null) {
+                if (
+                    selectedCategoryEntity != null
+                ) {
                     2
                 } else {
                     3
@@ -487,9 +995,9 @@ class AddTransactionActivity : AppCompatActivity() {
             }
 
 
-        // ============================================================
+        // ========================================================
         // ADD CATEGORY CHIPS
-        // ============================================================
+        // ========================================================
 
         displayCategories.forEach { category ->
 
@@ -504,9 +1012,9 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
 
-        // ============================================================
-        // ALWAYS ADD OTHER BUTTON
-        // ============================================================
+        // ========================================================
+        // OTHER BUTTON
+        // ========================================================
 
         val otherChip =
             createOtherChip()
@@ -551,10 +1059,6 @@ class AddTransactionActivity : AppCompatActivity() {
         )
 
 
-        // --------------------------------------------------------
-        // SIZE
-        // --------------------------------------------------------
-
         val chipParams =
             LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -568,9 +1072,9 @@ class AddTransactionActivity : AppCompatActivity() {
             chipParams
 
 
-        // --------------------------------------------------------
+        // ========================================================
         // ICON
-        // --------------------------------------------------------
+        // ========================================================
 
         val icon =
             ImageView(this)
@@ -590,9 +1094,9 @@ class AddTransactionActivity : AppCompatActivity() {
         )
 
 
-        // --------------------------------------------------------
+        // ========================================================
         // TEXT
-        // --------------------------------------------------------
+        // ========================================================
 
         val text =
             TextView(this)
@@ -623,16 +1127,21 @@ class AddTransactionActivity : AppCompatActivity() {
         )
 
 
-        // --------------------------------------------------------
+        // ========================================================
         // SELECTED STATE
-        // --------------------------------------------------------
+        // ========================================================
 
         chip.alpha =
-            if (selectedCategory.isEmpty()) {
+            if (
+                selectedCategoryId == null
+            ) {
 
                 1.0f
 
-            } else if (selectedCategory == category.label) {
+            } else if (
+                selectedCategoryId ==
+                category.id
+            ) {
 
                 1.0f
 
@@ -642,13 +1151,16 @@ class AddTransactionActivity : AppCompatActivity() {
             }
 
 
-        // --------------------------------------------------------
+        // ========================================================
         // CLICK
-        // --------------------------------------------------------
+        // ========================================================
 
         chip.setOnClickListener {
 
-            selectedCategory =
+            selectedCategoryId =
+                category.id
+
+            selectedCategoryLabel =
                 category.label
 
             updateSelectedCategoryText()
@@ -696,10 +1208,6 @@ class AddTransactionActivity : AppCompatActivity() {
         )
 
 
-        // --------------------------------------------------------
-        // SIZE
-        // --------------------------------------------------------
-
         val chipParams =
             LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -713,10 +1221,6 @@ class AddTransactionActivity : AppCompatActivity() {
             chipParams
 
 
-        // --------------------------------------------------------
-        // ICON
-        // --------------------------------------------------------
-
         val icon =
             TextView(this)
 
@@ -726,10 +1230,6 @@ class AddTransactionActivity : AppCompatActivity() {
         icon.textSize =
             22f
 
-
-        // --------------------------------------------------------
-        // TEXT
-        // --------------------------------------------------------
 
         val text =
             TextView(this)
@@ -760,25 +1260,21 @@ class AddTransactionActivity : AppCompatActivity() {
         )
 
 
-        // --------------------------------------------------------
-        // SELECTED STATE
-        // --------------------------------------------------------
-
-        val firstThreeLabels =
+        val firstThreeIds =
             categoryList
                 .take(3)
                 .map {
-                    it.label
+                    it.id
                 }
 
 
         chip.alpha =
             when {
 
-                selectedCategory.isEmpty() ->
+                selectedCategoryId == null ->
                     1.0f
 
-                selectedCategory !in firstThreeLabels ->
+                selectedCategoryId !in firstThreeIds ->
                     1.0f
 
                 else ->
@@ -805,13 +1301,15 @@ class AddTransactionActivity : AppCompatActivity() {
     private fun updateSelectedCategoryText() {
 
         tvSelectedCategory.text =
-            if (selectedCategory.isEmpty()) {
+            if (
+                selectedCategoryId == null
+            ) {
 
                 "No category selected"
 
             } else {
 
-                "Selected: $selectedCategory"
+                "Selected: $selectedCategoryLabel"
             }
     }
 
@@ -845,66 +1343,287 @@ class AddTransactionActivity : AppCompatActivity() {
 
 
     // ============================================================
-    // PAYMENT METHOD
-    // ============================================================
+// PAYMENT / ACCOUNT OBSERVER
+// ============================================================
 
     private fun setupPaymentChips() {
 
-        val chipCash =
-            findViewById<LinearLayout>(
-                R.id.chipCash
-            )
+        lifecycleScope.launch {
 
-        val chipCard =
-            findViewById<LinearLayout>(
-                R.id.chipCard
-            )
+            database
+                .accountDao()
+                .getAccountsForUser(
+                    currentUserId
+                )
+                .collectLatest { accounts ->
 
-        val chipBank =
-            findViewById<LinearLayout>(
-                R.id.chipBank
-            )
+                    accountList =
+                        accounts
+
+                    // =============================================
+                    // If selected account was deleted,
+                    // clear the selection.
+                    // =============================================
+
+                    if (
+                        selectedAccountId != null &&
+                        accountList.none {
+                            it.accountId ==
+                                    selectedAccountId
+                        }
+                    ) {
+
+                        selectedAccountId =
+                            null
+                    }
 
 
-        val chips =
-            listOf(
-                chipCash to "Cash",
-                chipCard to "Card",
-                chipBank to "Bank"
-            )
-
-
-        chips.forEach { (chip, name) ->
-
-            chip.setOnClickListener {
-
-                selectedPaymentMethod =
-                    name
-
-                chips.forEach { (otherChip, _) ->
-
-                    otherChip.alpha =
-                        0.5f
+                    updatePaymentChips()
                 }
+        }
+    }
 
-                chip.alpha =
-                    1.0f
-            }
+    // ============================================================
+// UPDATE PAYMENT / ACCOUNT CHIPS
+// ============================================================
+
+    private fun updatePaymentChips() {
+
+        paymentChipContainer.removeAllViews()
+
+
+        // ========================================================
+        // NO ACCOUNTS
+        // ========================================================
+
+        if (
+            accountList.isEmpty()
+        ) {
+
+            val text =
+                TextView(this)
+
+            text.text =
+                "No payment accounts available"
+
+            text.textSize =
+                14f
+
+            text.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.neutral_500
+                )
+            )
+
+            paymentChipContainer.addView(
+                text
+            )
+
+            return
         }
 
 
-        selectedPaymentMethod =
-            "Cash"
+        // ========================================================
+        // CREATE ACCOUNT CHIPS
+        // ========================================================
 
-        chipCash.alpha =
-            1.0f
+        accountList.forEach { account ->
 
-        chipCard.alpha =
-            0.5f
+            val chip =
+                createPaymentChip(
+                    account
+                )
 
-        chipBank.alpha =
-            0.5f
+            paymentChipContainer.addView(
+                chip
+            )
+        }
     }
+
+
+    // ============================================================
+// CREATE PAYMENT / ACCOUNT CHIP
+// ============================================================
+
+    private fun createPaymentChip(
+        account: Account
+    ): LinearLayout {
+
+        val chip =
+            LinearLayout(this)
+
+        chip.orientation =
+            LinearLayout.HORIZONTAL
+
+        chip.gravity =
+            Gravity.CENTER_VERTICAL
+
+        chip.setPadding(
+            dpToPx(14),
+            dpToPx(10),
+            dpToPx(14),
+            dpToPx(10)
+        )
+
+        chip.setBackgroundResource(
+            R.drawable.chip_bg
+        )
+
+
+        // ========================================================
+        // LAYOUT
+        // ========================================================
+
+        val chipParams =
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+        chipParams.marginEnd =
+            dpToPx(10)
+
+        chip.layoutParams =
+            chipParams
+
+
+        // ========================================================
+        // ICON
+        // ========================================================
+
+        val icon =
+            TextView(this)
+
+        icon.text =
+            getAccountEmoji(
+                account.name
+            )
+
+        icon.textSize =
+            16f
+
+
+        // ========================================================
+        // ACCOUNT NAME
+        // ========================================================
+
+        val text =
+            TextView(this)
+
+        val textParams =
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+        textParams.marginStart =
+            dpToPx(8)
+
+        text.layoutParams =
+            textParams
+
+        text.text =
+            account.name
+
+        text.textSize =
+            14f
+
+        text.setTextColor(
+            ContextCompat.getColor(
+                this,
+                R.color.primary_900
+            )
+        )
+
+
+        // ========================================================
+        // SELECTED STATE
+        // ========================================================
+
+        chip.alpha =
+            if (
+                selectedAccountId == null
+            ) {
+
+                1.0f
+
+            } else if (
+                selectedAccountId ==
+                account.accountId
+            ) {
+
+                1.0f
+
+            } else {
+
+                0.5f
+            }
+
+
+        // ========================================================
+        // CLICK
+        // ========================================================
+
+        chip.setOnClickListener {
+
+            selectedAccountId =
+                account.accountId
+
+            updatePaymentChips()
+        }
+
+
+        chip.addView(
+            icon
+        )
+
+        chip.addView(
+            text
+        )
+
+
+        return chip
+    }
+
+
+
+    // ============================================================
+// ACCOUNT ICON
+// ============================================================
+
+    private fun getAccountEmoji(
+        accountName: String
+    ): String {
+
+        val name =
+            accountName.lowercase()
+
+
+        return when {
+
+            name.contains("cash") ->
+                "💵"
+
+            name.contains("card") ||
+                    name.contains("visa") ||
+                    name.contains("master") ->
+                "💳"
+
+            name.contains("bank") ->
+                "🏦"
+
+            name.contains("wallet") ->
+                "👛"
+
+            else ->
+                "💰"
+        }
+    }
+
+
+
+
 
 
     // ============================================================
@@ -947,10 +1666,6 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
 
-        // --------------------------------------------------------
-        // DOT
-        // --------------------------------------------------------
-
         findViewById<View>(
             R.id.keyDot
         ).setOnClickListener {
@@ -967,10 +1682,6 @@ class AddTransactionActivity : AppCompatActivity() {
             }
         }
 
-
-        // --------------------------------------------------------
-        // DELETE
-        // --------------------------------------------------------
 
         findViewById<View>(
             R.id.keyDel
@@ -1019,9 +1730,9 @@ class AddTransactionActivity : AppCompatActivity() {
             currentAmountStr.toDoubleOrNull()
 
 
-        // --------------------------------------------------------
+        // ========================================================
         // VALIDATE AMOUNT
-        // --------------------------------------------------------
+        // ========================================================
 
         if (
             amount == null ||
@@ -1038,12 +1749,12 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
 
-        // --------------------------------------------------------
+        // ========================================================
         // VALIDATE CATEGORY
-        // --------------------------------------------------------
+        // ========================================================
 
         if (
-            selectedCategory.isEmpty()
+            selectedCategoryId == null
         ) {
 
             Toast.makeText(
@@ -1055,10 +1766,42 @@ class AddTransactionActivity : AppCompatActivity() {
             return
         }
 
+        // ========================================================
+        // VALIDATE ACCOUNT
+        // ========================================================
 
-        // --------------------------------------------------------
+        // No accounts have been created yet
+        if (
+            accountList.isEmpty()
+        ) {
+
+            Toast.makeText(
+                this,
+                "Please add a payment account first",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+
+        // Accounts exist, but none is selected
+        if (
+            selectedAccountId == null
+        ) {
+
+            Toast.makeText(
+                this,
+                "Please select a payment account",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        // ========================================================
         // VALIDATE USER
-        // --------------------------------------------------------
+        // ========================================================
 
         if (
             currentUserId == -1
@@ -1089,7 +1832,7 @@ class AddTransactionActivity : AppCompatActivity() {
 
             } else {
 
-                selectedCategory
+                selectedCategoryLabel
             }
 
 
@@ -1130,11 +1873,11 @@ class AddTransactionActivity : AppCompatActivity() {
                         type =
                             txnType,
 
-                        category =
-                            selectedCategory,
+                        categoryId =
+                            selectedCategoryId,
 
-                        paymentMethod =
-                            selectedPaymentMethod,
+                        accountId =
+                            selectedAccountId,
 
                         note =
                             note.ifEmpty {
@@ -1172,7 +1915,7 @@ class AddTransactionActivity : AppCompatActivity() {
                             "Large transaction detected"
 
                         notiMessage =
-                            "A $userCurrency $amount charge was made for $title today via $selectedPaymentMethod."
+                            "A $userCurrency $amount charge was made for $title today."
 
                         notiType =
                             "TRANSACTION"
@@ -1183,7 +1926,7 @@ class AddTransactionActivity : AppCompatActivity() {
                             "Expense Added"
 
                         notiMessage =
-                            "You spent $userCurrency $amount on $title ($selectedCategory)."
+                            "You spent $userCurrency $amount on $title ($selectedCategoryLabel)."
 
                         notiType =
                             "EXPENSE"
@@ -1195,7 +1938,7 @@ class AddTransactionActivity : AppCompatActivity() {
                         "Income Received"
 
                     notiMessage =
-                        "You received $userCurrency $amount from $title via $selectedPaymentMethod."
+                        "You received $userCurrency $amount from $title."
 
                     notiType =
                         "INCOME"
@@ -1301,3 +2044,4 @@ class AddTransactionActivity : AppCompatActivity() {
                 ).toInt()
     }
 }
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/neutral_0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp">
+
+        <!-- Account icon -->
+        <TextView
+            android:id="@+id/tvAccountIcon"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:text="💵"
+            android:textSize="23sp"
+            android:background="@drawable/bg_action_circle" />
+
+        <!-- Account information -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/tvAccountName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash"
+                android:fontFamily="@font/dosis_extrabold"
+                android:textColor="@color/neutral_900"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvAccountBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="MMK 150,000.00"
+                android:fontFamily="@font/dosis_semibold"
+                android:textColor="@color/neutral_700"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Three dot menu -->
+        <TextView
+            android:id="@+id/btnAccountMenu"
+            android:layout_width="38dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:text="⋮"
+            android:textColor="@color/neutral_500"
+            android:textSize="22sp"
+            android:fontFamily="@font/dosis_extrabold"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Account menu" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

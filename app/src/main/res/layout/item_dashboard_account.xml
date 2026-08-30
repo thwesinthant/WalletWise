@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="110dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/bg_account_card">
+
+    <TextView
+        android:id="@+id/tvAccountIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:background="@drawable/bg_action_circle"
+        android:text="💵"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvAccountName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Cash"
+        android:textColor="@color/neutral_900"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/tvAccountBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="MMK 150,000"
+        android:textColor="@color/neutral_700"
+        android:textSize="11sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -17,33 +18,38 @@ import java.util.Locale
 
 class TransactionAdapter(
     private var rawList: List<Transaction> = emptyList(),
-    private var currency: String = "MMK"
+    private var currency: String = "MMK",
+    private val onEditClick: ((Transaction) -> Unit)? = null,
+    private val onDeleteClick: ((Transaction) -> Unit)? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+// ============================================================
+// VIEW TYPES
+// ============================================================
 
-    // ============================================================
-    // VIEW TYPES
-    // ============================================================
+    companion object {
 
-    private val VIEW_TYPE_HEADER =
-        0
+        private const val VIEW_TYPE_HEADER = 0
 
-    private val VIEW_TYPE_ITEM =
-        1
+        private const val VIEW_TYPE_ITEM = 1
+
+        private const val MENU_EDIT = 1001
+
+        private const val MENU_DELETE = 1002
+    }
 
 
-    // ============================================================
-    // CATEGORY MAP
-    // ============================================================
+// ============================================================
+// CATEGORY MAP
+// ============================================================
 
-    private var categoryMap:
-            Map<String, CategoryEntity> =
+    private var categoryMap: Map<Long, CategoryEntity> =
         emptyMap()
 
 
-    // ============================================================
-    // DISPLAY ITEMS
-    // ============================================================
+// ============================================================
+// DISPLAY ITEMS
+// ============================================================
 
     private sealed class ListItem {
 
@@ -58,8 +64,7 @@ class TransactionAdapter(
     }
 
 
-    private var displayItems:
-            List<ListItem> =
+    private var displayItems: List<ListItem> =
         emptyList()
 
 
@@ -69,51 +74,80 @@ class TransactionAdapter(
     }
 
 
-    // ============================================================
-    // UPDATE CURRENCY
-    // ============================================================
+// ============================================================
+// UPDATE CURRENCY
+// ============================================================
 
     fun updateCurrency(
         newCurrency: String
     ) {
 
         currency =
-            newCurrency
-                .ifBlank {
-                    "MMK"
-                }
+            newCurrency.ifBlank {
+                "MMK"
+            }
 
         notifyDataSetChanged()
     }
 
 
-    // ============================================================
-    // BUILD DISPLAY ITEMS
-    // ============================================================
+// ============================================================
+// UPDATE TRANSACTIONS
+// ============================================================
+
+    fun updateList(
+        newList: List<Transaction>
+    ) {
+
+        rawList =
+            newList
+
+        buildDisplayItems()
+
+        notifyDataSetChanged()
+    }
+
+
+// ============================================================
+// UPDATE CATEGORIES
+// ============================================================
+
+    fun updateCategories(
+        categories: List<CategoryEntity>
+    ) {
+
+        categoryMap =
+            categories.associateBy {
+                it.id
+            }
+
+        notifyDataSetChanged()
+    }
+
+
+// ============================================================
+// BUILD DISPLAY ITEMS
+// ============================================================
 
     private fun buildDisplayItems() {
 
         val items =
             mutableListOf<ListItem>()
 
-
         val grouped =
-            rawList.groupBy {
+            rawList.groupBy { transaction ->
 
                 getGroupHeaderTitle(
-                    it.createdAt
+                    transaction.createdAt
                 )
             }
 
 
-        for (
-        (header, transactions)
-        in grouped
-        ) {
+        grouped.forEach { (header, transactions) ->
 
             items.add(
                 ListItem.Header(
-                    header
+                    title = header
                 )
             )
 
@@ -122,7 +156,7 @@ class TransactionAdapter(
 
                 items.add(
                     ListItem.Item(
-                        transaction
+                        transaction = transaction
                     )
                 )
             }
@@ -134,9 +168,9 @@ class TransactionAdapter(
     }
 
 
-    // ============================================================
-    // VIEW TYPE
-    // ============================================================
+// ============================================================
+// VIEW TYPE
+// ============================================================
 
     override fun getItemViewType(
         position: Int
@@ -155,30 +189,31 @@ class TransactionAdapter(
     }
 
 
-    // ============================================================
-    // CREATE VIEW HOLDER
-    // ============================================================
+// ============================================================
+// CREATE VIEW HOLDER
+// ============================================================
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
 
+        val inflater =
+            LayoutInflater.from(
+                parent.context
+            )
+
+
         return if (
             viewType == VIEW_TYPE_HEADER
         ) {
 
             val view =
-                LayoutInflater
-                    .from(
-                        parent.context
-                    )
-                    .inflate(
-                        R.layout.item_transaction_header,
-                        parent,
-                        false
-                    )
-
+                inflater.inflate(
+                    R.layout.item_transaction_header,
+                    parent,
+                    false
+                )
 
             HeaderViewHolder(
                 view
@@ -187,16 +222,11 @@ class TransactionAdapter(
         } else {
 
             val view =
-                LayoutInflater
-                    .from(
-                        parent.context
-                    )
-                    .inflate(
-                        R.layout.item_transaction_row,
-                        parent,
-                        false
-                    )
-
+                inflater.inflate(
+                    R.layout.item_transaction_row,
+                    parent,
+                    false
+                )
 
             TransactionViewHolder(
                 view
@@ -205,9 +235,9 @@ class TransactionAdapter(
     }
 
 
-    // ============================================================
-    // BIND VIEW HOLDER
-    // ============================================================
+// ============================================================
+// BIND VIEW HOLDER
+// ============================================================
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
@@ -226,9 +256,13 @@ class TransactionAdapter(
 
             is ListItem.Header -> {
 
-                (
-                        holder as HeaderViewHolder
-                        ).tvHeaderTitle.text =
+                val headerHolder =
+                    holder as HeaderViewHolder
+
+
+                headerHolder
+                    .tvHeaderTitle
+                    .text =
                     item.title
             }
 
@@ -247,140 +281,240 @@ class TransactionAdapter(
                     holder as TransactionViewHolder
 
 
-                // ------------------------------------------------
-                // TITLE
-                // ------------------------------------------------
-
-                itemHolder
-                    .tvTxnTitle
-                    .text =
-                    transaction.title
-
-
-                // ------------------------------------------------
-                // SUBTITLE
-                // ------------------------------------------------
-
-                itemHolder
-                    .tvTxnSubtitle
-                    .text =
-                    transaction.note
-                        ?: "${transaction.category} • ${transaction.paymentMethod}"
-
-
-                // =================================================
-                // CATEGORY ICON
-                // ============================================================
-
-                val category =
-                    categoryMap[
-                        transaction.category
-                    ]
-
-
-                if (
-                    category != null
-                ) {
-
-                    itemHolder
-                        .ivCategoryIcon
-                        .setImageResource(
-                            category.iconRes
-                        )
-
-
-                    itemHolder
-                        .ivCategoryIcon
-                        .setColorFilter(
-                            category.tintColor
-                        )
-
-                } else {
-
-                    val fallbackIcon =
-                        if (
-                            transaction.type ==
-                            "INCOME"
-                        ) {
-
-                            R.drawable.ic_plus
-
-                        } else {
-
-                            R.drawable.ic_card
-                        }
-
-
-                    itemHolder
-                        .ivCategoryIcon
-                        .setImageResource(
-                            fallbackIcon
-                        )
-
-
-                    itemHolder
-                        .ivCategoryIcon
-                        .clearColorFilter()
-                }
-
-
-                // =================================================
-                // AMOUNT
-                // ============================================================
-
-                val formattedAmount =
-                    String.format(
-                        Locale.getDefault(),
-                        "%,.2f",
-                        transaction.amount
-                    )
-
-
-                if (
-                    transaction.type ==
-                    "INCOME"
-                ) {
-
-                    itemHolder
-                        .tvTxnAmount
-                        .text =
-                        "$currency $formattedAmount"
-
-
-                    itemHolder
-                        .tvTxnAmount
-                        .setTextColor(
-                            ContextCompat.getColor(
-                                holder.itemView.context,
-                                R.color.income_green
-                            )
-                        )
-
-                } else {
-
-                    itemHolder
-                        .tvTxnAmount
-                        .text =
-                        "-$currency $formattedAmount"
-
-
-                    itemHolder
-                        .tvTxnAmount
-                        .setTextColor(
-                            ContextCompat.getColor(
-                                holder.itemView.context,
-                                R.color.expense_red
-                            )
-                        )
-                }
+                bindTransaction(
+                    itemHolder,
+                    transaction
+                )
             }
         }
     }
 
 
-    // ============================================================
-    // ITEM COUNT
-    // ============================================================
+// ============================================================
+// BIND TRANSACTION
+// ============================================================
+
+    private fun bindTransaction(
+        holder: TransactionViewHolder,
+        transaction: Transaction
+    ) {
+
+
+        // =========================================================
+        // CATEGORY
+        // =========================================================
+
+        val category =
+            transaction.categoryId?.let { categoryId ->
+
+                categoryMap[
+                    categoryId
+                ]
+            }
+
+
+        // =========================================================
+        // TITLE
+        // =========================================================
+
+        holder
+            .tvTxnTitle
+            .text =
+            transaction.title
+
+
+        // =========================================================
+        // SUBTITLE
+        // =========================================================
+
+        holder
+            .tvTxnSubtitle
+            .text =
+            transaction.note
+                ?.takeIf {
+                    it.isNotBlank()
+                }
+                ?: category
+                    ?.label
+                        ?: "No category"
+
+
+        // =========================================================
+        // CATEGORY ICON
+        // =========================================================
+
+        if (
+            category != null
+        ) {
+
+            holder
+                .ivCategoryIcon
+                .setImageResource(
+                    category.iconRes
+                )
+
+
+            holder
+                .ivCategoryIcon
+                .setColorFilter(
+                    category.tintColor
+                )
+
+        } else {
+
+            val fallbackIcon =
+                if (
+                    transaction.type == "INCOME"
+                ) {
+
+                    R.drawable.ic_plus
+
+                } else {
+
+                    R.drawable.ic_card
+                }
+
+
+            holder
+                .ivCategoryIcon
+                .setImageResource(
+                    fallbackIcon
+                )
+
+
+            holder
+                .ivCategoryIcon
+                .clearColorFilter()
+        }
+
+
+        // =========================================================
+        // AMOUNT
+        // =========================================================
+
+        val formattedAmount =
+            String.format(
+                Locale.getDefault(),
+                "%,.2f",
+                transaction.amount
+            )
+
+
+        if (
+            transaction.type == "INCOME"
+        ) {
+
+            holder
+                .tvTxnAmount
+                .text =
+                "$currency $formattedAmount"
+
+
+            holder
+                .tvTxnAmount
+                .setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.income_green
+                    )
+                )
+
+        } else {
+
+            holder
+                .tvTxnAmount
+                .text =
+                "-$currency $formattedAmount"
+
+
+            holder
+                .tvTxnAmount
+                .setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.expense_red
+                    )
+                )
+        }
+
+
+        // =========================================================
+        // MORE MENU
+        // =========================================================
+
+        holder
+            .btnTransactionMore
+            .setOnClickListener { view ->
+
+                showTransactionMenu(
+                    anchor = view,
+                    transaction = transaction
+                )
+            }
+    }
+
+
+// ============================================================
+// SHOW TRANSACTION MENU
+// ============================================================
+
+    private fun showTransactionMenu(
+        anchor: View,
+        transaction: Transaction
+    ) {
+
+        val popupMenu =
+            PopupMenu(
+                anchor.context,
+                anchor
+            )
+
+        popupMenu.menu.add(
+            0,
+            MENU_EDIT,
+            0,
+            "Edit"
+        )
+
+        popupMenu.menu.add(
+            0,
+            MENU_DELETE,
+            1,
+            "Delete"
+        )
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+
+            when (menuItem.itemId) {
+
+                MENU_EDIT -> {
+
+                    onEditClick?.invoke(
+                        transaction
+                    )
+
+                    true
+                }
+
+                MENU_DELETE -> {
+
+                    onDeleteClick?.invoke(
+                        transaction
+                    )
+
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+// ============================================================
+// ITEM COUNT
+// ============================================================
 
     override fun getItemCount(): Int {
 
@@ -388,49 +522,15 @@ class TransactionAdapter(
     }
 
 
-    // ============================================================
-    // UPDATE TRANSACTIONS
-    // ============================================================
-
-    fun updateList(
-        newList: List<Transaction>
-    ) {
-
-        rawList =
-            newList
-
-        buildDisplayItems()
-
-        notifyDataSetChanged()
-    }
-
-
-    // ============================================================
-    // UPDATE CATEGORIES
-    // ============================================================
-
-    fun updateCategories(
-        categories: List<CategoryEntity>
-    ) {
-
-        categoryMap =
-            categories.associateBy {
-                it.label
-            }
-
-        notifyDataSetChanged()
-    }
-
-
-    // ============================================================
-    // DATE HEADER
-    // ============================================================
+// ============================================================
+// DATE HEADER
+// ============================================================
 
     private fun getGroupHeaderTitle(
         timeMillis: Long
     ): String {
 
-        val itemCal =
+        val itemCalendar =
             Calendar
                 .getInstance()
                 .apply {
@@ -440,81 +540,75 @@ class TransactionAdapter(
                 }
 
 
-        val nowCal =
+        val todayCalendar =
             Calendar.getInstance()
 
 
-        return if (
+        if (
             isSameDay(
-                itemCal,
-                nowCal
+                itemCalendar,
+                todayCalendar
             )
         ) {
 
-            "Today"
-
-        } else {
-
-            nowCal.add(
-                Calendar.DAY_OF_YEAR,
-                -1
-            )
-
-
-            if (
-                isSameDay(
-                    itemCal,
-                    nowCal
-                )
-            ) {
-
-                "Yesterday"
-
-            } else {
-
-                SimpleDateFormat(
-                    "dd MMM yyyy",
-                    Locale.getDefault()
-                ).format(
-                    Date(
-                        timeMillis
-                    )
-                )
-            }
+            return "Today"
         }
+
+
+        todayCalendar.add(
+            Calendar.DAY_OF_YEAR,
+            -1
+        )
+
+
+        if (
+            isSameDay(
+                itemCalendar,
+                todayCalendar
+            )
+        ) {
+
+            return "Yesterday"
+        }
+
+
+        return SimpleDateFormat(
+            "dd MMM yyyy",
+            Locale.getDefault()
+        ).format(
+            Date(
+                timeMillis
+            )
+        )
     }
 
 
-    // ============================================================
-    // SAME DAY
-    // ============================================================
+// ============================================================
+// SAME DAY
+// ============================================================
 
     private fun isSameDay(
         cal1: Calendar,
         cal2: Calendar
     ): Boolean {
 
-        return (
+        return cal1.get(
+            Calendar.YEAR
+        ) == cal2.get(
+            Calendar.YEAR
+        )
+                &&
                 cal1.get(
-                    Calendar.YEAR
-                ) ==
-                        cal2.get(
-                            Calendar.YEAR
-                        )
-                        &&
-                        cal1.get(
-                            Calendar.DAY_OF_YEAR
-                        ) ==
-                        cal2.get(
-                            Calendar.DAY_OF_YEAR
-                        )
-                )
+                    Calendar.DAY_OF_YEAR
+                ) == cal2.get(
+            Calendar.DAY_OF_YEAR
+        )
     }
 
 
-    // ============================================================
-    // HEADER VIEW HOLDER
-    // ============================================================
+// ============================================================
+// HEADER VIEW HOLDER
+// ============================================================
 
     class HeaderViewHolder(
         view: View
@@ -522,17 +616,16 @@ class TransactionAdapter(
         view
     ) {
 
-        val tvHeaderTitle:
-                TextView =
+        val tvHeaderTitle: TextView =
             view.findViewById(
                 R.id.tvHeaderTitle
             )
     }
 
 
-    // ============================================================
-    // TRANSACTION VIEW HOLDER
-    // ============================================================
+// ============================================================
+// TRANSACTION VIEW HOLDER
+// ============================================================
 
     class TransactionViewHolder(
         view: View
@@ -540,31 +633,34 @@ class TransactionAdapter(
         view
     ) {
 
-        val ivCategoryIcon:
-                ImageView =
+        val ivCategoryIcon: ImageView =
             view.findViewById(
-                R.id.tvCategoryIcon
+                R.id.ivCategoryIcon
             )
 
 
-        val tvTxnTitle:
-                TextView =
+        val tvTxnTitle: TextView =
             view.findViewById(
                 R.id.tvTxnTitle
             )
 
 
-        val tvTxnSubtitle:
-                TextView =
+        val tvTxnSubtitle: TextView =
             view.findViewById(
                 R.id.tvTxnSubtitle
             )
 
 
-        val tvTxnAmount:
-                TextView =
+        val tvTxnAmount: TextView =
             view.findViewById(
                 R.id.tvTxnAmount
             )
+
+
+        val btnTransactionMore: TextView =
+            view.findViewById(
+                R.id.btnTransactionMore
+            )
     }
+
 }

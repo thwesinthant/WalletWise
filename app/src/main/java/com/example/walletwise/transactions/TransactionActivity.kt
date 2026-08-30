@@ -4,7 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +18,6 @@ import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.entity.Transaction
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 
 class TransactionActivity : AppCompatActivity() {
 
@@ -39,7 +41,8 @@ class TransactionActivity : AppCompatActivity() {
 // ADAPTER
 // =============================================================
 
-    private lateinit var transactionAdapter: TransactionAdapter
+    private lateinit var transactionAdapter:
+            TransactionAdapter
 
 
 // =============================================================
@@ -110,40 +113,16 @@ class TransactionActivity : AppCompatActivity() {
         )
 
 
-
         setContentView(
             R.layout.activity_all_transactions
         )
 
-// =========================================================
-// SYSTEM STATUS BAR + NAVIGATION BAR SAFE SPACE
-// =========================================================
 
-        val rootView =
-            findViewById<View>(
-                R.id.transactionRoot
-            )
+        // =========================================================
+        // SYSTEM BARS
+        // =========================================================
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(
-            rootView
-        ) { view, insets ->
-
-
-            val systemBars =
-                insets.getInsets(
-                    WindowInsetsCompat.Type.systemBars()
-                )
-
-
-            view.updatePadding(
-                top = systemBars.top,
-                bottom = systemBars.bottom
-            )
-
-
-            insets
-        }
+        setupWindowInsets()
 
 
         // =========================================================
@@ -199,12 +178,57 @@ class TransactionActivity : AppCompatActivity() {
 
 
         // =========================================================
+        // INITIAL FILTER UI
+        // =========================================================
+
+        updateFilterSelection()
+
+
+        // =========================================================
         // OBSERVERS
         // =========================================================
 
         observeUser()
 
         observeTransactions()
+    }
+
+
+// =============================================================
+// WINDOW INSETS
+// =============================================================
+
+    private fun setupWindowInsets() {
+
+        val rootView =
+            findViewById<View>(
+                R.id.transactionRoot
+            )
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+            rootView
+        ) { view, insets ->
+
+
+            val systemBars =
+                insets.getInsets(
+                    WindowInsetsCompat
+                        .Type
+                        .systemBars()
+                )
+
+
+            view.updatePadding(
+                top =
+                    systemBars.top,
+                bottom =
+                    systemBars.bottom
+            )
+
+
+            insets
+        }
     }
 
 
@@ -259,8 +283,33 @@ class TransactionActivity : AppCompatActivity() {
 
         transactionAdapter =
             TransactionAdapter(
-                emptyList(),
-                userCurrency
+                rawList =
+                    emptyList(),
+
+                currency =
+                    userCurrency,
+
+                onEditClick =
+                    { transaction ->
+
+                        openEditTransaction(
+                            transaction
+                        )
+                    },
+
+                onDeleteClick =
+                    { transaction ->
+
+                        Toast.makeText(
+                            this,
+                            "Delete clicked: ${transaction.transactionId}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        showDeleteConfirmation(
+                            transaction
+                        )
+                    }
             )
 
 
@@ -360,25 +409,133 @@ class TransactionActivity : AppCompatActivity() {
             R.id.fabAddTransaction
         ).setOnClickListener {
 
-            val intent =
-                Intent(
-                    this,
-                    AddTransactionActivity::class.java
-                )
-
-
-            intent.putExtra(
-                "USER_ID",
-                currentUserId
-            )
-
-
-            startActivity(
-                intent
-            )
+            openAddTransaction()
         }
     }
 
+
+// =============================================================
+// OPEN ADD TRANSACTION
+// =============================================================
+
+    private fun openAddTransaction() {
+
+        val intent =
+            Intent(
+                this,
+                AddTransactionActivity::class.java
+            )
+
+
+        intent.putExtra(
+            "USER_ID",
+            currentUserId
+        )
+
+
+        startActivity(
+            intent
+        )
+    }
+
+
+// =============================================================
+// OPEN EDIT TRANSACTION
+// =============================================================
+
+    private fun openEditTransaction(
+        transaction: Transaction
+    ) {
+
+        val intent =
+            Intent(
+                this,
+                AddTransactionActivity::class.java
+            )
+
+
+        intent.putExtra(
+            "USER_ID",
+            currentUserId
+        )
+
+
+        /*
+         * IMPORTANT:
+         * This requires your Transaction entity to have
+         * an ID property.
+         *
+         * Change "transactionId" below if your actual
+         * Transaction entity uses a different property name,
+         * such as id.
+         */
+
+        intent.putExtra(
+            "TRANSACTION_ID",
+            transaction.transactionId
+        )
+
+
+        startActivity(
+            intent
+        )
+    }
+
+
+// =============================================================
+// DELETE CONFIRMATION
+// =============================================================
+
+    private fun showDeleteConfirmation(
+        transaction: Transaction
+    ) {
+
+        AlertDialog.Builder(
+            this
+        )
+            .setTitle(
+                "Delete Transaction"
+            )
+            .setMessage(
+                "Are you sure you want to delete this transaction?"
+            )
+            .setNegativeButton(
+                "Cancel",
+                null
+            )
+            .setPositiveButton(
+                "Delete"
+            ) { _, _ ->
+
+                deleteTransaction(
+                    transaction
+                )
+            }
+            .show()
+    }
+
+
+    // =============================================================
+// DELETE TRANSACTION
+// =============================================================
+
+    private fun deleteTransaction(
+        transaction: Transaction
+    ) {
+
+        lifecycleScope.launch {
+
+            database
+                .transactionDao()
+                .deleteTransaction(
+                    transactionId =
+                        transaction.transactionId,
+
+                    userId =
+                        currentUserId
+                )
+        }
+    }
 
 // =============================================================
 // OBSERVE USER
@@ -416,7 +573,7 @@ class TransactionActivity : AppCompatActivity() {
 
 
 // =============================================================
-// OBSERVE TRANSACTIONS
+// OBSERVE TRANSACTIONS + CATEGORIES
 // =============================================================
 
     private fun observeTransactions() {
@@ -489,10 +646,12 @@ class TransactionActivity : AppCompatActivity() {
             ) {
 
                 FilterType.ALL ->
+
                     allTransactions
 
 
                 FilterType.INCOME ->
+
                     allTransactions.filter {
 
                         it.type ==
@@ -501,6 +660,7 @@ class TransactionActivity : AppCompatActivity() {
 
 
                 FilterType.EXPENSE ->
+
                     allTransactions.filter {
 
                         it.type ==
@@ -518,22 +678,24 @@ class TransactionActivity : AppCompatActivity() {
                 newestFirst
             ) {
 
-                filteredList.sortedByDescending {
+                filteredList
+                    .sortedByDescending {
 
-                    it.createdAt
-                }
+                        it.createdAt
+                    }
 
             } else {
 
-                filteredList.sortedBy {
+                filteredList
+                    .sortedBy {
 
-                    it.createdAt
-                }
+                        it.createdAt
+                    }
             }
 
 
         // ---------------------------------------------------------
-        // ADAPTER
+        // UPDATE ADAPTER
         // ---------------------------------------------------------
 
         transactionAdapter
@@ -575,6 +737,7 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun updateFilterSelection() {
 
+
         // =========================================================
         // ALL
         // =========================================================
@@ -584,27 +747,33 @@ class TransactionActivity : AppCompatActivity() {
             FilterType.ALL
         ) {
 
-            filterAll.setBackgroundResource(
-                R.drawable.bg_filter_selected
-            )
-
-            filterAll.setTextColor(
-                getColor(
-                    R.color.neutral_0
+            filterAll
+                .setBackgroundResource(
+                    R.drawable.bg_filter_selected
                 )
-            )
+
+
+            filterAll
+                .setTextColor(
+                    getColor(
+                        R.color.neutral_0
+                    )
+                )
 
         } else {
 
-            filterAll.setBackgroundResource(
-                R.drawable.bg_filter_unselected
-            )
-
-            filterAll.setTextColor(
-                getColor(
-                    R.color.neutral_500
+            filterAll
+                .setBackgroundResource(
+                    R.drawable.bg_filter_unselected
                 )
-            )
+
+
+            filterAll
+                .setTextColor(
+                    getColor(
+                        R.color.neutral_500
+                    )
+                )
         }
 
 
@@ -617,27 +786,33 @@ class TransactionActivity : AppCompatActivity() {
             FilterType.INCOME
         ) {
 
-            filterIncome.setBackgroundResource(
-                R.drawable.bg_filter_income
-            )
-
-            filterIncome.setTextColor(
-                getColor(
-                    R.color.neutral_0
+            filterIncome
+                .setBackgroundResource(
+                    R.drawable.bg_filter_income
                 )
-            )
+
+
+            filterIncome
+                .setTextColor(
+                    getColor(
+                        R.color.neutral_0
+                    )
+                )
 
         } else {
 
-            filterIncome.setBackgroundResource(
-                R.drawable.bg_filter_unselected
-            )
-
-            filterIncome.setTextColor(
-                getColor(
-                    R.color.neutral_500
+            filterIncome
+                .setBackgroundResource(
+                    R.drawable.bg_filter_unselected
                 )
-            )
+
+
+            filterIncome
+                .setTextColor(
+                    getColor(
+                        R.color.neutral_500
+                    )
+                )
         }
 
 
@@ -650,27 +825,33 @@ class TransactionActivity : AppCompatActivity() {
             FilterType.EXPENSE
         ) {
 
-            filterExpense.setBackgroundResource(
-                R.drawable.bg_filter_expense
-            )
-
-            filterExpense.setTextColor(
-                getColor(
-                    R.color.neutral_0
+            filterExpense
+                .setBackgroundResource(
+                    R.drawable.bg_filter_expense
                 )
-            )
+
+
+            filterExpense
+                .setTextColor(
+                    getColor(
+                        R.color.neutral_0
+                    )
+                )
 
         } else {
 
-            filterExpense.setBackgroundResource(
-                R.drawable.bg_filter_unselected
-            )
-
-            filterExpense.setTextColor(
-                getColor(
-                    R.color.neutral_500
+            filterExpense
+                .setBackgroundResource(
+                    R.drawable.bg_filter_unselected
                 )
-            )
+
+
+            filterExpense
+                .setTextColor(
+                    getColor(
+                        R.color.neutral_500
+                    )
+                )
         }
     }
 
