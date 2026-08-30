@@ -7,49 +7,51 @@ import org.json.JSONArray
 
 object CategorySeedLoader {
 
-    private const val DEFAULT_USER_ID = 0
-
     fun loadDefaultEntities(
         context: Context,
-        userId: Int = DEFAULT_USER_ID
+        userId: Int
     ): List<CategoryEntity> {
 
-        val json = context.assets
-            .open("categories_seed.json")
-            .bufferedReader()
-            .use { it.readText() }
+        val json =
+            context.assets
+                .open("categories_seed.json")
+                .bufferedReader()
+                .use {
+                    it.readText()
+                }
 
-        val array = JSONArray(json)
-        val entities = mutableListOf<CategoryEntity>()
+        val array =
+            JSONArray(json)
+
+        val entities =
+            mutableListOf<CategoryEntity>()
 
         for (index in 0 until array.length()) {
 
-            val obj = array.getJSONObject(index)
-
-            val iconName = obj.getString("icon")
-
-            val iconRes = context.resources.getIdentifier(
-                iconName,
-                "drawable",
-                context.packageName
-            )
-
-            // Skip if drawable doesn't exist
-            if (iconRes == 0) {
-                continue
-            }
+            val obj =
+                array.getJSONObject(index)
 
             entities.add(
                 CategoryEntity(
                     userId = userId,
-                    label = obj.getString("label"),
-                    iconRes = iconRes,
-                    tintColor = Color.parseColor(
-                        obj.getString("tintColor")
-                    ),
-                    bgColor = Color.parseColor(
-                        obj.getString("bgColor")
-                    ),
+
+                    label =
+                        obj.getString("label"),
+
+                    // Store stable drawable NAME.
+                    iconName =
+                        obj.getString("icon"),
+
+                    tintColor =
+                        Color.parseColor(
+                            obj.getString("tintColor")
+                        ),
+
+                    bgColor =
+                        Color.parseColor(
+                            obj.getString("bgColor")
+                        ),
+
                     sortOrder = index
                 )
             )

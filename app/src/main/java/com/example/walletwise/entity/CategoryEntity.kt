@@ -15,14 +15,26 @@ import androidx.room.PrimaryKey
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index(value = ["userId"])]
+    indices = [
+        Index(value = ["userId"])
+    ]
 )
 data class CategoryEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
+
     val userId: Int,
+
     val label: String,
-    val iconRes: Int,
+
+    // Stable drawable name, for example:
+    // ic_category_groceries
+    val iconName: String,
+
     val tintColor: Int,
+
     val bgColor: Int,
+
     val sortOrder: Int
 )

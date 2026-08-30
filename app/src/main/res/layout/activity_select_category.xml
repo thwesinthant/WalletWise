@@ -9,6 +9,10 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/bg_gradient_light_blue">
 
+    <!-- ========================================================= -->
+    <!-- TOOLBAR -->
+    <!-- ========================================================= -->
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -23,6 +27,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- ========================================================= -->
+    <!-- SETTINGS BUTTON -->
+    <!-- ========================================================= -->
+
+    <ImageView
+        android:id="@+id/btnManageCategories"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:padding="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_settings"
+        android:contentDescription="Manage categories"
+        app:tint="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar" />
+
+
+    <!-- ========================================================= -->
+    <!-- CATEGORY RECYCLER VIEW -->
+    <!-- ========================================================= -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRecyclerView"

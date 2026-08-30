@@ -11,40 +11,57 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CategoryDao {
 
-    @Query("""
-        SELECT * 
-        FROM categories 
-        WHERE userId = :userId
-        ORDER BY sortOrder ASC, id ASC
-    """)
-    fun observeAll(userId: Int): Flow<List<CategoryEntity>>
-
-    @Query("SELECT COUNT(*) FROM categories")
-    suspend fun count(): Int
-
-    @Query("""
-        SELECT COUNT(*) 
-        FROM categories 
-        WHERE userId = :userId
-    """)
-    suspend fun countByUserId(userId: Int): Int
-
-    @Query("""
-        SELECT MIN(sortOrder) 
+    @Query(
+        """
+        SELECT *
         FROM categories
         WHERE userId = :userId
-    """)
-    suspend fun minSortOrder(userId: Int): Int?
+        ORDER BY sortOrder ASC, id ASC
+        """
+    )
+    fun observeAll(
+        userId: Int
+    ): Flow<List<CategoryEntity>>
+
+    @Query(
+        """
+        SELECT COUNT(*)
+        FROM categories
+        WHERE userId = :userId
+        """
+    )
+    suspend fun countByUserId(
+        userId: Int
+    ): Int
+
+    @Query(
+        """
+        SELECT MIN(sortOrder)
+        FROM categories
+        WHERE userId = :userId
+        """
+    )
+    suspend fun minSortOrder(
+        userId: Int
+    ): Int?
 
     @Insert
-    suspend fun insertAll(categories: List<CategoryEntity>)
+    suspend fun insertAll(
+        categories: List<CategoryEntity>
+    )
 
     @Insert
-    suspend fun insert(category: CategoryEntity): Long
+    suspend fun insert(
+        category: CategoryEntity
+    ): Long
 
     @Update
-    suspend fun update(category: CategoryEntity)
+    suspend fun update(
+        category: CategoryEntity
+    )
 
     @Delete
-    suspend fun delete(category: CategoryEntity)
+    suspend fun delete(
+        category: CategoryEntity
+    )
 }

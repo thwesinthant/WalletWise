@@ -275,6 +275,7 @@
                             android:layout_height="26dp"
                             android:background="@drawable/bg_split_icon"
                             android:gravity="center"
+                            android:fontFamily="@font/dosis_bold"
                             android:text="↑"
                             android:textColor="@color/expense_red"
                             android:textSize="12sp" />
@@ -325,7 +326,7 @@
                             android:gravity="center"
                             android:text="↓"
                             android:textColor="@color/income_green"
-                            android:textSize="20sp" />
+                            android:textSize="12sp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

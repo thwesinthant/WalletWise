@@ -3,6 +3,8 @@ package com.example.walletwise.category
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -22,21 +24,42 @@ import kotlinx.coroutines.launch
 
 class SelectCategoryActivity : AppCompatActivity() {
 
+    // ============================================================
+    // DATABASE
+    // ============================================================
+
     private lateinit var userDao: UserDao
     private lateinit var categoryDao: CategoryDao
+
+    // ============================================================
+    // ADAPTER
+    // ============================================================
+
     private lateinit var adapter: CategoryAdapter
 
-    private var currentEntities: List<CategoryEntity> = emptyList()
+    // ============================================================
+    // CATEGORY STATE
+    // ============================================================
 
-    private var currentUserId: Int = 0
+    private var currentEntities: List<CategoryEntity> =
+        emptyList()
+
+    private var currentUserId: Int = -1
 
     /*
-     * TRUE  = user is selecting a category for transaction
-     * FALSE = user is managing categories
+     * TRUE  = selecting a category for transaction
+     * FALSE = managing categories
      */
-    private var selectMode: Boolean = false
+    private var selectMode: Boolean = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    // ============================================================
+    // ON CREATE
+    // ============================================================
+
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
+
         super.onCreate(savedInstanceState)
 
         setContentView(
@@ -47,10 +70,34 @@ class SelectCategoryActivity : AppCompatActivity() {
         // GET MODE
         // ========================================================
 
-        selectMode = intent.getBooleanExtra(
-            EXTRA_SELECT_MODE,
-            false
-        )
+        selectMode =
+            intent.getBooleanExtra(
+                EXTRA_SELECT_MODE,
+                true
+            )
+
+        // ========================================================
+        // GET USER ID
+        // ========================================================
+
+        currentUserId =
+            intent.getIntExtra(
+                EXTRA_USER_ID,
+                -1
+            )
+
+        // ========================================================
+        // DATABASE
+        // ========================================================
+
+        val database =
+            AppDatabase.getDatabase(this)
+
+        userDao =
+            database.userDao()
+
+        categoryDao =
+            database.categoryDao()
 
         // ========================================================
         // TOOLBAR
@@ -73,20 +120,35 @@ class SelectCategoryActivity : AppCompatActivity() {
         }
 
         // ========================================================
-        // DATABASE
+        // SETTINGS BUTTON
         // ========================================================
 
-        val database =
-            AppDatabase.getDatabase(this)
+        val btnManageCategories =
+            findViewById<ImageView>(
+                R.id.btnManageCategories
+            )
 
-        userDao =
-            database.userDao()
+        /*
+         * Only show the settings button when we are
+         * selecting a category.
+         *
+         * In Manage Categories mode, there is no need
+         * to show the settings button again.
+         */
+        btnManageCategories.visibility =
+            if (selectMode) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
 
-        categoryDao =
-            database.categoryDao()
+        btnManageCategories.setOnClickListener {
+
+            openManageCategories()
+        }
 
         // ========================================================
-        // RECYCLERVIEW
+        // RECYCLER VIEW
         // ========================================================
 
         val recyclerView =
@@ -105,7 +167,9 @@ class SelectCategoryActivity : AppCompatActivity() {
                 mutableListOf()
             ) { selected ->
 
-                handleCategoryClick(selected)
+                handleCategoryClick(
+                    selected
+                )
             }
 
         recyclerView.adapter =
@@ -118,25 +182,13 @@ class SelectCategoryActivity : AppCompatActivity() {
         lifecycleScope.launch {
 
             /*
-             * IMPORTANT:
-             * Prefer the USER_ID passed from the previous Activity.
+             * If a valid USER_ID was passed from
+             * AddTransactionActivity, use it.
              */
-            val passedUserId =
-                intent.getIntExtra(
-                    EXTRA_USER_ID,
-                    -1
-                )
-
-            if (passedUserId != -1) {
-
-                currentUserId =
-                    passedUserId
-
-            } else {
+            if (currentUserId == -1) {
 
                 /*
-                 * Fallback for your existing Category Management
-                 * implementation.
+                 * Fallback for the existing local-user setup.
                  */
                 val existingUser =
                     userDao.getUserByEmail(
@@ -155,7 +207,7 @@ class SelectCategoryActivity : AppCompatActivity() {
             }
 
             // ====================================================
-            // SEED CATEGORIES IF EMPTY
+            // SEED DEFAULT CATEGORIES
             // ====================================================
 
             if (
@@ -165,11 +217,10 @@ class SelectCategoryActivity : AppCompatActivity() {
             ) {
 
                 val defaultCategories =
-                    CategorySeedLoader
-                        .loadDefaultEntities(
-                            this@SelectCategoryActivity,
-                            currentUserId
-                        )
+                    CategorySeedLoader.loadDefaultEntities(
+                        this@SelectCategoryActivity,
+                        currentUserId
+                    )
 
                 categoryDao.insertAll(
                     defaultCategories
@@ -192,31 +243,35 @@ class SelectCategoryActivity : AppCompatActivity() {
                     val displayList =
                         mutableListOf<Category>()
 
-                    /*
-                     * MANAGE MODE:
-                     * Show Add button.
-                     */
+                    // =================================================
+                    // MANAGE MODE
+                    // =================================================
+
                     if (!selectMode) {
 
+                        /*
+                         * Add button appears as the first item.
+                         */
                         displayList.add(
                             Category(
                                 label = "Add",
-                                iconRes =
-                                    R.drawable.ic_plus,
-                                tintColor =
-                                    Color.TRANSPARENT,
-                                isAddAction =
-                                    true
+                                iconRes = R.drawable.ic_plus,
+                                tintColor = Color.TRANSPARENT,
+                                isAddAction = true
                             )
                         )
                     }
 
-                    /*
-                     * Show all categories.
-                     */
+                    // =================================================
+                    // NORMAL CATEGORIES
+                    // =================================================
+
                     displayList.addAll(
-                        entities.map {
-                            it.toCategory()
+                        entities.map { entity ->
+
+                            entity.toCategory(
+                                this@SelectCategoryActivity
+                            )
                         }
                     )
 
@@ -228,6 +283,42 @@ class SelectCategoryActivity : AppCompatActivity() {
     }
 
     // ============================================================
+    // OPEN MANAGE CATEGORY PAGE
+    // ============================================================
+
+    private fun openManageCategories() {
+
+        val intent =
+            Intent(
+                this,
+                SelectCategoryActivity::class.java
+            )
+
+        /*
+         * FALSE means:
+         *
+         * "Do not select a category.
+         * Open category management."
+         */
+        intent.putExtra(
+            EXTRA_SELECT_MODE,
+            false
+        )
+
+        /*
+         * Pass the SAME logged-in user ID.
+         */
+        intent.putExtra(
+            EXTRA_USER_ID,
+            currentUserId
+        )
+
+        startActivity(
+            intent
+        )
+    }
+
+    // ============================================================
     // HANDLE CATEGORY CLICK
     // ============================================================
 
@@ -235,11 +326,16 @@ class SelectCategoryActivity : AppCompatActivity() {
         selected: Category
     ) {
 
-        /*
-         * MODE 1
-         * SELECT CATEGORY
-         */
+        // ========================================================
+        // SELECT MODE
+        // ========================================================
+
         if (selectMode) {
+
+            /*
+             * Return the selected category to
+             * AddTransactionActivity.
+             */
 
             val resultIntent =
                 Intent()
@@ -269,11 +365,13 @@ class SelectCategoryActivity : AppCompatActivity() {
             return
         }
 
-        /*
-         * MODE 2
-         * MANAGE CATEGORY
-         */
+        // ========================================================
+        // MANAGE MODE
+        // ========================================================
 
+        /*
+         * Add button clicked.
+         */
         if (selected.isAddAction) {
 
             showAddOrEditSheet(
@@ -283,9 +381,14 @@ class SelectCategoryActivity : AppCompatActivity() {
             return
         }
 
+        /*
+         * Find the actual CategoryEntity.
+         */
         val entity =
             currentEntities.firstOrNull {
+
                 it.id == selected.id
+
             }
 
         if (entity != null) {
@@ -305,11 +408,19 @@ class SelectCategoryActivity : AppCompatActivity() {
     ) {
 
         AddCategoryBottomSheet(
+
             existing =
-                existing?.toCategory()
+                existing?.toCategory(
+                    this@SelectCategoryActivity
+                )
+
         ) { result ->
 
             lifecycleScope.launch {
+
+                // =================================================
+                // ADD
+                // =================================================
 
                 if (existing == null) {
 
@@ -321,44 +432,48 @@ class SelectCategoryActivity : AppCompatActivity() {
                                 ) - 1
 
                     categoryDao.insert(
-                        CategoryEntity(
-                            userId =
-                                currentUserId,
 
-                            label =
-                                result.label,
+                        result.toEntity(
 
-                            iconRes =
-                                result.iconRes,
-
-                            tintColor =
-                                result.tintColor,
-
-                            bgColor =
-                                result.bgColor,
+                            context =
+                                this@SelectCategoryActivity,
 
                             sortOrder =
-                                nextOrder
+                                nextOrder,
+
+                            userId =
+                                currentUserId
                         )
                     )
 
-                } else {
+                }
+
+                // =================================================
+                // EDIT
+                // =================================================
+
+                else {
+
+                    val updatedEntity =
+                        result.toEntity(
+
+                            context =
+                                this@SelectCategoryActivity,
+
+                            sortOrder =
+                                existing.sortOrder,
+
+                            userId =
+                                existing.userId
+
+                        ).copy(
+
+                            id =
+                                existing.id
+                        )
 
                     categoryDao.update(
-                        existing.copy(
-
-                            label =
-                                result.label,
-
-                            iconRes =
-                                result.iconRes,
-
-                            tintColor =
-                                result.tintColor,
-
-                            bgColor =
-                                result.bgColor
-                        )
+                        updatedEntity
                     )
                 }
             }
@@ -442,32 +557,8 @@ class SelectCategoryActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // ROOM ENTITY → UI CATEGORY
+    // CONSTANTS
     // ============================================================
-
-    private fun CategoryEntity.toCategory(): Category {
-
-        return Category(
-
-            label =
-                label,
-
-            iconRes =
-                iconRes,
-
-            tintColor =
-                tintColor,
-
-            bgColor =
-                bgColor,
-
-            isAddAction =
-                false,
-
-            id =
-                id
-        )
-    }
 
     companion object {
 

@@ -10,6 +10,7 @@ import com.example.walletwise.dashboard.DashboardActivity
 import com.example.walletwise.transactions.AddTransactionActivity
 import com.example.walletwise.goal.GoalActivity
 import com.example.walletwise.profile.ProfileActivity
+import com.example.walletwise.transactions.TransactionActivity
 
 enum class NavTab {
     HOME,
@@ -117,7 +118,7 @@ object BottomNavHelper {
                         DashboardActivity::class.java
 
                     NavTab.TRANSACTION ->
-                        AddTransactionActivity::class.java
+                        TransactionActivity::class.java
 
                     NavTab.BUDGETS ->
                         SelectCategoryActivity::class.java

@@ -17,15 +17,21 @@ import java.util.Date
 import java.util.Locale
 
 class TransactionAdapter(
+
     private var rawList: List<Transaction> = emptyList(),
+
     private var currency: String = "MMK",
+
     private val onEditClick: ((Transaction) -> Unit)? = null,
+
     private val onDeleteClick: ((Transaction) -> Unit)? = null
+
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-// ============================================================
-// VIEW TYPES
-// ============================================================
+
+    // ============================================================
+    // VIEW TYPES
+    // ============================================================
 
     companion object {
 
@@ -39,24 +45,23 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// CATEGORY MAP
-// ============================================================
+    // ============================================================
+    // CATEGORY MAP
+    // ============================================================
 
     private var categoryMap: Map<Long, CategoryEntity> =
         emptyMap()
 
 
-// ============================================================
-// DISPLAY ITEMS
-// ============================================================
+    // ============================================================
+    // DISPLAY ITEMS
+    // ============================================================
 
     private sealed class ListItem {
 
         data class Header(
             val title: String
         ) : ListItem()
-
 
         data class Item(
             val transaction: Transaction
@@ -74,9 +79,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// UPDATE CURRENCY
-// ============================================================
+    // ============================================================
+    // UPDATE CURRENCY
+    // ============================================================
 
     fun updateCurrency(
         newCurrency: String
@@ -91,9 +96,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// UPDATE TRANSACTIONS
-// ============================================================
+    // ============================================================
+    // UPDATE TRANSACTIONS
+    // ============================================================
 
     fun updateList(
         newList: List<Transaction>
@@ -108,9 +113,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// UPDATE CATEGORIES
-// ============================================================
+    // ============================================================
+    // UPDATE CATEGORIES
+    // ============================================================
 
     fun updateCategories(
         categories: List<CategoryEntity>
@@ -125,9 +130,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// BUILD DISPLAY ITEMS
-// ============================================================
+    // ============================================================
+    // BUILD DISPLAY ITEMS
+    // ============================================================
 
     private fun buildDisplayItems() {
 
@@ -142,7 +147,6 @@ class TransactionAdapter(
                 )
             }
 
-
         grouped.forEach { (header, transactions) ->
 
             items.add(
@@ -150,7 +154,6 @@ class TransactionAdapter(
                     title = header
                 )
             )
-
 
             transactions.forEach { transaction ->
 
@@ -162,15 +165,14 @@ class TransactionAdapter(
             }
         }
 
-
         displayItems =
             items
     }
 
 
-// ============================================================
-// VIEW TYPE
-// ============================================================
+    // ============================================================
+    // VIEW TYPE
+    // ============================================================
 
     override fun getItemViewType(
         position: Int
@@ -189,9 +191,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// CREATE VIEW HOLDER
-// ============================================================
+    // ============================================================
+    // CREATE VIEW HOLDER
+    // ============================================================
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -202,7 +204,6 @@ class TransactionAdapter(
             LayoutInflater.from(
                 parent.context
             )
-
 
         return if (
             viewType == VIEW_TYPE_HEADER
@@ -235,9 +236,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// BIND VIEW HOLDER
-// ============================================================
+    // ============================================================
+    // BIND VIEW HOLDER
+    // ============================================================
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
@@ -259,7 +260,6 @@ class TransactionAdapter(
                 val headerHolder =
                     holder as HeaderViewHolder
 
-
                 headerHolder
                     .tvHeaderTitle
                     .text =
@@ -276,10 +276,8 @@ class TransactionAdapter(
                 val transaction =
                     item.transaction
 
-
                 val itemHolder =
                     holder as TransactionViewHolder
-
 
                 bindTransaction(
                     itemHolder,
@@ -290,9 +288,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// BIND TRANSACTION
-// ============================================================
+    // ============================================================
+    // BIND TRANSACTION
+    // ============================================================
 
     private fun bindTransaction(
         holder: TransactionViewHolder,
@@ -347,12 +345,17 @@ class TransactionAdapter(
             category != null
         ) {
 
+            val iconResId =
+                getDrawableResourceId(
+                    holder.itemView.context,
+                    category.iconName
+                )
+
             holder
                 .ivCategoryIcon
                 .setImageResource(
-                    category.iconRes
+                    iconResId
                 )
-
 
             holder
                 .ivCategoryIcon
@@ -374,13 +377,11 @@ class TransactionAdapter(
                     R.drawable.ic_card
                 }
 
-
             holder
                 .ivCategoryIcon
                 .setImageResource(
                     fallbackIcon
                 )
-
 
             holder
                 .ivCategoryIcon
@@ -409,7 +410,6 @@ class TransactionAdapter(
                 .text =
                 "$currency $formattedAmount"
 
-
             holder
                 .tvTxnAmount
                 .setTextColor(
@@ -425,7 +425,6 @@ class TransactionAdapter(
                 .tvTxnAmount
                 .text =
                 "-$currency $formattedAmount"
-
 
             holder
                 .tvTxnAmount
@@ -454,9 +453,39 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// SHOW TRANSACTION MENU
-// ============================================================
+    // ============================================================
+    // CONVERT DRAWABLE NAME TO RESOURCE ID
+    // ============================================================
+
+    private fun getDrawableResourceId(
+        context: android.content.Context,
+        iconName: String
+    ): Int {
+
+        val resourceId =
+            context.resources.getIdentifier(
+                iconName,
+                "drawable",
+                context.packageName
+            )
+
+        return if (
+            resourceId != 0
+        ) {
+
+            resourceId
+
+        } else {
+
+            // Safe fallback if drawable name does not exist.
+            R.drawable.ic_card
+        }
+    }
+
+
+    // ============================================================
+    // SHOW TRANSACTION MENU
+    // ============================================================
 
     private fun showTransactionMenu(
         anchor: View,
@@ -483,9 +512,12 @@ class TransactionAdapter(
             "Delete"
         )
 
+
         popupMenu.setOnMenuItemClickListener { menuItem ->
 
-            when (menuItem.itemId) {
+            when (
+                menuItem.itemId
+            ) {
 
                 MENU_EDIT -> {
 
@@ -496,6 +528,7 @@ class TransactionAdapter(
                     true
                 }
 
+
                 MENU_DELETE -> {
 
                     onDeleteClick?.invoke(
@@ -505,16 +538,20 @@ class TransactionAdapter(
                     true
                 }
 
-                else -> false
+
+                else ->
+                    false
             }
         }
+
 
         popupMenu.show()
     }
 
-// ============================================================
-// ITEM COUNT
-// ============================================================
+
+    // ============================================================
+    // ITEM COUNT
+    // ============================================================
 
     override fun getItemCount(): Int {
 
@@ -522,9 +559,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// DATE HEADER
-// ============================================================
+    // ============================================================
+    // DATE HEADER
+    // ============================================================
 
     private fun getGroupHeaderTitle(
         timeMillis: Long
@@ -583,9 +620,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// SAME DAY
-// ============================================================
+    // ============================================================
+    // SAME DAY
+    // ============================================================
 
     private fun isSameDay(
         cal1: Calendar,
@@ -606,9 +643,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// HEADER VIEW HOLDER
-// ============================================================
+    // ============================================================
+    // HEADER VIEW HOLDER
+    // ============================================================
 
     class HeaderViewHolder(
         view: View
@@ -623,9 +660,9 @@ class TransactionAdapter(
     }
 
 
-// ============================================================
-// TRANSACTION VIEW HOLDER
-// ============================================================
+    // ============================================================
+    // TRANSACTION VIEW HOLDER
+    // ============================================================
 
     class TransactionViewHolder(
         view: View
@@ -662,5 +699,4 @@ class TransactionAdapter(
                 R.id.btnTransactionMore
             )
     }
-
 }

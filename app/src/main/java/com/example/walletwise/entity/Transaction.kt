@@ -31,7 +31,8 @@ import androidx.room.PrimaryKey
     indices = [
         Index(value = ["user_id"]),
         Index(value = ["account_id"]),
-        Index(value = ["category_id"])
+        Index(value = ["category_id"]),
+        Index(value = ["transfer_group_id"])
     ]
 )
 data class Transaction(
@@ -62,5 +63,8 @@ data class Transaction(
     val note: String? = null,
 
     @ColumnInfo(name = "created_at")
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+
+    @ColumnInfo(name = "transfer_group_id")
+    val transferGroupId: String? = null
 )
