@@ -89,6 +89,17 @@
             android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Budget  -->
+        <activity
+            android:name=".budget.BudgetActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".budget.AddBudgetActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- Profile -->
         <activity
             android:name=".profile.ProfileActivity"
@@ -108,10 +119,7 @@
             android:name=".category.SelectCategoryActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".budget.BudgetActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+
 
     </application>
 

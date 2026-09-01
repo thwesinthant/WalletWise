@@ -25,13 +25,6 @@ interface TransactionDao {
 
     // ============================================================
     // INSERT TRANSFER
-    //
-    // One transfer creates TWO transactions:
-    //
-    // TRANSFER_OUT
-    // TRANSFER_IN
-    //
-    // Both must contain the SAME transferGroupId.
     // ============================================================
 
     @RoomTransaction
@@ -39,8 +32,14 @@ interface TransactionDao {
         transferOut: Transaction,
         transferIn: Transaction
     ) {
-        insertTransaction(transferOut)
-        insertTransaction(transferIn)
+
+        insertTransaction(
+            transferOut
+        )
+
+        insertTransaction(
+            transferIn
+        )
     }
 
 
@@ -136,8 +135,6 @@ interface TransactionDao {
 
     // ============================================================
     // DELETE COMPLETE TRANSFER
-    //
-    // Deletes both TRANSFER_OUT and TRANSFER_IN.
     // ============================================================
 
     @Query(
@@ -198,7 +195,7 @@ interface TransactionDao {
         WHERE user_id = :userId
         AND type = 'EXPENSE'
         AND created_at >= :startDate
-        AND created_at <= :endDate
+        AND created_at < :endDate
         """
     )
     suspend fun getExpenseForPeriod(
@@ -220,7 +217,7 @@ interface TransactionDao {
         AND category_id = :categoryId
         AND type = 'EXPENSE'
         AND created_at >= :startDate
-        AND created_at <= :endDate
+        AND created_at < :endDate
         """
     )
     suspend fun getCategoryExpenseForPeriod(
@@ -291,8 +288,6 @@ interface TransactionDao {
 
     // ============================================================
     // UPDATE COMPLETE TRANSFER
-    //
-    // Updates both sides atomically.
     // ============================================================
 
     @RoomTransaction
@@ -321,5 +316,49 @@ interface TransactionDao {
             note = transferIn.note
         )
     }
-}
 
+
+    // ============================================================
+    // LATEST TRANSACTION DATE
+    // ============================================================
+
+    @Query(
+        """
+        SELECT MAX(created_at)
+        FROM transactions
+        WHERE user_id = :userId
+        """
+    )
+    fun observeLatestTransactionDate(
+        userId: Int
+    ): Flow<Long?>
+
+
+    // ============================================================
+    // BUDGET EXPENSE
+    //
+    // Calculates ALL EXPENSE transactions belonging to the
+    // user's budget date range.
+    //
+    // IMPORTANT:
+    // There is intentionally NO budgetId parameter.
+    //
+    // The budget itself is identified by its date range.
+    // ============================================================
+
+    @Query(
+        """
+        SELECT COALESCE(SUM(amount), 0)
+        FROM transactions
+        WHERE user_id = :userId
+        AND type = 'EXPENSE'
+        AND created_at >= :startDate
+        AND created_at < :endDate
+        """
+    )
+    suspend fun getBudgetExpense(
+        userId: Int,
+        startDate: Long,
+        endDate: Long
+    ): Double
+}

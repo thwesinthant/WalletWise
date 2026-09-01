@@ -2032,6 +2032,16 @@ class AddTransactionActivity : AppCompatActivity() {
                             }
                     )
 
+                // ============================================================
+                // RECHECK BUDGETS AFTER EDITING AN EXPENSE
+                // ============================================================
+
+                if (isExpense) {
+
+                    checkBudgetsAfterExpense()
+                }
+
+
                 withContext(Dispatchers.Main) {
 
                     Toast.makeText(
@@ -2461,13 +2471,21 @@ class AddTransactionActivity : AppCompatActivity() {
                         transaction
                     )
 
+                // ========================================================
+                // CHECK ALL BUDGETS
+                // ========================================================
+
+                if (isExpense) {
+                    checkBudgetsAfterExpense()
+                }
+
                 val notiTitle: String
                 val notiMessage: String
                 val notiType: String
 
                 if (isExpense) {
 
-                    if (amount >= 500) {
+                    if (amount >= 50000) {
 
                         notiTitle =
                             "Large transaction detected"
@@ -2576,6 +2594,241 @@ class AddTransactionActivity : AppCompatActivity() {
     }
 
     // ============================================================
+// CHECK BUDGETS AFTER EXPENSE
+//
+// Checks:
+// 1. Overall budget amount
+// 2. Every category budget inside every active budget
+//
+// A notification is created only when spending crosses the
+// budget limit for the first time.
+// ============================================================
+
+    private suspend fun checkBudgetsAfterExpense() {
+
+        // Only expenses affect budgets.
+        if (!isExpense) {
+            return
+        }
+
+        val now =
+            System.currentTimeMillis()
+
+        // ========================================================
+        // GET ALL ACTIVE BUDGETS
+        // ========================================================
+
+        val activeBudgets =
+            database
+                .budgetDao()
+                .getActiveBudgets(
+                    currentUserId,
+                    now
+                )
+
+        // No active budgets.
+        if (activeBudgets.isEmpty()) {
+            return
+        }
+
+        // ========================================================
+        // CHECK EVERY BUDGET CARD
+        // ========================================================
+
+        for (budget in activeBudgets) {
+
+            // ====================================================
+            // OVERALL BUDGET SPENDING
+            // ====================================================
+
+            val totalSpent =
+                database
+                    .transactionDao()
+                    .getBudgetExpense(
+                        userId = currentUserId,
+                        startDate = budget.startDate,
+                        endDate = budget.endDate
+                    )
+
+            // ====================================================
+            // OVERALL BUDGET EXCEEDED
+            // ====================================================
+
+            if (totalSpent > budget.amount) {
+
+                val existingNotificationCount =
+                    database
+                        .notificationDao()
+                        .countBudgetExceededNotification(
+                            userId = currentUserId,
+                            budgetId = budget.budgetId
+                        )
+
+                // Only create one notification.
+                if (existingNotificationCount == 0) {
+
+                    val notification =
+                        Notification(
+
+                            notificationId = 0,
+
+                            userId =
+                                currentUserId,
+
+                            title =
+                                "Budget Exceeded",
+
+                            message =
+                                "${budget.name}: You have spent " +
+                                        "$userCurrency ${formatAmount(totalSpent)} " +
+                                        "of your $userCurrency ${formatAmount(budget.amount)} budget.",
+
+                            type =
+                                "BUDGET_EXCEEDED",
+
+                            referenceType =
+                                "BUDGET",
+
+                            referenceId =
+                                budget.budgetId,
+
+                            isRead =
+                                false,
+
+                            timeAgo =
+                                null,
+
+                            createdAt =
+                                System.currentTimeMillis()
+                                    .toString()
+                        )
+
+                    database
+                        .notificationDao()
+                        .insertNotification(
+                            notification
+                        )
+                }
+            }
+
+            // ====================================================
+            // GET ALL CATEGORY LIMITS FOR THIS BUDGET
+            // ====================================================
+
+            val budgetCategories =
+                database
+                    .budgetDao()
+                    .getBudgetCategoriesOnce(
+                        budget.budgetId
+                    )
+
+            // ====================================================
+            // CHECK EVERY CATEGORY
+            // ====================================================
+
+            for (budgetCategory in budgetCategories) {
+
+                val categorySpent =
+                    database
+                        .transactionDao()
+                        .getCategoryExpenseForPeriod(
+                            userId = currentUserId,
+
+                            categoryId =
+                                budgetCategory.categoryId,
+
+                            startDate =
+                                budget.startDate,
+
+                            endDate =
+                                budget.endDate
+                        )
+
+                // =================================================
+                // CATEGORY BUDGET EXCEEDED
+                // =================================================
+
+                if (
+                    categorySpent >
+                    budgetCategory.limitAmount
+                ) {
+
+                    val existingNotificationCount =
+                        database
+                            .notificationDao()
+                            .countCategoryBudgetExceededNotification(
+                                userId =
+                                    currentUserId,
+
+                                budgetCategoryId =
+                                    budgetCategory.budgetCategoryId
+                            )
+
+                    // Only create one notification.
+                    if (
+                        existingNotificationCount == 0
+                    ) {
+
+                        val category =
+                            database
+                                .categoryDao()
+                                .getCategoryById(
+                                    categoryId = budgetCategory.categoryId,
+                                    userId = currentUserId
+                                )
+
+                        val categoryName =
+                            category?.label ?: "Category"
+
+                        val notification =
+                            Notification(
+
+                                notificationId = 0,
+
+                                userId =
+                                    currentUserId,
+
+                                title =
+                                    "$categoryName Budget Exceeded",
+
+                                message =
+                                    "You have spent " +
+                                            "$userCurrency ${formatAmount(categorySpent)} " +
+                                            "on $categoryName, exceeding your " +
+                                            "$userCurrency ${formatAmount(budgetCategory.limitAmount)} category budget.",
+
+                                type =
+                                    "CATEGORY_BUDGET_EXCEEDED",
+
+                                referenceType =
+                                    "BUDGET_CATEGORY",
+
+                                referenceId =
+                                    budgetCategory.budgetCategoryId,
+
+                                isRead =
+                                    false,
+
+                                timeAgo =
+                                    null,
+
+                                createdAt =
+                                    System.currentTimeMillis()
+                                        .toString()
+                            )
+
+                        database
+                            .notificationDao()
+                            .insertNotification(
+                                notification
+                            )
+                    }
+                }
+            }
+        }
+    }
+
+    // ============================================================
     // CUSTOM KEYPAD
     // ============================================================
 
@@ -2659,6 +2912,20 @@ class AddTransactionActivity : AppCompatActivity() {
 
                 "$userCurrency $currentAmountStr"
             }
+    }
+
+    private fun formatAmount(
+        amount: Double
+    ): String {
+
+        return if (amount % 1.0 == 0.0) {
+            amount.toLong().toString()
+        } else {
+            String.format(
+                "%.2f",
+                amount
+            )
+        }
     }
 
     // ============================================================

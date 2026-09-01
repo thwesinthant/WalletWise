@@ -30,7 +30,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -81,6 +83,8 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var ivDashboardAvatar: ImageView
 
     private lateinit var balanceAmount: TextView
+
+    private lateinit var balanceUpdatedDate: TextView
 
     private lateinit var expenseAmount: TextView
 
@@ -163,6 +167,11 @@ class DashboardActivity : AppCompatActivity() {
         balanceAmount =
             findViewById(
                 R.id.balanceAmount
+            )
+
+        balanceUpdatedDate =
+            findViewById(
+                R.id.balanceUpdatedDate
             )
 
         expenseAmount =
@@ -326,8 +335,31 @@ class DashboardActivity : AppCompatActivity() {
         observeAccounts()
 
         observeRecentTransactions()
+
+        observeBalanceUpdatedDate()
     }
 
+    // =============================================================
+// OBSERVE BALANCE UPDATED DATE
+// =============================================================
+
+    private fun observeBalanceUpdatedDate() {
+
+        lifecycleScope.launch {
+
+            database
+                .transactionDao()
+                .observeLatestTransactionDate(
+                    currentUserId
+                )
+                .collect { latestDate ->
+
+                    updateBalanceUpdatedDate(
+                        latestDate
+                    )
+                }
+        }
+    }
 
     // =============================================================
     // OBSERVE ACCOUNTS
@@ -434,6 +466,31 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateBalanceUpdatedDate(
+        lastUpdated: Long?
+    ) {
+
+        if (lastUpdated == null) {
+
+            balanceUpdatedDate.text =
+                "No updates yet"
+
+            return
+        }
+
+        val dateFormat =
+            SimpleDateFormat(
+                "dd/MM/yyyy",
+                Locale.getDefault()
+            )
+
+        balanceUpdatedDate.text =
+            "Updated ${
+                dateFormat.format(
+                    Date(lastUpdated)
+                )
+            }"
+    }
 
     // =============================================================
     // DELETE TRANSACTION

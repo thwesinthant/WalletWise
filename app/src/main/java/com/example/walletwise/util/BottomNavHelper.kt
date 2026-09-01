@@ -5,6 +5,8 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import com.example.walletwise.R
+import com.example.walletwise.budget.AddBudgetActivity
+import com.example.walletwise.budget.BudgetActivity
 import com.example.walletwise.category.SelectCategoryActivity
 import com.example.walletwise.dashboard.DashboardActivity
 import com.example.walletwise.transactions.AddTransactionActivity
@@ -124,22 +126,53 @@ object BottomNavHelper {
                         SelectCategoryActivity::class.java
 
                     NavTab.GOALS ->
-                        GoalActivity::class.java
+                        BudgetActivity::class.java
 
                     NavTab.SETTINGS ->
                         ProfileActivity::class.java
                 }
 
-                val intent = Intent(
-                    activity,
-                    targetClass
-                )
+                val intent =
+                    Intent(
+                        activity,
+                        targetClass
+                    )
 
-                // VERY IMPORTANT
-                intent.putExtra(
-                    "USER_ID",
-                    userId
-                )
+
+                // =====================================================
+                // CATEGORY MANAGEMENT
+                // =====================================================
+
+                if (tab == NavTab.BUDGETS) {
+
+                    /*
+                     * Open SelectCategoryActivity in MANAGE mode.
+                     */
+                    intent.putExtra(
+                        SelectCategoryActivity.EXTRA_SELECT_MODE,
+                        false
+                    )
+
+                    /*
+                     * SelectCategoryActivity uses EXTRA_USER_ID,
+                     * not "USER_ID".
+                     */
+                    intent.putExtra(
+                        SelectCategoryActivity.EXTRA_USER_ID,
+                        userId
+                    )
+
+                } else {
+
+                    /*
+                     * Other activities use "USER_ID".
+                     */
+                    intent.putExtra(
+                        "USER_ID",
+                        userId
+                    )
+                }
+
 
                 if (tab == NavTab.HOME) {
 

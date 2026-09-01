@@ -1,316 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/background_light"
-    android:fillViewport="true">
+    android:background="@drawable/gradient_header_bg"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
+
+    <ImageView
+        android:id="@+id/btnBack"
+
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="54dp"
+
+        android:padding="8dp"
+
+        android:background="@drawable/circle_bg_white"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:contentDescription="Back"
+
+        android:clickable="true"
+        android:focusable="true"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- ===================================================== -->
+    <!-- PAGE TITLE -->
+    <!-- ===================================================== -->
+
+    <TextView
+        android:id="@+id/tvBudgetPageTitle"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:text="Add Budget"
+
+        android:fontFamily="@font/dosis_extrabold"
+        android:textColor="@color/primary_900"
+        android:textSize="20sp"
+
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
-        <!-- HEADER -->
+    <!-- ===================================================== -->
+    <!-- SCROLLABLE CONTENT -->
+    <!-- ===================================================== -->
+
+    <ScrollView
+        android:id="@+id/budgetScrollView"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="24dp"
+
+        android:fillViewport="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+
+        android:scrollbars="none"
+
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:gravity="center_vertical">
+            android:orientation="vertical"
 
-            <ImageButton
-                android:id="@+id/btnBack"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="30dp">
 
-                android:layout_width="44dp"
-                android:layout_height="44dp"
 
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_back"
-                android:contentDescription="Back" />
-
+            <!-- ================================================= -->
+            <!-- INTRO -->
+            <!-- ================================================= -->
 
             <TextView
+                android:id="@+id/tvBudgetPageSubtitle"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
 
-                android:text="Add Budget"
+                android:text="Create a new spending plan"
 
                 android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/text_primary_light"
-                android:textSize="24sp" />
-
-        </LinearLayout>
+                android:textColor="@color/neutral_500"
+                android:textSize="13sp" />
 
 
-        <!-- INTRO -->
+            <!-- ================================================= -->
+            <!-- BUDGET NAME -->
+            <!-- ================================================= -->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="25dp"
-
-            android:text="Create a new spending plan"
-
-            android:fontFamily="@font/dosis_bold"
-            android:textColor="@color/neutral_500"
-            android:textSize="13sp" />
-
-
-        <!-- BUDGET NAME -->
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MoneyMate.TextInputLayout"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="18dp"
-
-            android:hint="Budget Name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBudgetName"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MoneyMate.TextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:fontFamily="@font/dosis_bold"
-                android:textSize="15sp" />
+                android:layout_marginTop="18dp"
 
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Budget Name">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBudgetName"
 
-        <!-- AMOUNT -->
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MoneyMate.TextInputLayout"
+                    android:inputType="textCapSentences"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_bold"
+                    android:textSize="15sp" />
 
-            android:layout_marginTop="14dp"
-
-            android:hint="Budget Amount">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBudgetAmount"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="numberDecimal"
-
-                android:fontFamily="@font/dosis_bold"
-                android:textSize="15sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!-- START DATE -->
+            <!-- ================================================= -->
+            <!-- TOTAL BUDGET AMOUNT -->
+            <!-- ================================================= -->
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MoneyMate.TextInputLayout"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="14dp"
-
-            android:hint="Start Date">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etStartDate"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MoneyMate.TextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:focusable="false"
+                android:layout_marginTop="14dp"
 
-                android:text="August 01, 2026"
+                android:hint="Budget Amount"
 
-                android:fontFamily="@font/dosis_bold"
-                android:textSize="15sp" />
+                app:prefixText="MMK ">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBudgetAmount"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:inputType="numberDecimal"
+
+                    android:fontFamily="@font/dosis_bold"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!-- END DATE -->
+            <!-- ================================================= -->
+            <!-- START DATE -->
+            <!-- ================================================= -->
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MoneyMate.TextInputLayout"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="14dp"
-
-            android:hint="End Date">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEndDate"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MoneyMate.TextInputLayout"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:focusable="false"
+                android:layout_marginTop="14dp"
 
-                android:text="August 31, 2026"
+                android:hint="Start Date">
 
-                android:fontFamily="@font/dosis_bold"
-                android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etStartDate"
 
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
+                    android:focusable="false"
+                    android:clickable="true"
 
-        <!-- CATEGORIES -->
+                    android:fontFamily="@font/dosis_bold"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="25dp"
-
-            android:text="Budget Categories"
-
-            android:fontFamily="@font/dosis_bold"
-            android:textColor="@color/text_primary_light"
-            android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <!-- ================================================= -->
+            <!-- END DATE -->
+            <!-- ================================================= -->
 
-            android:layout_marginTop="3dp"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MoneyMate.TextInputLayout"
 
-            android:text="Set spending limits for each category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:fontFamily="@font/dosis_bold"
-            android:textColor="@color/neutral_500"
-            android:textSize="12sp" />
+                android:layout_marginTop="14dp"
+
+                android:hint="End Date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEndDate"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:focusable="false"
+                    android:clickable="true"
+
+                    android:fontFamily="@font/dosis_bold"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!-- CATEGORY 1 -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="14dp"
-            android:padding="14dp"
-
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_add_category">
+            <!-- ================================================= -->
+            <!-- BUDGET CATEGORIES -->
+            <!-- ================================================= -->
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-
-                android:text="🍔  Food"
-
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/text_primary_light"
-                android:textSize="14sp" />
-
-            <TextView
-                android:text="150,000 MMK"
+                android:id="@+id/tvCategoriesTitle"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                android:layout_marginTop="25dp"
+
+                android:text="Budget Categories"
+
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/text_primary_light"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/tvCategoriesSubtitle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="3dp"
+
+                android:text="Optional — divide your budget by category"
+
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/neutral_500"
+                android:textSize="12sp" />
+
+
+            <!-- ================================================= -->
+            <!-- DYNAMIC CATEGORY ROWS -->
+            <!-- ================================================= -->
+
+            <LinearLayout
+                android:id="@+id/categoryContainer"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="14dp"
+
+                android:orientation="vertical" />
+
+
+            <!-- ================================================= -->
+            <!-- ADD CATEGORY -->
+            <!-- ================================================= -->
+
+            <Button
+                android:id="@+id/btnAddCategory"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+
+                android:text="+ Add Category"
+                android:textAllCaps="false"
 
                 android:fontFamily="@font/dosis_bold"
                 android:textColor="@color/primary_500"
-                android:textSize="13sp" />
+
+                android:backgroundTint="@color/primary_50" />
+
+
+            <!-- ================================================= -->
+            <!-- CREATE / UPDATE BUDGET -->
+            <!-- ================================================= -->
+
+            <Button
+                android:id="@+id/btnCreateBudget"
+
+                style="@style/Widget.MoneyMate.Button.Primary"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="25dp"
+
+                android:text="Create Budget" />
 
         </LinearLayout>
 
+    </ScrollView>
 
-        <!-- CATEGORY 2 -->
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="8dp"
-            android:padding="14dp"
-
-            android:gravity="center_vertical"
-            android:background="@drawable/bg_add_category">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-
-                android:text="🚌  Transport"
-
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/text_primary_light"
-                android:textSize="14sp" />
-
-            <TextView
-                android:text="80,000 MMK"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/primary_500"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-
-        <!-- ADD CATEGORY -->
-
-        <Button
-            android:id="@+id/btnAddCategory"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="12dp"
-
-            android:text="+ Add Category"
-
-            android:textAllCaps="false"
-
-            android:fontFamily="@font/dosis_bold"
-            android:textColor="@color/primary_500"
-
-            android:backgroundTint="@color/primary_50" />
-
-
-        <!-- CREATE -->
-
-        <Button
-            android:id="@+id/btnCreateBudget"
-
-            style="@style/Widget.MoneyMate.Button.Primary"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="20dp"
-
-            android:text="Create Budget" />
-
-    </LinearLayout>
-
-</ScrollView>
