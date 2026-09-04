@@ -26,4 +26,9 @@ interface ApiService {
         @Body request: ResetPasswordRequest
     ): Response<ApiResponse<ResetPasswordData>>
 
+    @POST("api/change_password.php")
+    suspend fun changePassword(
+        @Body request: ChangePasswordRequest
+    ): Response<ApiResponse<ChangePasswordData>>
+
 }

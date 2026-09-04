@@ -3,14 +3,11 @@ package com.example.walletwise.category
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.walletwise.CategoryAdapter
 import com.example.walletwise.R
 import com.example.walletwise.dao.CategoryDao
 import com.example.walletwise.dao.UserDao
@@ -46,12 +43,6 @@ class SelectCategoryActivity : AppCompatActivity() {
 
     private var currentUserId: Int = -1
 
-    /*
-     * TRUE  = selecting a category for transaction
-     * FALSE = managing categories
-     */
-    private var selectMode: Boolean = true
-
     // ============================================================
     // ON CREATE
     // ============================================================
@@ -65,16 +56,6 @@ class SelectCategoryActivity : AppCompatActivity() {
         setContentView(
             R.layout.activity_select_category
         )
-
-        // ========================================================
-        // GET MODE
-        // ========================================================
-
-        selectMode =
-            intent.getBooleanExtra(
-                EXTRA_SELECT_MODE,
-                true
-            )
 
         // ========================================================
         // GET USER ID
@@ -109,42 +90,10 @@ class SelectCategoryActivity : AppCompatActivity() {
             )
 
         toolbar.title =
-            if (selectMode) {
-                "Select category"
-            } else {
-                "Manage categories"
-            }
+            "Categories"
 
         toolbar.setNavigationOnClickListener {
             finish()
-        }
-
-        // ========================================================
-        // SETTINGS BUTTON
-        // ========================================================
-
-        val btnManageCategories =
-            findViewById<ImageView>(
-                R.id.btnManageCategories
-            )
-
-        /*
-         * Only show the settings button when we are
-         * selecting a category.
-         *
-         * In Manage Categories mode, there is no need
-         * to show the settings button again.
-         */
-        btnManageCategories.visibility =
-            if (selectMode) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-
-        btnManageCategories.setOnClickListener {
-
-            openManageCategories()
         }
 
         // ========================================================
@@ -164,13 +113,28 @@ class SelectCategoryActivity : AppCompatActivity() {
 
         adapter =
             CategoryAdapter(
-                mutableListOf()
-            ) { selected ->
+                mutableListOf(),
 
-                handleCategoryClick(
-                    selected
-                )
-            }
+                // =================================================
+                // NORMAL TAP
+                // =================================================
+                onClick = { selected ->
+
+                    handleCategoryClick(
+                        selected
+                    )
+                },
+
+                // =================================================
+                // LONG PRESS
+                // =================================================
+                onLongClick = { selected ->
+
+                    handleCategoryLongClick(
+                        selected
+                    )
+                }
+            )
 
         recyclerView.adapter =
             adapter
@@ -181,15 +145,12 @@ class SelectCategoryActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
 
-            /*
-             * If a valid USER_ID was passed from
-             * AddTransactionActivity, use it.
-             */
+            // ====================================================
+            // FALLBACK LOCAL USER
+            // ====================================================
+
             if (currentUserId == -1) {
 
-                /*
-                 * Fallback for the existing local-user setup.
-                 */
                 val existingUser =
                     userDao.getUserByEmail(
                         DEFAULT_USER_EMAIL
@@ -244,23 +205,17 @@ class SelectCategoryActivity : AppCompatActivity() {
                         mutableListOf<Category>()
 
                     // =================================================
-                    // MANAGE MODE
+                    // ADD CATEGORY TILE
                     // =================================================
 
-                    if (!selectMode) {
-
-                        /*
-                         * Add button appears as the first item.
-                         */
-                        displayList.add(
-                            Category(
-                                label = "Add",
-                                iconRes = R.drawable.ic_plus,
-                                tintColor = Color.TRANSPARENT,
-                                isAddAction = true
-                            )
+                    displayList.add(
+                        Category(
+                            label = "Add",
+                            iconRes = R.drawable.ic_plus,
+                            tintColor = Color.TRANSPARENT,
+                            isAddAction = true
                         )
-                    }
+                    )
 
                     // =================================================
                     // NORMAL CATEGORIES
@@ -283,43 +238,7 @@ class SelectCategoryActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // OPEN MANAGE CATEGORY PAGE
-    // ============================================================
-
-    private fun openManageCategories() {
-
-        val intent =
-            Intent(
-                this,
-                SelectCategoryActivity::class.java
-            )
-
-        /*
-         * FALSE means:
-         *
-         * "Do not select a category.
-         * Open category management."
-         */
-        intent.putExtra(
-            EXTRA_SELECT_MODE,
-            false
-        )
-
-        /*
-         * Pass the SAME logged-in user ID.
-         */
-        intent.putExtra(
-            EXTRA_USER_ID,
-            currentUserId
-        )
-
-        startActivity(
-            intent
-        )
-    }
-
-    // ============================================================
-    // HANDLE CATEGORY CLICK
+    // HANDLE NORMAL CLICK
     // ============================================================
 
     private fun handleCategoryClick(
@@ -327,51 +246,9 @@ class SelectCategoryActivity : AppCompatActivity() {
     ) {
 
         // ========================================================
-        // SELECT MODE
+        // ADD CATEGORY
         // ========================================================
 
-        if (selectMode) {
-
-            /*
-             * Return the selected category to
-             * AddTransactionActivity.
-             */
-
-            val resultIntent =
-                Intent()
-
-            resultIntent.putExtra(
-                RESULT_CATEGORY_ID,
-                selected.id
-            )
-
-            resultIntent.putExtra(
-                RESULT_CATEGORY_LABEL,
-                selected.label
-            )
-
-            resultIntent.putExtra(
-                RESULT_CATEGORY_ICON,
-                selected.iconRes
-            )
-
-            setResult(
-                RESULT_OK,
-                resultIntent
-            )
-
-            finish()
-
-            return
-        }
-
-        // ========================================================
-        // MANAGE MODE
-        // ========================================================
-
-        /*
-         * Add button clicked.
-         */
         if (selected.isAddAction) {
 
             showAddOrEditSheet(
@@ -381,9 +258,56 @@ class SelectCategoryActivity : AppCompatActivity() {
             return
         }
 
-        /*
-         * Find the actual CategoryEntity.
-         */
+        // ========================================================
+        // SELECT CATEGORY
+        // ========================================================
+
+        val resultIntent =
+            Intent()
+
+        resultIntent.putExtra(
+            RESULT_CATEGORY_ID,
+            selected.id
+        )
+
+        resultIntent.putExtra(
+            RESULT_CATEGORY_LABEL,
+            selected.label
+        )
+
+        resultIntent.putExtra(
+            RESULT_CATEGORY_ICON,
+            selected.iconRes
+        )
+
+        setResult(
+            RESULT_OK,
+            resultIntent
+        )
+
+        finish()
+    }
+
+    // ============================================================
+    // HANDLE LONG PRESS
+    // ============================================================
+
+    private fun handleCategoryLongClick(
+        selected: Category
+    ) {
+
+        // ========================================================
+        // DO NOTHING FOR ADD TILE
+        // ========================================================
+
+        if (selected.isAddAction) {
+            return
+        }
+
+        // ========================================================
+        // FIND ENTITY
+        // ========================================================
+
         val entity =
             currentEntities.firstOrNull {
 
@@ -561,9 +485,6 @@ class SelectCategoryActivity : AppCompatActivity() {
     // ============================================================
 
     companion object {
-
-        const val EXTRA_SELECT_MODE =
-            "EXTRA_SELECT_MODE"
 
         const val EXTRA_USER_ID =
             "EXTRA_USER_ID"

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="splash_background">#E8F0FE</color>
+
+    <!-- LOGIN / FORM UI -->
+    <color name="input_background">#F8FAFD</color>
+    <color name="input_border">#DCE3ED</color>
+
     <color name="dialog_bg">#2B2F38</color>
     <color name="colorBackground">#F1F2F6</color>
     <color name="colorYellow">#FFC800</color>
@@ -11,6 +18,40 @@
     <color name="colorDotActive">#1A1A1A</color>
     <color name="colorDotInactive">#D9D9DE</color>
 
+
+    <!-- for dashboard color -->
+    <!--  Core blue brand palette  -->
+    <color name="blue_primary">#2F6FED</color>
+    <color name="blue_primary_dark">#1E4FC7</color>
+    <color name="blue_soft">#E9F0FE</color>
+    <color name="blue_softer">#F2F6FE</color>
+    <color name="blue_chip">#D7E5FD</color>
+    <!--  Backgrounds / surfaces  -->
+    <color name="screen_background">#F5F7FB</color>
+    <color name="card_white">#FFFFFF</color>
+    <color name="divider">#EEF1F6</color>
+    <!--  Text  -->
+    <color name="text_primary">#14162B</color>
+    <color name="text_secondary">#8A8FA3</color>
+    <color name="text_muted">#6E7488</color>
+    <!--  Semantic  -->
+    <color name="expense_blue">#2F6FED</color>
+    <color name="warn_orange">#FFA53E</color>
+    <color name="purple_accent">#7B7FF6</color>
+    <color name="pink_accent">#FF5A8A</color>
+    <color name="income_chip_bg">#E6F9EF</color>
+    <color name="expense_chip_bg">#FDEBEB</color>
+    <!--  Donut palette  -->
+    <color name="donut_green">#2ED47A</color>
+    <color name="donut_blue">#2F6FED</color>
+    <color name="donut_purple">#8B7CF6</color>
+    <color name="donut_orange">#FFA53E</color>
+    <color name="donut_red">#EF5757</color>
+    <color name="donut_pink">#FF5A8A</color>
+    <!--  Misc UI  -->
+    <color name="progress_track">#EDEFF5</color>
+    <color name="tab_unselected_bg">#F0F1F5</color>
+    <color name="period_badge_bg">#F3F4F8</color>
 
     <!-- ===================== PRIMARY (Blue) ===================== -->
     <color name="primary_50">#E8F0FE</color>

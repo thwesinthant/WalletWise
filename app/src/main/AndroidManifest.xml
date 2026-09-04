@@ -6,14 +6,24 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ExpenceAndBudgetTracker"
+        android:theme="@style/Theme.WalletWise.Starting"
         android:usesCleartextTraffic="true">
+
+        <!-- Onboarding -->
+        <activity
+            android:name=".onboarding.OnboardingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WalletWise.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- Login -->
         <activity
@@ -21,13 +31,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ExpenceAndBudgetTracker"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- Register -->
         <activity
@@ -64,13 +68,18 @@
             android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".dashboard.DashboardAnalyticsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- Account -->
         <activity
             android:name=".account.AccountActivity"
             android:exported="false"
-
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".account.AddEditAccountActivity"
             android:exported="false"
@@ -89,37 +98,53 @@
             android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Budget  -->
+        <!-- Budget -->
         <activity
             android:name=".budget.BudgetActivity"
             android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".budget.AddBudgetActivity"
             android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Goals -->
+        <activity
+            android:name=".goal.GoalActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Profile -->
         <activity
             android:name=".profile.ProfileActivity"
             android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".profile.EditProfileActivity"
             android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".auth.ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Notification -->
         <activity
             android:name=".notification.NotificationActivity"
             android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".category.SelectCategoryActivity"
             android:exported="false"
+            android:theme="@style/Theme.ExpenceAndBudgetTracker"
             android:windowSoftInputMode="adjustResize" />
-
 
     </application>
 

@@ -50,8 +50,8 @@ interface AccountDao {
         """
         SELECT *
         FROM accounts
-        WHERE userId = :userId
-        ORDER BY accountId ASC
+        WHERE user_id = :userId
+        ORDER BY account_id ASC
         """
     )
     fun getAccountsForUser(
@@ -67,8 +67,8 @@ interface AccountDao {
         """
         SELECT *
         FROM accounts
-        WHERE accountId = :accountId
-        AND userId = :userId
+        WHERE account_id = :accountId
+        AND user_id = :userId
         LIMIT 1
         """
     )
@@ -83,7 +83,7 @@ interface AccountDao {
     //
     // Balance =
     //
-    // openingBalance
+    // opening_balance
     // + income
     // + transfer in
     // - expense
@@ -93,47 +93,47 @@ interface AccountDao {
     @Query(
         """
         SELECT
-            a.accountId AS accountId,
+            a.account_id AS account_id,
             a.name AS name,
-            a.openingBalance AS openingBalance,
+            a.opening_balance AS opening_balance,
 
-            a.openingBalance
+            (
+                a.opening_balance
 
-            + COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'INCOME'
-            ), 0)
+                + COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'INCOME'
+                ), 0)
 
-            + COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'TRANSFER_IN'
-            ), 0)
+                + COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'TRANSFER_IN'
+                ), 0)
 
-            - COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'EXPENSE'
-            ), 0)
+                - COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'EXPENSE'
+                ), 0)
 
-            - COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'TRANSFER_OUT'
-            ), 0)
-
-            AS currentBalance
+                - COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'TRANSFER_OUT'
+                ), 0)
+            ) AS current_balance
 
         FROM accounts a
 
-        WHERE a.userId = :userId
+        WHERE a.user_id = :userId
 
-        ORDER BY a.accountId ASC
+        ORDER BY a.account_id ASC
         """
     )
     fun getAccountBalances(
@@ -148,46 +148,46 @@ interface AccountDao {
     @Query(
         """
         SELECT
-            a.accountId AS accountId,
+            a.account_id AS account_id,
             a.name AS name,
-            a.openingBalance AS openingBalance,
+            a.opening_balance AS opening_balance,
 
-            a.openingBalance
+            (
+                a.opening_balance
 
-            + COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'INCOME'
-            ), 0)
+                + COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'INCOME'
+                ), 0)
 
-            + COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'TRANSFER_IN'
-            ), 0)
+                + COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'TRANSFER_IN'
+                ), 0)
 
-            - COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'EXPENSE'
-            ), 0)
+                - COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'EXPENSE'
+                ), 0)
 
-            - COALESCE((
-                SELECT SUM(amount)
-                FROM transactions t
-                WHERE t.account_id = a.accountId
-                AND t.type = 'TRANSFER_OUT'
-            ), 0)
-
-            AS currentBalance
+                - COALESCE((
+                    SELECT SUM(amount)
+                    FROM transactions t
+                    WHERE t.account_id = a.account_id
+                    AND t.type = 'TRANSFER_OUT'
+                ), 0)
+            ) AS current_balance
 
         FROM accounts a
 
-        WHERE a.accountId = :accountId
-        AND a.userId = :userId
+        WHERE a.account_id = :accountId
+        AND a.user_id = :userId
 
         LIMIT 1
         """

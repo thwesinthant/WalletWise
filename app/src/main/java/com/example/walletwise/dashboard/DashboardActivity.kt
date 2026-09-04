@@ -19,6 +19,7 @@ import com.example.walletwise.account.DashboardAccountAdapter
 import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.entity.Transaction
 import com.example.walletwise.notification.NotificationActivity
+import com.example.walletwise.notification.NotificationPopupManager
 import com.example.walletwise.profile.ProfileActivity
 import com.example.walletwise.transactions.AddTransactionActivity
 import com.example.walletwise.transactions.TransactionActivity
@@ -26,6 +27,7 @@ import com.example.walletwise.transactions.TransactionAdapter
 import com.example.walletwise.util.BottomNavHelper
 import com.example.walletwise.util.NavTab
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -46,14 +48,23 @@ class DashboardActivity : AppCompatActivity() {
 
 
     // =============================================================
-    // FINANCIAL DATA
-    // =============================================================
+// FINANCIAL DATA
+// =============================================================
 
     private var latestExpense: Double = 0.0
 
     private var latestIncome: Double = 0.0
 
     private var latestBalance: Double = 0.0
+
+
+// =============================================================
+// ACCOUNT SUMMARY DATA
+// =============================================================
+
+    private var latestAccountCount: Int = 0
+
+    private var latestAccountTotalBalance: Double = 0.0
 
 
     // =============================================================
@@ -90,6 +101,10 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var incomeAmount: TextView
 
+    private lateinit var tvNotificationBadge: TextView
+
+    private lateinit var notificationPopupManager: NotificationPopupManager
+
     private lateinit var rvDashboardTransactions: RecyclerView
 
     private lateinit var rvDashboardAccounts: RecyclerView
@@ -99,6 +114,10 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var emptyDashboardAccounts: View
 
     private lateinit var emptyBalanceState: View
+
+    // notifications
+    private var notificationObserverInitialized = false
+    private var latestNotificationId = 0
 
 
     // =============================================================
@@ -145,6 +164,9 @@ class DashboardActivity : AppCompatActivity() {
             )
 
 
+        notificationPopupManager =
+            NotificationPopupManager(this)
+
         // =========================================================
         // FIND VIEWS
         // =========================================================
@@ -182,6 +204,11 @@ class DashboardActivity : AppCompatActivity() {
         incomeAmount =
             findViewById(
                 R.id.incomeAmount
+            )
+
+        tvNotificationBadge =
+            findViewById(
+                R.id.tvNotificationBadge
             )
 
         rvDashboardTransactions =
@@ -329,14 +356,125 @@ class DashboardActivity : AppCompatActivity() {
         // =========================================================
 
         observeUser()
-
         observeFinancialData()
-
         observeAccounts()
-
         observeRecentTransactions()
-
         observeBalanceUpdatedDate()
+        observeUnreadNotifications()
+        observeNotificationPopups()
+    }
+
+    override fun onDestroy() {
+        notificationPopupManager.dismiss()
+        super.onDestroy()
+    }
+
+    private fun observeNotificationPopups() {
+
+        lifecycleScope.launch {
+
+            database
+                .notificationDao()
+                .getNotificationsByUser(currentUserId)
+                .collectLatest { notifications ->
+
+                    if (notifications.isEmpty()) {
+                        return@collectLatest
+                    }
+
+                    val newestNotification =
+                        notifications.first()
+
+                    // -------------------------------------------------
+                    // FIRST EMISSION
+                    //
+                    // This is existing notification history.
+                    // Do not show an old notification as a popup.
+                    // -------------------------------------------------
+
+                    if (!notificationObserverInitialized) {
+
+                        latestNotificationId =
+                            newestNotification.notificationId
+
+                        notificationObserverInitialized = true
+
+                        return@collectLatest
+                    }
+
+
+                    // -------------------------------------------------
+                    // NEW NOTIFICATION
+                    //
+                    // A notification with a higher ID was inserted.
+                    // Show only the newest one.
+                    // -------------------------------------------------
+
+                    if (
+                        newestNotification.notificationId >
+                        latestNotificationId
+                    ) {
+
+                        latestNotificationId =
+                            newestNotification.notificationId
+
+                        notificationPopupManager.show(
+                            newestNotification
+                        )
+                    }
+                }
+        }
+    }
+
+    // =============================================================
+    // OBSERVE UNREAD NOTIFICATIONS
+    // =============================================================
+
+    private fun observeUnreadNotifications() {
+
+        lifecycleScope.launch {
+
+            database
+                .notificationDao()
+                .getUnreadNotificationCount(
+                    currentUserId
+                )
+                .collect { unreadCount ->
+
+                    updateNotificationBadge(
+                        unreadCount
+                    )
+                }
+        }
+    }
+
+    // =============================================================
+    // UPDATE NOTIFICATION BADGE
+    // =============================================================
+
+    private fun updateNotificationBadge(
+        unreadCount: Int
+    ) {
+
+        if (unreadCount <= 0) {
+
+            tvNotificationBadge.visibility =
+                View.GONE
+
+            return
+        }
+
+
+        tvNotificationBadge.visibility =
+            View.VISIBLE
+
+
+        tvNotificationBadge.text =
+            if (unreadCount >= 10) {
+                "10+"
+            } else {
+                unreadCount.toString()
+            }
     }
 
     // =============================================================
@@ -364,6 +502,10 @@ class DashboardActivity : AppCompatActivity() {
     // =============================================================
     // OBSERVE ACCOUNTS
     // =============================================================
+
+    // =============================================================
+// OBSERVE ACCOUNTS
+// =============================================================
 
     private fun observeAccounts() {
 
@@ -398,12 +540,23 @@ class DashboardActivity : AppCompatActivity() {
 
 
                     // =============================================
+                    // SAVE ACCOUNT SUMMARY DATA
+                    // =============================================
+
+                    latestAccountCount =
+                        accounts.size
+
+
+                    // =============================================
                     // NO ACCOUNTS
                     // =============================================
 
                     if (accounts.isEmpty()) {
 
                         latestBalance =
+                            0.0
+
+                        latestAccountTotalBalance =
                             0.0
 
 
@@ -414,8 +567,7 @@ class DashboardActivity : AppCompatActivity() {
                             View.VISIBLE
 
 
-                        tvAccountSummary.text =
-                            "No accounts yet"
+                        updateAccountSummary()
 
                         return@collect
                     }
@@ -439,6 +591,10 @@ class DashboardActivity : AppCompatActivity() {
                         totalWalletBalance
 
 
+                    latestAccountTotalBalance =
+                        totalWalletBalance
+
+
                     // =============================================
                     // SHOW BALANCE
                     // =============================================
@@ -454,14 +610,10 @@ class DashboardActivity : AppCompatActivity() {
 
 
                     // =============================================
-                    // ACCOUNT SUMMARY
+                    // UPDATE ACCOUNT SUMMARY
                     // =============================================
 
-                    tvAccountSummary.text =
-                        "${accounts.size} accounts · " +
-                                formatCurrency(
-                                    totalWalletBalance
-                                )
+                    updateAccountSummary()
                 }
         }
     }
@@ -621,11 +773,11 @@ class DashboardActivity : AppCompatActivity() {
 
 
         // ---------------------------------------------------------
-        // NOTIFICATION
-        // ---------------------------------------------------------
+// NOTIFICATION
+// ---------------------------------------------------------
 
-        findViewById<ImageView>(
-            R.id.ivNoti
+        findViewById<View>(
+            R.id.notificationContainer
         ).setOnClickListener {
 
             val intent =
@@ -701,6 +853,28 @@ class DashboardActivity : AppCompatActivity() {
                 Intent(
                     this@DashboardActivity,
                     ProfileActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                currentUserId
+            )
+
+            startActivity(intent)
+        }
+
+        // ---------------------------------------------------------
+// ANALYTICS
+// ---------------------------------------------------------
+
+        findViewById<TextView>(
+            R.id.btnAnalytics
+        ).setOnClickListener {
+
+            val intent =
+                Intent(
+                    this@DashboardActivity,
+                    DashboardAnalyticsActivity::class.java
                 )
 
             intent.putExtra(
@@ -834,15 +1008,51 @@ class DashboardActivity : AppCompatActivity() {
                     )
 
 
-                    // -------------------------------------------------
-                    // UPDATE FINANCIAL UI
-                    // -------------------------------------------------
+                // -------------------------------------------------
+                // UPDATE FINANCIAL UI
+                // -------------------------------------------------
 
                     updateFinancialUI()
+
+
+                // -------------------------------------------------
+                // UPDATE ACCOUNT SUMMARY
+                // -------------------------------------------------
+
+                    updateAccountSummary()
+
                 }
         }
     }
 
+    // =============================================================
+// UPDATE ACCOUNT SUMMARY
+// =============================================================
+
+    private fun updateAccountSummary() {
+
+        if (latestAccountCount == 0) {
+
+            tvAccountSummary.text =
+                "No accounts yet"
+
+            return
+        }
+
+
+        tvAccountSummary.text =
+            "$latestAccountCount ${
+                if (latestAccountCount == 1) {
+                    "account"
+                } else {
+                    "accounts"
+                }
+            } · ${
+                formatCurrency(
+                    latestAccountTotalBalance
+                )
+            }"
+    }
 
     // =============================================================
     // FORMAT CURRENCY
@@ -876,7 +1086,10 @@ class DashboardActivity : AppCompatActivity() {
             formatCurrency(
                 latestIncome
             )
+
+        updateWalletBalanceUI()
     }
+
 
     private fun updateWalletBalanceUI() {
 

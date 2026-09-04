@@ -63,7 +63,7 @@ interface BudgetDao {
         """
         SELECT *
         FROM budgets
-        WHERE budgetId = :budgetId
+        WHERE budget_id = :budgetId
         LIMIT 1
         """
     )
@@ -74,15 +74,6 @@ interface BudgetDao {
 
     // ============================================================
     // GET ACTIVE BUDGET
-    //
-    // A budget is active when:
-    //
-    // start_date <= current date
-    // AND
-    // end_date > current date
-    //
-    // end_date should represent the beginning of the day
-    // AFTER the budget's final day.
     // ============================================================
 
     @Query(
@@ -104,13 +95,6 @@ interface BudgetDao {
 
     // ============================================================
     // CHECK OVERLAPPING BUDGET
-    //
-    // Used before creating/updating a budget.
-    //
-    // Returns the number of budgets that overlap the requested
-    // period.
-    //
-    // When editing, pass the current budgetId so it is excluded.
     // ============================================================
 
     @Query(
@@ -118,7 +102,7 @@ interface BudgetDao {
         SELECT COUNT(*)
         FROM budgets
         WHERE user_id = :userId
-        AND budgetId != :budgetId
+        AND budget_id != :budgetId
         AND start_date < :endDate
         AND end_date > :startDate
         """
@@ -181,6 +165,26 @@ interface BudgetDao {
 
 
     // ============================================================
+    // GET ALL BUDGET CATEGORIES FOR A USER (across every one of
+    // their budgets) — used by the Analytics screen's Budget vs
+    // Actual card, which combines this with getBudgetsByUser
+    // rather than adding a Repository/ViewModel layer.
+    // ============================================================
+
+    @Query(
+        """
+        SELECT budget_categories.*
+        FROM budget_categories
+        INNER JOIN budgets ON budgets.budget_id = budget_categories.budget_id
+        WHERE budgets.user_id = :userId
+        """
+    )
+    fun getBudgetCategoriesForUser(
+        userId: Int
+    ): Flow<List<BudgetCategory>>
+
+
+    // ============================================================
     // GET BUDGET CATEGORIES ONCE
     // ============================================================
 
@@ -214,11 +218,6 @@ interface BudgetDao {
 
     // ============================================================
     // INSERT BUDGET + CATEGORIES
-    //
-    // Creates the budget and its category limits atomically.
-    //
-    // IMPORTANT:
-    // The categories must use the newly-created budget ID.
     // ============================================================
 
     @Transaction
@@ -227,7 +226,10 @@ interface BudgetDao {
         categories: List<BudgetCategory>
     ): Long {
 
-        val budgetId = insertBudget(budget)
+        val budgetId =
+            insertBudget(
+                budget
+            )
 
         if (categories.isNotEmpty()) {
 
@@ -235,7 +237,8 @@ interface BudgetDao {
                 categories.map { category ->
 
                     category.copy(
-                        budgetId = budgetId.toInt()
+                        budgetId =
+                            budgetId.toInt()
                     )
                 }
 
@@ -248,74 +251,96 @@ interface BudgetDao {
     }
 
 
-    // ============================================================
-    // UPDATE BUDGET + CATEGORIES
-    //
-    // 1. Update budget
-    // 2. Delete old category limits
-    // 3. Insert new category limits
-    //
-    // Everything happens inside one Room transaction.
-    // ============================================================
 
     @Transaction
     suspend fun updateBudgetWithCategories(
         budget: Budget,
         categories: List<BudgetCategory>
     ) {
+        // Update main budget
+        updateBudget(budget)
 
-        updateBudget(
-            budget
-        )
+        // Get existing category rows
+        val existingCategories =
+            getBudgetCategoriesOnce(
+                budget.budgetId
+            )
 
-        deleteCategoriesForBudget(
-            budget.budgetId
-        )
+        // Category IDs currently selected by user
+        val newCategoryIds =
+            categories
+                .map { it.categoryId }
+                .toSet()
 
-        if (categories.isNotEmpty()) {
+        // Remove categories that no longer exist
+        existingCategories
+            .filter {
+                it.categoryId !in newCategoryIds
+            }
+            .forEach { existing ->
 
-            val updatedCategories =
-                categories.map { category ->
+                deleteBudgetCategory(
+                    existing
+                )
+            }
 
-                    category.copy(
-                        budgetId = budget.budgetId
-                    )
+        // Update existing categories
+        // or insert new ones
+        categories.forEach { newCategory ->
+
+            val existing =
+                existingCategories.firstOrNull {
+                    it.categoryId ==
+                            newCategory.categoryId
                 }
 
-            insertBudgetCategories(
-                updatedCategories
-            )
+            if (existing != null) {
+
+                updateBudgetCategory(
+                    existing.copy(
+                        limitAmount =
+                            newCategory.limitAmount
+                    )
+                )
+
+            } else {
+
+                insertBudgetCategory(
+                    newCategory.copy(
+                        budgetId =
+                            budget.budgetId,
+
+                        budgetCategoryId =
+                            0
+                    )
+                )
+            }
         }
     }
 
+
     // ============================================================
-// GET ALL ACTIVE BUDGETS
-//
-// Returns every budget that is currently active for the user.
-// ============================================================
+    // GET ALL ACTIVE BUDGETS
+    // ============================================================
 
     @Query(
         """
-    SELECT *
-    FROM budgets
-    WHERE user_id = :userId
-    AND start_date <= :date
-    AND end_date > :date
-    ORDER BY start_date DESC
-    """
+        SELECT *
+        FROM budgets
+        WHERE user_id = :userId
+        AND start_date <= :date
+        AND end_date > :date
+        ORDER BY start_date DESC
+        """
     )
     suspend fun getActiveBudgets(
         userId: Int,
         date: Long
     ): List<Budget>
 
+
     // ============================================================
     // DELETE BUDGET COMPLETELY
-    //
-    // BudgetCategory rows are automatically deleted because
-    // BudgetCategory has:
-    //
-    // onDelete = ForeignKey.CASCADE
     // ============================================================
 
     @Transaction

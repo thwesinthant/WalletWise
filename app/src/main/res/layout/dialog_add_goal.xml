@@ -1,139 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="@drawable/rounded_bg">
 
-    <!-- Piggy bank icon + heading -->
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bg_dialog_card">
+
+
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+
+        android:layout_marginBottom="16dp"
+
         android:gravity="center_vertical"
-        android:layout_marginBottom="20dp">
+        android:orientation="horizontal">
+
+
+        <!-- Goal Icon -->
 
         <ImageView
-            android:layout_width="0.55in"
-            android:layout_height="0.55in"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
 
-            android:padding="6dp"
             android:src="@drawable/goal"
-            android:contentDescription="New goal" />
+
+            android:contentDescription="Goal" />
+
+
+        <!-- Title -->
 
         <TextView
-            android:fontFamily="@font/dosis_bold"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+
+            android:fontFamily="@font/dosis_bold"
+
             android:text="Create a New Goal"
-            android:textColor="#4A90D9"
-            android:textSize="28dp" />
+
+            android:textColor="@color/neutral_900"
+            android:textSize="21sp" />
+
     </LinearLayout>
 
-    <!-- Goal name field -->
+
+    <!-- ===================================================== -->
+    <!-- GOAL NAME -->
+    <!-- ===================================================== -->
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilGoalTitle"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:hint="Goal name"
-        android:textSize="18dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#4A90D9"
-        app:hintTextColor="#4A90D9"
-        app:startIconTint="#4A90D9"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+
+        app:boxStrokeColor="@color/primary_500"
+        app:hintTextColor="@color/primary_500">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etGoalTitle"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textSize="17dp" />
+
+            android:inputType="textCapSentences"
+
+            android:fontFamily="@font/dosis_medium"
+
+            android:textColor="@color/neutral_900"
+            android:textSize="15sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Target amount field -->
+
+    <!-- ===================================================== -->
+    <!-- TARGET AMOUNT -->
+    <!-- ===================================================== -->
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilGoalTarget"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+
+        android:layout_marginTop="12dp"
+
         android:hint="Target amount"
-        android:textSize="18dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#4A90D9"
-        app:hintTextColor="#4A90D9"
-        app:suffixText="MMK"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+
+        app:boxStrokeColor="@color/primary_500"
+        app:hintTextColor="@color/primary_500"
+
+        app:suffixText="MMK">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etGoalTarget"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="17dp" />
+
+            android:inputType="numberDecimal"
+
+            android:fontFamily="@font/dosis_medium"
+
+            android:textColor="@color/neutral_900"
+            android:textSize="15sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:hint="Target date"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#4A90D9"
-        app:hintTextColor="#4A90D9"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_calendar"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etGoalTargetDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:focusable="false"
-            android:clickable="true"
-            android:textSize="17dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <!-- ===================================================== -->
+    <!-- BUTTONS -->
+    <!-- ===================================================== -->
 
-    <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="24dp"
-        android:gravity="end">
+        android:layout_height="44dp"
+
+        android:layout_marginTop="20dp"
+
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal">
+
+
+        <!-- Cancel -->
 
         <TextView
             android:id="@+id/btnCancel"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
+
             android:background="@drawable/button_border"
-            android:padding="12dp"
-            android:textSize="19dp"
+
+            android:gravity="center"
+
+            android:minWidth="82dp"
+
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+
+            android:fontFamily="@font/dosis_semibold"
+
             android:text="Cancel"
-            android:textStyle="bold"/>
+
+            android:textColor="@color/neutral_700"
+            android:textSize="14sp"
+
+            android:clickable="true"
+            android:focusable="true" />
+
+
+        <!-- Add Goal -->
 
         <TextView
             android:id="@+id/btnAdd"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
+
             android:layout_marginStart="8dp"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="12dp"
+
+            android:background="@drawable/bg_add_budget_button"
+
+            android:gravity="center"
+
+            android:minWidth="96dp"
+
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+
+            android:fontFamily="@font/dosis_bold"
+
             android:text="Add Goal"
-            android:textSize="19dp"
-            android:background="@drawable/button_border"
-            android:textStyle="bold" />
+
+            android:textColor="@color/neutral_0"
+            android:textSize="14sp"
+
+            android:clickable="true"
+            android:focusable="true" />
+
     </LinearLayout>
 
+
 </LinearLayout>
+

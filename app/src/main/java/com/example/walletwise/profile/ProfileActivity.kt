@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.walletwise.R
+import com.example.walletwise.auth.ChangePasswordActivity
 import com.example.walletwise.auth.LoginActivity
 import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.util.BottomNavHelper
@@ -27,19 +28,13 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(
-            R.layout.activity_profile
-        )
+        setContentView(R.layout.activity_profile)
 
         // =========================================================
         // GET USER ID FIRST
         // =========================================================
 
-        userId =
-            intent.getIntExtra(
-                "USER_ID",
-                -1
-            )
+        userId = intent.getIntExtra("USER_ID", -1)
 
         if (userId == -1) {
 
@@ -57,8 +52,7 @@ class ProfileActivity : AppCompatActivity() {
         // DATABASE
         // =========================================================
 
-        database =
-            AppDatabase.getDatabase(this)
+        database = AppDatabase.getDatabase(this)
 
         // =========================================================
         // BOTTOM NAV
@@ -66,9 +60,7 @@ class ProfileActivity : AppCompatActivity() {
 
         BottomNavHelper.setup(
             activity = this,
-            root = findViewById(
-                android.R.id.content
-            ),
+            root = findViewById(android.R.id.content),
             current = NavTab.SETTINGS,
             userId = userId
         )
@@ -78,66 +70,44 @@ class ProfileActivity : AppCompatActivity() {
         // =========================================================
 
         val ivAvatar =
-            findViewById<ImageView>(
-                R.id.ivAvatar
-            )
+            findViewById<ImageView>(R.id.ivAvatar)
 
         val btnEditPhoto =
-            findViewById<TextView>(
-                R.id.btnEditPhoto
-            )
+            findViewById<TextView>(R.id.btnEditPhoto)
 
         val tvGreeting =
-            findViewById<TextView>(
-                R.id.tvGreeting
-            )
+            findViewById<TextView>(R.id.tvGreeting)
 
         val tvNameValue =
-            findViewById<TextView>(
-                R.id.tvNameValue
-            )
+            findViewById<TextView>(R.id.tvNameValue)
 
         val tvCurrencyValue =
-            findViewById<TextView>(
-                R.id.tvCurrencyValue
-            )
+            findViewById<TextView>(R.id.tvCurrencyValue)
 
         val tvEmailValue =
-            findViewById<TextView>(
-                R.id.tvEmailValue
-            )
+            findViewById<TextView>(R.id.tvEmailValue)
 
         val rowName =
-            findViewById<LinearLayout>(
-                R.id.rowName
-            )
+            findViewById<LinearLayout>(R.id.rowName)
 
         val rowCurrency =
-            findViewById<LinearLayout>(
-                R.id.rowCurrency
-            )
+            findViewById<LinearLayout>(R.id.rowCurrency)
+
+        val rowChangePassword =
+            findViewById<LinearLayout>(R.id.rowChangePassword)
 
         val tvLogout =
-            findViewById<TextView>(
-                R.id.tvLogout
-            )
+            findViewById<TextView>(R.id.tvLogout)
 
-        val tvDeactivate =
-            findViewById<TextView>(
-                R.id.tvDeactivate
-            )
 
         val btnBack =
-            findViewById<ImageView>(
-                R.id.btnBack
-            )
+            findViewById<ImageView>(R.id.btnBack)
 
         // =========================================================
         // BACK
         // =========================================================
 
         btnBack.setOnClickListener {
-
             finish()
         }
 
@@ -169,13 +139,11 @@ class ProfileActivity : AppCompatActivity() {
                     // Profile image
                     user.profileImage?.let { path ->
 
-                        val imgFile =
-                            File(path)
+                        val imgFile = File(path)
 
                         if (imgFile.exists()) {
 
-                            ivAvatar.imageTintList =
-                                null
+                            ivAvatar.imageTintList = null
 
                             ivAvatar.scaleType =
                                 ImageView.ScaleType.CENTER_CROP
@@ -228,14 +196,32 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         // =========================================================
+        // CHANGE PASSWORD
+        // =========================================================
+
+        rowChangePassword.setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    ChangePasswordActivity::class.java
+                )
+
+            intent.putExtra(
+                "USER_ID",
+                userId
+            )
+
+            startActivity(intent)
+        }
+
+        // =========================================================
         // LOGOUT
         // =========================================================
 
         tvLogout.setOnClickListener {
 
-            SessionManager.clearSession(
-                this
-            )
+            SessionManager.clearSession(this)
 
             val intent =
                 Intent(
@@ -252,17 +238,7 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        // =========================================================
-        // DEACTIVATE
-        // =========================================================
 
-        tvDeactivate.setOnClickListener {
-
-            Toast.makeText(
-                this,
-                "Deactivate flow not built yet",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 }
+

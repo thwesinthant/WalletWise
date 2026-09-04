@@ -1,95 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+
     android:layout_marginBottom="12dp"
-    app:cardBackgroundColor="#F6FAFB"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    android:background="@drawable/bg_actions_card"
+
+    android:padding="18dp">
+
+
+    <!-- ============================================= -->
+    <!-- TOP ROW -->
+    <!-- ============================================= -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="horizontal"
-        android:padding="16dp"
+
         android:gravity="center_vertical">
 
-        <!-- Text + progress column -->
+
+        <!-- ========================================= -->
+        <!-- GOAL INFO -->
+        <!-- ========================================= -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+
             android:layout_weight="1"
+
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvGoalTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Car"
-                android:textColor="#4A90D9"
-                android:textSize="18dp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvGoalTarget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="8000 MMK"
-
-                android:textSize="16sp"
-                android:textColor="#808080"/>
-
-            <ProgressBar
-                android:id="@+id/progressGoal"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="10dp"
-                android:max="100"
-                android:progress="33"
-                android:progressTint="#4A90D9"
-                android:progressBackgroundTint="#DDE3EA" />
+            <!-- ===================================== -->
+            <!-- TITLE + STATUS -->
+            <!-- ===================================== -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:orientation="horizontal">
+
+                android:orientation="horizontal"
+
+                android:gravity="center_vertical">
+
+
+                <!-- GOAL TITLE -->
 
                 <TextView
-                    android:id="@+id/tvGoalAmounts"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="4250 MMK / 8000 MMK"
-                    android:textColor="#404040"
-                    android:textSize="16sp" />
+                    android:id="@+id/tvGoalTitle"
 
-                <TextView
-                    android:id="@+id/tvGoalPercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="33%"
-                    android:textColor="#404040"
-                    android:textSize="14sp" />
+
+                    android:text="New Car"
+
+                    android:fontFamily="@font/dosis_bold"
+                    android:textColor="@color/neutral_900"
+                    android:textSize="19sp" />
+
+
+                <!-- STATUS BADGE -->
+
+                <TextView
+                    android:id="@+id/tvGoalStatus"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="8dp"
+
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+
+                    android:gravity="center"
+
+                    android:text="ACTIVE"
+                    android:textAllCaps="true"
+
+                    android:textSize="9sp"
+
+                    android:textColor="@color/neutral_0"
+
+                    android:background="@drawable/bg_goal_status_active" />
+
             </LinearLayout>
+
+
+            <!-- ===================================== -->
+            <!-- TARGET -->
+            <!-- ===================================== -->
+
+            <TextView
+                android:id="@+id/tvGoalTarget"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="2dp"
+
+                android:text="Target: 800,000 MMK"
+
+                android:fontFamily="@font/dosis_medium"
+                android:textColor="@color/neutral_500"
+                android:textSize="11sp" />
+
         </LinearLayout>
 
-        <!-- Piggy bank image is a BUTTON, not decoration.
-             Tapping it should trigger an action, e.g. "add money to this goal". -->
-        <ImageButton
+
+        <!-- ========================================= -->
+        <!-- ADD MONEY -->
+        <!-- ========================================= -->
+
+        <TextView
             android:id="@+id/btnPiggyBank"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="12dp"
-            android:background="#F3F7FA"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/outline_add_24"
+
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+
+            android:background="@drawable/bg_action_circle"
+
+            android:gravity="center"
+
+            android:text="+"
+
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/primary_500"
+            android:textSize="23sp"
+
+            android:clickable="true"
+            android:focusable="true"
+
             android:contentDescription="Add money to goal" />
+
+
+        <!-- ========================================= -->
+        <!-- DELETE -->
+        <!-- ========================================= -->
+
+        <TextView
+            android:id="@+id/btnDeleteGoal"
+
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+
+            android:layout_marginStart="8dp"
+
+            android:gravity="center"
+
+            android:text="⋮"
+
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/neutral_500"
+            android:textSize="22sp"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:contentDescription="Goal options" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+
+    <!-- ============================================= -->
+    <!-- PROGRESS -->
+    <!-- ============================================= -->
+
+    <ProgressBar
+        android:id="@+id/progressGoal"
+
+        style="?android:attr/progressBarStyleHorizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+
+        android:layout_marginTop="16dp"
+
+        android:max="100"
+        android:progress="0"
+
+        android:progressTint="@color/primary_500"
+        android:backgroundTint="@color/primary_100" />
+
+
+    <!-- ============================================= -->
+    <!-- BOTTOM INFO -->
+    <!-- ============================================= -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+
+        android:layout_marginTop="8dp">
+
+
+        <!-- SAVED AMOUNT -->
+
+        <TextView
+            android:id="@+id/tvGoalAmounts"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+
+            android:text="0 MMK saved"
+
+            android:fontFamily="@font/dosis_medium"
+            android:textColor="@color/neutral_500"
+            android:textSize="11sp" />
+
+
+        <!-- PERCENT -->
+
+        <TextView
+            android:id="@+id/tvGoalPercent"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="0%"
+
+            android:fontFamily="@font/dosis_semibold"
+            android:textColor="@color/primary_500"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+
+    <!-- ============================================= -->
+    <!-- REMAINING -->
+    <!-- ============================================= -->
+
+    <TextView
+        android:id="@+id/tvGoalRemaining"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="3dp"
+
+        android:text="0 remaining"
+
+        android:fontFamily="@font/dosis_semibold"
+        android:textColor="@color/income_green"
+        android:textSize="11sp" />
+
+
+</LinearLayout>

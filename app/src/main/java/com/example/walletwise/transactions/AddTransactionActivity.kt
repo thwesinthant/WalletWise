@@ -1691,11 +1691,6 @@ class AddTransactionActivity : AppCompatActivity() {
             )
 
         intent.putExtra(
-            SelectCategoryActivity.EXTRA_SELECT_MODE,
-            true
-        )
-
-        intent.putExtra(
             SelectCategoryActivity.EXTRA_USER_ID,
             currentUserId
         )
@@ -1934,137 +1929,144 @@ class AddTransactionActivity : AppCompatActivity() {
     }
 
     // ============================================================
-    // UPDATE NORMAL TRANSACTION
+    // UPDATE TRANSACTION
     // ============================================================
 
     private fun updateTransaction() {
 
-        val amount =
-            currentAmountStr.toDoubleOrNull()
+        val amount = currentAmountStr.toDoubleOrNull()
 
-        if (
-            amount == null ||
-            amount <= 0
-        ) {
-
+        if (amount == null || amount <= 0) {
             Toast.makeText(
                 this,
-                "Please enter an amount greater than 0",
+                "Please enter a valid amount",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
         if (selectedCategoryId == null) {
-
             Toast.makeText(
                 this,
                 "Please select a category",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
         if (selectedAccountId == null) {
-
             Toast.makeText(
                 this,
-                "Please select a payment account",
+                "Please select an account",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
-        val note =
-            etNote.text
-                .toString()
-                .trim()
+        val note = etNote.text.toString().trim()
 
-        val title =
-            if (note.isNotEmpty()) {
-                note
-            } else {
-                selectedCategoryLabel
-            }
+        val title = if (note.isNotEmpty()) {
+            note
+        } else {
+            selectedCategoryLabel.ifEmpty { "Transaction" }
+        }
 
-        val txnType =
-            if (isExpense) {
-                "EXPENSE"
-            } else {
-                "INCOME"
-            }
+        val txnType = if (isExpense) {
+            "EXPENSE"
+        } else {
+            "INCOME"
+        }
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
 
             try {
 
-                database
-                    .transactionDao()
-                    .updateTransaction(
+                withContext(Dispatchers.IO) {
 
-                        transactionId =
-                            editingTransactionId,
+                    // ====================================================
+                    // UPDATE EXISTING TRANSACTION
+                    // ====================================================
 
-                        userId =
-                            currentUserId,
-
-                        title =
-                            title,
-
-                        amount =
-                            amount,
-
-                        type =
-                            txnType,
-
-                        categoryId =
-                            selectedCategoryId,
-
-                        accountId =
-                            selectedAccountId,
-
-                        note =
-                            note.ifEmpty {
-                                null
-                            }
+                    database.transactionDao().updateTransaction(
+                        transactionId = editingTransactionId,
+                        userId = currentUserId,
+                        title = title,
+                        amount = amount,
+                        type = txnType,
+                        categoryId = selectedCategoryId,
+                        accountId = selectedAccountId,
+                        note = note
                     )
 
-                // ============================================================
-                // RECHECK BUDGETS AFTER EDITING AN EXPENSE
-                // ============================================================
+                    // ====================================================
+                    // CHECK BUDGETS AFTER EXPENSE UPDATE
+                    // ====================================================
 
-                if (isExpense) {
+                    if (isExpense) {
+                        checkBudgetsAfterExpense()
+                    }
 
-                    checkBudgetsAfterExpense()
+                    // ====================================================
+                    // CREATE UPDATE NOTIFICATION
+                    // ====================================================
+
+                    val notification = if (isExpense) {
+
+                        Notification(
+                            notificationId = 0,
+                            userId = currentUserId,
+                            title = "Expense Updated",
+                            message = "You updated your expense of $userCurrency ${formatAmount(amount)} on $title ($selectedCategoryLabel).",
+                            type = "EXPENSE",
+                            referenceType = "EXPENSE",
+                            referenceId = editingTransactionId,
+                            isRead = false,
+                            timeAgo = null,
+                            createdAt = System.currentTimeMillis().toString()
+                        )
+
+                    } else {
+
+                        Notification(
+                            notificationId = 0,
+                            userId = currentUserId,
+                            title = "Income Updated",
+                            message = "You updated your income of $userCurrency ${formatAmount(amount)} from $title.",
+                            type = "INCOME",
+                            referenceType = "INCOME",
+                            referenceId = editingTransactionId,
+                            isRead = false,
+                            timeAgo = null,
+                            createdAt = System.currentTimeMillis().toString()
+                        )
+                    }
+
+                    database.notificationDao().insertNotification(notification)
                 }
 
+                // ========================================================
+                // SUCCESS
+                // ========================================================
 
-                withContext(Dispatchers.Main) {
+                Toast.makeText(
+                    this@AddTransactionActivity,
+                    if (isExpense) {
+                        "Expense updated successfully!"
+                    } else {
+                        "Income updated successfully!"
+                    },
+                    Toast.LENGTH_SHORT
+                ).show()
 
-                    Toast.makeText(
-                        this@AddTransactionActivity,
-                        "Transaction updated successfully!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    finish()
-                }
+                finish()
 
             } catch (e: Exception) {
 
-                e.printStackTrace()
-
-                withContext(Dispatchers.Main) {
-
-                    Toast.makeText(
-                        this@AddTransactionActivity,
-                        "Error updating transaction: ${e.localizedMessage}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                Toast.makeText(
+                    this@AddTransactionActivity,
+                    "Failed to update transaction: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -2075,289 +2077,242 @@ class AddTransactionActivity : AppCompatActivity() {
 
     private fun updateTransfer() {
 
-        val amount =
-            currentAmountStr.toDoubleOrNull()
+        val amount = currentAmountStr.toDoubleOrNull()
 
-        if (
-            amount == null ||
-            amount <= 0
-        ) {
-
+        if (amount == null || amount <= 0) {
             Toast.makeText(
                 this,
-                "Please enter an amount greater than 0",
+                "Please enter a valid amount",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
         if (selectedAccountId == null) {
-
             Toast.makeText(
                 this,
-                "Please select the source account",
+                "Please select source account",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
         if (selectedDestinationAccountId == null) {
-
             Toast.makeText(
                 this,
-                "Please select the destination account",
+                "Please select destination account",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
-        if (
-            selectedAccountId ==
-            selectedDestinationAccountId
-        ) {
-
+        if (selectedAccountId == selectedDestinationAccountId) {
             Toast.makeText(
                 this,
                 "Source and destination accounts must be different",
                 Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
-        val groupId =
-            editingTransferGroupId
+        val transferGroupId = editingTransferGroupId
 
-        if (groupId.isNullOrEmpty()) {
-
+        if (transferGroupId.isNullOrEmpty()) {
             Toast.makeText(
                 this,
-                "This transfer has no transfer group ID and cannot be safely edited.",
-                Toast.LENGTH_LONG
+                "Transfer information not found",
+                Toast.LENGTH_SHORT
             ).show()
-
             return
         }
 
-        val note =
-            etNote.text
-                .toString()
-                .trim()
-
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
 
             try {
 
-                // =================================================
-                // LOAD COMPLETE TRANSFER PAIR
-                // =================================================
+                withContext(Dispatchers.IO) {
 
-                val transferTransactions =
-                    database
-                        .transactionDao()
-                        .getTransactionsByTransferGroupId(
-                            groupId,
-                            currentUserId
-                        )
+                    // ====================================================
+                    // GET ORIGINAL TRANSFER PAIR
+                    // ====================================================
 
-                val transferOut =
-                    transferTransactions
-                        .firstOrNull {
+                    val transferPair =
+                        database.transactionDao()
+                            .getTransactionsByTransferGroupId(
+                                transferGroupId = transferGroupId,
+                                userId = currentUserId
+                            )
+
+                    if (transferPair.size < 2) {
+                        throw Exception("Transfer pair not found")
+                    }
+
+                    val oldTransferOut =
+                        transferPair.firstOrNull {
                             it.type == "TRANSFER_OUT"
                         }
 
-                val transferIn =
-                    transferTransactions
-                        .firstOrNull {
+                    val oldTransferIn =
+                        transferPair.firstOrNull {
                             it.type == "TRANSFER_IN"
                         }
 
-                if (
-                    transferOut == null ||
-                    transferIn == null
-                ) {
-
-                    withContext(Dispatchers.Main) {
-
-                        Toast.makeText(
-                            this@AddTransactionActivity,
-                            "Complete transfer pair not found.",
-                            Toast.LENGTH_LONG
-                        ).show()
+                    if (oldTransferOut == null || oldTransferIn == null) {
+                        throw Exception("Invalid transfer data")
                     }
 
-                    return@launch
-                }
+                    // ====================================================
+                    // GET SOURCE ACCOUNT
+                    // ====================================================
 
-                // =================================================
-                // CHECK SOURCE BALANCE
-                //
-                // If the old TRANSFER_OUT came from the same
-                // source account, add its old amount back because
-                // it is already reflected in the current balance.
-                // =================================================
-
-                val sourceAccount =
-                    database
-                        .accountDao()
-                        .getAccountBalanceById(
-                            selectedAccountId!!,
-                            currentUserId
+                    val sourceAccount =
+                        database.accountDao().getAccountById(
+                            accountId = selectedAccountId!!,
+                            userId = currentUserId
                         )
 
-                if (sourceAccount == null) {
-
-                    withContext(Dispatchers.Main) {
-
-                        Toast.makeText(
-                            this@AddTransactionActivity,
-                            "Source account not found",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (sourceAccount == null) {
+                        throw Exception("Source account not found")
                     }
 
-                    return@launch
-                }
+                    // ====================================================
+                    // GET CURRENT SOURCE ACCOUNT BALANCE
+                    // ====================================================
 
-                var availableBalance =
-                    sourceAccount.currentBalance
-
-                if (
-                    transferOut.accountId ==
-                    selectedAccountId
-                ) {
-
-                    availableBalance +=
-                        transferOut.amount
-                }
-
-                if (
-                    availableBalance < amount
-                ) {
-
-                    withContext(Dispatchers.Main) {
-
-                        Toast.makeText(
-                            this@AddTransactionActivity,
-                            "Insufficient balance in ${sourceAccount.name}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-
-                    return@launch
-                }
-
-                // =================================================
-                // DESTINATION ACCOUNT
-                // =================================================
-
-                val destinationAccount =
-                    database
-                        .accountDao()
-                        .getAccountById(
-                            selectedDestinationAccountId!!,
-                            currentUserId
+                    val sourceBalance =
+                        database.accountDao().getAccountBalanceById(
+                            accountId = selectedAccountId!!,
+                            userId = currentUserId
                         )
 
-                if (destinationAccount == null) {
-
-                    withContext(Dispatchers.Main) {
-
-                        Toast.makeText(
-                            this@AddTransactionActivity,
-                            "Destination account not found",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (sourceBalance == null) {
+                        throw Exception("Source account balance not found")
                     }
 
-                    return@launch
+                    /*
+                     * If the old transfer used the same source account,
+                     * add the old transfer amount back temporarily.
+                     *
+                     * Example:
+                     *
+                     * Current balance = 50,000
+                     * Old transfer    = 20,000
+                     *
+                     * Available for editing =
+                     * 50,000 + 20,000 = 70,000
+                     */
+
+                    val availableBalance =
+                        if (oldTransferOut.accountId == selectedAccountId) {
+                            sourceBalance.currentBalance + oldTransferOut.amount
+                        } else {
+                            sourceBalance.currentBalance
+                        }
+
+                    // ====================================================
+                    // CHECK INSUFFICIENT BALANCE
+                    // ====================================================
+
+                    if (availableBalance < amount) {
+                        throw Exception(
+                            "Insufficient balance. Available: $userCurrency ${
+                                formatAmount(availableBalance)
+                            }"
+                        )
+                    }
+
+                    // ====================================================
+                    // GET DESTINATION ACCOUNT
+                    // ====================================================
+
+                    val destinationAccount =
+                        database.accountDao().getAccountById(
+                            accountId = selectedDestinationAccountId!!,
+                            userId = currentUserId
+                        )
+
+                    if (destinationAccount == null) {
+                        throw Exception("Destination account not found")
+                    }
+
+                    val note = etNote.text.toString().trim()
+
+                    // ====================================================
+                    // UPDATE TRANSFER OUT
+                    // ====================================================
+
+                    val updatedTransferOut =
+                        oldTransferOut.copy(
+                            amount = amount,
+                            accountId = selectedAccountId!!,
+                            note = note,
+                            createdAt = editingCreatedAt
+                        )
+
+                    // ====================================================
+                    // UPDATE TRANSFER IN
+                    // ====================================================
+
+                    val updatedTransferIn =
+                        oldTransferIn.copy(
+                            amount = amount,
+                            accountId = selectedDestinationAccountId!!,
+                            note = note,
+                            createdAt = editingCreatedAt
+                        )
+
+                    // ====================================================
+                    // UPDATE COMPLETE TRANSFER
+                    // ====================================================
+
+                    database.transactionDao().updateTransfer(
+                        updatedTransferOut,
+                        updatedTransferIn
+                    )
+
+                    // ====================================================
+                    // CREATE "TRANSFER UPDATED" NOTIFICATION
+                    // ====================================================
+
+                    val notification = Notification(
+                        notificationId = 0,
+                        userId = currentUserId,
+                        title = "Transfer Updated",
+                        message = "You updated a transfer of $userCurrency ${
+                            formatAmount(amount)
+                        } from ${sourceAccount.name} to ${destinationAccount.name}.",
+                        type = "TRANSFER",
+                        referenceType = "TRANSFER",
+                        referenceId = null,
+                        isRead = false,
+                        timeAgo = null,
+                        createdAt = System.currentTimeMillis().toString()
+                    )
+
+                    database.notificationDao().insertNotification(
+                        notification
+                    )
                 }
 
-                // =================================================
-                // CREATE UPDATED OUT
-                // =================================================
+                // ========================================================
+                // SUCCESS
+                // ========================================================
 
-                val newTransferOut =
-                    transferOut.copy(
+                Toast.makeText(
+                    this@AddTransactionActivity,
+                    "Transfer updated successfully!",
+                    Toast.LENGTH_SHORT
+                ).show()
 
-                        accountId =
-                            selectedAccountId,
-
-                        amount =
-                            amount,
-
-                        title =
-                            if (note.isNotEmpty()) {
-                                note
-                            } else {
-                                "Transfer to ${destinationAccount.name}"
-                            },
-
-                        note =
-                            note.ifEmpty {
-                                "Transfer to ${destinationAccount.name}"
-                            }
-                    )
-
-                // =================================================
-                // CREATE UPDATED IN
-                // =================================================
-
-                val newTransferIn =
-                    transferIn.copy(
-
-                        accountId =
-                            selectedDestinationAccountId,
-
-                        amount =
-                            amount,
-
-                        title =
-                            "Transfer from ${sourceAccount.name}",
-
-                        note =
-                            note.ifEmpty {
-                                "Transfer from ${sourceAccount.name}"
-                            }
-                    )
-
-                // =================================================
-                // UPDATE BOTH ATOMICALLY
-                // =================================================
-
-                database
-                    .transactionDao()
-                    .updateTransfer(
-                        newTransferOut,
-                        newTransferIn
-                    )
-
-                withContext(Dispatchers.Main) {
-
-                    Toast.makeText(
-                        this@AddTransactionActivity,
-                        "Transfer updated successfully!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    finish()
-                }
+                finish()
 
             } catch (e: Exception) {
 
-                e.printStackTrace()
-
-                withContext(Dispatchers.Main) {
-
-                    Toast.makeText(
-                        this@AddTransactionActivity,
-                        "Error updating transfer: ${e.localizedMessage}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                Toast.makeText(
+                    this@AddTransactionActivity,
+                    "Failed to update transfer: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

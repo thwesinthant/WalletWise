@@ -1,0 +1,2936 @@
+Folder PATH listing
+Volume serial number is 00000017 E222:86A0
+C:.
+¦   .gitignore
+¦   app_structure.txt
+¦   build.gradle.kts
+¦   
++---build
+¦   +---generated
+¦   ¦   +---ap_generated_sources
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---out
+¦   ¦   +---data_binding_base_class_source_out
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---out
+¦   ¦   ¦           +---com
+¦   ¦   ¦               +---example
+¦   ¦   ¦                   +---walletwise
+¦   ¦   ¦                       +---databinding
+¦   ¦   ¦                               ActivityAccountBinding.java
+¦   ¦   ¦                               ActivityAddBudgetBinding.java
+¦   ¦   ¦                               ActivityAddEditAccountBinding.java
+¦   ¦   ¦                               ActivityAddTransactionBinding.java
+¦   ¦   ¦                               ActivityAllTransactionsBinding.java
+¦   ¦   ¦                               ActivityAuthBinding.java
+¦   ¦   ¦                               ActivityBudgetsBinding.java
+¦   ¦   ¦                               ActivityDashboardBinding.java
+¦   ¦   ¦                               ActivityEditProfileBinding.java
+¦   ¦   ¦                               ActivityForgotPasswordBinding.java
+¦   ¦   ¦                               ActivityGoalsBinding.java
+¦   ¦   ¦                               ActivityLoginBinding.java
+¦   ¦   ¦                               ActivityMoneymateDashboardBinding.java
+¦   ¦   ¦                               ActivityNotificationsBinding.java
+¦   ¦   ¦                               ActivityNotificationsEmptyBinding.java
+¦   ¦   ¦                               ActivityOnboardingBinding.java
+¦   ¦   ¦                               ActivityOtpVerificationBinding.java
+¦   ¦   ¦                               ActivityProfileBinding.java
+¦   ¦   ¦                               ActivityRegisterBinding.java
+¦   ¦   ¦                               ActivityResetPasswordBinding.java
+¦   ¦   ¦                               ActivitySelectCategoryBinding.java
+¦   ¦   ¦                               ActivityTransactionBinding.java
+¦   ¦   ¦                               DialogAddCategoryBinding.java
+¦   ¦   ¦                               DialogAddGoalBinding.java
+¦   ¦   ¦                               DialogAddGoalMoneyBinding.java
+¦   ¦   ¦                               DialogCategoryActionsBinding.java
+¦   ¦   ¦                               DialogIconPickerBinding.java
+¦   ¦   ¦                               FragmentOnboardingPageBinding.java
+¦   ¦   ¦                               ItemAccountBinding.java
+¦   ¦   ¦                               ItemBudgetBinding.java
+¦   ¦   ¦                               ItemBudgetCategoryBinding.java
+¦   ¦   ¦                               ItemCategoryBinding.java
+¦   ¦   ¦                               ItemColorSwatchBinding.java
+¦   ¦   ¦                               ItemDashboardAccountBinding.java
+¦   ¦   ¦                               ItemDashboardAddAccountBinding.java
+¦   ¦   ¦                               ItemGoalCardBinding.java
+¦   ¦   ¦                               ItemIconOptionBinding.java
+¦   ¦   ¦                               ItemNotificationBinding.java
+¦   ¦   ¦                               ItemProfileRowBinding.java
+¦   ¦   ¦                               ItemTransactionHeaderBinding.java
+¦   ¦   ¦                               ItemTransactionRowBinding.java
+¦   ¦   ¦                               LayoutBottomNavBinding.java
+¦   ¦   ¦                               ViewBackButtonBinding.java
+¦   ¦   ¦                               
+¦   ¦   +---ksp
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---kotlin
+¦   ¦   ¦           +---com
+¦   ¦   ¦               +---example
+¦   ¦   ¦                   +---walletwise
+¦   ¦   ¦                       +---dao
+¦   ¦   ¦                       ¦       AccountDao_Impl.kt
+¦   ¦   ¦                       ¦       BudgetDao_Impl.kt
+¦   ¦   ¦                       ¦       CategoryDao_Impl.kt
+¦   ¦   ¦                       ¦       GoalDao_Impl.kt
+¦   ¦   ¦                       ¦       NotificationDao_Impl.kt
+¦   ¦   ¦                       ¦       TransactionDao_Impl.kt
+¦   ¦   ¦                       ¦       UserDao_Impl.kt
+¦   ¦   ¦                       ¦       
+¦   ¦   ¦                       +---database
+¦   ¦   ¦                               AppDatabase_Impl.kt
+¦   ¦   ¦                               
+¦   ¦   +---res
+¦   ¦   ¦   +---pngs
+¦   ¦   ¦       +---debug
+¦   ¦   +---updated_navigation_xml
+¦   ¦       +---debug
+¦   +---intermediates
+¦   ¦   +---aar_metadata_check
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---checkDebugAarMetadata
+¦   ¦   +---android_res_source_set_path_map
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mapDebugSourceSetPaths
+¦   ¦   ¦               file-map.txt
+¦   ¦   ¦               
+¦   ¦   +---annotation_processor_list
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---javaPreCompileDebug
+¦   ¦   ¦               annotationProcessors.json
+¦   ¦   ¦               
+¦   ¦   +---apk
+¦   ¦   ¦   +---debug
+¦   ¦   ¦           app-debug.apk
+¦   ¦   ¦           output-metadata.json
+¦   ¦   ¦           
+¦   ¦   +---apk_ide_redirect_file
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---createDebugApkListingFileRedirect
+¦   ¦   ¦               redirect.txt
+¦   ¦   ¦               
+¦   ¦   +---app_metadata
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---writeDebugAppMetadata
+¦   ¦   ¦               app-metadata.properties
+¦   ¦   ¦               
+¦   ¦   +---assets
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugAssets
+¦   ¦   ¦               categories_seed.json
+¦   ¦   ¦               
+¦   ¦   +---built_in_kotlinc
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---compileDebugKotlin
+¦   ¦   ¦           +---classes
+¦   ¦   ¦               +---com
+¦   ¦   ¦               ¦   +---example
+¦   ¦   ¦               ¦       +---walletwise
+¦   ¦   ¦               ¦           ¦   CategoryAdapter$ViewHolder.class
+¦   ¦   ¦               ¦           ¦   CategoryAdapter.class
+¦   ¦   ¦               ¦           ¦   
+¦   ¦   ¦               ¦           +---account
+¦   ¦   ¦               ¦           ¦       AccountActivity$deleteAccount$1$1.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$deleteAccount$1$2.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$deleteAccount$1$3.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$deleteAccount$1$4.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$deleteAccount$1.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$loadUserCurrency$1$1.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$loadUserCurrency$1.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$observeAccounts$1$1.class
+¦   ¦   ¦               ¦           ¦       AccountActivity$observeAccounts$1.class
+¦   ¦   ¦               ¦           ¦       AccountActivity.class
+¦   ¦   ¦               ¦           ¦       AccountAdapter$AccountViewHolder.class
+¦   ¦   ¦               ¦           ¦       AccountAdapter.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$loadAccount$1$1.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$loadAccount$1$2.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$loadAccount$1.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$saveAccount$1$1.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$saveAccount$1$2.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$saveAccount$1$3.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity$saveAccount$1.class
+¦   ¦   ¦               ¦           ¦       AddEditAccountActivity.class
+¦   ¦   ¦               ¦           ¦       DashboardAccountAdapter$AccountViewHolder.class
+¦   ¦   ¦               ¦           ¦       DashboardAccountAdapter$AddAccountViewHolder.class
+¦   ¦   ¦               ¦           ¦       DashboardAccountAdapter$Companion.class
+¦   ¦   ¦               ¦           ¦       DashboardAccountAdapter.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---auth
+¦   ¦   ¦               ¦           ¦       ForgotPasswordActivity$sendCode$1.class
+¦   ¦   ¦               ¦           ¦       ForgotPasswordActivity.class
+¦   ¦   ¦               ¦           ¦       LoginActivity$loginUser$1.class
+¦   ¦   ¦               ¦           ¦       LoginActivity.class
+¦   ¦   ¦               ¦           ¦       OtpVerificationActivity$resendCode$1.class
+¦   ¦   ¦               ¦           ¦       OtpVerificationActivity$verifyCode$1.class
+¦   ¦   ¦               ¦           ¦       OtpVerificationActivity.class
+¦   ¦   ¦               ¦           ¦       RegisterActivity$handleRegister$1.class
+¦   ¦   ¦               ¦           ¦       RegisterActivity.class
+¦   ¦   ¦               ¦           ¦       ResetPasswordActivity$resetPassword$1.class
+¦   ¦   ¦               ¦           ¦       ResetPasswordActivity.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---budget
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity$Companion.class
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity$createOrUpdateBudget$1.class
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity$loadBudgetForEdit$1.class
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity$loadCategories$1.class
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity$loadUserCurrency$1.class
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity$onCreate$1.class
+¦   ¦   ¦               ¦           ¦       AddBudgetActivity.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$bindBudgetCard$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$deleteBudget$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$displayBudgets$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$loadAndBindBudget$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$loadCategorySummary$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$loadUserCurrency$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$observeBudgets$2.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$onCreate$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity$updateBudgetSummary$1.class
+¦   ¦   ¦               ¦           ¦       BudgetActivity.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---category
+¦   ¦   ¦               ¦           ¦       AddCategoryBottomSheet.class
+¦   ¦   ¦               ¦           ¦       CategoryActionsBottomSheet.class
+¦   ¦   ¦               ¦           ¦       CategoryIconResolverKt.class
+¦   ¦   ¦               ¦           ¦       CategoryMappersKt.class
+¦   ¦   ¦               ¦           ¦       ColorSwatchAdapter$ViewHolder.class
+¦   ¦   ¦               ¦           ¦       ColorSwatchAdapter.class
+¦   ¦   ¦               ¦           ¦       IconGridAdapter$ViewHolder.class
+¦   ¦   ¦               ¦           ¦       IconGridAdapter.class
+¦   ¦   ¦               ¦           ¦       IconOptionAdapter$ViewHolder.class
+¦   ¦   ¦               ¦           ¦       IconOptionAdapter.class
+¦   ¦   ¦               ¦           ¦       IconPickerDialogFragment.class
+¦   ¦   ¦               ¦           ¦       SelectCategoryActivity$Companion.class
+¦   ¦   ¦               ¦           ¦       SelectCategoryActivity$confirmDelete$1$1.class
+¦   ¦   ¦               ¦           ¦       SelectCategoryActivity$onCreate$4$1.class
+¦   ¦   ¦               ¦           ¦       SelectCategoryActivity$onCreate$4.class
+¦   ¦   ¦               ¦           ¦       SelectCategoryActivity$showAddOrEditSheet$1$1.class
+¦   ¦   ¦               ¦           ¦       SelectCategoryActivity.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---dao
+¦   ¦   ¦               ¦           ¦       AccountDao.class
+¦   ¦   ¦               ¦           ¦       AccountDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       AccountDao_Impl$2.class
+¦   ¦   ¦               ¦           ¦       AccountDao_Impl$3.class
+¦   ¦   ¦               ¦           ¦       AccountDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       AccountDao_Impl.class
+¦   ¦   ¦               ¦           ¦       BudgetDao$DefaultImpls.class
+¦   ¦   ¦               ¦           ¦       BudgetDao$insertBudgetWithCategories$1.class
+¦   ¦   ¦               ¦           ¦       BudgetDao$updateBudgetWithCategories$1.class
+¦   ¦   ¦               ¦           ¦       BudgetDao.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$2.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$3.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$4.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$5.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$6.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$deleteBudgetCompletely$2.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$insertBudgetWithCategories$2.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl$updateBudgetWithCategories$2.class
+¦   ¦   ¦               ¦           ¦       BudgetDao_Impl.class
+¦   ¦   ¦               ¦           ¦       CategoryDao.class
+¦   ¦   ¦               ¦           ¦       CategoryDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       CategoryDao_Impl$2.class
+¦   ¦   ¦               ¦           ¦       CategoryDao_Impl$3.class
+¦   ¦   ¦               ¦           ¦       CategoryDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       CategoryDao_Impl.class
+¦   ¦   ¦               ¦           ¦       GoalDao.class
+¦   ¦   ¦               ¦           ¦       GoalDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       GoalDao_Impl$2.class
+¦   ¦   ¦               ¦           ¦       GoalDao_Impl$3.class
+¦   ¦   ¦               ¦           ¦       GoalDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       GoalDao_Impl.class
+¦   ¦   ¦               ¦           ¦       NotificationDao.class
+¦   ¦   ¦               ¦           ¦       NotificationDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       NotificationDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       NotificationDao_Impl.class
+¦   ¦   ¦               ¦           ¦       TransactionDao$DefaultImpls.class
+¦   ¦   ¦               ¦           ¦       TransactionDao$insertTransfer$1.class
+¦   ¦   ¦               ¦           ¦       TransactionDao$updateTransfer$1.class
+¦   ¦   ¦               ¦           ¦       TransactionDao.class
+¦   ¦   ¦               ¦           ¦       TransactionDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       TransactionDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       TransactionDao_Impl$insertTransfer$2.class
+¦   ¦   ¦               ¦           ¦       TransactionDao_Impl$updateTransfer$2.class
+¦   ¦   ¦               ¦           ¦       TransactionDao_Impl.class
+¦   ¦   ¦               ¦           ¦       UserDao.class
+¦   ¦   ¦               ¦           ¦       UserDao_Impl$1.class
+¦   ¦   ¦               ¦           ¦       UserDao_Impl$2.class
+¦   ¦   ¦               ¦           ¦       UserDao_Impl$3.class
+¦   ¦   ¦               ¦           ¦       UserDao_Impl$Companion.class
+¦   ¦   ¦               ¦           ¦       UserDao_Impl.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---dashboard
+¦   ¦   ¦               ¦           ¦       DashboardActivity$deleteTransaction$1$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$deleteTransaction$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeAccounts$1$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeAccounts$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeBalanceUpdatedDate$1$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeBalanceUpdatedDate$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeFinancialData$1$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeFinancialData$1$2.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeFinancialData$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeRecentTransactions$1$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeRecentTransactions$1$2.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeRecentTransactions$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeUser$1$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity$observeUser$1.class
+¦   ¦   ¦               ¦           ¦       DashboardActivity.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---database
+¦   ¦   ¦               ¦           ¦       AppDatabase$Companion.class
+¦   ¦   ¦               ¦           ¦       AppDatabase.class
+¦   ¦   ¦               ¦           ¦       AppDatabase_Impl$createOpenDelegate$_openDelegate$1.class
+¦   ¦   ¦               ¦           ¦       AppDatabase_Impl.class
+¦   ¦   ¦               ¦           ¦       CategorySeedLoader.class
+¦   ¦   ¦               ¦           ¦       MigrationsKt$MIGRATION_1_2$1.class
+¦   ¦   ¦               ¦           ¦       MigrationsKt.class
+¦   ¦   ¦               ¦           ¦       Migration_2_3Kt$MIGRATION_2_3$1.class
+¦   ¦   ¦               ¦           ¦       Migration_2_3Kt.class
+¦   ¦   ¦               ¦           ¦       MIGRATION_3_4Kt$MIGRATION_3_4$1.class
+¦   ¦   ¦               ¦           ¦       MIGRATION_3_4Kt.class
+¦   ¦   ¦               ¦           ¦       MIGRATION_5_6Kt$MIGRATION_5_6$1.class
+¦   ¦   ¦               ¦           ¦       MIGRATION_5_6Kt.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---entity
+¦   ¦   ¦               ¦           ¦       Account.class
+¦   ¦   ¦               ¦           ¦       AccountBalance.class
+¦   ¦   ¦               ¦           ¦       Budget.class
+¦   ¦   ¦               ¦           ¦       BudgetCategory.class
+¦   ¦   ¦               ¦           ¦       BudgetWithCategories.class
+¦   ¦   ¦               ¦           ¦       Category.class
+¦   ¦   ¦               ¦           ¦       CategoryEntity.class
+¦   ¦   ¦               ¦           ¦       Goal.class
+¦   ¦   ¦               ¦           ¦       Notification.class
+¦   ¦   ¦               ¦           ¦       Transaction.class
+¦   ¦   ¦               ¦           ¦       User.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---goal
+¦   ¦   ¦               ¦           ¦       GoalActivity$Companion.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$deleteGoal$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$loadUserCurrency$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$observeGoals$1$1$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$observeGoals$1$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$observeGoals$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$showAddGoalDialog$1$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity$showAddMoneyDialog$1$1.class
+¦   ¦   ¦               ¦           ¦       GoalActivity.class
+¦   ¦   ¦               ¦           ¦       GoalAdapter$GoalViewHolder.class
+¦   ¦   ¦               ¦           ¦       GoalAdapter$submitList$diffCallback$1.class
+¦   ¦   ¦               ¦           ¦       GoalAdapter.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---network
+¦   ¦   ¦               ¦           ¦       ApiResponse.class
+¦   ¦   ¦               ¦           ¦       ApiService.class
+¦   ¦   ¦               ¦           ¦       ForgotPasswordData.class
+¦   ¦   ¦               ¦           ¦       ForgotPasswordRequest.class
+¦   ¦   ¦               ¦           ¦       RegisterData.class
+¦   ¦   ¦               ¦           ¦       RegisterRequest.class
+¦   ¦   ¦               ¦           ¦       ResetPasswordData.class
+¦   ¦   ¦               ¦           ¦       ResetPasswordRequest.class
+¦   ¦   ¦               ¦           ¦       RetrofitClient.class
+¦   ¦   ¦               ¦           ¦       VerifyOtpData.class
+¦   ¦   ¦               ¦           ¦       VerifyOtpRequest.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---notification
+¦   ¦   ¦               ¦           ¦       NotificationActivity$onCreate$3$1.class
+¦   ¦   ¦               ¦           ¦       NotificationActivity$onCreate$4$1.class
+¦   ¦   ¦               ¦           ¦       NotificationActivity$onCreate$5$1.class
+¦   ¦   ¦               ¦           ¦       NotificationActivity$onCreate$5.class
+¦   ¦   ¦               ¦           ¦       NotificationActivity.class
+¦   ¦   ¦               ¦           ¦       NotificationAdapter$NotificationViewHolder.class
+¦   ¦   ¦               ¦           ¦       NotificationAdapter.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---onboarding
+¦   ¦   ¦               ¦           ¦       OnboardingActivity.class
+¦   ¦   ¦               ¦           ¦       OnboardingAdapter.class
+¦   ¦   ¦               ¦           ¦       OnboardingFragment$Companion.class
+¦   ¦   ¦               ¦           ¦       OnboardingFragment$OnboardingActionListener.class
+¦   ¦   ¦               ¦           ¦       OnboardingFragment.class
+¦   ¦   ¦               ¦           ¦       OnboardingItem.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---profile
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$5$1$1$1.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$5$1.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$5.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$6$1$1$1.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$6$1$1$2.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$6$1$1$newImagePath$1$1.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity$onCreate$6$1.class
+¦   ¦   ¦               ¦           ¦       EditProfileActivity.class
+¦   ¦   ¦               ¦           ¦       ProfileActivity$onCreate$2$1.class
+¦   ¦   ¦               ¦           ¦       ProfileActivity$onCreate$2.class
+¦   ¦   ¦               ¦           ¦       ProfileActivity.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---transactions
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$checkBudgetsAfterExpense$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$Companion.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1$2.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1$3.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1$4.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1$5.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1$6.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadTransactionForEditing$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadUserCurrency$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$loadUserCurrency$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransactionAndNotify$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransactionAndNotify$1$2.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransactionAndNotify$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransfer$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransfer$1$2.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransfer$1$3.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransfer$1$4.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransfer$1$5.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$saveTransfer$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$setupCategoryChips$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$setupCategoryChips$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$setupPaymentChips$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$setupPaymentChips$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransaction$1$2.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransaction$1$3.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransaction$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1$2.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1$3.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1$4.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1$5.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1$6.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity$updateTransfer$1.class
+¦   ¦   ¦               ¦           ¦       AddTransactionActivity.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$applyFilterAndSort$$inlined$sortedBy$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$applyFilterAndSort$$inlined$sortedByDescending$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$deleteTransaction$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$FilterType.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$observeTransactions$1$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$observeTransactions$1$2.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$observeTransactions$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$observeUser$1$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$observeUser$1.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity$WhenMappings.class
+¦   ¦   ¦               ¦           ¦       TransactionActivity.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter$Companion.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter$HeaderViewHolder.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter$ListItem$Header.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter$ListItem$Item.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter$ListItem.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter$TransactionViewHolder.class
+¦   ¦   ¦               ¦           ¦       TransactionAdapter.class
+¦   ¦   ¦               ¦           ¦       
+¦   ¦   ¦               ¦           +---ui
+¦   ¦   ¦               ¦           ¦   +---theme
+¦   ¦   ¦               ¦           ¦           ColorKt.class
+¦   ¦   ¦               ¦           ¦           ThemeKt.class
+¦   ¦   ¦               ¦           ¦           TypeKt.class
+¦   ¦   ¦               ¦           ¦           
+¦   ¦   ¦               ¦           +---util
+¦   ¦   ¦               ¦                   BottomNavHelper$WhenMappings.class
+¦   ¦   ¦               ¦                   BottomNavHelper.class
+¦   ¦   ¦               ¦                   NavTab.class
+¦   ¦   ¦               ¦                   PasswordUtils.class
+¦   ¦   ¦               ¦                   SessionManager.class
+¦   ¦   ¦               ¦                   
+¦   ¦   ¦               +---META-INF
+¦   ¦   ¦                       app.kotlin_module
+¦   ¦   ¦                       
+¦   ¦   +---compatible_screen_manifest
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---createDebugCompatibleScreenManifests
+¦   ¦   ¦               output-metadata.json
+¦   ¦   ¦               
+¦   ¦   +---compiled_navigation_res
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---compileDebugNavigationResources
+¦   ¦   +---compile_and_runtime_r_class_jar
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugResources
+¦   ¦   ¦               R.jar
+¦   ¦   ¦               
+¦   ¦   +---compile_r_class_jar
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---generateDebugRFile
+¦   ¦   ¦               R.jar
+¦   ¦   ¦               
+¦   ¦   +---compile_symbol_list
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---generateDebugRFile
+¦   ¦   ¦               R.txt
+¦   ¦   ¦               
+¦   ¦   +---compressed_assets
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---compressDebugAssets
+¦   ¦   ¦           +---out
+¦   ¦   ¦               +---assets
+¦   ¦   ¦                       categories_seed.json.jar
+¦   ¦   ¦                       
+¦   ¦   +---data_binding_base_class_log_artifact
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dataBindingGenBaseClassesDebug
+¦   ¦   ¦           +---out
+¦   ¦   ¦                   com.example.walletwise-binding_classes.json
+¦   ¦   ¦                   
+¦   ¦   +---data_binding_dependency_artifacts
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dataBindingMergeDependencyArtifactsDebug
+¦   ¦   +---data_binding_layout_info_type_merge
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugResources
+¦   ¦   ¦           +---out
+¦   ¦   ¦                   activity_account-layout.xml
+¦   ¦   ¦                   activity_add_budget-layout.xml
+¦   ¦   ¦                   activity_add_edit_account-layout.xml
+¦   ¦   ¦                   activity_add_transaction-layout.xml
+¦   ¦   ¦                   activity_all_transactions-layout.xml
+¦   ¦   ¦                   activity_auth-layout.xml
+¦   ¦   ¦                   activity_budgets-layout.xml
+¦   ¦   ¦                   activity_dashboard-layout.xml
+¦   ¦   ¦                   activity_edit_profile-layout.xml
+¦   ¦   ¦                   activity_forgot_password-layout.xml
+¦   ¦   ¦                   activity_goals-layout.xml
+¦   ¦   ¦                   activity_login-layout.xml
+¦   ¦   ¦                   activity_moneymate_dashboard-layout.xml
+¦   ¦   ¦                   activity_notifications-layout.xml
+¦   ¦   ¦                   activity_notifications_empty-layout.xml
+¦   ¦   ¦                   activity_onboarding-layout.xml
+¦   ¦   ¦                   activity_otp_verification-layout.xml
+¦   ¦   ¦                   activity_profile-layout.xml
+¦   ¦   ¦                   activity_register-layout.xml
+¦   ¦   ¦                   activity_reset_password-layout.xml
+¦   ¦   ¦                   activity_select_category-layout.xml
+¦   ¦   ¦                   activity_transaction-layout.xml
+¦   ¦   ¦                   dialog_add_category-layout.xml
+¦   ¦   ¦                   dialog_add_goal-layout.xml
+¦   ¦   ¦                   dialog_add_goal_money-layout.xml
+¦   ¦   ¦                   dialog_category_actions-layout.xml
+¦   ¦   ¦                   dialog_icon_picker-layout.xml
+¦   ¦   ¦                   fragment_onboarding_page-layout.xml
+¦   ¦   ¦                   item_account-layout.xml
+¦   ¦   ¦                   item_budget-layout.xml
+¦   ¦   ¦                   item_budget_category-layout.xml
+¦   ¦   ¦                   item_category-layout.xml
+¦   ¦   ¦                   item_color_swatch-layout.xml
+¦   ¦   ¦                   item_dashboard_account-layout.xml
+¦   ¦   ¦                   item_dashboard_add_account-layout.xml
+¦   ¦   ¦                   item_goal_card-layout.xml
+¦   ¦   ¦                   item_icon_option-layout.xml
+¦   ¦   ¦                   item_notification-layout.xml
+¦   ¦   ¦                   item_profile_row-layout.xml
+¦   ¦   ¦                   item_transaction_header-layout.xml
+¦   ¦   ¦                   item_transaction_row-layout.xml
+¦   ¦   ¦                   layout_bottom_nav-layout.xml
+¦   ¦   ¦                   view_back_button-layout.xml
+¦   ¦   ¦                   
+¦   ¦   +---data_binding_layout_info_type_package
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---packageDebugResources
+¦   ¦   ¦           +---out
+¦   ¦   ¦                   activity_account-layout.xml
+¦   ¦   ¦                   activity_add_budget-layout.xml
+¦   ¦   ¦                   activity_add_edit_account-layout.xml
+¦   ¦   ¦                   activity_add_transaction-layout.xml
+¦   ¦   ¦                   activity_all_transactions-layout.xml
+¦   ¦   ¦                   activity_auth-layout.xml
+¦   ¦   ¦                   activity_budgets-layout.xml
+¦   ¦   ¦                   activity_dashboard-layout.xml
+¦   ¦   ¦                   activity_edit_profile-layout.xml
+¦   ¦   ¦                   activity_forgot_password-layout.xml
+¦   ¦   ¦                   activity_goals-layout.xml
+¦   ¦   ¦                   activity_login-layout.xml
+¦   ¦   ¦                   activity_moneymate_dashboard-layout.xml
+¦   ¦   ¦                   activity_notifications-layout.xml
+¦   ¦   ¦                   activity_notifications_empty-layout.xml
+¦   ¦   ¦                   activity_onboarding-layout.xml
+¦   ¦   ¦                   activity_otp_verification-layout.xml
+¦   ¦   ¦                   activity_profile-layout.xml
+¦   ¦   ¦                   activity_register-layout.xml
+¦   ¦   ¦                   activity_reset_password-layout.xml
+¦   ¦   ¦                   activity_select_category-layout.xml
+¦   ¦   ¦                   activity_transaction-layout.xml
+¦   ¦   ¦                   dialog_add_category-layout.xml
+¦   ¦   ¦                   dialog_add_goal-layout.xml
+¦   ¦   ¦                   dialog_add_goal_money-layout.xml
+¦   ¦   ¦                   dialog_category_actions-layout.xml
+¦   ¦   ¦                   dialog_icon_picker-layout.xml
+¦   ¦   ¦                   fragment_onboarding_page-layout.xml
+¦   ¦   ¦                   item_account-layout.xml
+¦   ¦   ¦                   item_budget-layout.xml
+¦   ¦   ¦                   item_budget_category-layout.xml
+¦   ¦   ¦                   item_category-layout.xml
+¦   ¦   ¦                   item_color_swatch-layout.xml
+¦   ¦   ¦                   item_dashboard_account-layout.xml
+¦   ¦   ¦                   item_dashboard_add_account-layout.xml
+¦   ¦   ¦                   item_goal_card-layout.xml
+¦   ¦   ¦                   item_icon_option-layout.xml
+¦   ¦   ¦                   item_notification-layout.xml
+¦   ¦   ¦                   item_profile_row-layout.xml
+¦   ¦   ¦                   item_transaction_header-layout.xml
+¦   ¦   ¦                   item_transaction_row-layout.xml
+¦   ¦   ¦                   layout_bottom_nav-layout.xml
+¦   ¦   ¦                   view_back_button-layout.xml
+¦   ¦   ¦                   
+¦   ¦   +---desugar_graph
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   ¦               +---currentProject
+¦   ¦   ¦               ¦   +---dirs_bucket_0
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_1
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_2
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_3
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_4
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_5
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---jar_4db9ac6f5d7a499bf88b1d8bf322d85b78921c522491d48cdb533fcbb3c93d61_bucket_0
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---jar_4db9ac6f5d7a499bf88b1d8bf322d85b78921c522491d48cdb533fcbb3c93d61_bucket_1
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---jar_4db9ac6f5d7a499bf88b1d8bf322d85b78921c522491d48cdb533fcbb3c93d61_bucket_2
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---jar_4db9ac6f5d7a499bf88b1d8bf322d85b78921c522491d48cdb533fcbb3c93d61_bucket_3
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---jar_4db9ac6f5d7a499bf88b1d8bf322d85b78921c522491d48cdb533fcbb3c93d61_bucket_4
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---jar_4db9ac6f5d7a499bf88b1d8bf322d85b78921c522491d48cdb533fcbb3c93d61_bucket_5
+¦   ¦   ¦               ¦           graph.bin
+¦   ¦   ¦               ¦           
+¦   ¦   ¦               +---externalLibs
+¦   ¦   ¦               ¦   +---dirs_bucket_0
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_1
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_2
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_3
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_4
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_5
+¦   ¦   ¦               ¦           graph.bin
+¦   ¦   ¦               ¦           
+¦   ¦   ¦               +---mixedScopes
+¦   ¦   ¦               ¦   +---dirs_bucket_0
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_1
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_2
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_3
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_4
+¦   ¦   ¦               ¦   ¦       graph.bin
+¦   ¦   ¦               ¦   ¦       
+¦   ¦   ¦               ¦   +---dirs_bucket_5
+¦   ¦   ¦               ¦           graph.bin
+¦   ¦   ¦               ¦           
+¦   ¦   ¦               +---otherProjects
+¦   ¦   ¦                   +---dirs_bucket_0
+¦   ¦   ¦                   ¦       graph.bin
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---dirs_bucket_1
+¦   ¦   ¦                   ¦       graph.bin
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---dirs_bucket_2
+¦   ¦   ¦                   ¦       graph.bin
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---dirs_bucket_3
+¦   ¦   ¦                   ¦       graph.bin
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---dirs_bucket_4
+¦   ¦   ¦                   ¦       graph.bin
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---dirs_bucket_5
+¦   ¦   ¦                           graph.bin
+¦   ¦   ¦                           
+¦   ¦   +---dex
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeExtDexDebug
+¦   ¦   ¦       ¦       classes.dex
+¦   ¦   ¦       ¦       classes2.dex
+¦   ¦   ¦       ¦       classes3.dex
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---mergeLibDexDebug
+¦   ¦   ¦       ¦   +---0
+¦   ¦   ¦       ¦   +---1
+¦   ¦   ¦       ¦   +---10
+¦   ¦   ¦       ¦   +---11
+¦   ¦   ¦       ¦   +---12
+¦   ¦   ¦       ¦   +---13
+¦   ¦   ¦       ¦   +---14
+¦   ¦   ¦       ¦   +---15
+¦   ¦   ¦       ¦   +---2
+¦   ¦   ¦       ¦   +---3
+¦   ¦   ¦       ¦   +---4
+¦   ¦   ¦       ¦   +---5
+¦   ¦   ¦       ¦   +---6
+¦   ¦   ¦       ¦   +---7
+¦   ¦   ¦       ¦   +---8
+¦   ¦   ¦       ¦   +---9
+¦   ¦   ¦       +---mergeProjectDexDebug
+¦   ¦   ¦           +---0
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---1
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---10
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---11
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---12
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---13
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---14
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---15
+¦   ¦   ¦           +---2
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---3
+¦   ¦   ¦           +---4
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---5
+¦   ¦   ¦           +---6
+¦   ¦   ¦           ¦       classes.dex
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---7
+¦   ¦   ¦           +---8
+¦   ¦   ¦           +---9
+¦   ¦   ¦                   classes.dex
+¦   ¦   ¦                   
+¦   ¦   +---dex_archive_input_jar_hashes
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦               out
+¦   ¦   ¦               
+¦   ¦   +---dex_number_of_buckets_file
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦               out
+¦   ¦   ¦               
+¦   ¦   +---duplicate_classes_check
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---checkDebugDuplicateClasses
+¦   ¦   +---external_file_lib_dex_archives
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---desugarDebugFileDependencies
+¦   ¦   +---external_libs_dex_archive
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---external_libs_dex_archive_with_artifact_transforms
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---global_synthetics_dex
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---generateDebugGlobalSynthetics
+¦   ¦   ¦               classes.dex
+¦   ¦   ¦               
+¦   ¦   +---global_synthetics_external_lib
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---global_synthetics_external_libs_artifact_transform
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---global_synthetics_file_lib
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---desugarDebugFileDependencies
+¦   ¦   +---global_synthetics_mixed_scope
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---global_synthetics_project
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---global_synthetics_subproject
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---incremental
+¦   ¦   ¦   +---dataBindingGenBaseClassesDebug
+¦   ¦   ¦   ¦       base_builder_log.json
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---debug
+¦   ¦   ¦   ¦   +---mergeDebugResources
+¦   ¦   ¦   ¦   ¦   ¦   compile-file-map.properties
+¦   ¦   ¦   ¦   ¦   ¦   merger.xml
+¦   ¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   ¦   +---merged.dir
+¦   ¦   ¦   ¦   ¦   +---stripped.dir
+¦   ¦   ¦   ¦   ¦       +---layout
+¦   ¦   ¦   ¦   ¦               activity_login.xml
+¦   ¦   ¦   ¦   ¦               activity_register.xml
+¦   ¦   ¦   ¦   ¦               
+¦   ¦   ¦   ¦   +---packageDebugResources
+¦   ¦   ¦   ¦       ¦   compile-file-map.properties
+¦   ¦   ¦   ¦       ¦   merger.xml
+¦   ¦   ¦   ¦       ¦   
+¦   ¦   ¦   ¦       +---merged.dir
+¦   ¦   ¦   ¦       +---stripped.dir
+¦   ¦   ¦   ¦           +---layout
+¦   ¦   ¦   ¦                   activity_login.xml
+¦   ¦   ¦   ¦                   activity_register.xml
+¦   ¦   ¦   ¦                   
+¦   ¦   ¦   +---debug-mergeJavaRes
+¦   ¦   ¦   ¦   ¦   merge-state
+¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   +---zip-cache
+¦   ¦   ¦   ¦           +hZyLM5DvBjVeMuewnrS1Q==
+¦   ¦   ¦   ¦           +WFmcdEZejkqwmrV8cpeaQ==
+¦   ¦   ¦   ¦           0HPhhmlP4nWWW54dhsp1uw==
+¦   ¦   ¦   ¦           0ovxz7aDrNDpUyrR4yF80w==
+¦   ¦   ¦   ¦           0WxAkkiNYHJ2ay0XRsUHLg==
+¦   ¦   ¦   ¦           1F_vmNqKffOK5BRroL4g8A==
+¦   ¦   ¦   ¦           22FZsQ1SDv4rqQPZoBDeWg==
+¦   ¦   ¦   ¦           2barVcxBVfhuxsPP4fSD1g==
+¦   ¦   ¦   ¦           2LxLLOc8daO6RooyO1bM2A==
+¦   ¦   ¦   ¦           42k7IjDPKN3VMez4EZabFg==
+¦   ¦   ¦   ¦           4PbMTA5bhNRfhIvTuPVOIQ==
+¦   ¦   ¦   ¦           5DcDLj1ekMqzneI7kk7iPQ==
+¦   ¦   ¦   ¦           6aHdJQorG9PND0k6LaJN1A==
+¦   ¦   ¦   ¦           6g3UOq+NTfwMPatuNOx5uA==
+¦   ¦   ¦   ¦           6Wug_4x3k8vWLXwPsk20pg==
+¦   ¦   ¦   ¦           6WUYs16427YrFQv9de7vDQ==
+¦   ¦   ¦   ¦           7mZzm3n3Zu+wA1K6FNyOFA==
+¦   ¦   ¦   ¦           7rOVD88p9EXsmpW3UA88QQ==
+¦   ¦   ¦   ¦           8BaPX66RgZ4bnQMM1H_ppg==
+¦   ¦   ¦   ¦           8CKStWJVExkJpg99CD_tow==
+¦   ¦   ¦   ¦           8FHOb1mhKJqUOO0oAoWPMA==
+¦   ¦   ¦   ¦           A0ajYwFRnG8b5hf1FJXN2A==
+¦   ¦   ¦   ¦           AfbXjhUBNTrhrz9666rg+w==
+¦   ¦   ¦   ¦           Am2ORmDPZwioCAnteCVU2Q==
+¦   ¦   ¦   ¦           amKcgSpOFkeSizq3V5+3kw==
+¦   ¦   ¦   ¦           B1q0viQ0mRP143xtlj4tmg==
+¦   ¦   ¦   ¦           B7EBYZ5vibYpB7+HBo_+0w==
+¦   ¦   ¦   ¦           BBGLF74IoE28bfCLJjWmCg==
+¦   ¦   ¦   ¦           cyq5Ltpr_TdHjDz_QrVnUQ==
+¦   ¦   ¦   ¦           cYv_WoXrVvkQrQMl0VgZrg==
+¦   ¦   ¦   ¦           dFy5b66JujNUI5AKiyuyXA==
+¦   ¦   ¦   ¦           DowZwZKL2MCVD3kQNlIMEw==
+¦   ¦   ¦   ¦           DugLSsGa1CDWKDdWY4sE8g==
+¦   ¦   ¦   ¦           DuVCqIBFpwQA7G642YS06w==
+¦   ¦   ¦   ¦           eA9PdsfCqn424yT+DHQHVw==
+¦   ¦   ¦   ¦           fa7BDyqi14ktnKPfAONM1A==
+¦   ¦   ¦   ¦           fgTTRENxn4VBErJf8bs5Mg==
+¦   ¦   ¦   ¦           FLgvVhb1tHg03BPa+zVtJA==
+¦   ¦   ¦   ¦           fm+NaOBG_CwHIQnIU4N8ag==
+¦   ¦   ¦   ¦           fogTWUxAicmuqL1aFXZu3g==
+¦   ¦   ¦   ¦           G2EZI_Di92V5tX3xNhNw8g==
+¦   ¦   ¦   ¦           gjLiSXiDHjNA5FpP5DX8zg==
+¦   ¦   ¦   ¦           gRhNclubSr7nDOg65V7MjQ==
+¦   ¦   ¦   ¦           hgI4kYAnVycFrR2pognpaw==
+¦   ¦   ¦   ¦           HPKZx_XZGl2XmhBCaXVIFg==
+¦   ¦   ¦   ¦           HpqUFQf1ZL9H1yA8o_b3Tg==
+¦   ¦   ¦   ¦           hrhDfNmzgSJoFrN_oAhwag==
+¦   ¦   ¦   ¦           HzTe6NuWiys2comDh0FU5A==
+¦   ¦   ¦   ¦           I8FqQGdehoGa+cB1OlX7oA==
+¦   ¦   ¦   ¦           IDRxh7cwgf7Mpk1I9Lht_Q==
+¦   ¦   ¦   ¦           IFra1TEAWeq_hKDrVnT+CQ==
+¦   ¦   ¦   ¦           IhkuIygH3COB_Z_lOQ9MBA==
+¦   ¦   ¦   ¦           iiQ1PnLNOQf1EWll_PGb+w==
+¦   ¦   ¦   ¦           ikWqkVJchu896rWcReTWsA==
+¦   ¦   ¦   ¦           io66bP8OqGOzOnXIzc51Ug==
+¦   ¦   ¦   ¦           JaLr+EnLkzday6iGic8rMQ==
+¦   ¦   ¦   ¦           jsZ1vzqXiBcYHN_xD8R2fQ==
+¦   ¦   ¦   ¦           JwgQK0UAO42m_ZR9y9IAhg==
+¦   ¦   ¦   ¦           KF4XQJL11drHHIYH9kSC6Q==
+¦   ¦   ¦   ¦           KsbBNDBJrm3hHw8wnu3r8w==
+¦   ¦   ¦   ¦           kubiie++3jQHp23elrF6QQ==
+¦   ¦   ¦   ¦           L1qrhGwABtNmS_BIl93mmQ==
+¦   ¦   ¦   ¦           lmaOKz2MpjlGA_u5mQBLnQ==
+¦   ¦   ¦   ¦           mEspUszRhxgPy6vinpfQpw==
+¦   ¦   ¦   ¦           mM0rm++eDCs+7nMGmEHO4A==
+¦   ¦   ¦   ¦           MpVBb_doHc5LyF2IpD5Gxg==
+¦   ¦   ¦   ¦           MpYnON1JCFvfTXXoMWSF0Q==
+¦   ¦   ¦   ¦           MZjBebLJmairIsOZvVKRxg==
+¦   ¦   ¦   ¦           NgNmzBpGxJx_ceerPZvqmQ==
+¦   ¦   ¦   ¦           O+6vDTcfP4MsFVTEGumVbQ==
+¦   ¦   ¦   ¦           oP4rmffTYb1rs_sHYaCUXg==
+¦   ¦   ¦   ¦           Oyb2cSK7fxZlgr1zPiBUpw==
+¦   ¦   ¦   ¦           p+DkXGYQI_fmNLdkVh3jaA==
+¦   ¦   ¦   ¦           PoTdooni7P3kVMgP7To84Q==
+¦   ¦   ¦   ¦           PPztOpthQod5mC6QNUgUZw==
+¦   ¦   ¦   ¦           Q+y3vyR2AjHEX4sEHMDjNA==
+¦   ¦   ¦   ¦           q83yw95bALsdjJqo8MPUgA==
+¦   ¦   ¦   ¦           qiaiyCzr+frX32+cJVPF5Q==
+¦   ¦   ¦   ¦           qXniC_szXEG2CwGH1UzN3A==
+¦   ¦   ¦   ¦           r8HSvIQPyOalXK+ooB4EKg==
+¦   ¦   ¦   ¦           RjbUcOXwinx3de8kWlFNRg==
+¦   ¦   ¦   ¦           rl7PXN0+lBaHJkcAhZ5U1g==
+¦   ¦   ¦   ¦           rS2Cyp69HR0yYIxiJignlg==
+¦   ¦   ¦   ¦           rWWaheA9g1sSgP8V70ro8w==
+¦   ¦   ¦   ¦           sBlTHcTNAWWkZZC5eZGqJQ==
+¦   ¦   ¦   ¦           sVewLSLVMFcaOuKSCRyQDg==
+¦   ¦   ¦   ¦           SVrsrpTCTxHyU7O25wCXLQ==
+¦   ¦   ¦   ¦           T7PQFjWZRQ4Oeeg9CF69yg==
+¦   ¦   ¦   ¦           tmAUHoYLqnyL9EAvLRYUjQ==
+¦   ¦   ¦   ¦           tRqxwnK_6iNSeZvEwtRnkA==
+¦   ¦   ¦   ¦           tXfikmknDggNosz_fTNemA==
+¦   ¦   ¦   ¦           uDGoCUhMTkBcb_2IahOdAg==
+¦   ¦   ¦   ¦           uFWic2NzdoFlgwR6az28GQ==
+¦   ¦   ¦   ¦           Vx19l0DGwxjDCt5DrvyLmQ==
+¦   ¦   ¦   ¦           V_jIPCYMe2mEBHX3w6O0KQ==
+¦   ¦   ¦   ¦           w7fW2oPh0qZEctjR9CwOiQ==
+¦   ¦   ¦   ¦           w8eebmVEaL5sZDEaa8y+SA==
+¦   ¦   ¦   ¦           WLEK4EB3GRXZG97Err8Cvw==
+¦   ¦   ¦   ¦           x5HdL_igXZqf2MupmCf28g==
+¦   ¦   ¦   ¦           XhjW9FHCeXSuBKCVKvBgfQ==
+¦   ¦   ¦   ¦           xTiX+f2MvnqCf6a5DY5pbw==
+¦   ¦   ¦   ¦           Y0LbpGBeMOQA3wWiwRGgXg==
+¦   ¦   ¦   ¦           YiFkCzk7x0GmjBUOJUMcBg==
+¦   ¦   ¦   ¦           zNdWMtiiIEENM_HSwpPiBg==
+¦   ¦   ¦   ¦           zS3IlTkyN8_Jd4m28DCtBA==
+¦   ¦   ¦   ¦           zteDgPmhaZx_1b8mW4AzCg==
+¦   ¦   ¦   ¦           zxmr55J3Bbz_x1Mz0SUhaQ==
+¦   ¦   ¦   ¦           _DjyHAidzxtknb98RHDsDA==
+¦   ¦   ¦   ¦           _I3_SA5Fa2FepierdkfbYg==
+¦   ¦   ¦   ¦           _parQh3OjZD8ar7XMNY+yA==
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---mergeDebugAssets
+¦   ¦   ¦   ¦       merger.xml
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---mergeDebugJniLibFolders
+¦   ¦   ¦   ¦       merger.xml
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---packageDebug
+¦   ¦   ¦   ¦   +---tmp
+¦   ¦   ¦   ¦       +---debug
+¦   ¦   ¦   ¦           ¦   dex-renamer-state.txt
+¦   ¦   ¦   ¦           ¦   
+¦   ¦   ¦   ¦           +---zip-cache
+¦   ¦   ¦   ¦                   androidResources
+¦   ¦   ¦   ¦                   javaResources0
+¦   ¦   ¦   ¦                   
+¦   ¦   ¦   +---processDebugResources
+¦   ¦   ¦           resources-list-for-linked-resources-binary-format-debug.ap_.txt
+¦   ¦   ¦           
+¦   ¦   +---javac
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---compileDebugJavaWithJavac
+¦   ¦   ¦           +---classes
+¦   ¦   ¦               +---com
+¦   ¦   ¦                   +---example
+¦   ¦   ¦                       +---walletwise
+¦   ¦   ¦                           +---databinding
+¦   ¦   ¦                                   ActivityAccountBinding.class
+¦   ¦   ¦                                   ActivityAddBudgetBinding.class
+¦   ¦   ¦                                   ActivityAddEditAccountBinding.class
+¦   ¦   ¦                                   ActivityAddTransactionBinding.class
+¦   ¦   ¦                                   ActivityAllTransactionsBinding.class
+¦   ¦   ¦                                   ActivityAuthBinding.class
+¦   ¦   ¦                                   ActivityBudgetsBinding.class
+¦   ¦   ¦                                   ActivityDashboardBinding.class
+¦   ¦   ¦                                   ActivityEditProfileBinding.class
+¦   ¦   ¦                                   ActivityForgotPasswordBinding.class
+¦   ¦   ¦                                   ActivityGoalsBinding.class
+¦   ¦   ¦                                   ActivityLoginBinding.class
+¦   ¦   ¦                                   ActivityMoneymateDashboardBinding.class
+¦   ¦   ¦                                   ActivityNotificationsBinding.class
+¦   ¦   ¦                                   ActivityNotificationsEmptyBinding.class
+¦   ¦   ¦                                   ActivityOnboardingBinding.class
+¦   ¦   ¦                                   ActivityOtpVerificationBinding.class
+¦   ¦   ¦                                   ActivityProfileBinding.class
+¦   ¦   ¦                                   ActivityRegisterBinding.class
+¦   ¦   ¦                                   ActivityResetPasswordBinding.class
+¦   ¦   ¦                                   ActivitySelectCategoryBinding.class
+¦   ¦   ¦                                   ActivityTransactionBinding.class
+¦   ¦   ¦                                   DialogAddCategoryBinding.class
+¦   ¦   ¦                                   DialogAddGoalBinding.class
+¦   ¦   ¦                                   DialogAddGoalMoneyBinding.class
+¦   ¦   ¦                                   DialogCategoryActionsBinding.class
+¦   ¦   ¦                                   DialogIconPickerBinding.class
+¦   ¦   ¦                                   FragmentOnboardingPageBinding.class
+¦   ¦   ¦                                   ItemAccountBinding.class
+¦   ¦   ¦                                   ItemBudgetBinding.class
+¦   ¦   ¦                                   ItemBudgetCategoryBinding.class
+¦   ¦   ¦                                   ItemCategoryBinding.class
+¦   ¦   ¦                                   ItemColorSwatchBinding.class
+¦   ¦   ¦                                   ItemDashboardAccountBinding.class
+¦   ¦   ¦                                   ItemDashboardAddAccountBinding.class
+¦   ¦   ¦                                   ItemGoalCardBinding.class
+¦   ¦   ¦                                   ItemIconOptionBinding.class
+¦   ¦   ¦                                   ItemNotificationBinding.class
+¦   ¦   ¦                                   ItemProfileRowBinding.class
+¦   ¦   ¦                                   ItemTransactionHeaderBinding.class
+¦   ¦   ¦                                   ItemTransactionRowBinding.class
+¦   ¦   ¦                                   LayoutBottomNavBinding.class
+¦   ¦   ¦                                   ViewBackButtonBinding.class
+¦   ¦   ¦                                   
+¦   ¦   +---java_res
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugJavaRes
+¦   ¦   ¦           +---out
+¦   ¦   ¦               +---com
+¦   ¦   ¦               ¦   +---example
+¦   ¦   ¦               ¦       +---walletwise
+¦   ¦   ¦               ¦           +---account
+¦   ¦   ¦               ¦           +---auth
+¦   ¦   ¦               ¦           +---budget
+¦   ¦   ¦               ¦           +---category
+¦   ¦   ¦               ¦           +---dao
+¦   ¦   ¦               ¦           +---dashboard
+¦   ¦   ¦               ¦           +---database
+¦   ¦   ¦               ¦           +---entity
+¦   ¦   ¦               ¦           +---goal
+¦   ¦   ¦               ¦           +---network
+¦   ¦   ¦               ¦           +---notification
+¦   ¦   ¦               ¦           +---onboarding
+¦   ¦   ¦               ¦           +---profile
+¦   ¦   ¦               ¦           +---transactions
+¦   ¦   ¦               ¦           +---ui
+¦   ¦   ¦               ¦           ¦   +---theme
+¦   ¦   ¦               ¦           +---util
+¦   ¦   ¦               +---META-INF
+¦   ¦   ¦                       app.kotlin_module
+¦   ¦   ¦                       
+¦   ¦   +---linked_resources_binary_format
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugResources
+¦   ¦   ¦               linked-resources-binary-format-debug.ap_
+¦   ¦   ¦               output-metadata.json
+¦   ¦   ¦               
+¦   ¦   +---local_only_symbol_list
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---parseDebugLocalResources
+¦   ¦   ¦               R-def.txt
+¦   ¦   ¦               
+¦   ¦   +---manifest_merge_blame_file
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugMainManifest
+¦   ¦   ¦               manifest-merger-blame-debug-report.txt
+¦   ¦   ¦               
+¦   ¦   +---merged_java_res
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugJavaResource
+¦   ¦   ¦               base.jar
+¦   ¦   ¦               
+¦   ¦   +---merged_jni_libs
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugJniLibFolders
+¦   ¦   ¦           +---out
+¦   ¦   +---merged_manifest
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugMainManifest
+¦   ¦   ¦               AndroidManifest.xml
+¦   ¦   ¦               
+¦   ¦   +---merged_manifests
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugManifest
+¦   ¦   ¦               AndroidManifest.xml
+¦   ¦   ¦               output-metadata.json
+¦   ¦   ¦               
+¦   ¦   +---merged_native_libs
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugNativeLibs
+¦   ¦   ¦           +---out
+¦   ¦   ¦               +---lib
+¦   ¦   ¦                   +---arm64-v8a
+¦   ¦   ¦                   ¦       libandroidx.graphics.path.so
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---armeabi-v7a
+¦   ¦   ¦                   ¦       libandroidx.graphics.path.so
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---x86
+¦   ¦   ¦                   ¦       libandroidx.graphics.path.so
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---x86_64
+¦   ¦   ¦                           libandroidx.graphics.path.so
+¦   ¦   ¦                           
+¦   ¦   +---merged_res
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugResources
+¦   ¦   ¦               drawable_baseline_arrow_back_24.xml.flat
+¦   ¦   ¦               drawable_baseline_table_rows_24.xml.flat
+¦   ¦   ¦               drawable_bg_account_card.xml.flat
+¦   ¦   ¦               drawable_bg_actions_card.xml.flat
+¦   ¦   ¦               drawable_bg_action_circle.xml.flat
+¦   ¦   ¦               drawable_bg_active_budget.xml.flat
+¦   ¦   ¦               drawable_bg_add_account_box.xml.flat
+¦   ¦   ¦               drawable_bg_add_budget_button.xml.flat
+¦   ¦   ¦               drawable_bg_add_category.xml.flat
+¦   ¦   ¦               drawable_bg_allocation_summary.xml.flat
+¦   ¦   ¦               drawable_bg_avatar.xml.flat
+¦   ¦   ¦               drawable_bg_badge.xml.flat
+¦   ¦   ¦               drawable_bg_balance_card.xml.flat
+¦   ¦   ¦               drawable_bg_bottom_sheet_light_blue.xml.flat
+¦   ¦   ¦               drawable_bg_button_black.xml.flat
+¦   ¦   ¦               drawable_bg_button_purple.xml.flat
+¦   ¦   ¦               drawable_bg_button_white_pill.xml.flat
+¦   ¦   ¦               drawable_bg_button_yellow.xml.flat
+¦   ¦   ¦               drawable_bg_card_all_rounded.xml.flat
+¦   ¦   ¦               drawable_bg_card_handle.xml.flat
+¦   ¦   ¦               drawable_bg_card_top_rounded.xml.flat
+¦   ¦   ¦               drawable_bg_category_tile.xml.flat
+¦   ¦   ¦               drawable_bg_category_tile_circle.xml.flat
+¦   ¦   ¦               drawable_bg_category_tile_dashed.xml.flat
+¦   ¦   ¦               drawable_bg_circle_social.xml.flat
+¦   ¦   ¦               drawable_bg_color_swatch.xml.flat
+¦   ¦   ¦               drawable_bg_dialog_light_blue.xml.flat
+¦   ¦   ¦               drawable_bg_dialog_rounded.xml.flat
+¦   ¦   ¦               drawable_bg_drag_handle.xml.flat
+¦   ¦   ¦               drawable_bg_dynamic_island.xml.flat
+¦   ¦   ¦               drawable_bg_empty_circle.xml.flat
+¦   ¦   ¦               drawable_bg_expenses_card.xml.flat
+¦   ¦   ¦               drawable_bg_expense_icon.xml.flat
+¦   ¦   ¦               drawable_bg_expense_row.xml.flat
+¦   ¦   ¦               drawable_bg_fab.xml.flat
+¦   ¦   ¦               drawable_bg_fab_add.xml.flat
+¦   ¦   ¦               drawable_bg_field.xml.flat
+¦   ¦   ¦               drawable_bg_filter_expense.xml.flat
+¦   ¦   ¦               drawable_bg_filter_income.xml.flat
+¦   ¦   ¦               drawable_bg_filter_selected.xml.flat
+¦   ¦   ¦               drawable_bg_filter_unselected.xml.flat
+¦   ¦   ¦               drawable_bg_goal_status_active.xml.flat
+¦   ¦   ¦               drawable_bg_goal_status_completed.xml.flat
+¦   ¦   ¦               drawable_bg_gradient.xml.flat
+¦   ¦   ¦               drawable_bg_gradient_header.xml.flat
+¦   ¦   ¦               drawable_bg_gradient_light_blue.xml.flat
+¦   ¦   ¦               drawable_bg_gradient_pill_button.xml.flat
+¦   ¦   ¦               drawable_bg_header_gradient.xml.flat
+¦   ¦   ¦               drawable_bg_header_shape.xml.flat
+¦   ¦   ¦               drawable_bg_icon_badge.xml.flat
+¦   ¦   ¦               drawable_bg_input_box.xml.flat
+¦   ¦   ¦               drawable_bg_input_filled.xml.flat
+¦   ¦   ¦               drawable_bg_input_filled_focused.xml.flat
+¦   ¦   ¦               drawable_bg_input_white_rounded.xml.flat
+¦   ¦   ¦               drawable_bg_login_card.xml.flat
+¦   ¦   ¦               drawable_bg_logo_dot.xml.flat
+¦   ¦   ¦               drawable_bg_logo_mark.xml.flat
+¦   ¦   ¦               drawable_bg_nav_active.xml.flat
+¦   ¦   ¦               drawable_bg_nav_selected.xml.flat
+¦   ¦   ¦               drawable_bg_notif_card.xml.flat
+¦   ¦   ¦               drawable_bg_outline_pill_button.xml.flat
+¦   ¦   ¦               drawable_bg_phone_gradient.xml.flat
+¦   ¦   ¦               drawable_bg_primary_pill_button.xml.flat
+¦   ¦   ¦               drawable_bg_recent_transaction_icon.xml.flat
+¦   ¦   ¦               drawable_bg_save_button.xml.flat
+¦   ¦   ¦               drawable_bg_segment_active.xml.flat
+¦   ¦   ¦               drawable_bg_segment_outer.xml.flat
+¦   ¦   ¦               drawable_bg_skip_button.xml.flat
+¦   ¦   ¦               drawable_bg_solid_pill_white.xml.flat
+¦   ¦   ¦               drawable_bg_spinner.xml.flat
+¦   ¦   ¦               drawable_bg_split_icon.xml.flat
+¦   ¦   ¦               drawable_bg_tab_ripple.xml.flat
+¦   ¦   ¦               drawable_bg_toolbar_rounded.xml.flat
+¦   ¦   ¦               drawable_bg_txn_icon.xml.flat
+¦   ¦   ¦               drawable_bg_unread_dot.xml.flat
+¦   ¦   ¦               drawable_bg_value_pill.xml.flat
+¦   ¦   ¦               drawable_bg_view_all_pill.xml.flat
+¦   ¦   ¦               drawable_bg_white_pill.xml.flat
+¦   ¦   ¦               drawable_btn_add_bg.xml.flat
+¦   ¦   ¦               drawable_button_border.xml.flat
+¦   ¦   ¦               drawable_card_bg.xml.flat
+¦   ¦   ¦               drawable_checkbox_selector.xml.flat
+¦   ¦   ¦               drawable_chip_bg.xml.flat
+¦   ¦   ¦               drawable_circle_bg_white.xml.flat
+¦   ¦   ¦               drawable_circle_mask.xml.flat
+¦   ¦   ¦               drawable_delete_img.png.flat
+¦   ¦   ¦               drawable_dot_active.xml.flat
+¦   ¦   ¦               drawable_dot_inactive.xml.flat
+¦   ¦   ¦               drawable_facebook.xml.flat
+¦   ¦   ¦               drawable_goal.jpg.flat
+¦   ¦   ¦               drawable_google.xml.flat
+¦   ¦   ¦               drawable_gradient_header_bg.xml.flat
+¦   ¦   ¦               drawable_ic_arrow_back.xml.flat
+¦   ¦   ¦               drawable_ic_arrow_down.xml.flat
+¦   ¦   ¦               drawable_ic_back.xml.flat
+¦   ¦   ¦               drawable_ic_backspace.xml.flat
+¦   ¦   ¦               drawable_ic_bell.xml.flat
+¦   ¦   ¦               drawable_ic_calendar.xml.flat
+¦   ¦   ¦               drawable_ic_camera.xml.flat
+¦   ¦   ¦               drawable_ic_card.xml.flat
+¦   ¦   ¦               drawable_ic_category.xml.flat
+¦   ¦   ¦               drawable_ic_category_car.xml.flat
+¦   ¦   ¦               drawable_ic_category_education.xml.flat
+¦   ¦   ¦               drawable_ic_category_groceries.xml.flat
+¦   ¦   ¦               drawable_ic_category_gym.xml.flat
+¦   ¦   ¦               drawable_ic_category_home.xml.flat
+¦   ¦   ¦               drawable_ic_category_insurances.xml.flat
+¦   ¦   ¦               drawable_ic_category_internet.xml.flat
+¦   ¦   ¦               drawable_ic_category_marketing.xml.flat
+¦   ¦   ¦               drawable_ic_category_other.xml.flat
+¦   ¦   ¦               drawable_ic_category_rent.xml.flat
+¦   ¦   ¦               drawable_ic_category_shopping.xml.flat
+¦   ¦   ¦               drawable_ic_category_subscription.xml.flat
+¦   ¦   ¦               drawable_ic_category_travel.xml.flat
+¦   ¦   ¦               drawable_ic_category_vacation.xml.flat
+¦   ¦   ¦               drawable_ic_category_water.xml.flat
+¦   ¦   ¦               drawable_ic_cat_bar.xml.flat
+¦   ¦   ¦               drawable_ic_cat_beach.xml.flat
+¦   ¦   ¦               drawable_ic_cat_beauty.xml.flat
+¦   ¦   ¦               drawable_ic_cat_celebration.xml.flat
+¦   ¦   ¦               drawable_ic_cat_clothing.xml.flat
+¦   ¦   ¦               drawable_ic_cat_coffee.xml.flat
+¦   ¦   ¦               drawable_ic_cat_creditcard.xml.flat
+¦   ¦   ¦               drawable_ic_cat_education.xml.flat
+¦   ¦   ¦               drawable_ic_cat_entertainment.xml.flat
+¦   ¦   ¦               drawable_ic_cat_fitness.xml.flat
+¦   ¦   ¦               drawable_ic_cat_food.xml.flat
+¦   ¦   ¦               drawable_ic_cat_fuel.xml.flat
+¦   ¦   ¦               drawable_ic_cat_gaming.xml.flat
+¦   ¦   ¦               drawable_ic_cat_gifts.xml.flat
+¦   ¦   ¦               drawable_ic_cat_groceries.xml.flat
+¦   ¦   ¦               drawable_ic_cat_health.xml.flat
+¦   ¦   ¦               drawable_ic_cat_home.xml.flat
+¦   ¦   ¦               drawable_ic_cat_insurance.xml.flat
+¦   ¦   ¦               drawable_ic_cat_internet.xml.flat
+¦   ¦   ¦               drawable_ic_cat_kids.xml.flat
+¦   ¦   ¦               drawable_ic_cat_pets.xml.flat
+¦   ¦   ¦               drawable_ic_cat_pharmacy.xml.flat
+¦   ¦   ¦               drawable_ic_cat_phone.xml.flat
+¦   ¦   ¦               drawable_ic_cat_repair.xml.flat
+¦   ¦   ¦               drawable_ic_cat_savings.xml.flat
+¦   ¦   ¦               drawable_ic_cat_shopping.xml.flat
+¦   ¦   ¦               drawable_ic_cat_subscription.xml.flat
+¦   ¦   ¦               drawable_ic_cat_transport.xml.flat
+¦   ¦   ¦               drawable_ic_cat_travel.xml.flat
+¦   ¦   ¦               drawable_ic_cat_utilities.xml.flat
+¦   ¦   ¦               drawable_ic_chart.xml.flat
+¦   ¦   ¦               drawable_ic_checkbox_checked.xml.flat
+¦   ¦   ¦               drawable_ic_checkbox_unchecked.xml.flat
+¦   ¦   ¦               drawable_ic_chevron_right.xml.flat
+¦   ¦   ¦               drawable_ic_clock.xml.flat
+¦   ¦   ¦               drawable_ic_close.xml.flat
+¦   ¦   ¦               drawable_ic_delete.xml.flat
+¦   ¦   ¦               drawable_ic_edit.xml.flat
+¦   ¦   ¦               drawable_ic_eye.xml.flat
+¦   ¦   ¦               drawable_ic_eye_off.xml.flat
+¦   ¦   ¦               drawable_ic_heart.xml.flat
+¦   ¦   ¦               drawable_ic_home.xml.flat
+¦   ¦   ¦               drawable_ic_launcher_background.xml.flat
+¦   ¦   ¦               drawable_ic_launcher_foreground.xml.flat
+¦   ¦   ¦               drawable_ic_lock.xml.flat
+¦   ¦   ¦               drawable_ic_logo_mark.xml.flat
+¦   ¦   ¦               drawable_ic_manage.xml.flat
+¦   ¦   ¦               drawable_ic_notification_bill.xml.flat
+¦   ¦   ¦               drawable_ic_notification_budget.xml.flat
+¦   ¦   ¦               drawable_ic_notification_default.xml.flat
+¦   ¦   ¦               drawable_ic_notification_expense.xml.flat
+¦   ¦   ¦               drawable_ic_notification_goal.xml.flat
+¦   ¦   ¦               drawable_ic_notification_income.xml.flat
+¦   ¦   ¦               drawable_ic_notification_summary.xml.flat
+¦   ¦   ¦               drawable_ic_notification_transaction.xml.flat
+¦   ¦   ¦               drawable_ic_person.xml.flat
+¦   ¦   ¦               drawable_ic_piggy.xml.flat
+¦   ¦   ¦               drawable_ic_plus.xml.flat
+¦   ¦   ¦               drawable_ic_receipt.xml.flat
+¦   ¦   ¦               drawable_ic_scale.xml.flat
+¦   ¦   ¦               drawable_ic_search.xml.flat
+¦   ¦   ¦               drawable_ic_settings.xml.flat
+¦   ¦   ¦               drawable_ic_track.xml.flat
+¦   ¦   ¦               drawable_ic_wallet.xml.flat
+¦   ¦   ¦               drawable_illustration_change_money.xml.flat
+¦   ¦   ¦               drawable_illustration_fast_transfer.xml.flat
+¦   ¦   ¦               drawable_illustration_save.xml.flat
+¦   ¦   ¦               drawable_img.png.flat
+¦   ¦   ¦               drawable_img_1.png.flat
+¦   ¦   ¦               drawable_item_icon_option.xml.flat
+¦   ¦   ¦               drawable_key_bg.xml.flat
+¦   ¦   ¦               drawable_noti.png.flat
+¦   ¦   ¦               drawable_outline_add_24.xml.flat
+¦   ¦   ¦               drawable_piggy.png.flat
+¦   ¦   ¦               drawable_rounded_bg.xml.flat
+¦   ¦   ¦               drawable_selector_bg.xml.flat
+¦   ¦   ¦               drawable_selector_selected_bg.xml.flat
+¦   ¦   ¦               drawable_shadow_top.xml.flat
+¦   ¦   ¦               drawable_shape_circle.xml.flat
+¦   ¦   ¦               drawable_shape_circle_ring.xml.flat
+¦   ¦   ¦               drawable_shape_rounded_bg.xml.flat
+¦   ¦   ¦               drawable_twitter.xml.flat
+¦   ¦   ¦               drawable_walletwise_logo.png.flat
+¦   ¦   ¦               font_dosis_bold.ttf.flat
+¦   ¦   ¦               font_dosis_extrabold.ttf.flat
+¦   ¦   ¦               font_dosis_extralight.ttf.flat
+¦   ¦   ¦               font_dosis_light.ttf.flat
+¦   ¦   ¦               font_dosis_medium.ttf.flat
+¦   ¦   ¦               font_dosis_regular.ttf.flat
+¦   ¦   ¦               font_dosis_semibold.ttf.flat
+¦   ¦   ¦               font_molengo_regular.ttf.flat
+¦   ¦   ¦               layout_activity_account.xml.flat
+¦   ¦   ¦               layout_activity_add_budget.xml.flat
+¦   ¦   ¦               layout_activity_add_edit_account.xml.flat
+¦   ¦   ¦               layout_activity_add_transaction.xml.flat
+¦   ¦   ¦               layout_activity_all_transactions.xml.flat
+¦   ¦   ¦               layout_activity_auth.xml.flat
+¦   ¦   ¦               layout_activity_budgets.xml.flat
+¦   ¦   ¦               layout_activity_dashboard.xml.flat
+¦   ¦   ¦               layout_activity_edit_profile.xml.flat
+¦   ¦   ¦               layout_activity_forgot_password.xml.flat
+¦   ¦   ¦               layout_activity_goals.xml.flat
+¦   ¦   ¦               layout_activity_login.xml.flat
+¦   ¦   ¦               layout_activity_moneymate_dashboard.xml.flat
+¦   ¦   ¦               layout_activity_notifications.xml.flat
+¦   ¦   ¦               layout_activity_notifications_empty.xml.flat
+¦   ¦   ¦               layout_activity_onboarding.xml.flat
+¦   ¦   ¦               layout_activity_otp_verification.xml.flat
+¦   ¦   ¦               layout_activity_profile.xml.flat
+¦   ¦   ¦               layout_activity_register.xml.flat
+¦   ¦   ¦               layout_activity_reset_password.xml.flat
+¦   ¦   ¦               layout_activity_select_category.xml.flat
+¦   ¦   ¦               layout_activity_transaction.xml.flat
+¦   ¦   ¦               layout_dialog_add_category.xml.flat
+¦   ¦   ¦               layout_dialog_add_goal.xml.flat
+¦   ¦   ¦               layout_dialog_add_goal_money.xml.flat
+¦   ¦   ¦               layout_dialog_category_actions.xml.flat
+¦   ¦   ¦               layout_dialog_icon_picker.xml.flat
+¦   ¦   ¦               layout_fragment_onboarding_page.xml.flat
+¦   ¦   ¦               layout_item_account.xml.flat
+¦   ¦   ¦               layout_item_budget.xml.flat
+¦   ¦   ¦               layout_item_budget_category.xml.flat
+¦   ¦   ¦               layout_item_category.xml.flat
+¦   ¦   ¦               layout_item_color_swatch.xml.flat
+¦   ¦   ¦               layout_item_dashboard_account.xml.flat
+¦   ¦   ¦               layout_item_dashboard_add_account.xml.flat
+¦   ¦   ¦               layout_item_goal_card.xml.flat
+¦   ¦   ¦               layout_item_icon_option.xml.flat
+¦   ¦   ¦               layout_item_notification.xml.flat
+¦   ¦   ¦               layout_item_profile_row.xml.flat
+¦   ¦   ¦               layout_item_transaction_header.xml.flat
+¦   ¦   ¦               layout_item_transaction_row.xml.flat
+¦   ¦   ¦               layout_layout_bottom_nav.xml.flat
+¦   ¦   ¦               layout_view_back_button.xml.flat
+¦   ¦   ¦               mipmap-anydpi-v26_ic_launcher.xml.flat
+¦   ¦   ¦               mipmap-anydpi-v26_ic_launcher_round.xml.flat
+¦   ¦   ¦               mipmap-anydpi-v26_logo.png.flat
+¦   ¦   ¦               mipmap-anydpi-v26_logo2.png.flat
+¦   ¦   ¦               mipmap-hdpi_ic_launcher.webp.flat
+¦   ¦   ¦               mipmap-hdpi_ic_launcher_round.webp.flat
+¦   ¦   ¦               mipmap-mdpi_ic_launcher.webp.flat
+¦   ¦   ¦               mipmap-mdpi_ic_launcher_round.webp.flat
+¦   ¦   ¦               mipmap-xhdpi_ic_launcher.webp.flat
+¦   ¦   ¦               mipmap-xhdpi_ic_launcher_round.webp.flat
+¦   ¦   ¦               mipmap-xxhdpi_ic_launcher.webp.flat
+¦   ¦   ¦               mipmap-xxhdpi_ic_launcher_round.webp.flat
+¦   ¦   ¦               mipmap-xxxhdpi_ic_launcher.webp.flat
+¦   ¦   ¦               mipmap-xxxhdpi_ic_launcher_round.webp.flat
+¦   ¦   ¦               values-af_values-af.arsc.flat
+¦   ¦   ¦               values-am_values-am.arsc.flat
+¦   ¦   ¦               values-ar_values-ar.arsc.flat
+¦   ¦   ¦               values-as_values-as.arsc.flat
+¦   ¦   ¦               values-az_values-az.arsc.flat
+¦   ¦   ¦               values-b+es+419_values-b+es+419.arsc.flat
+¦   ¦   ¦               values-b+sr+Latn_values-b+sr+Latn.arsc.flat
+¦   ¦   ¦               values-be_values-be.arsc.flat
+¦   ¦   ¦               values-bg_values-bg.arsc.flat
+¦   ¦   ¦               values-bn_values-bn.arsc.flat
+¦   ¦   ¦               values-bs_values-bs.arsc.flat
+¦   ¦   ¦               values-ca_values-ca.arsc.flat
+¦   ¦   ¦               values-cs_values-cs.arsc.flat
+¦   ¦   ¦               values-da_values-da.arsc.flat
+¦   ¦   ¦               values-de_values-de.arsc.flat
+¦   ¦   ¦               values-el_values-el.arsc.flat
+¦   ¦   ¦               values-en-rAU_values-en-rAU.arsc.flat
+¦   ¦   ¦               values-en-rCA_values-en-rCA.arsc.flat
+¦   ¦   ¦               values-en-rGB_values-en-rGB.arsc.flat
+¦   ¦   ¦               values-en-rIN_values-en-rIN.arsc.flat
+¦   ¦   ¦               values-en-rXC_values-en-rXC.arsc.flat
+¦   ¦   ¦               values-es-rUS_values-es-rUS.arsc.flat
+¦   ¦   ¦               values-es_values-es.arsc.flat
+¦   ¦   ¦               values-et_values-et.arsc.flat
+¦   ¦   ¦               values-eu_values-eu.arsc.flat
+¦   ¦   ¦               values-fa_values-fa.arsc.flat
+¦   ¦   ¦               values-fi_values-fi.arsc.flat
+¦   ¦   ¦               values-fr-rCA_values-fr-rCA.arsc.flat
+¦   ¦   ¦               values-fr_values-fr.arsc.flat
+¦   ¦   ¦               values-gl_values-gl.arsc.flat
+¦   ¦   ¦               values-gu_values-gu.arsc.flat
+¦   ¦   ¦               values-h320dp-port-v13_values-h320dp-port-v13.arsc.flat
+¦   ¦   ¦               values-h360dp-land-v13_values-h360dp-land-v13.arsc.flat
+¦   ¦   ¦               values-h480dp-land-v13_values-h480dp-land-v13.arsc.flat
+¦   ¦   ¦               values-h550dp-port-v13_values-h550dp-port-v13.arsc.flat
+¦   ¦   ¦               values-h720dp-v13_values-h720dp-v13.arsc.flat
+¦   ¦   ¦               values-hdpi-v4_values-hdpi-v4.arsc.flat
+¦   ¦   ¦               values-hi_values-hi.arsc.flat
+¦   ¦   ¦               values-hr_values-hr.arsc.flat
+¦   ¦   ¦               values-hu_values-hu.arsc.flat
+¦   ¦   ¦               values-hy_values-hy.arsc.flat
+¦   ¦   ¦               values-in_values-in.arsc.flat
+¦   ¦   ¦               values-is_values-is.arsc.flat
+¦   ¦   ¦               values-it_values-it.arsc.flat
+¦   ¦   ¦               values-iw_values-iw.arsc.flat
+¦   ¦   ¦               values-ja_values-ja.arsc.flat
+¦   ¦   ¦               values-ka_values-ka.arsc.flat
+¦   ¦   ¦               values-kk_values-kk.arsc.flat
+¦   ¦   ¦               values-km_values-km.arsc.flat
+¦   ¦   ¦               values-kn_values-kn.arsc.flat
+¦   ¦   ¦               values-ko_values-ko.arsc.flat
+¦   ¦   ¦               values-ky_values-ky.arsc.flat
+¦   ¦   ¦               values-land_values-land.arsc.flat
+¦   ¦   ¦               values-large-v4_values-large-v4.arsc.flat
+¦   ¦   ¦               values-ldltr-v21_values-ldltr-v21.arsc.flat
+¦   ¦   ¦               values-ldrtl-v17_values-ldrtl-v17.arsc.flat
+¦   ¦   ¦               values-lo_values-lo.arsc.flat
+¦   ¦   ¦               values-lt_values-lt.arsc.flat
+¦   ¦   ¦               values-lv_values-lv.arsc.flat
+¦   ¦   ¦               values-mk_values-mk.arsc.flat
+¦   ¦   ¦               values-ml_values-ml.arsc.flat
+¦   ¦   ¦               values-mn_values-mn.arsc.flat
+¦   ¦   ¦               values-mr_values-mr.arsc.flat
+¦   ¦   ¦               values-ms_values-ms.arsc.flat
+¦   ¦   ¦               values-my_values-my.arsc.flat
+¦   ¦   ¦               values-nb_values-nb.arsc.flat
+¦   ¦   ¦               values-ne_values-ne.arsc.flat
+¦   ¦   ¦               values-night-v8_values-night-v8.arsc.flat
+¦   ¦   ¦               values-nl_values-nl.arsc.flat
+¦   ¦   ¦               values-or_values-or.arsc.flat
+¦   ¦   ¦               values-pa_values-pa.arsc.flat
+¦   ¦   ¦               values-pl_values-pl.arsc.flat
+¦   ¦   ¦               values-port_values-port.arsc.flat
+¦   ¦   ¦               values-pt-rBR_values-pt-rBR.arsc.flat
+¦   ¦   ¦               values-pt-rPT_values-pt-rPT.arsc.flat
+¦   ¦   ¦               values-pt_values-pt.arsc.flat
+¦   ¦   ¦               values-ro_values-ro.arsc.flat
+¦   ¦   ¦               values-ru_values-ru.arsc.flat
+¦   ¦   ¦               values-si_values-si.arsc.flat
+¦   ¦   ¦               values-sk_values-sk.arsc.flat
+¦   ¦   ¦               values-sl_values-sl.arsc.flat
+¦   ¦   ¦               values-small-v4_values-small-v4.arsc.flat
+¦   ¦   ¦               values-sq_values-sq.arsc.flat
+¦   ¦   ¦               values-sr_values-sr.arsc.flat
+¦   ¦   ¦               values-sv_values-sv.arsc.flat
+¦   ¦   ¦               values-sw600dp-v13_values-sw600dp-v13.arsc.flat
+¦   ¦   ¦               values-sw_values-sw.arsc.flat
+¦   ¦   ¦               values-ta_values-ta.arsc.flat
+¦   ¦   ¦               values-te_values-te.arsc.flat
+¦   ¦   ¦               values-th_values-th.arsc.flat
+¦   ¦   ¦               values-tl_values-tl.arsc.flat
+¦   ¦   ¦               values-tr_values-tr.arsc.flat
+¦   ¦   ¦               values-uk_values-uk.arsc.flat
+¦   ¦   ¦               values-ur_values-ur.arsc.flat
+¦   ¦   ¦               values-uz_values-uz.arsc.flat
+¦   ¦   ¦               values-v16_values-v16.arsc.flat
+¦   ¦   ¦               values-v17_values-v17.arsc.flat
+¦   ¦   ¦               values-v18_values-v18.arsc.flat
+¦   ¦   ¦               values-v21_values-v21.arsc.flat
+¦   ¦   ¦               values-v22_values-v22.arsc.flat
+¦   ¦   ¦               values-v23_values-v23.arsc.flat
+¦   ¦   ¦               values-v24_values-v24.arsc.flat
+¦   ¦   ¦               values-v25_values-v25.arsc.flat
+¦   ¦   ¦               values-v26_values-v26.arsc.flat
+¦   ¦   ¦               values-v28_values-v28.arsc.flat
+¦   ¦   ¦               values-v30_values-v30.arsc.flat
+¦   ¦   ¦               values-v31_values-v31.arsc.flat
+¦   ¦   ¦               values-v34_values-v34.arsc.flat
+¦   ¦   ¦               values-vi_values-vi.arsc.flat
+¦   ¦   ¦               values-w320dp-land-v13_values-w320dp-land-v13.arsc.flat
+¦   ¦   ¦               values-w360dp-port-v13_values-w360dp-port-v13.arsc.flat
+¦   ¦   ¦               values-w400dp-port-v13_values-w400dp-port-v13.arsc.flat
+¦   ¦   ¦               values-w600dp-land-v13_values-w600dp-land-v13.arsc.flat
+¦   ¦   ¦               values-watch-v20_values-watch-v20.arsc.flat
+¦   ¦   ¦               values-watch-v21_values-watch-v21.arsc.flat
+¦   ¦   ¦               values-xlarge-v4_values-xlarge-v4.arsc.flat
+¦   ¦   ¦               values-zh-rCN_values-zh-rCN.arsc.flat
+¦   ¦   ¦               values-zh-rHK_values-zh-rHK.arsc.flat
+¦   ¦   ¦               values-zh-rTW_values-zh-rTW.arsc.flat
+¦   ¦   ¦               values-zu_values-zu.arsc.flat
+¦   ¦   ¦               values_values.arsc.flat
+¦   ¦   ¦               xml_backup_rules.xml.flat
+¦   ¦   ¦               xml_data_extraction_rules.xml.flat
+¦   ¦   ¦               
+¦   ¦   +---merged_res_blame_folder
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugResources
+¦   ¦   ¦           +---out
+¦   ¦   ¦               +---multi-v2
+¦   ¦   ¦               ¦       mergeDebugResources.json
+¦   ¦   ¦               ¦       values-af.json
+¦   ¦   ¦               ¦       values-am.json
+¦   ¦   ¦               ¦       values-ar.json
+¦   ¦   ¦               ¦       values-as.json
+¦   ¦   ¦               ¦       values-az.json
+¦   ¦   ¦               ¦       values-b+es+419.json
+¦   ¦   ¦               ¦       values-b+sr+Latn.json
+¦   ¦   ¦               ¦       values-be.json
+¦   ¦   ¦               ¦       values-bg.json
+¦   ¦   ¦               ¦       values-bn.json
+¦   ¦   ¦               ¦       values-bs.json
+¦   ¦   ¦               ¦       values-ca.json
+¦   ¦   ¦               ¦       values-cs.json
+¦   ¦   ¦               ¦       values-da.json
+¦   ¦   ¦               ¦       values-de.json
+¦   ¦   ¦               ¦       values-el.json
+¦   ¦   ¦               ¦       values-en-rAU.json
+¦   ¦   ¦               ¦       values-en-rCA.json
+¦   ¦   ¦               ¦       values-en-rGB.json
+¦   ¦   ¦               ¦       values-en-rIN.json
+¦   ¦   ¦               ¦       values-en-rXC.json
+¦   ¦   ¦               ¦       values-es-rUS.json
+¦   ¦   ¦               ¦       values-es.json
+¦   ¦   ¦               ¦       values-et.json
+¦   ¦   ¦               ¦       values-eu.json
+¦   ¦   ¦               ¦       values-fa.json
+¦   ¦   ¦               ¦       values-fi.json
+¦   ¦   ¦               ¦       values-fr-rCA.json
+¦   ¦   ¦               ¦       values-fr.json
+¦   ¦   ¦               ¦       values-gl.json
+¦   ¦   ¦               ¦       values-gu.json
+¦   ¦   ¦               ¦       values-h320dp-port-v13.json
+¦   ¦   ¦               ¦       values-h360dp-land-v13.json
+¦   ¦   ¦               ¦       values-h480dp-land-v13.json
+¦   ¦   ¦               ¦       values-h550dp-port-v13.json
+¦   ¦   ¦               ¦       values-h720dp-v13.json
+¦   ¦   ¦               ¦       values-hdpi-v4.json
+¦   ¦   ¦               ¦       values-hi.json
+¦   ¦   ¦               ¦       values-hr.json
+¦   ¦   ¦               ¦       values-hu.json
+¦   ¦   ¦               ¦       values-hy.json
+¦   ¦   ¦               ¦       values-in.json
+¦   ¦   ¦               ¦       values-is.json
+¦   ¦   ¦               ¦       values-it.json
+¦   ¦   ¦               ¦       values-iw.json
+¦   ¦   ¦               ¦       values-ja.json
+¦   ¦   ¦               ¦       values-ka.json
+¦   ¦   ¦               ¦       values-kk.json
+¦   ¦   ¦               ¦       values-km.json
+¦   ¦   ¦               ¦       values-kn.json
+¦   ¦   ¦               ¦       values-ko.json
+¦   ¦   ¦               ¦       values-ky.json
+¦   ¦   ¦               ¦       values-land.json
+¦   ¦   ¦               ¦       values-large-v4.json
+¦   ¦   ¦               ¦       values-ldltr-v21.json
+¦   ¦   ¦               ¦       values-ldrtl-v17.json
+¦   ¦   ¦               ¦       values-lo.json
+¦   ¦   ¦               ¦       values-lt.json
+¦   ¦   ¦               ¦       values-lv.json
+¦   ¦   ¦               ¦       values-mk.json
+¦   ¦   ¦               ¦       values-ml.json
+¦   ¦   ¦               ¦       values-mn.json
+¦   ¦   ¦               ¦       values-mr.json
+¦   ¦   ¦               ¦       values-ms.json
+¦   ¦   ¦               ¦       values-my.json
+¦   ¦   ¦               ¦       values-nb.json
+¦   ¦   ¦               ¦       values-ne.json
+¦   ¦   ¦               ¦       values-night-v8.json
+¦   ¦   ¦               ¦       values-nl.json
+¦   ¦   ¦               ¦       values-or.json
+¦   ¦   ¦               ¦       values-pa.json
+¦   ¦   ¦               ¦       values-pl.json
+¦   ¦   ¦               ¦       values-port.json
+¦   ¦   ¦               ¦       values-pt-rBR.json
+¦   ¦   ¦               ¦       values-pt-rPT.json
+¦   ¦   ¦               ¦       values-pt.json
+¦   ¦   ¦               ¦       values-ro.json
+¦   ¦   ¦               ¦       values-ru.json
+¦   ¦   ¦               ¦       values-si.json
+¦   ¦   ¦               ¦       values-sk.json
+¦   ¦   ¦               ¦       values-sl.json
+¦   ¦   ¦               ¦       values-small-v4.json
+¦   ¦   ¦               ¦       values-sq.json
+¦   ¦   ¦               ¦       values-sr.json
+¦   ¦   ¦               ¦       values-sv.json
+¦   ¦   ¦               ¦       values-sw.json
+¦   ¦   ¦               ¦       values-sw600dp-v13.json
+¦   ¦   ¦               ¦       values-ta.json
+¦   ¦   ¦               ¦       values-te.json
+¦   ¦   ¦               ¦       values-th.json
+¦   ¦   ¦               ¦       values-tl.json
+¦   ¦   ¦               ¦       values-tr.json
+¦   ¦   ¦               ¦       values-uk.json
+¦   ¦   ¦               ¦       values-ur.json
+¦   ¦   ¦               ¦       values-uz.json
+¦   ¦   ¦               ¦       values-v16.json
+¦   ¦   ¦               ¦       values-v17.json
+¦   ¦   ¦               ¦       values-v18.json
+¦   ¦   ¦               ¦       values-v21.json
+¦   ¦   ¦               ¦       values-v22.json
+¦   ¦   ¦               ¦       values-v23.json
+¦   ¦   ¦               ¦       values-v24.json
+¦   ¦   ¦               ¦       values-v25.json
+¦   ¦   ¦               ¦       values-v26.json
+¦   ¦   ¦               ¦       values-v28.json
+¦   ¦   ¦               ¦       values-v30.json
+¦   ¦   ¦               ¦       values-v31.json
+¦   ¦   ¦               ¦       values-v34.json
+¦   ¦   ¦               ¦       values-vi.json
+¦   ¦   ¦               ¦       values-w320dp-land-v13.json
+¦   ¦   ¦               ¦       values-w360dp-port-v13.json
+¦   ¦   ¦               ¦       values-w400dp-port-v13.json
+¦   ¦   ¦               ¦       values-w600dp-land-v13.json
+¦   ¦   ¦               ¦       values-watch-v20.json
+¦   ¦   ¦               ¦       values-watch-v21.json
+¦   ¦   ¦               ¦       values-xlarge-v4.json
+¦   ¦   ¦               ¦       values-zh-rCN.json
+¦   ¦   ¦               ¦       values-zh-rHK.json
+¦   ¦   ¦               ¦       values-zh-rTW.json
+¦   ¦   ¦               ¦       values-zu.json
+¦   ¦   ¦               ¦       values.json
+¦   ¦   ¦               ¦       
+¦   ¦   ¦               +---single
+¦   ¦   ¦                       layout.json
+¦   ¦   ¦                       mergeDebugResources.json
+¦   ¦   ¦                       
+¦   ¦   +---merged_test_only_native_libs
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---mergeDebugNativeLibs
+¦   ¦   ¦           +---out
+¦   ¦   +---mixed_scope_dex_archive
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---navigation_json
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---extractDeepLinksDebug
+¦   ¦   ¦               navigation.json
+¦   ¦   ¦               
+¦   ¦   +---nested_resources_validation_report
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---generateDebugResources
+¦   ¦   ¦               nestedResourcesValidationReport.txt
+¦   ¦   ¦               
+¦   ¦   +---packaged_manifests
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugManifestForPackage
+¦   ¦   ¦               AndroidManifest.xml
+¦   ¦   ¦               output-metadata.json
+¦   ¦   ¦               
+¦   ¦   +---packaged_res
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---packageDebugResources
+¦   ¦   ¦           +---drawable
+¦   ¦   ¦           ¦       baseline_arrow_back_24.xml
+¦   ¦   ¦           ¦       baseline_table_rows_24.xml
+¦   ¦   ¦           ¦       bg_account_card.xml
+¦   ¦   ¦           ¦       bg_actions_card.xml
+¦   ¦   ¦           ¦       bg_action_circle.xml
+¦   ¦   ¦           ¦       bg_active_budget.xml
+¦   ¦   ¦           ¦       bg_add_account_box.xml
+¦   ¦   ¦           ¦       bg_add_budget_button.xml
+¦   ¦   ¦           ¦       bg_add_category.xml
+¦   ¦   ¦           ¦       bg_allocation_summary.xml
+¦   ¦   ¦           ¦       bg_avatar.xml
+¦   ¦   ¦           ¦       bg_badge.xml
+¦   ¦   ¦           ¦       bg_balance_card.xml
+¦   ¦   ¦           ¦       bg_bottom_sheet_light_blue.xml
+¦   ¦   ¦           ¦       bg_button_black.xml
+¦   ¦   ¦           ¦       bg_button_purple.xml
+¦   ¦   ¦           ¦       bg_button_white_pill.xml
+¦   ¦   ¦           ¦       bg_button_yellow.xml
+¦   ¦   ¦           ¦       bg_card_all_rounded.xml
+¦   ¦   ¦           ¦       bg_card_handle.xml
+¦   ¦   ¦           ¦       bg_card_top_rounded.xml
+¦   ¦   ¦           ¦       bg_category_tile.xml
+¦   ¦   ¦           ¦       bg_category_tile_circle.xml
+¦   ¦   ¦           ¦       bg_category_tile_dashed.xml
+¦   ¦   ¦           ¦       bg_circle_social.xml
+¦   ¦   ¦           ¦       bg_color_swatch.xml
+¦   ¦   ¦           ¦       bg_dialog_light_blue.xml
+¦   ¦   ¦           ¦       bg_dialog_rounded.xml
+¦   ¦   ¦           ¦       bg_drag_handle.xml
+¦   ¦   ¦           ¦       bg_dynamic_island.xml
+¦   ¦   ¦           ¦       bg_empty_circle.xml
+¦   ¦   ¦           ¦       bg_expenses_card.xml
+¦   ¦   ¦           ¦       bg_expense_icon.xml
+¦   ¦   ¦           ¦       bg_expense_row.xml
+¦   ¦   ¦           ¦       bg_fab.xml
+¦   ¦   ¦           ¦       bg_fab_add.xml
+¦   ¦   ¦           ¦       bg_field.xml
+¦   ¦   ¦           ¦       bg_filter_expense.xml
+¦   ¦   ¦           ¦       bg_filter_income.xml
+¦   ¦   ¦           ¦       bg_filter_selected.xml
+¦   ¦   ¦           ¦       bg_filter_unselected.xml
+¦   ¦   ¦           ¦       bg_goal_status_active.xml
+¦   ¦   ¦           ¦       bg_goal_status_completed.xml
+¦   ¦   ¦           ¦       bg_gradient.xml
+¦   ¦   ¦           ¦       bg_gradient_header.xml
+¦   ¦   ¦           ¦       bg_gradient_light_blue.xml
+¦   ¦   ¦           ¦       bg_gradient_pill_button.xml
+¦   ¦   ¦           ¦       bg_header_gradient.xml
+¦   ¦   ¦           ¦       bg_header_shape.xml
+¦   ¦   ¦           ¦       bg_icon_badge.xml
+¦   ¦   ¦           ¦       bg_input_box.xml
+¦   ¦   ¦           ¦       bg_input_filled.xml
+¦   ¦   ¦           ¦       bg_input_filled_focused.xml
+¦   ¦   ¦           ¦       bg_input_white_rounded.xml
+¦   ¦   ¦           ¦       bg_login_card.xml
+¦   ¦   ¦           ¦       bg_logo_dot.xml
+¦   ¦   ¦           ¦       bg_logo_mark.xml
+¦   ¦   ¦           ¦       bg_nav_active.xml
+¦   ¦   ¦           ¦       bg_nav_selected.xml
+¦   ¦   ¦           ¦       bg_notif_card.xml
+¦   ¦   ¦           ¦       bg_outline_pill_button.xml
+¦   ¦   ¦           ¦       bg_phone_gradient.xml
+¦   ¦   ¦           ¦       bg_primary_pill_button.xml
+¦   ¦   ¦           ¦       bg_recent_transaction_icon.xml
+¦   ¦   ¦           ¦       bg_save_button.xml
+¦   ¦   ¦           ¦       bg_segment_active.xml
+¦   ¦   ¦           ¦       bg_segment_outer.xml
+¦   ¦   ¦           ¦       bg_skip_button.xml
+¦   ¦   ¦           ¦       bg_solid_pill_white.xml
+¦   ¦   ¦           ¦       bg_spinner.xml
+¦   ¦   ¦           ¦       bg_split_icon.xml
+¦   ¦   ¦           ¦       bg_tab_ripple.xml
+¦   ¦   ¦           ¦       bg_toolbar_rounded.xml
+¦   ¦   ¦           ¦       bg_txn_icon.xml
+¦   ¦   ¦           ¦       bg_unread_dot.xml
+¦   ¦   ¦           ¦       bg_value_pill.xml
+¦   ¦   ¦           ¦       bg_view_all_pill.xml
+¦   ¦   ¦           ¦       bg_white_pill.xml
+¦   ¦   ¦           ¦       btn_add_bg.xml
+¦   ¦   ¦           ¦       button_border.xml
+¦   ¦   ¦           ¦       card_bg.xml
+¦   ¦   ¦           ¦       checkbox_selector.xml
+¦   ¦   ¦           ¦       chip_bg.xml
+¦   ¦   ¦           ¦       circle_bg_white.xml
+¦   ¦   ¦           ¦       circle_mask.xml
+¦   ¦   ¦           ¦       delete_img.png
+¦   ¦   ¦           ¦       dot_active.xml
+¦   ¦   ¦           ¦       dot_inactive.xml
+¦   ¦   ¦           ¦       facebook.xml
+¦   ¦   ¦           ¦       goal.jpg
+¦   ¦   ¦           ¦       google.xml
+¦   ¦   ¦           ¦       gradient_header_bg.xml
+¦   ¦   ¦           ¦       ic_arrow_back.xml
+¦   ¦   ¦           ¦       ic_arrow_down.xml
+¦   ¦   ¦           ¦       ic_back.xml
+¦   ¦   ¦           ¦       ic_backspace.xml
+¦   ¦   ¦           ¦       ic_bell.xml
+¦   ¦   ¦           ¦       ic_calendar.xml
+¦   ¦   ¦           ¦       ic_camera.xml
+¦   ¦   ¦           ¦       ic_card.xml
+¦   ¦   ¦           ¦       ic_category.xml
+¦   ¦   ¦           ¦       ic_category_car.xml
+¦   ¦   ¦           ¦       ic_category_education.xml
+¦   ¦   ¦           ¦       ic_category_groceries.xml
+¦   ¦   ¦           ¦       ic_category_gym.xml
+¦   ¦   ¦           ¦       ic_category_home.xml
+¦   ¦   ¦           ¦       ic_category_insurances.xml
+¦   ¦   ¦           ¦       ic_category_internet.xml
+¦   ¦   ¦           ¦       ic_category_marketing.xml
+¦   ¦   ¦           ¦       ic_category_other.xml
+¦   ¦   ¦           ¦       ic_category_rent.xml
+¦   ¦   ¦           ¦       ic_category_shopping.xml
+¦   ¦   ¦           ¦       ic_category_subscription.xml
+¦   ¦   ¦           ¦       ic_category_travel.xml
+¦   ¦   ¦           ¦       ic_category_vacation.xml
+¦   ¦   ¦           ¦       ic_category_water.xml
+¦   ¦   ¦           ¦       ic_cat_bar.xml
+¦   ¦   ¦           ¦       ic_cat_beach.xml
+¦   ¦   ¦           ¦       ic_cat_beauty.xml
+¦   ¦   ¦           ¦       ic_cat_celebration.xml
+¦   ¦   ¦           ¦       ic_cat_clothing.xml
+¦   ¦   ¦           ¦       ic_cat_coffee.xml
+¦   ¦   ¦           ¦       ic_cat_creditcard.xml
+¦   ¦   ¦           ¦       ic_cat_education.xml
+¦   ¦   ¦           ¦       ic_cat_entertainment.xml
+¦   ¦   ¦           ¦       ic_cat_fitness.xml
+¦   ¦   ¦           ¦       ic_cat_food.xml
+¦   ¦   ¦           ¦       ic_cat_fuel.xml
+¦   ¦   ¦           ¦       ic_cat_gaming.xml
+¦   ¦   ¦           ¦       ic_cat_gifts.xml
+¦   ¦   ¦           ¦       ic_cat_groceries.xml
+¦   ¦   ¦           ¦       ic_cat_health.xml
+¦   ¦   ¦           ¦       ic_cat_home.xml
+¦   ¦   ¦           ¦       ic_cat_insurance.xml
+¦   ¦   ¦           ¦       ic_cat_internet.xml
+¦   ¦   ¦           ¦       ic_cat_kids.xml
+¦   ¦   ¦           ¦       ic_cat_pets.xml
+¦   ¦   ¦           ¦       ic_cat_pharmacy.xml
+¦   ¦   ¦           ¦       ic_cat_phone.xml
+¦   ¦   ¦           ¦       ic_cat_repair.xml
+¦   ¦   ¦           ¦       ic_cat_savings.xml
+¦   ¦   ¦           ¦       ic_cat_shopping.xml
+¦   ¦   ¦           ¦       ic_cat_subscription.xml
+¦   ¦   ¦           ¦       ic_cat_transport.xml
+¦   ¦   ¦           ¦       ic_cat_travel.xml
+¦   ¦   ¦           ¦       ic_cat_utilities.xml
+¦   ¦   ¦           ¦       ic_chart.xml
+¦   ¦   ¦           ¦       ic_checkbox_checked.xml
+¦   ¦   ¦           ¦       ic_checkbox_unchecked.xml
+¦   ¦   ¦           ¦       ic_chevron_right.xml
+¦   ¦   ¦           ¦       ic_clock.xml
+¦   ¦   ¦           ¦       ic_close.xml
+¦   ¦   ¦           ¦       ic_delete.xml
+¦   ¦   ¦           ¦       ic_edit.xml
+¦   ¦   ¦           ¦       ic_eye.xml
+¦   ¦   ¦           ¦       ic_eye_off.xml
+¦   ¦   ¦           ¦       ic_heart.xml
+¦   ¦   ¦           ¦       ic_home.xml
+¦   ¦   ¦           ¦       ic_launcher_background.xml
+¦   ¦   ¦           ¦       ic_launcher_foreground.xml
+¦   ¦   ¦           ¦       ic_lock.xml
+¦   ¦   ¦           ¦       ic_logo_mark.xml
+¦   ¦   ¦           ¦       ic_manage.xml
+¦   ¦   ¦           ¦       ic_notification_bill.xml
+¦   ¦   ¦           ¦       ic_notification_budget.xml
+¦   ¦   ¦           ¦       ic_notification_default.xml
+¦   ¦   ¦           ¦       ic_notification_expense.xml
+¦   ¦   ¦           ¦       ic_notification_goal.xml
+¦   ¦   ¦           ¦       ic_notification_income.xml
+¦   ¦   ¦           ¦       ic_notification_summary.xml
+¦   ¦   ¦           ¦       ic_notification_transaction.xml
+¦   ¦   ¦           ¦       ic_person.xml
+¦   ¦   ¦           ¦       ic_piggy.xml
+¦   ¦   ¦           ¦       ic_plus.xml
+¦   ¦   ¦           ¦       ic_receipt.xml
+¦   ¦   ¦           ¦       ic_scale.xml
+¦   ¦   ¦           ¦       ic_search.xml
+¦   ¦   ¦           ¦       ic_settings.xml
+¦   ¦   ¦           ¦       ic_track.xml
+¦   ¦   ¦           ¦       ic_wallet.xml
+¦   ¦   ¦           ¦       illustration_change_money.xml
+¦   ¦   ¦           ¦       illustration_fast_transfer.xml
+¦   ¦   ¦           ¦       illustration_save.xml
+¦   ¦   ¦           ¦       img.png
+¦   ¦   ¦           ¦       img_1.png
+¦   ¦   ¦           ¦       item_icon_option.xml
+¦   ¦   ¦           ¦       key_bg.xml
+¦   ¦   ¦           ¦       noti.png
+¦   ¦   ¦           ¦       outline_add_24.xml
+¦   ¦   ¦           ¦       piggy.png
+¦   ¦   ¦           ¦       rounded_bg.xml
+¦   ¦   ¦           ¦       selector_bg.xml
+¦   ¦   ¦           ¦       selector_selected_bg.xml
+¦   ¦   ¦           ¦       shadow_top.xml
+¦   ¦   ¦           ¦       shape_circle.xml
+¦   ¦   ¦           ¦       shape_circle_ring.xml
+¦   ¦   ¦           ¦       shape_rounded_bg.xml
+¦   ¦   ¦           ¦       twitter.xml
+¦   ¦   ¦           ¦       walletwise_logo.png
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---font
+¦   ¦   ¦           ¦       dosis_bold.ttf
+¦   ¦   ¦           ¦       dosis_extrabold.ttf
+¦   ¦   ¦           ¦       dosis_extralight.ttf
+¦   ¦   ¦           ¦       dosis_light.ttf
+¦   ¦   ¦           ¦       dosis_medium.ttf
+¦   ¦   ¦           ¦       dosis_regular.ttf
+¦   ¦   ¦           ¦       dosis_semibold.ttf
+¦   ¦   ¦           ¦       molengo_regular.ttf
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---layout
+¦   ¦   ¦           ¦       activity_account.xml
+¦   ¦   ¦           ¦       activity_add_budget.xml
+¦   ¦   ¦           ¦       activity_add_edit_account.xml
+¦   ¦   ¦           ¦       activity_add_transaction.xml
+¦   ¦   ¦           ¦       activity_all_transactions.xml
+¦   ¦   ¦           ¦       activity_auth.xml
+¦   ¦   ¦           ¦       activity_budgets.xml
+¦   ¦   ¦           ¦       activity_dashboard.xml
+¦   ¦   ¦           ¦       activity_edit_profile.xml
+¦   ¦   ¦           ¦       activity_forgot_password.xml
+¦   ¦   ¦           ¦       activity_goals.xml
+¦   ¦   ¦           ¦       activity_login.xml
+¦   ¦   ¦           ¦       activity_moneymate_dashboard.xml
+¦   ¦   ¦           ¦       activity_notifications.xml
+¦   ¦   ¦           ¦       activity_notifications_empty.xml
+¦   ¦   ¦           ¦       activity_onboarding.xml
+¦   ¦   ¦           ¦       activity_otp_verification.xml
+¦   ¦   ¦           ¦       activity_profile.xml
+¦   ¦   ¦           ¦       activity_register.xml
+¦   ¦   ¦           ¦       activity_reset_password.xml
+¦   ¦   ¦           ¦       activity_select_category.xml
+¦   ¦   ¦           ¦       activity_transaction.xml
+¦   ¦   ¦           ¦       dialog_add_category.xml
+¦   ¦   ¦           ¦       dialog_add_goal.xml
+¦   ¦   ¦           ¦       dialog_add_goal_money.xml
+¦   ¦   ¦           ¦       dialog_category_actions.xml
+¦   ¦   ¦           ¦       dialog_icon_picker.xml
+¦   ¦   ¦           ¦       fragment_onboarding_page.xml
+¦   ¦   ¦           ¦       item_account.xml
+¦   ¦   ¦           ¦       item_budget.xml
+¦   ¦   ¦           ¦       item_budget_category.xml
+¦   ¦   ¦           ¦       item_category.xml
+¦   ¦   ¦           ¦       item_color_swatch.xml
+¦   ¦   ¦           ¦       item_dashboard_account.xml
+¦   ¦   ¦           ¦       item_dashboard_add_account.xml
+¦   ¦   ¦           ¦       item_goal_card.xml
+¦   ¦   ¦           ¦       item_icon_option.xml
+¦   ¦   ¦           ¦       item_notification.xml
+¦   ¦   ¦           ¦       item_profile_row.xml
+¦   ¦   ¦           ¦       item_transaction_header.xml
+¦   ¦   ¦           ¦       item_transaction_row.xml
+¦   ¦   ¦           ¦       layout_bottom_nav.xml
+¦   ¦   ¦           ¦       view_back_button.xml
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---mipmap-anydpi-v26
+¦   ¦   ¦           ¦       ic_launcher.xml
+¦   ¦   ¦           ¦       ic_launcher_round.xml
+¦   ¦   ¦           ¦       logo.png
+¦   ¦   ¦           ¦       logo2.png
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---mipmap-hdpi-v4
+¦   ¦   ¦           ¦       ic_launcher.webp
+¦   ¦   ¦           ¦       ic_launcher_round.webp
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---mipmap-mdpi-v4
+¦   ¦   ¦           ¦       ic_launcher.webp
+¦   ¦   ¦           ¦       ic_launcher_round.webp
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---mipmap-xhdpi-v4
+¦   ¦   ¦           ¦       ic_launcher.webp
+¦   ¦   ¦           ¦       ic_launcher_round.webp
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---mipmap-xxhdpi-v4
+¦   ¦   ¦           ¦       ic_launcher.webp
+¦   ¦   ¦           ¦       ic_launcher_round.webp
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---mipmap-xxxhdpi-v4
+¦   ¦   ¦           ¦       ic_launcher.webp
+¦   ¦   ¦           ¦       ic_launcher_round.webp
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---values
+¦   ¦   ¦           ¦       values.xml
+¦   ¦   ¦           ¦       
+¦   ¦   ¦           +---xml
+¦   ¦   ¦                   backup_rules.xml
+¦   ¦   ¦                   data_extraction_rules.xml
+¦   ¦   ¦                   
+¦   ¦   +---project_dex_archive
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   ¦               ¦   0ddbd2b43c85b58af49a761af4b55139e0aa2e6ff5dbc5eb6490448f63727156_0.jar
+¦   ¦   ¦               ¦   0ddbd2b43c85b58af49a761af4b55139e0aa2e6ff5dbc5eb6490448f63727156_1.jar
+¦   ¦   ¦               ¦   0ddbd2b43c85b58af49a761af4b55139e0aa2e6ff5dbc5eb6490448f63727156_2.jar
+¦   ¦   ¦               ¦   0ddbd2b43c85b58af49a761af4b55139e0aa2e6ff5dbc5eb6490448f63727156_3.jar
+¦   ¦   ¦               ¦   0ddbd2b43c85b58af49a761af4b55139e0aa2e6ff5dbc5eb6490448f63727156_4.jar
+¦   ¦   ¦               ¦   0ddbd2b43c85b58af49a761af4b55139e0aa2e6ff5dbc5eb6490448f63727156_5.jar
+¦   ¦   ¦               ¦   
+¦   ¦   ¦               +---com
+¦   ¦   ¦                   +---example
+¦   ¦   ¦                       +---walletwise
+¦   ¦   ¦                           ¦   CategoryAdapter$ViewHolder.dex
+¦   ¦   ¦                           ¦   CategoryAdapter.dex
+¦   ¦   ¦                           ¦   
+¦   ¦   ¦                           +---account
+¦   ¦   ¦                           ¦       AccountActivity$deleteAccount$1$1.dex
+¦   ¦   ¦                           ¦       AccountActivity$deleteAccount$1$2.dex
+¦   ¦   ¦                           ¦       AccountActivity$deleteAccount$1$3.dex
+¦   ¦   ¦                           ¦       AccountActivity$deleteAccount$1$4.dex
+¦   ¦   ¦                           ¦       AccountActivity$deleteAccount$1.dex
+¦   ¦   ¦                           ¦       AccountActivity$loadUserCurrency$1$1.dex
+¦   ¦   ¦                           ¦       AccountActivity$loadUserCurrency$1.dex
+¦   ¦   ¦                           ¦       AccountActivity$observeAccounts$1$1.dex
+¦   ¦   ¦                           ¦       AccountActivity$observeAccounts$1.dex
+¦   ¦   ¦                           ¦       AccountActivity.dex
+¦   ¦   ¦                           ¦       AccountAdapter$AccountViewHolder.dex
+¦   ¦   ¦                           ¦       AccountAdapter.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$loadAccount$1$1.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$loadAccount$1$2.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$loadAccount$1.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$saveAccount$1$1.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$saveAccount$1$2.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$saveAccount$1$3.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity$saveAccount$1.dex
+¦   ¦   ¦                           ¦       AddEditAccountActivity.dex
+¦   ¦   ¦                           ¦       DashboardAccountAdapter$AccountViewHolder.dex
+¦   ¦   ¦                           ¦       DashboardAccountAdapter$AddAccountViewHolder.dex
+¦   ¦   ¦                           ¦       DashboardAccountAdapter$Companion.dex
+¦   ¦   ¦                           ¦       DashboardAccountAdapter.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---auth
+¦   ¦   ¦                           ¦       ForgotPasswordActivity$sendCode$1.dex
+¦   ¦   ¦                           ¦       ForgotPasswordActivity.dex
+¦   ¦   ¦                           ¦       LoginActivity$loginUser$1.dex
+¦   ¦   ¦                           ¦       LoginActivity.dex
+¦   ¦   ¦                           ¦       OtpVerificationActivity$resendCode$1.dex
+¦   ¦   ¦                           ¦       OtpVerificationActivity$verifyCode$1.dex
+¦   ¦   ¦                           ¦       OtpVerificationActivity.dex
+¦   ¦   ¦                           ¦       RegisterActivity$handleRegister$1.dex
+¦   ¦   ¦                           ¦       RegisterActivity.dex
+¦   ¦   ¦                           ¦       ResetPasswordActivity$resetPassword$1.dex
+¦   ¦   ¦                           ¦       ResetPasswordActivity.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---budget
+¦   ¦   ¦                           ¦       AddBudgetActivity$Companion.dex
+¦   ¦   ¦                           ¦       AddBudgetActivity$createOrUpdateBudget$1.dex
+¦   ¦   ¦                           ¦       AddBudgetActivity$loadBudgetForEdit$1.dex
+¦   ¦   ¦                           ¦       AddBudgetActivity$loadCategories$1.dex
+¦   ¦   ¦                           ¦       AddBudgetActivity$loadUserCurrency$1.dex
+¦   ¦   ¦                           ¦       AddBudgetActivity$onCreate$1.dex
+¦   ¦   ¦                           ¦       AddBudgetActivity.dex
+¦   ¦   ¦                           ¦       BudgetActivity$bindBudgetCard$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$deleteBudget$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$displayBudgets$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$loadAndBindBudget$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$loadCategorySummary$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$loadUserCurrency$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$observeBudgets$2.dex
+¦   ¦   ¦                           ¦       BudgetActivity$onCreate$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity$updateBudgetSummary$1.dex
+¦   ¦   ¦                           ¦       BudgetActivity.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---category
+¦   ¦   ¦                           ¦       AddCategoryBottomSheet.dex
+¦   ¦   ¦                           ¦       CategoryActionsBottomSheet.dex
+¦   ¦   ¦                           ¦       CategoryIconResolverKt.dex
+¦   ¦   ¦                           ¦       CategoryMappersKt.dex
+¦   ¦   ¦                           ¦       ColorSwatchAdapter$ViewHolder.dex
+¦   ¦   ¦                           ¦       ColorSwatchAdapter.dex
+¦   ¦   ¦                           ¦       IconGridAdapter$ViewHolder.dex
+¦   ¦   ¦                           ¦       IconGridAdapter.dex
+¦   ¦   ¦                           ¦       IconOptionAdapter$ViewHolder.dex
+¦   ¦   ¦                           ¦       IconOptionAdapter.dex
+¦   ¦   ¦                           ¦       IconPickerDialogFragment.dex
+¦   ¦   ¦                           ¦       SelectCategoryActivity$Companion.dex
+¦   ¦   ¦                           ¦       SelectCategoryActivity$confirmDelete$1$1.dex
+¦   ¦   ¦                           ¦       SelectCategoryActivity$onCreate$4$1.dex
+¦   ¦   ¦                           ¦       SelectCategoryActivity$onCreate$4.dex
+¦   ¦   ¦                           ¦       SelectCategoryActivity$showAddOrEditSheet$1$1.dex
+¦   ¦   ¦                           ¦       SelectCategoryActivity.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---dao
+¦   ¦   ¦                           ¦       AccountDao.dex
+¦   ¦   ¦                           ¦       AccountDao_Impl$1.dex
+¦   ¦   ¦                           ¦       AccountDao_Impl$2.dex
+¦   ¦   ¦                           ¦       AccountDao_Impl$3.dex
+¦   ¦   ¦                           ¦       AccountDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       AccountDao_Impl.dex
+¦   ¦   ¦                           ¦       BudgetDao$DefaultImpls.dex
+¦   ¦   ¦                           ¦       BudgetDao$insertBudgetWithCategories$1.dex
+¦   ¦   ¦                           ¦       BudgetDao$updateBudgetWithCategories$1.dex
+¦   ¦   ¦                           ¦       BudgetDao.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$1.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$2.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$3.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$4.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$5.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$6.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$deleteBudgetCompletely$2.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$insertBudgetWithCategories$2.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl$updateBudgetWithCategories$2.dex
+¦   ¦   ¦                           ¦       BudgetDao_Impl.dex
+¦   ¦   ¦                           ¦       CategoryDao.dex
+¦   ¦   ¦                           ¦       CategoryDao_Impl$1.dex
+¦   ¦   ¦                           ¦       CategoryDao_Impl$2.dex
+¦   ¦   ¦                           ¦       CategoryDao_Impl$3.dex
+¦   ¦   ¦                           ¦       CategoryDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       CategoryDao_Impl.dex
+¦   ¦   ¦                           ¦       GoalDao.dex
+¦   ¦   ¦                           ¦       GoalDao_Impl$1.dex
+¦   ¦   ¦                           ¦       GoalDao_Impl$2.dex
+¦   ¦   ¦                           ¦       GoalDao_Impl$3.dex
+¦   ¦   ¦                           ¦       GoalDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       GoalDao_Impl.dex
+¦   ¦   ¦                           ¦       NotificationDao.dex
+¦   ¦   ¦                           ¦       NotificationDao_Impl$1.dex
+¦   ¦   ¦                           ¦       NotificationDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       NotificationDao_Impl.dex
+¦   ¦   ¦                           ¦       TransactionDao$DefaultImpls.dex
+¦   ¦   ¦                           ¦       TransactionDao$insertTransfer$1.dex
+¦   ¦   ¦                           ¦       TransactionDao$updateTransfer$1.dex
+¦   ¦   ¦                           ¦       TransactionDao.dex
+¦   ¦   ¦                           ¦       TransactionDao_Impl$1.dex
+¦   ¦   ¦                           ¦       TransactionDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       TransactionDao_Impl$insertTransfer$2.dex
+¦   ¦   ¦                           ¦       TransactionDao_Impl$updateTransfer$2.dex
+¦   ¦   ¦                           ¦       TransactionDao_Impl.dex
+¦   ¦   ¦                           ¦       UserDao.dex
+¦   ¦   ¦                           ¦       UserDao_Impl$1.dex
+¦   ¦   ¦                           ¦       UserDao_Impl$2.dex
+¦   ¦   ¦                           ¦       UserDao_Impl$3.dex
+¦   ¦   ¦                           ¦       UserDao_Impl$Companion.dex
+¦   ¦   ¦                           ¦       UserDao_Impl.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---dashboard
+¦   ¦   ¦                           ¦       DashboardActivity$deleteTransaction$1$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$deleteTransaction$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeAccounts$1$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeAccounts$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeBalanceUpdatedDate$1$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeBalanceUpdatedDate$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeFinancialData$1$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeFinancialData$1$2.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeFinancialData$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeRecentTransactions$1$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeRecentTransactions$1$2.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeRecentTransactions$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeUser$1$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity$observeUser$1.dex
+¦   ¦   ¦                           ¦       DashboardActivity.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---database
+¦   ¦   ¦                           ¦       AppDatabase$Companion.dex
+¦   ¦   ¦                           ¦       AppDatabase.dex
+¦   ¦   ¦                           ¦       AppDatabase_Impl$createOpenDelegate$_openDelegate$1.dex
+¦   ¦   ¦                           ¦       AppDatabase_Impl.dex
+¦   ¦   ¦                           ¦       CategorySeedLoader.dex
+¦   ¦   ¦                           ¦       MigrationsKt$MIGRATION_1_2$1.dex
+¦   ¦   ¦                           ¦       MigrationsKt.dex
+¦   ¦   ¦                           ¦       Migration_2_3Kt$MIGRATION_2_3$1.dex
+¦   ¦   ¦                           ¦       Migration_2_3Kt.dex
+¦   ¦   ¦                           ¦       MIGRATION_3_4Kt$MIGRATION_3_4$1.dex
+¦   ¦   ¦                           ¦       MIGRATION_3_4Kt.dex
+¦   ¦   ¦                           ¦       MIGRATION_5_6Kt$MIGRATION_5_6$1.dex
+¦   ¦   ¦                           ¦       MIGRATION_5_6Kt.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---databinding
+¦   ¦   ¦                           ¦       ActivityAccountBinding.dex
+¦   ¦   ¦                           ¦       ActivityAddBudgetBinding.dex
+¦   ¦   ¦                           ¦       ActivityAddEditAccountBinding.dex
+¦   ¦   ¦                           ¦       ActivityAddTransactionBinding.dex
+¦   ¦   ¦                           ¦       ActivityAllTransactionsBinding.dex
+¦   ¦   ¦                           ¦       ActivityAuthBinding.dex
+¦   ¦   ¦                           ¦       ActivityBudgetsBinding.dex
+¦   ¦   ¦                           ¦       ActivityDashboardBinding.dex
+¦   ¦   ¦                           ¦       ActivityEditProfileBinding.dex
+¦   ¦   ¦                           ¦       ActivityForgotPasswordBinding.dex
+¦   ¦   ¦                           ¦       ActivityGoalsBinding.dex
+¦   ¦   ¦                           ¦       ActivityLoginBinding.dex
+¦   ¦   ¦                           ¦       ActivityMoneymateDashboardBinding.dex
+¦   ¦   ¦                           ¦       ActivityNotificationsBinding.dex
+¦   ¦   ¦                           ¦       ActivityNotificationsEmptyBinding.dex
+¦   ¦   ¦                           ¦       ActivityOnboardingBinding.dex
+¦   ¦   ¦                           ¦       ActivityOtpVerificationBinding.dex
+¦   ¦   ¦                           ¦       ActivityProfileBinding.dex
+¦   ¦   ¦                           ¦       ActivityRegisterBinding.dex
+¦   ¦   ¦                           ¦       ActivityResetPasswordBinding.dex
+¦   ¦   ¦                           ¦       ActivitySelectCategoryBinding.dex
+¦   ¦   ¦                           ¦       ActivityTransactionBinding.dex
+¦   ¦   ¦                           ¦       DialogAddCategoryBinding.dex
+¦   ¦   ¦                           ¦       DialogAddGoalBinding.dex
+¦   ¦   ¦                           ¦       DialogAddGoalMoneyBinding.dex
+¦   ¦   ¦                           ¦       DialogCategoryActionsBinding.dex
+¦   ¦   ¦                           ¦       DialogIconPickerBinding.dex
+¦   ¦   ¦                           ¦       FragmentOnboardingPageBinding.dex
+¦   ¦   ¦                           ¦       ItemAccountBinding.dex
+¦   ¦   ¦                           ¦       ItemBudgetBinding.dex
+¦   ¦   ¦                           ¦       ItemBudgetCategoryBinding.dex
+¦   ¦   ¦                           ¦       ItemCategoryBinding.dex
+¦   ¦   ¦                           ¦       ItemColorSwatchBinding.dex
+¦   ¦   ¦                           ¦       ItemDashboardAccountBinding.dex
+¦   ¦   ¦                           ¦       ItemDashboardAddAccountBinding.dex
+¦   ¦   ¦                           ¦       ItemGoalCardBinding.dex
+¦   ¦   ¦                           ¦       ItemIconOptionBinding.dex
+¦   ¦   ¦                           ¦       ItemNotificationBinding.dex
+¦   ¦   ¦                           ¦       ItemProfileRowBinding.dex
+¦   ¦   ¦                           ¦       ItemTransactionHeaderBinding.dex
+¦   ¦   ¦                           ¦       ItemTransactionRowBinding.dex
+¦   ¦   ¦                           ¦       LayoutBottomNavBinding.dex
+¦   ¦   ¦                           ¦       ViewBackButtonBinding.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---entity
+¦   ¦   ¦                           ¦       Account.dex
+¦   ¦   ¦                           ¦       AccountBalance.dex
+¦   ¦   ¦                           ¦       Budget.dex
+¦   ¦   ¦                           ¦       BudgetCategory.dex
+¦   ¦   ¦                           ¦       BudgetWithCategories.dex
+¦   ¦   ¦                           ¦       Category.dex
+¦   ¦   ¦                           ¦       CategoryEntity.dex
+¦   ¦   ¦                           ¦       Goal.dex
+¦   ¦   ¦                           ¦       Notification.dex
+¦   ¦   ¦                           ¦       Transaction.dex
+¦   ¦   ¦                           ¦       User.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---goal
+¦   ¦   ¦                           ¦       GoalActivity$Companion.dex
+¦   ¦   ¦                           ¦       GoalActivity$deleteGoal$1.dex
+¦   ¦   ¦                           ¦       GoalActivity$loadUserCurrency$1.dex
+¦   ¦   ¦                           ¦       GoalActivity$observeGoals$1$1$1.dex
+¦   ¦   ¦                           ¦       GoalActivity$observeGoals$1$1.dex
+¦   ¦   ¦                           ¦       GoalActivity$observeGoals$1.dex
+¦   ¦   ¦                           ¦       GoalActivity$showAddGoalDialog$1$1.dex
+¦   ¦   ¦                           ¦       GoalActivity$showAddMoneyDialog$1$1.dex
+¦   ¦   ¦                           ¦       GoalActivity.dex
+¦   ¦   ¦                           ¦       GoalAdapter$GoalViewHolder.dex
+¦   ¦   ¦                           ¦       GoalAdapter$submitList$diffCallback$1.dex
+¦   ¦   ¦                           ¦       GoalAdapter.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---network
+¦   ¦   ¦                           ¦       ApiResponse.dex
+¦   ¦   ¦                           ¦       ApiService.dex
+¦   ¦   ¦                           ¦       ForgotPasswordData.dex
+¦   ¦   ¦                           ¦       ForgotPasswordRequest.dex
+¦   ¦   ¦                           ¦       RegisterData.dex
+¦   ¦   ¦                           ¦       RegisterRequest.dex
+¦   ¦   ¦                           ¦       ResetPasswordData.dex
+¦   ¦   ¦                           ¦       ResetPasswordRequest.dex
+¦   ¦   ¦                           ¦       RetrofitClient.dex
+¦   ¦   ¦                           ¦       VerifyOtpData.dex
+¦   ¦   ¦                           ¦       VerifyOtpRequest.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---notification
+¦   ¦   ¦                           ¦       NotificationActivity$onCreate$3$1.dex
+¦   ¦   ¦                           ¦       NotificationActivity$onCreate$4$1.dex
+¦   ¦   ¦                           ¦       NotificationActivity$onCreate$5$1.dex
+¦   ¦   ¦                           ¦       NotificationActivity$onCreate$5.dex
+¦   ¦   ¦                           ¦       NotificationActivity.dex
+¦   ¦   ¦                           ¦       NotificationAdapter$NotificationViewHolder.dex
+¦   ¦   ¦                           ¦       NotificationAdapter.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---onboarding
+¦   ¦   ¦                           ¦       OnboardingActivity.dex
+¦   ¦   ¦                           ¦       OnboardingAdapter.dex
+¦   ¦   ¦                           ¦       OnboardingFragment$Companion.dex
+¦   ¦   ¦                           ¦       OnboardingFragment$OnboardingActionListener.dex
+¦   ¦   ¦                           ¦       OnboardingFragment.dex
+¦   ¦   ¦                           ¦       OnboardingItem.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---profile
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$5$1$1$1.dex
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$5$1.dex
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$5.dex
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$6$1$1$1.dex
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$6$1$1$2.dex
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$6$1$1$newImagePath$1$1.dex
+¦   ¦   ¦                           ¦       EditProfileActivity$onCreate$6$1.dex
+¦   ¦   ¦                           ¦       EditProfileActivity.dex
+¦   ¦   ¦                           ¦       ProfileActivity$onCreate$2$1.dex
+¦   ¦   ¦                           ¦       ProfileActivity$onCreate$2.dex
+¦   ¦   ¦                           ¦       ProfileActivity.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---transactions
+¦   ¦   ¦                           ¦       AddTransactionActivity$checkBudgetsAfterExpense$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$Companion.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1$2.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1$3.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1$4.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1$5.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1$6.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadTransactionForEditing$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadUserCurrency$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$loadUserCurrency$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransactionAndNotify$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransactionAndNotify$1$2.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransactionAndNotify$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransfer$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransfer$1$2.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransfer$1$3.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransfer$1$4.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransfer$1$5.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$saveTransfer$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$setupCategoryChips$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$setupCategoryChips$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$setupPaymentChips$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$setupPaymentChips$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransaction$1$2.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransaction$1$3.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransaction$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1$2.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1$3.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1$4.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1$5.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1$6.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity$updateTransfer$1.dex
+¦   ¦   ¦                           ¦       AddTransactionActivity.dex
+¦   ¦   ¦                           ¦       TransactionActivity$applyFilterAndSort$$inlined$sortedBy$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$applyFilterAndSort$$inlined$sortedByDescending$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$deleteTransaction$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$FilterType.dex
+¦   ¦   ¦                           ¦       TransactionActivity$observeTransactions$1$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$observeTransactions$1$2.dex
+¦   ¦   ¦                           ¦       TransactionActivity$observeTransactions$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$observeUser$1$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$observeUser$1.dex
+¦   ¦   ¦                           ¦       TransactionActivity$WhenMappings.dex
+¦   ¦   ¦                           ¦       TransactionActivity.dex
+¦   ¦   ¦                           ¦       TransactionAdapter$Companion.dex
+¦   ¦   ¦                           ¦       TransactionAdapter$HeaderViewHolder.dex
+¦   ¦   ¦                           ¦       TransactionAdapter$ListItem$Header.dex
+¦   ¦   ¦                           ¦       TransactionAdapter$ListItem$Item.dex
+¦   ¦   ¦                           ¦       TransactionAdapter$ListItem.dex
+¦   ¦   ¦                           ¦       TransactionAdapter$TransactionViewHolder.dex
+¦   ¦   ¦                           ¦       TransactionAdapter.dex
+¦   ¦   ¦                           ¦       
+¦   ¦   ¦                           +---ui
+¦   ¦   ¦                           ¦   +---theme
+¦   ¦   ¦                           ¦           ColorKt.dex
+¦   ¦   ¦                           ¦           ThemeKt.dex
+¦   ¦   ¦                           ¦           TypeKt.dex
+¦   ¦   ¦                           ¦           
+¦   ¦   ¦                           +---util
+¦   ¦   ¦                                   BottomNavHelper$WhenMappings.dex
+¦   ¦   ¦                                   BottomNavHelper.dex
+¦   ¦   ¦                                   NavTab.dex
+¦   ¦   ¦                                   PasswordUtils.dex
+¦   ¦   ¦                                   SessionManager.dex
+¦   ¦   ¦                                   
+¦   ¦   +---runtime_symbol_list
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugResources
+¦   ¦   ¦               R.txt
+¦   ¦   ¦               
+¦   ¦   +---signing_config_versions
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---writeDebugSigningConfigVersions
+¦   ¦   ¦               signing-config-versions.json
+¦   ¦   ¦               
+¦   ¦   +---stable_resource_ids_file
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---processDebugResources
+¦   ¦   ¦               stableIds.txt
+¦   ¦   ¦               
+¦   ¦   +---stripped_native_libs
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---stripDebugDebugSymbols
+¦   ¦   ¦           +---out
+¦   ¦   ¦               +---lib
+¦   ¦   ¦                   +---arm64-v8a
+¦   ¦   ¦                   ¦       libandroidx.graphics.path.so
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---armeabi-v7a
+¦   ¦   ¦                   ¦       libandroidx.graphics.path.so
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---x86
+¦   ¦   ¦                   ¦       libandroidx.graphics.path.so
+¦   ¦   ¦                   ¦       
+¦   ¦   ¦                   +---x86_64
+¦   ¦   ¦                           libandroidx.graphics.path.so
+¦   ¦   ¦                           
+¦   ¦   +---sub_project_dex_archive
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---dexBuilderDebug
+¦   ¦   ¦           +---out
+¦   ¦   +---symbol_list_with_package_name
+¦   ¦   ¦   +---debug
+¦   ¦   ¦       +---generateDebugRFile
+¦   ¦   ¦               package-aware-r.txt
+¦   ¦   ¦               
+¦   ¦   +---validate_signing_config
+¦   ¦       +---debug
+¦   ¦           +---validateSigningDebug
+¦   +---kotlin
+¦   ¦   +---compileDebugKotlin
+¦   ¦       +---cacheable
+¦   ¦       ¦   ¦   last-build.bin
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---caches-jvm
+¦   ¦       ¦       +---inputs
+¦   ¦       ¦       ¦       source-to-output.tab
+¦   ¦       ¦       ¦       source-to-output.tab.keystream
+¦   ¦       ¦       ¦       source-to-output.tab.keystream.len
+¦   ¦       ¦       ¦       source-to-output.tab.len
+¦   ¦       ¦       ¦       source-to-output.tab.values
+¦   ¦       ¦       ¦       source-to-output.tab.values.at
+¦   ¦       ¦       ¦       source-to-output.tab.values.s
+¦   ¦       ¦       ¦       source-to-output.tab_i
+¦   ¦       ¦       ¦       source-to-output.tab_i.len
+¦   ¦       ¦       ¦       
+¦   ¦       ¦       +---jvm
+¦   ¦       ¦       ¦   +---kotlin
+¦   ¦       ¦       ¦           class-attributes.tab
+¦   ¦       ¦       ¦           class-attributes.tab.keystream
+¦   ¦       ¦       ¦           class-attributes.tab.keystream.len
+¦   ¦       ¦       ¦           class-attributes.tab.len
+¦   ¦       ¦       ¦           class-attributes.tab.values.at
+¦   ¦       ¦       ¦           class-attributes.tab_i
+¦   ¦       ¦       ¦           class-attributes.tab_i.len
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab.keystream
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab.keystream.len
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab.len
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab.values.at
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab_i
+¦   ¦       ¦       ¦           class-fq-name-to-source.tab_i.len
+¦   ¦       ¦       ¦           constants.tab
+¦   ¦       ¦       ¦           constants.tab.keystream
+¦   ¦       ¦       ¦           constants.tab.keystream.len
+¦   ¦       ¦       ¦           constants.tab.len
+¦   ¦       ¦       ¦           constants.tab.values.at
+¦   ¦       ¦       ¦           constants.tab_i
+¦   ¦       ¦       ¦           constants.tab_i.len
+¦   ¦       ¦       ¦           internal-name-to-source.tab
+¦   ¦       ¦       ¦           internal-name-to-source.tab.keystream
+¦   ¦       ¦       ¦           internal-name-to-source.tab.keystream.len
+¦   ¦       ¦       ¦           internal-name-to-source.tab.len
+¦   ¦       ¦       ¦           internal-name-to-source.tab.values
+¦   ¦       ¦       ¦           internal-name-to-source.tab.values.at
+¦   ¦       ¦       ¦           internal-name-to-source.tab.values.s
+¦   ¦       ¦       ¦           internal-name-to-source.tab_i
+¦   ¦       ¦       ¦           internal-name-to-source.tab_i.len
+¦   ¦       ¦       ¦           package-parts.tab
+¦   ¦       ¦       ¦           package-parts.tab.keystream
+¦   ¦       ¦       ¦           package-parts.tab.keystream.len
+¦   ¦       ¦       ¦           package-parts.tab.len
+¦   ¦       ¦       ¦           package-parts.tab.values.at
+¦   ¦       ¦       ¦           package-parts.tab_i
+¦   ¦       ¦       ¦           package-parts.tab_i.len
+¦   ¦       ¦       ¦           proto.tab
+¦   ¦       ¦       ¦           proto.tab.keystream
+¦   ¦       ¦       ¦           proto.tab.keystream.len
+¦   ¦       ¦       ¦           proto.tab.len
+¦   ¦       ¦       ¦           proto.tab.values
+¦   ¦       ¦       ¦           proto.tab.values.at
+¦   ¦       ¦       ¦           proto.tab.values.s
+¦   ¦       ¦       ¦           proto.tab_i
+¦   ¦       ¦       ¦           proto.tab_i.len
+¦   ¦       ¦       ¦           source-to-classes.tab
+¦   ¦       ¦       ¦           source-to-classes.tab.keystream
+¦   ¦       ¦       ¦           source-to-classes.tab.keystream.len
+¦   ¦       ¦       ¦           source-to-classes.tab.len
+¦   ¦       ¦       ¦           source-to-classes.tab.values
+¦   ¦       ¦       ¦           source-to-classes.tab.values.at
+¦   ¦       ¦       ¦           source-to-classes.tab.values.s
+¦   ¦       ¦       ¦           source-to-classes.tab_i
+¦   ¦       ¦       ¦           source-to-classes.tab_i.len
+¦   ¦       ¦       ¦           subtypes.tab
+¦   ¦       ¦       ¦           subtypes.tab.keystream
+¦   ¦       ¦       ¦           subtypes.tab.keystream.len
+¦   ¦       ¦       ¦           subtypes.tab.len
+¦   ¦       ¦       ¦           subtypes.tab.values.at
+¦   ¦       ¦       ¦           subtypes.tab_i
+¦   ¦       ¦       ¦           subtypes.tab_i.len
+¦   ¦       ¦       ¦           supertypes.tab
+¦   ¦       ¦       ¦           supertypes.tab.keystream
+¦   ¦       ¦       ¦           supertypes.tab.keystream.len
+¦   ¦       ¦       ¦           supertypes.tab.len
+¦   ¦       ¦       ¦           supertypes.tab.values.at
+¦   ¦       ¦       ¦           supertypes.tab_i
+¦   ¦       ¦       ¦           supertypes.tab_i.len
+¦   ¦       ¦       ¦           
+¦   ¦       ¦       +---lookups
+¦   ¦       ¦               counters.tab
+¦   ¦       ¦               file-to-id.tab
+¦   ¦       ¦               file-to-id.tab.keystream
+¦   ¦       ¦               file-to-id.tab.keystream.len
+¦   ¦       ¦               file-to-id.tab.len
+¦   ¦       ¦               file-to-id.tab.values.at
+¦   ¦       ¦               file-to-id.tab_i
+¦   ¦       ¦               file-to-id.tab_i.len
+¦   ¦       ¦               id-to-file.tab
+¦   ¦       ¦               id-to-file.tab.keystream
+¦   ¦       ¦               id-to-file.tab.keystream.len
+¦   ¦       ¦               id-to-file.tab.len
+¦   ¦       ¦               id-to-file.tab.values.at
+¦   ¦       ¦               id-to-file.tab_i
+¦   ¦       ¦               id-to-file.tab_i.len
+¦   ¦       ¦               lookups.tab
+¦   ¦       ¦               lookups.tab.keystream
+¦   ¦       ¦               lookups.tab.keystream.len
+¦   ¦       ¦               lookups.tab.len
+¦   ¦       ¦               lookups.tab.values
+¦   ¦       ¦               lookups.tab.values.at
+¦   ¦       ¦               lookups.tab.values.s
+¦   ¦       ¦               lookups.tab_i
+¦   ¦       ¦               lookups.tab_i.len
+¦   ¦       ¦               
+¦   ¦       +---classpath-snapshot
+¦   ¦       ¦       shrunk-classpath-snapshot.bin
+¦   ¦       ¦       
+¦   ¦       +---local-state
+¦   +---kspCaches
+¦   ¦   +---debug
+¦   ¦       ¦   ap-classpath-entries.bin
+¦   ¦       ¦   caches.uptodate
+¦   ¦       ¦   classpath-entries.bin
+¦   ¦       ¦   classpath-structure.bin
+¦   ¦       ¦   sealed
+¦   ¦       ¦   sourceToOutputs
+¦   ¦       ¦   symbols
+¦   ¦       ¦   
+¦   ¦       +---backups
+¦   ¦       ¦   +---kotlin
+¦   ¦       ¦       +---com
+¦   ¦       ¦           +---example
+¦   ¦       ¦               +---walletwise
+¦   ¦       ¦                   +---dao
+¦   ¦       ¦                   ¦       AccountDao_Impl.kt
+¦   ¦       ¦                   ¦       BudgetDao_Impl.kt
+¦   ¦       ¦                   ¦       CategoryDao_Impl.kt
+¦   ¦       ¦                   ¦       GoalDao_Impl.kt
+¦   ¦       ¦                   ¦       NotificationDao_Impl.kt
+¦   ¦       ¦                   ¦       TransactionDao_Impl.kt
+¦   ¦       ¦                   ¦       UserDao_Impl.kt
+¦   ¦       ¦                   ¦       
+¦   ¦       ¦                   +---database
+¦   ¦       ¦                           AppDatabase_Impl.kt
+¦   ¦       ¦                           
+¦   ¦       +---logs
+¦   ¦       +---symbolLookups
+¦   ¦               counters.tab
+¦   ¦               file-to-id.tab
+¦   ¦               file-to-id.tab.keystream
+¦   ¦               file-to-id.tab.keystream.len
+¦   ¦               file-to-id.tab.len
+¦   ¦               file-to-id.tab.values.at
+¦   ¦               file-to-id.tab_i
+¦   ¦               file-to-id.tab_i.len
+¦   ¦               id-to-file.tab
+¦   ¦               id-to-file.tab.keystream
+¦   ¦               id-to-file.tab.keystream.len
+¦   ¦               id-to-file.tab.len
+¦   ¦               id-to-file.tab.values.at
+¦   ¦               id-to-file.tab_i
+¦   ¦               id-to-file.tab_i.len
+¦   ¦               lookups.tab
+¦   ¦               lookups.tab.keystream
+¦   ¦               lookups.tab.keystream.len
+¦   ¦               lookups.tab.len
+¦   ¦               lookups.tab.values.at
+¦   ¦               lookups.tab_i
+¦   ¦               lookups.tab_i.len
+¦   ¦               
+¦   +---outputs
+¦   ¦   +---logs
+¦   ¦           manifest-merger-debug-report.txt
+¦   ¦           
+¦   +---tmp
+¦       +---compileDebugJavaWithJavac
+¦           ¦   previous-compilation-data.bin
+¦           ¦   
+¦           +---compileTransaction
+¦               +---backup-dir
+¦               +---stash-dir
+¦                       ActivityRegisterBinding.class.uniqueId0
+¦                       
++---src
+    +---androidTest
+    ¦   +---assets
+    ¦   +---java
+    ¦       +---com
+    ¦           +---example
+    ¦               +---walletwise
+    ¦                       ExampleInstrumentedTest.kt
+    ¦                       
+    +---main
+    ¦   ¦   AndroidManifest.xml
+    ¦   ¦   
+    ¦   +---assets
+    ¦   ¦       categories_seed.json
+    ¦   ¦       
+    ¦   +---java
+    ¦   ¦   +---com
+    ¦   ¦       +---example
+    ¦   ¦           +---walletwise
+    ¦   ¦               +---account
+    ¦   ¦               ¦       AccountActivity.kt
+    ¦   ¦               ¦       AccountAdapter.kt
+    ¦   ¦               ¦       AddEditAccountActivity.kt
+    ¦   ¦               ¦       DashboardAccountAdapter.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---auth
+    ¦   ¦               ¦       AuthActivity.kt
+    ¦   ¦               ¦       ForgotPasswordActivity.kt
+    ¦   ¦               ¦       LoginActivity.kt
+    ¦   ¦               ¦       OtpVerificationActivity.kt
+    ¦   ¦               ¦       RegisterActivity.kt
+    ¦   ¦               ¦       ResetPasswordActivity.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---budget
+    ¦   ¦               ¦       AddBudgetActivity.kt
+    ¦   ¦               ¦       BudgetActivity.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---category
+    ¦   ¦               ¦       AddCategoryBottomSheet.kt
+    ¦   ¦               ¦       CategoryActionsBottomSheet.kt
+    ¦   ¦               ¦       CategoryAdapter.kt
+    ¦   ¦               ¦       CategoryIconResolver.kt
+    ¦   ¦               ¦       CategoryMappers.kt
+    ¦   ¦               ¦       ColorSwatchAdapter.kt
+    ¦   ¦               ¦       IconGridAdapter.kt
+    ¦   ¦               ¦       IconOptionAdapter.kt
+    ¦   ¦               ¦       IconPickerDialogFragment.kt
+    ¦   ¦               ¦       SelectCategoryActivity.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---dao
+    ¦   ¦               ¦       AccountDao.kt
+    ¦   ¦               ¦       BudgetDao.kt
+    ¦   ¦               ¦       CategoryDao.kt
+    ¦   ¦               ¦       GoalDao.kt
+    ¦   ¦               ¦       NotificationDao.kt
+    ¦   ¦               ¦       TransactionDao.kt
+    ¦   ¦               ¦       UserDao.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---dashboard
+    ¦   ¦               ¦       DashboardActivity.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---database
+    ¦   ¦               ¦       AppDatabase.kt
+    ¦   ¦               ¦       CategorySeedLoader.kt
+    ¦   ¦               ¦       Migrations.kt
+    ¦   ¦               ¦       Migration_2_3.kt
+    ¦   ¦               ¦       MIGRATION_3_4.kt
+    ¦   ¦               ¦       MIGRATION_5_6.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---entity
+    ¦   ¦               ¦       Account.kt
+    ¦   ¦               ¦       Budget.kt
+    ¦   ¦               ¦       BudgetCategory.kt
+    ¦   ¦               ¦       BudgetWithCategories.kt
+    ¦   ¦               ¦       Category.kt
+    ¦   ¦               ¦       CategoryEntity.kt
+    ¦   ¦               ¦       Goal.kt
+    ¦   ¦               ¦       Notification.kt
+    ¦   ¦               ¦       Transaction.kt
+    ¦   ¦               ¦       User.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---goal
+    ¦   ¦               ¦       GoalActivity.kt
+    ¦   ¦               ¦       GoalAdapter.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---network
+    ¦   ¦               ¦       ApiModels.kt
+    ¦   ¦               ¦       ApiService.kt
+    ¦   ¦               ¦       RetrofitClient.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---notification
+    ¦   ¦               ¦       NotificationActivity.kt
+    ¦   ¦               ¦       NotificationAdapter.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---onboarding
+    ¦   ¦               ¦       OnboardingActivity.kt
+    ¦   ¦               ¦       OnboardingAdapter.kt
+    ¦   ¦               ¦       OnboardingFragment.kt
+    ¦   ¦               ¦       OnboardingItem.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---profile
+    ¦   ¦               ¦       EditProfileActivity.kt
+    ¦   ¦               ¦       ProfileActivity.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---transactions
+    ¦   ¦               ¦       AddTransactionActivity.kt
+    ¦   ¦               ¦       TransactionActivity.kt
+    ¦   ¦               ¦       TransactionAdapter.kt
+    ¦   ¦               ¦       
+    ¦   ¦               +---ui
+    ¦   ¦               ¦   +---theme
+    ¦   ¦               ¦           Color.kt
+    ¦   ¦               ¦           Theme.kt
+    ¦   ¦               ¦           Type.kt
+    ¦   ¦               ¦           
+    ¦   ¦               +---util
+    ¦   ¦                       BottomNavHelper.kt
+    ¦   ¦                       PasswordUtils.kt
+    ¦   ¦                       SessionManager.kt
+    ¦   ¦                       
+    ¦   +---keepRules
+    ¦   ¦       rules.keep
+    ¦   ¦       
+    ¦   +---res
+    ¦       +---drawable
+    ¦       ¦       baseline_arrow_back_24.xml
+    ¦       ¦       baseline_table_rows_24.xml
+    ¦       ¦       bg_account_card.xml
+    ¦       ¦       bg_actions_card.xml
+    ¦       ¦       bg_action_circle.xml
+    ¦       ¦       bg_active_budget.xml
+    ¦       ¦       bg_add_account_box.xml
+    ¦       ¦       bg_add_budget_button.xml
+    ¦       ¦       bg_add_category.xml
+    ¦       ¦       bg_allocation_summary.xml
+    ¦       ¦       bg_avatar.xml
+    ¦       ¦       bg_badge.xml
+    ¦       ¦       bg_balance_card.xml
+    ¦       ¦       bg_bottom_sheet_light_blue.xml
+    ¦       ¦       bg_button_black.xml
+    ¦       ¦       bg_button_purple.xml
+    ¦       ¦       bg_button_white_pill.xml
+    ¦       ¦       bg_button_yellow.xml
+    ¦       ¦       bg_card_all_rounded.xml
+    ¦       ¦       bg_card_handle.xml
+    ¦       ¦       bg_card_top_rounded.xml
+    ¦       ¦       bg_category_tile.xml
+    ¦       ¦       bg_category_tile_circle.xml
+    ¦       ¦       bg_category_tile_dashed.xml
+    ¦       ¦       bg_circle_social.xml
+    ¦       ¦       bg_color_swatch.xml
+    ¦       ¦       bg_dialog_light_blue.xml
+    ¦       ¦       bg_dialog_rounded.xml
+    ¦       ¦       bg_drag_handle.xml
+    ¦       ¦       bg_dynamic_island.xml
+    ¦       ¦       bg_empty_circle.xml
+    ¦       ¦       bg_expenses_card.xml
+    ¦       ¦       bg_expense_icon.xml
+    ¦       ¦       bg_expense_row.xml
+    ¦       ¦       bg_fab.xml
+    ¦       ¦       bg_fab_add.xml
+    ¦       ¦       bg_field.xml
+    ¦       ¦       bg_filter_expense.xml
+    ¦       ¦       bg_filter_income.xml
+    ¦       ¦       bg_filter_selected.xml
+    ¦       ¦       bg_filter_unselected.xml
+    ¦       ¦       bg_goal_status_active.xml
+    ¦       ¦       bg_goal_status_completed.xml
+    ¦       ¦       bg_gradient.xml
+    ¦       ¦       bg_gradient_header.xml
+    ¦       ¦       bg_gradient_light_blue.xml
+    ¦       ¦       bg_gradient_pill_button.xml
+    ¦       ¦       bg_header_gradient.xml
+    ¦       ¦       bg_header_shape.xml
+    ¦       ¦       bg_icon_badge.xml
+    ¦       ¦       bg_input_box.xml
+    ¦       ¦       bg_input_filled.xml
+    ¦       ¦       bg_input_filled_focused.xml
+    ¦       ¦       bg_input_white_rounded.xml
+    ¦       ¦       bg_login_card.xml
+    ¦       ¦       bg_logo_dot.xml
+    ¦       ¦       bg_logo_mark.xml
+    ¦       ¦       bg_nav_active.xml
+    ¦       ¦       bg_nav_selected.xml
+    ¦       ¦       bg_notif_card.xml
+    ¦       ¦       bg_outline_pill_button.xml
+    ¦       ¦       bg_phone_gradient.xml
+    ¦       ¦       bg_primary_pill_button.xml
+    ¦       ¦       bg_recent_transaction_icon.xml
+    ¦       ¦       bg_save_button.xml
+    ¦       ¦       bg_segment_active.xml
+    ¦       ¦       bg_segment_outer.xml
+    ¦       ¦       bg_skip_button.xml
+    ¦       ¦       bg_solid_pill_white.xml
+    ¦       ¦       bg_spinner.xml
+    ¦       ¦       bg_split_icon.xml
+    ¦       ¦       bg_tab_ripple.xml
+    ¦       ¦       bg_toolbar_rounded.xml
+    ¦       ¦       bg_txn_icon.xml
+    ¦       ¦       bg_unread_dot.xml
+    ¦       ¦       bg_value_pill.xml
+    ¦       ¦       bg_view_all_pill.xml
+    ¦       ¦       bg_white_pill.xml
+    ¦       ¦       btn_add_bg.xml
+    ¦       ¦       button_border.xml
+    ¦       ¦       card_bg.xml
+    ¦       ¦       checkbox_selector.xml
+    ¦       ¦       chip_bg.xml
+    ¦       ¦       circle_bg_white.xml
+    ¦       ¦       circle_mask.xml
+    ¦       ¦       delete_img.png
+    ¦       ¦       dot_active.xml
+    ¦       ¦       dot_inactive.xml
+    ¦       ¦       facebook.xml
+    ¦       ¦       goal.jpg
+    ¦       ¦       google.xml
+    ¦       ¦       gradient_header_bg.xml
+    ¦       ¦       ic_arrow_back.xml
+    ¦       ¦       ic_arrow_down.xml
+    ¦       ¦       ic_back.xml
+    ¦       ¦       ic_backspace.xml
+    ¦       ¦       ic_bell.xml
+    ¦       ¦       ic_calendar.xml
+    ¦       ¦       ic_camera.xml
+    ¦       ¦       ic_card.xml
+    ¦       ¦       ic_category.xml
+    ¦       ¦       ic_category_car.xml
+    ¦       ¦       ic_category_education.xml
+    ¦       ¦       ic_category_groceries.xml
+    ¦       ¦       ic_category_gym.xml
+    ¦       ¦       ic_category_home.xml
+    ¦       ¦       ic_category_insurances.xml
+    ¦       ¦       ic_category_internet.xml
+    ¦       ¦       ic_category_marketing.xml
+    ¦       ¦       ic_category_other.xml
+    ¦       ¦       ic_category_rent.xml
+    ¦       ¦       ic_category_shopping.xml
+    ¦       ¦       ic_category_subscription.xml
+    ¦       ¦       ic_category_travel.xml
+    ¦       ¦       ic_category_vacation.xml
+    ¦       ¦       ic_category_water.xml
+    ¦       ¦       ic_cat_bar.xml
+    ¦       ¦       ic_cat_beach.xml
+    ¦       ¦       ic_cat_beauty.xml
+    ¦       ¦       ic_cat_celebration.xml
+    ¦       ¦       ic_cat_clothing.xml
+    ¦       ¦       ic_cat_coffee.xml
+    ¦       ¦       ic_cat_creditcard.xml
+    ¦       ¦       ic_cat_education.xml
+    ¦       ¦       ic_cat_entertainment.xml
+    ¦       ¦       ic_cat_fitness.xml
+    ¦       ¦       ic_cat_food.xml
+    ¦       ¦       ic_cat_fuel.xml
+    ¦       ¦       ic_cat_gaming.xml
+    ¦       ¦       ic_cat_gifts.xml
+    ¦       ¦       ic_cat_groceries.xml
+    ¦       ¦       ic_cat_health.xml
+    ¦       ¦       ic_cat_home.xml
+    ¦       ¦       ic_cat_insurance.xml
+    ¦       ¦       ic_cat_internet.xml
+    ¦       ¦       ic_cat_kids.xml
+    ¦       ¦       ic_cat_pets.xml
+    ¦       ¦       ic_cat_pharmacy.xml
+    ¦       ¦       ic_cat_phone.xml
+    ¦       ¦       ic_cat_repair.xml
+    ¦       ¦       ic_cat_savings.xml
+    ¦       ¦       ic_cat_shopping.xml
+    ¦       ¦       ic_cat_subscription.xml
+    ¦       ¦       ic_cat_transport.xml
+    ¦       ¦       ic_cat_travel.xml
+    ¦       ¦       ic_cat_utilities.xml
+    ¦       ¦       ic_chart.xml
+    ¦       ¦       ic_checkbox_checked.xml
+    ¦       ¦       ic_checkbox_unchecked.xml
+    ¦       ¦       ic_chevron_right.xml
+    ¦       ¦       ic_clock.xml
+    ¦       ¦       ic_close.xml
+    ¦       ¦       ic_delete.xml
+    ¦       ¦       ic_edit.xml
+    ¦       ¦       ic_eye.xml
+    ¦       ¦       ic_eye_off.xml
+    ¦       ¦       ic_heart.xml
+    ¦       ¦       ic_home.xml
+    ¦       ¦       ic_launcher_background.xml
+    ¦       ¦       ic_launcher_foreground.xml
+    ¦       ¦       ic_lock.xml
+    ¦       ¦       ic_logo_mark.xml
+    ¦       ¦       ic_manage.xml
+    ¦       ¦       ic_notification_bill.xml
+    ¦       ¦       ic_notification_budget.xml
+    ¦       ¦       ic_notification_default.xml
+    ¦       ¦       ic_notification_expense.xml
+    ¦       ¦       ic_notification_goal.xml
+    ¦       ¦       ic_notification_income.xml
+    ¦       ¦       ic_notification_summary.xml
+    ¦       ¦       ic_notification_transaction.xml
+    ¦       ¦       ic_person.xml
+    ¦       ¦       ic_piggy.xml
+    ¦       ¦       ic_plus.xml
+    ¦       ¦       ic_receipt.xml
+    ¦       ¦       ic_scale.xml
+    ¦       ¦       ic_search.xml
+    ¦       ¦       ic_settings.xml
+    ¦       ¦       ic_track.xml
+    ¦       ¦       ic_wallet.xml
+    ¦       ¦       illustration_change_money.xml
+    ¦       ¦       illustration_control.png
+    ¦       ¦       illustration_fast_transfer.xml
+    ¦       ¦       illustration_grow.png
+    ¦       ¦       illustration_save.xml
+    ¦       ¦       illustration_track.png
+    ¦       ¦       img.png
+    ¦       ¦       img_1.png
+    ¦       ¦       item_icon_option.xml
+    ¦       ¦       key_bg.xml
+    ¦       ¦       noti.png
+    ¦       ¦       outline_add_24.xml
+    ¦       ¦       outline_button.xml
+    ¦       ¦       page_background.xml
+    ¦       ¦       piggy.png
+    ¦       ¦       primary_button.xml
+    ¦       ¦       rounded_bg.xml
+    ¦       ¦       selector_bg.xml
+    ¦       ¦       selector_selected_bg.xml
+    ¦       ¦       shadow_top.xml
+    ¦       ¦       shape_circle.xml
+    ¦       ¦       shape_circle_ring.xml
+    ¦       ¦       shape_rounded_bg.xml
+    ¦       ¦       twitter.xml
+    ¦       ¦       walletwise_logo.png
+    ¦       ¦       white_card.xml
+    ¦       ¦       
+    ¦       +---font
+    ¦       ¦       dosis_bold.ttf
+    ¦       ¦       dosis_extrabold.ttf
+    ¦       ¦       dosis_extralight.ttf
+    ¦       ¦       dosis_light.ttf
+    ¦       ¦       dosis_medium.ttf
+    ¦       ¦       dosis_regular.ttf
+    ¦       ¦       dosis_semibold.ttf
+    ¦       ¦       molengo_regular.ttf
+    ¦       ¦       
+    ¦       +---layout
+    ¦       ¦       activity_account.xml
+    ¦       ¦       activity_add_budget.xml
+    ¦       ¦       activity_add_edit_account.xml
+    ¦       ¦       activity_add_transaction.xml
+    ¦       ¦       activity_all_transactions.xml
+    ¦       ¦       activity_auth.xml
+    ¦       ¦       activity_budgets.xml
+    ¦       ¦       activity_dashboard.xml
+    ¦       ¦       activity_edit_profile.xml
+    ¦       ¦       activity_forgot_password.xml
+    ¦       ¦       activity_goals.xml
+    ¦       ¦       activity_login.xml
+    ¦       ¦       activity_main.xml
+    ¦       ¦       activity_moneymate_dashboard.xml
+    ¦       ¦       activity_notifications.xml
+    ¦       ¦       activity_notifications_empty.xml
+    ¦       ¦       activity_onboarding.xml
+    ¦       ¦       activity_otp_verification.xml
+    ¦       ¦       activity_profile.xml
+    ¦       ¦       activity_register.xml
+    ¦       ¦       activity_reset_password.xml
+    ¦       ¦       activity_select_category.xml
+    ¦       ¦       activity_transaction.xml
+    ¦       ¦       dialog_add_category.xml
+    ¦       ¦       dialog_add_goal.xml
+    ¦       ¦       dialog_add_goal_money.xml
+    ¦       ¦       dialog_category_actions.xml
+    ¦       ¦       dialog_icon_picker.xml
+    ¦       ¦       fragment_onboarding_page.xml
+    ¦       ¦       item_account.xml
+    ¦       ¦       item_budget.xml
+    ¦       ¦       item_budget_category.xml
+    ¦       ¦       item_category.xml
+    ¦       ¦       item_color_swatch.xml
+    ¦       ¦       item_dashboard_account.xml
+    ¦       ¦       item_dashboard_add_account.xml
+    ¦       ¦       item_goal_card.xml
+    ¦       ¦       item_icon_option.xml
+    ¦       ¦       item_notification.xml
+    ¦       ¦       item_profile_row.xml
+    ¦       ¦       item_transaction_header.xml
+    ¦       ¦       item_transaction_row.xml
+    ¦       ¦       layout_bottom_nav.xml
+    ¦       ¦       page1.xml
+    ¦       ¦       page2.xml
+    ¦       ¦       page3.xml
+    ¦       ¦       view_back_button.xml
+    ¦       ¦       
+    ¦       +---mipmap-anydpi-v26
+    ¦       ¦       ic_launcher.xml
+    ¦       ¦       ic_launcher_round.xml
+    ¦       ¦       logo.png
+    ¦       ¦       logo2.png
+    ¦       ¦       
+    ¦       +---mipmap-hdpi
+    ¦       ¦       ic_launcher.webp
+    ¦       ¦       ic_launcher_round.webp
+    ¦       ¦       
+    ¦       +---mipmap-mdpi
+    ¦       ¦       ic_launcher.webp
+    ¦       ¦       ic_launcher_round.webp
+    ¦       ¦       
+    ¦       +---mipmap-xhdpi
+    ¦       ¦       ic_launcher.webp
+    ¦       ¦       ic_launcher_round.webp
+    ¦       ¦       
+    ¦       +---mipmap-xxhdpi
+    ¦       ¦       ic_launcher.webp
+    ¦       ¦       ic_launcher_round.webp
+    ¦       ¦       
+    ¦       +---mipmap-xxxhdpi
+    ¦       ¦       ic_launcher.webp
+    ¦       ¦       ic_launcher_round.webp
+    ¦       ¦       
+    ¦       +---values
+    ¦       ¦       colors.xml
+    ¦       ¦       strings.xml
+    ¦       ¦       styles.xml
+    ¦       ¦       themes.xml
+    ¦       ¦       
+    ¦       +---xml
+    ¦               backup_rules.xml
+    ¦               data_extraction_rules.xml
+    ¦               
+    +---test
+        +---java
+            +---com
+                +---example
+                    +---walletwise
+                            ExampleUnitTest.kt
+                            

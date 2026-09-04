@@ -10,70 +10,105 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
 
-    android:layout_marginBottom="9dp">
+    android:layout_marginBottom="10dp">
 
 
     <!-- ===================================================== -->
     <!-- CATEGORY -->
     <!-- ===================================================== -->
 
-    <Spinner
-        android:id="@+id/spCategory"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCategory"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
 
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
 
         android:layout_weight="1"
 
-        android:background="@drawable/bg_spinner"
+        android:hint="Category"
 
-        android:paddingStart="12dp"
-        android:paddingEnd="5dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
 
-        android:fontFamily="@font/molengo_regular" />
+        app:boxStrokeColor="@color/primary_500">
 
-
-    <!-- ===================================================== -->
-    <!-- CATEGORY LIMIT -->
-    <!-- ===================================================== -->
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutCategoryAmount"
-
-        style="@style/Widget.MoneyMate.TextInputLayout"
-
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="8dp"
-
-        android:hint="Limit"
-
-        app:prefixText="MMK ">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCategoryAmount"
-
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/spCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="56dp"
 
-            android:inputType="numberDecimal"
+            android:inputType="none"
+            android:focusable="false"
+            android:fontFamily="@font/dosis_bold"
+            android:textSize="14sp"
 
-            android:fontFamily="@font/dosis_semibold"
-            android:textSize="13sp" />
+            android:textColor="@android:color/black"
+            android:popupBackground="@color/neutral_0"
+
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:dropDownVerticalOffset="4dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <!-- ===================================================== -->
-    <!-- REMOVE CATEGORY -->
+    <!-- CATEGORY AMOUNT -->
+    <!-- ===================================================== -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCategoryAmount"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+
+        android:layout_marginStart="8dp"
+
+        android:hint="Amount"
+
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+
+        app:boxStrokeColor="@color/primary_500">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCategoryAmount"
+
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+
+            android:inputType="numberDecimal"
+
+            android:fontFamily="@font/dosis_bold"
+            android:textSize="15sp"
+            android:textColor="@color/background_dark"
+
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!-- ===================================================== -->
+    <!-- REMOVE -->
     <!-- ===================================================== -->
 
     <TextView
         android:id="@+id/btnRemoveCategory"
 
-        android:layout_width="40dp"
-        android:layout_height="45dp"
+        android:layout_width="38dp"
+        android:layout_height="48dp"
 
         android:layout_marginStart="2dp"
 

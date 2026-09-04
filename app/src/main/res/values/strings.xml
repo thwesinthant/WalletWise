@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Expence And Budget Tracker</string>
+    <string name="app_name">WalletWise</string>
     <string name="skip">Skip</string>
     <string name="greet_name">Hello, %1$s</string>
     <string name="title_page_1">Fast transfer</string>
@@ -11,4 +11,26 @@
     <string name="login">Login</string>
     <string name="create_account">Create Account</string>
     <string name="icon_option_description">Icon option</string>
+    <string name="back">Back</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="tab_this_month">This Month</string>
+    <string name="tab_this_year">This Year</string>
+    <string name="tab_custom">Custom</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="income_vs_expense">Income vs Expense</string>
+    <string name="balance_trend">Balance Trend</string>
+    <string name="balance_trend_subtitle">Do I have more money than before?</string>
+    <string name="today_label">TODAY</string>
+    <string name="vs_past_period">vs past period</string>
+    <string name="cash_flow">Cash Flow</string>
+    <string name="cash_flow_subtitle">Am I spending less than I make?</string>
+    <string name="last_30_days">LAST 30 DAYS</string>
+    <string name="balance_by_accounts">Balance by Accounts</string>
+    <string name="balance_by_accounts_subtitle">In which accounts do I have most of my money?</string>
+    <string name="budget_progress">Budget Progress</string>
+    <string name="budget_progress_subtitle">How much of my budget is left?</string>
+    <string name="no_active_budget">No active budget for this period. Create one to see your progress here.</string>
+    <string name="of_limit_format">of %1$s</string>
 </resources>

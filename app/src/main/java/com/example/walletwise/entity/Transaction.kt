@@ -11,19 +11,19 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = User::class,
-            parentColumns = ["userId"],
+            parentColumns = ["user_id"],
             childColumns = ["user_id"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Account::class,
-            parentColumns = ["accountId"],
+            parentColumns = ["account_id"],
             childColumns = ["account_id"],
             onDelete = ForeignKey.SET_NULL
         ),
         ForeignKey(
             entity = CategoryEntity::class,
-            parentColumns = ["id"],
+            parentColumns = ["category_id"],
             childColumns = ["category_id"],
             onDelete = ForeignKey.SET_NULL
         )

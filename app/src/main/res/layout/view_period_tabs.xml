@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/tabThisMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_tab_selected"
+        android:fontFamily="@font/dosis_bold"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/tab_this_month"
+        android:textColor="@color/blue_primary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tabThisYear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_tab_unselected"
+        android:fontFamily="@font/dosis_medium"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/tab_this_year"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tabCustom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/bg_tab_unselected"
+        android:fontFamily="@font/dosis_medium"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/tab_custom"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp" />
+</LinearLayout>

@@ -1,79 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp"
     android:background="@drawable/gradient_header_bg">
 
-    <!-- Header Back Button -->
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:padding="8dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/circle_bg_white"
-        android:src="@drawable/baseline_arrow_back_24"
-        android:contentDescription="Back"
+    <!-- ============================================= -->
+    <!-- FIXED TOP NAVIGATION -->
+    <!-- ============================================= -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topNav"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Header Title -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notifications"
-        android:fontFamily="@font/dosis_extrabold"
-        android:textSize="20sp"
-        android:textColor="@color/primary_900"
-        app:layout_constraintTop_toTopOf="@id/btnBack"
-        app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- BACK BUTTON -->
 
-    <!-- Settings Icon (စမ်းသပ် Noti ထည့်ရန် ခလုတ်) -->
-    <ImageView
-        android:id="@+id/btnSettings"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="20dp"
-        android:padding="9dp"
-        android:src="@drawable/ic_settings"
-        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTitle" />
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="20dp"
+            android:padding="8dp"
+            android:background="@drawable/circle_bg_white"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:contentDescription="Back"
+            android:clickable="true"
+            android:focusable="true"
 
-    <!-- 1. Notification RecyclerView List -->
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- TITLE -->
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textSize="20sp"
+            android:textColor="@color/primary_900"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@id/btnBack" />
+
+        <!-- SETTINGS BUTTON -->
+
+        <ImageView
+            android:id="@+id/btnSettings"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="20dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="Notification settings"
+            android:clickable="true"
+            android:focusable="true"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnBack"
+            app:layout_constraintBottom_toBottomOf="@id/btnBack" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- ============================================= -->
+    <!-- NOTIFICATION LIST -->
+    <!-- ============================================= -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNotifications"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="6dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+
+        android:layout_marginTop="8dp"
+
+        android:paddingTop="4dp"
+        android:paddingBottom="24dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+
+        app:layout_constraintTop_toBottomOf="@id/topNav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 2. Empty State View (Noti လုံးဝမရှိချိန် ပြသရန်) -->
+
+    <!-- ============================================= -->
+    <!-- EMPTY STATE -->
+    <!-- ============================================= -->
+
     <LinearLayout
         android:id="@+id/layoutEmptyState"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="center"
         android:paddingHorizontal="24dp"
+        android:paddingBottom="40dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+
+        app:layout_constraintTop_toBottomOf="@id/topNav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- EMPTY IMAGE -->
 
         <ImageView
             android:id="@+id/noti"
@@ -81,6 +122,8 @@
             android:layout_height="210dp"
             android:src="@drawable/noti"
             android:contentDescription="Empty Notification" />
+
+        <!-- EMPTY TITLE -->
 
         <TextView
             android:id="@+id/tvEmptyTitle"
@@ -92,6 +135,8 @@
             android:textColor="@color/text_primary_light"
             android:textSize="20sp" />
 
+        <!-- EMPTY SUBTITLE -->
+
         <TextView
             android:id="@+id/tvEmptySubtitle"
             android:layout_width="wrap_content"
@@ -102,151 +147,7 @@
             android:fontFamily="@font/molengo_regular"
             android:textColor="@color/text_secondary_light"
             android:textSize="15sp" />
-    </LinearLayout>
 
-    <!-- Bottom Navigation Shadow -->
-    <View
-        android:id="@+id/navShadow"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="@drawable/shadow_top"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Bottom Navigation -->
-    <LinearLayout
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:orientation="horizontal"
-        android:background="@color/neutral_0"
-        android:gravity="center_vertical"
-        android:paddingBottom="8dp"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="32dp"
-                android:layout_height="30dp"
-                android:background="@drawable/bg_nav_active"
-                android:gravity="center"
-                android:text="🏠"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Home"
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/neutral_500"
-                android:textSize="11sp"
-                android:layout_marginTop="3dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="📋"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Transaction"
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/neutral_500"
-                android:textSize="11sp"
-                android:layout_marginTop="3dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="💰"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Budgets"
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/neutral_500"
-                android:textSize="11sp"
-                android:layout_marginTop="3dp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="🎯"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Goals"
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/neutral_500"
-                android:textSize="11sp"
-                android:layout_marginTop="3dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="⚙️"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:fontFamily="@font/dosis_bold"
-                android:textColor="@color/neutral_500"
-                android:textSize="11sp"
-                android:layout_marginTop="3dp" />
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

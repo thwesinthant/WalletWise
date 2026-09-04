@@ -19,7 +19,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/circle_bg_white"
         android:contentDescription="Back"
         android:padding="8dp"
@@ -55,7 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/selector_bg"
         android:orientation="horizontal"
@@ -190,7 +190,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/chip_bg"
         android:hint="Add a note (optional)"
@@ -301,11 +301,13 @@
         android:id="@+id/keypadArea"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@color/neutral_0"
         android:orientation="vertical"
-        android:paddingHorizontal="12dp"
-        android:paddingTop="12dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -315,6 +317,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="3"
+            android:paddingBottom="3dp"
             android:rowCount="4">
 
             <!-- ================================================= -->
@@ -324,11 +327,11 @@
             <LinearLayout
                 android:id="@+id/key1"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -339,19 +342,18 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="1"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key2"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -362,7 +364,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="2"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -370,19 +372,18 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="ABC"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key3"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -393,7 +394,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="3"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -401,7 +402,7 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="DEF"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
 
@@ -413,11 +414,11 @@
             <LinearLayout
                 android:id="@+id/key4"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -428,7 +429,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="4"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -436,19 +437,18 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="GHI"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key5"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -459,7 +459,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="5"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -467,19 +467,18 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="JKL"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key6"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -490,7 +489,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="6"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -498,7 +497,7 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="MNO"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
 
@@ -510,11 +509,11 @@
             <LinearLayout
                 android:id="@+id/key7"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -525,7 +524,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="7"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -533,19 +532,18 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="PQRS"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key8"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -556,7 +554,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="8"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -564,19 +562,18 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="TUV"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key9"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -587,7 +584,7 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="9"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -595,7 +592,7 @@
                     android:fontFamily="@font/molengo_regular"
                     android:text="WXYZ"
                     android:textColor="@color/neutral_500"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
             </LinearLayout>
 
@@ -607,11 +604,11 @@
             <LinearLayout
                 android:id="@+id/keyDot"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -623,19 +620,18 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="."
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/key0"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
@@ -647,26 +643,25 @@
                     android:fontFamily="@font/dosis_extrabold"
                     android:text="0"
                     android:textColor="@color/primary_600"
-                    android:textSize="24sp" />
+                    android:textSize="21sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/keyDel"
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="6dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/key_bg"
-                android:elevation="3dp"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:outlineProvider="background">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
                     android:contentDescription="Delete"
                     android:src="@drawable/ic_backspace" />
 
@@ -675,5 +670,4 @@
         </GridLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

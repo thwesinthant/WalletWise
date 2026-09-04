@@ -8,11 +8,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.walletwise.dao.AccountDao
 import com.example.walletwise.dao.BudgetDao
 import com.example.walletwise.dao.CategoryDao
+import com.example.walletwise.dao.GoalDao
 import com.example.walletwise.dao.NotificationDao
 import com.example.walletwise.dao.TransactionDao
 import com.example.walletwise.dao.UserDao
 import com.example.walletwise.entity.Account
 import com.example.walletwise.entity.Budget
+import com.example.walletwise.entity.Goal
 import com.example.walletwise.entity.BudgetCategory
 import com.example.walletwise.entity.CategoryEntity
 import com.example.walletwise.entity.Notification
@@ -30,7 +32,8 @@ import kotlinx.coroutines.launch
         Transaction::class,
         Account::class,
         Budget::class,
-        BudgetCategory::class
+        BudgetCategory::class,
+        Goal::class
     ],
     version = 5,
     exportSchema = false
@@ -49,6 +52,8 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun budgetDao(): BudgetDao
 
+    abstract fun goalDao(): GoalDao
+
     companion object {
 
         @Volatile
@@ -66,13 +71,11 @@ abstract class AppDatabase : RoomDatabase() {
                         AppDatabase::class.java,
                         "walletwise"
                     )
-                        .addCallback(
-                            AppDatabaseCallback()
-                        )
                         .addMigrations(
                             MIGRATION_1_2,
                             MIGRATION_2_3,
-                            MIGRATION_3_4
+                            MIGRATION_3_4,
+                            MIGRATION_5_6
                         )
                         .fallbackToDestructiveMigration()
                         .build()
@@ -84,32 +87,5 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        private class AppDatabaseCallback :
-            RoomDatabase.Callback() {
-
-            override fun onCreate(
-                db: SupportSQLiteDatabase
-            ) {
-
-                super.onCreate(
-                    db
-                )
-
-                INSTANCE?.let { database ->
-
-                    CoroutineScope(
-                        Dispatchers.IO
-                    ).launch {
-
-                        database
-                            .notificationDao()
-                            .insertAll(
-                                SeedData
-                                    .getDefaultNotifications()
-                            )
-                    }
-                }
-            }
-        }
     }
 }

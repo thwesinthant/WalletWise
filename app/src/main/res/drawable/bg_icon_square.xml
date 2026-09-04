@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rounded-square icon background for account rows. Tinted per-account at runtime
+     via view.background.mutate() + setTint() (see MainActivity). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/card_white" />
+    <corners android:radius="10dp" />
+</shape>

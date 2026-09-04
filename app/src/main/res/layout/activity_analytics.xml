@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dashboardScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_header_bg"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:overScrollMode="ifContentScrolls">
+
+    <LinearLayout
+        android:id="@+id/dashboardContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <include
+            android:id="@+id/topBar"
+            layout="@layout/view_top_bar" />
+
+        <include
+            android:id="@+id/periodTabs"
+            layout="@layout/view_period_tabs" />
+
+        <include
+            android:id="@+id/balanceOverviewCard"
+            layout="@layout/view_balance_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/incomeVsExpenseCard"
+            layout="@layout/view_income_vs_expense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/incomeBreakdownCard"
+            layout="@layout/view_breakdown_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/expenseBreakdownCard"
+            layout="@layout/view_breakdown_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/balanceTrendCard"
+            layout="@layout/view_balance_trend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/budgetProgressCard"
+            layout="@layout/view_budget_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/accountsCard"
+            layout="@layout/view_accounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

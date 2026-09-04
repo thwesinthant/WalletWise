@@ -17,31 +17,68 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(users: List<User>)
 
-    @Query("SELECT * FROM users WHERE userId = :userId LIMIT 1")
+    @Query(
+        """
+        SELECT * FROM users
+        WHERE user_id = :userId
+        LIMIT 1
+        """
+    )
     fun getUserById(userId: Int): Flow<User?>
 
-    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    /*
+     * Used when a screen needs the user immediately,
+     * for example to get the user's selected currency.
+     */
+    @Query(
+        """
+        SELECT * FROM users
+        WHERE user_id = :userId
+        LIMIT 1
+        """
+    )
+    suspend fun getUserByIdOnce(userId: Int): User?
+
+    @Query(
+        """
+        SELECT * FROM users
+        WHERE email = :email
+        LIMIT 1
+        """
+    )
     suspend fun getUserByEmail(email: String): User?
 
-    @Query("""
+    @Query(
+        """
         SELECT * FROM users
         WHERE email = :email
         AND password = :password
         LIMIT 1
-    """)
+        """
+    )
     suspend fun login(
         email: String,
         password: String
     ): User?
 
-    @Query("SELECT EXISTS(SELECT 1 FROM users WHERE email = :email)")
+    @Query(
+        """
+        SELECT EXISTS(
+            SELECT 1
+            FROM users
+            WHERE email = :email
+        )
+        """
+    )
     suspend fun emailExists(email: String): Boolean
 
-    @Query("""
-        UPDATE users 
-        SET password = :newPasswordHash 
+    @Query(
+        """
+        UPDATE users
+        SET password = :newPasswordHash
         WHERE email = :email
-    """)
+        """
+    )
     suspend fun updatePassword(
         email: String,
         newPasswordHash: String

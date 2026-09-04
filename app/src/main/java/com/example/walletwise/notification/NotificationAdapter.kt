@@ -5,119 +5,398 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+
 import androidx.recyclerview.widget.RecyclerView
+
 import com.example.walletwise.R
 import com.example.walletwise.entity.Notification
 
-class NotificationAdapter(
-    private var notifications: List<Notification>,
-    private val onMarkAsReadClick: (Notification) -> Unit
-) : RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    class NotificationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvTitle: TextView = view.findViewById(R.id.tvTitle)
-        val tvMessage: TextView = view.findViewById(R.id.tvMessage)
-        val tvTimeAgo: TextView = view.findViewById(R.id.tvTimeAgo)
-        val imgIcon: ImageView = view.findViewById(R.id.imgIcon)
-        val tvMarkAsRead: TextView = view.findViewById(R.id.tvMarkAsRead)
+class NotificationAdapter(
+
+    private var notifications: List<Notification>,
+
+    private val onMarkAsReadClick:
+        (Notification) -> Unit,
+
+    private val onDeleteClick:
+        (Notification) -> Unit
+
+) : RecyclerView.Adapter<
+        NotificationAdapter.NotificationViewHolder
+        >() {
+
+
+    // ============================================================
+    // VIEW HOLDER
+    // ============================================================
+
+    class NotificationViewHolder(
+        view: View
+    ) : RecyclerView.ViewHolder(view) {
+
+
+        val tvTitle: TextView =
+            view.findViewById(
+                R.id.tvTitle
+            )
+
+
+        val tvMessage: TextView =
+            view.findViewById(
+                R.id.tvMessage
+            )
+
+
+        val tvTimeAgo: TextView =
+            view.findViewById(
+                R.id.tvTimeAgo
+            )
+
+
+        val imgIcon: ImageView =
+            view.findViewById(
+                R.id.imgIcon
+            )
+
+
+        val tvMarkAsRead: TextView =
+            view.findViewById(
+                R.id.tvMarkAsRead
+            )
+
+
+        val btnDelete: ImageView =
+            view.findViewById(
+                R.id.btnDelete
+            )
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_notification, parent, false)
+
+    // ============================================================
+    // CREATE VIEW HOLDER
+    // ============================================================
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): NotificationViewHolder {
+
+
+        val view =
+            LayoutInflater
+                .from(parent.context)
+                .inflate(
+                    R.layout.item_notification,
+                    parent,
+                    false
+                )
+
+
         return NotificationViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        val item = notifications[position]
-        holder.tvTitle.text = item.title
-        holder.tvMessage.text = item.message
 
-        // အချိန်တွက်ချက်ပြသခြင်း
-        val createdTime = item.createdAt.toLongOrNull() ?: System.currentTimeMillis()
-        holder.tvTimeAgo.text = getTimeAgo(createdTime)
+    // ============================================================
+    // BIND VIEW HOLDER
+    // ============================================================
 
-        val titleLower = item.title.lowercase()
-        val typeUpper = item.type.uppercase()
+    override fun onBindViewHolder(
+        holder: NotificationViewHolder,
+        position: Int
+    ) {
 
-        // Notification အမျိုးအစားအလိုက် Icon သတ်မှတ်ခြင်း
-        when {
-            // ၁။ Income သီးသန့် Icon (ဝင်ငွေပြ Icon)
-            titleLower.contains("income") || typeUpper == "INCOME" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_input_add)
-            }
-            // ၂။ Large Transaction (သတိပေး Alert Icon)
-            titleLower.contains("large") || typeUpper == "TRANSACTION" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_dialog_alert)
-            }
-            // ၃။ Expense (အသုံးစရိတ် Icon)
-            titleLower.contains("expense") || typeUpper == "EXPENSE" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_menu_send)
-            }
-            // ၄။ Budget Alert
-            titleLower.contains("budget") || typeUpper == "BUDGET_ALERT" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_dialog_alert)
-            }
-            // ၅။ Bill Due
-            titleLower.contains("bill") || typeUpper == "BILL_DUE" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_menu_agenda)
-            }
-            // ၆။ Summary
-            titleLower.contains("summary") || typeUpper == "SUMMARY" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_menu_sort_by_size)
-            }
-            // ၇။ Goal Reminder
-            titleLower.contains("goal") || typeUpper == "GOAL_REMINDER" -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_menu_compass)
-            }
-            else -> {
-                holder.imgIcon.setImageResource(android.R.drawable.ic_popup_reminder)
-            }
-        }
 
-        // ဖတ်ပြီးသား (isRead = true) ဖြစ်ပါက မှိန်ပြပြီး Mark as read ခလုတ်ကို ဖျောက်ခြင်း
+        val item =
+            notifications[position]
+
+
+        // ========================================================
+        // TITLE
+        // ========================================================
+
+        holder.tvTitle.text =
+            item.title
+
+
+        // ========================================================
+        // MESSAGE
+        // ========================================================
+
+        holder.tvMessage.text =
+            item.message
+
+
+        // ========================================================
+        // TIME AGO
+        // ========================================================
+
+        val createdTime =
+            item.createdAt
+                .toLongOrNull()
+                ?: System.currentTimeMillis()
+
+
+        holder.tvTimeAgo.text =
+            getTimeAgo(createdTime)
+
+
+        // ========================================================
+        // NOTIFICATION TYPE
+        // ========================================================
+
+        val titleLower =
+            item.title.lowercase()
+
+
+        val typeUpper =
+            item.type.uppercase()
+
+
+        // ========================================================
+        // ICON
+        // ========================================================
+
+        val iconResource =
+            when {
+
+
+                // INCOME
+
+                titleLower.contains("income") ||
+                        typeUpper == "INCOME" -> {
+
+                    R.drawable.ic_notification_income
+                }
+
+
+                // EXPENSE
+
+                titleLower.contains("expense") ||
+                        typeUpper == "EXPENSE" -> {
+
+                    R.drawable.ic_notification_expense
+                }
+
+
+                // LARGE TRANSACTION
+
+                titleLower.contains("large") ||
+                        typeUpper == "TRANSACTION" -> {
+
+                    R.drawable.ic_notification_transaction
+                }
+
+
+                // BUDGET
+
+                titleLower.contains("budget") ||
+                        typeUpper == "BUDGET_ALERT" ||
+                        typeUpper == "BUDGET_EXCEEDED" ||
+                        typeUpper == "CATEGORY_BUDGET_EXCEEDED" -> {
+
+                    R.drawable.ic_notification_budget
+                }
+
+
+                // BILL
+
+                titleLower.contains("bill") ||
+                        typeUpper == "BILL_DUE" -> {
+
+                    R.drawable.ic_notification_bill
+                }
+
+
+                // SUMMARY
+
+                titleLower.contains("summary") ||
+                        typeUpper == "SUMMARY" -> {
+
+                    R.drawable.ic_notification_summary
+                }
+
+
+                // GOAL
+
+                titleLower.contains("goal") ||
+                        typeUpper == "GOAL_REMINDER" ||
+                        typeUpper == "GOAL_COMPLETED" -> {
+
+                    R.drawable.ic_notification_goal
+                }
+
+
+                // DEFAULT
+
+                else -> {
+
+                    R.drawable.ic_notification_default
+                }
+            }
+
+
+        holder.imgIcon.setImageResource(
+            iconResource
+        )
+
+
+        // ========================================================
+        // READ STATE
+        // ========================================================
+
         if (item.isRead) {
-            holder.itemView.alpha = 0.4f
-            holder.tvMarkAsRead.visibility = View.GONE
+
+            holder.itemView.alpha =
+                0.45f
+
+            holder.tvMarkAsRead.visibility =
+                View.GONE
+
         } else {
-            holder.itemView.alpha = 1.0f
-            holder.tvMarkAsRead.visibility = View.VISIBLE
+
+            holder.itemView.alpha =
+                1.0f
+
+            holder.tvMarkAsRead.visibility =
+                View.VISIBLE
         }
+
+
+        // ========================================================
+        // CLICK NOTIFICATION
+        // ========================================================
 
         holder.itemView.setOnClickListener {
-            if (!item.isRead) onMarkAsReadClick(item)
+
+            if (!item.isRead) {
+
+                onMarkAsReadClick(item)
+            }
         }
 
+
+        // ========================================================
+        // MARK AS READ
+        // ========================================================
+
         holder.tvMarkAsRead.setOnClickListener {
-            if (!item.isRead) onMarkAsReadClick(item)
+
+            if (!item.isRead) {
+
+                onMarkAsReadClick(item)
+            }
+        }
+
+
+        // ========================================================
+        // DELETE NOTIFICATION
+        // ========================================================
+
+        holder.btnDelete.setOnClickListener {
+
+            onDeleteClick(item)
         }
     }
 
-    override fun getItemCount(): Int = notifications.size
-    fun updateList(newList: List<Notification>) {
-        notifications = newList
+
+    // ============================================================
+    // ITEM COUNT
+    // ============================================================
+
+    override fun getItemCount(): Int {
+
+        return notifications.size
+    }
+
+
+    // ============================================================
+    // UPDATE LIST
+    // ============================================================
+
+    fun updateList(
+        newList: List<Notification>
+    ) {
+
+        notifications =
+            newList
+
         notifyDataSetChanged()
     }
 
-    private fun getTimeAgo(time: Long): String {
-        val now = System.currentTimeMillis()
-        val diff = now - time
 
-        val minute = 60 * 1000L
-        val hour = 60 * minute
-        val day = 24 * hour
+    // ============================================================
+    // TIME AGO
+    // ============================================================
 
-        val minutes = diff / minute
-        val hours = diff / hour
-        val days = diff / day
+    private fun getTimeAgo(
+        time: Long
+    ): String {
+
+
+        val now =
+            System.currentTimeMillis()
+
+
+        val diff =
+            now - time
+
+
+        val minute =
+            60 * 1000L
+
+
+        val hour =
+            60 * minute
+
+
+        val day =
+            24 * hour
+
+
+        val minutes =
+            diff / minute
+
+
+        val hours =
+            diff / hour
+
+
+        val days =
+            diff / day
+
 
         return when {
-            diff < minute -> "Just now"
-            diff < hour -> "${minutes}m"
-            hours == 1L -> "1 hr"
-            hours < 24 -> "$hours hr"
-            days == 1L -> "1 dy"
-            else -> "$days dy"
+
+            diff < minute -> {
+
+                "Just now"
+            }
+
+            diff < hour -> {
+
+                "${minutes}m"
+            }
+
+            hours == 1L -> {
+
+                "1 hr"
+            }
+
+            hours < 24 -> {
+
+                "$hours hr"
+            }
+
+            days == 1L -> {
+
+                "1 day"
+            }
+
+            else -> {
+
+                "$days days"
+            }
         }
     }
 }

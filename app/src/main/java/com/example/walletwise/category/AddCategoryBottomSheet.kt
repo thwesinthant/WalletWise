@@ -123,6 +123,8 @@ class AddCategoryBottomSheet(
         val saveButton = view.findViewById<Button>(R.id.saveCategoryButton)
 
         nameInput.setText(existing?.label ?: "")
+        nameInput.setTextColor(Color.BLACK)
+        nameInput.setHintTextColor(Color.DKGRAY)
         saveButton.text = if (existing != null) "Update Category" else "Save Category"
 
         fun updatePreview() {

@@ -7,40 +7,49 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
-
 import com.example.walletwise.R
 import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.entity.Budget
 import com.example.walletwise.entity.CategoryEntity
+import com.example.walletwise.notification.NotificationPopupManager
 import com.example.walletwise.util.BottomNavHelper
 import com.example.walletwise.util.NavTab
-
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-
 import java.text.NumberFormat
 import java.util.Date
 import java.util.Locale
 
-
 class BudgetActivity : AppCompatActivity() {
-
 
     // ============================================================
     // DATABASE
     // ============================================================
 
     private lateinit var database: AppDatabase
+
+    private lateinit var notificationPopupManager:
+            NotificationPopupManager
+
+
+    // ============================================================
+    // USER
+    // ============================================================
+
+    private var userId: Int = -1
+
+    private var userCurrency: String = "MMK"
 
 
     // ============================================================
@@ -65,13 +74,6 @@ class BudgetActivity : AppCompatActivity() {
     private lateinit var tvProgressPercent: TextView
 
     private lateinit var tvMonthRemaining: TextView
-
-
-    // ============================================================
-    // USER
-    // ============================================================
-
-    private var userId: Int = -1
 
 
     // ============================================================
@@ -127,6 +129,23 @@ class BudgetActivity : AppCompatActivity() {
 
 
         // ========================================================
+        // NOTIFICATION POPUP
+        // ========================================================
+
+        notificationPopupManager =
+            NotificationPopupManager(
+                this
+            )
+
+
+        // ========================================================
+        // INITIALIZE VIEWS
+        // ========================================================
+
+        initializeViews()
+
+
+        // ========================================================
         // BOTTOM NAVIGATION
         // ========================================================
 
@@ -135,20 +154,52 @@ class BudgetActivity : AppCompatActivity() {
             root = findViewById(
                 android.R.id.content
             ),
-            current = NavTab.HOME,
+            current = NavTab.BUDGETS,
             userId = userId
         )
 
 
         // ========================================================
-        // INITIALIZE
+        // ADD BUDGET BUTTON
         // ========================================================
-
-        initializeViews()
 
         setupAddBudgetButton()
 
-        observeBudgets()
+
+        // ========================================================
+        // LOAD USER CURRENCY THEN OBSERVE BUDGETS
+        // ========================================================
+
+        lifecycleScope.launch {
+
+            loadUserCurrency()
+
+            observeBudgets()
+        }
+    }
+
+
+    // ============================================================
+    // LOAD USER CURRENCY
+    // ============================================================
+
+    private suspend fun loadUserCurrency() {
+
+        val user =
+            database
+                .userDao()
+                .getUserByIdOnce(
+                    userId
+                )
+
+
+        userCurrency =
+            user
+                ?.currency
+                ?.takeIf {
+                    it.isNotBlank()
+                }
+                ?: "MMK"
     }
 
 
@@ -157,6 +208,19 @@ class BudgetActivity : AppCompatActivity() {
     // ============================================================
 
     private fun initializeViews() {
+
+        val btnBack =
+            findViewById<ImageView>(
+                R.id.btnBack
+            )
+
+
+        btnBack.setOnClickListener {
+
+            onBackPressedDispatcher
+                .onBackPressed()
+        }
+
 
         btnAddBudget =
             findViewById(
@@ -233,28 +297,23 @@ class BudgetActivity : AppCompatActivity() {
     // OBSERVE BUDGETS
     // ============================================================
 
-    private fun observeBudgets() {
+    private suspend fun observeBudgets() {
 
-        lifecycleScope.launch {
+        database
+            .budgetDao()
+            .getBudgetsByUser(
+                userId
+            )
+            .collectLatest { budgets ->
 
-            database
-                .budgetDao()
-                .getBudgetsByUser(
-                    userId
+                displayBudgets(
+                    budgets
                 )
-                .collectLatest { budgets ->
 
-
-                    displayBudgets(
-                        budgets
-                    )
-
-
-                    updateBudgetSummary(
-                        budgets
-                    )
-                }
-        }
+                updateBudgetSummary(
+                    budgets
+                )
+            }
     }
 
 
@@ -268,10 +327,6 @@ class BudgetActivity : AppCompatActivity() {
 
         budgetListContainer.removeAllViews()
 
-
-        // ========================================================
-        // EMPTY STATE
-        // ========================================================
 
         if (budgets.isEmpty()) {
 
@@ -290,10 +345,10 @@ class BudgetActivity : AppCompatActivity() {
 
 
             emptyView.setPadding(
-                16,
-                30,
-                16,
-                30
+                dpToPx(16),
+                dpToPx(30),
+                dpToPx(16),
+                dpToPx(30)
             )
 
 
@@ -310,10 +365,6 @@ class BudgetActivity : AppCompatActivity() {
         }
 
 
-        // ========================================================
-        // GET USER CATEGORIES
-        // ========================================================
-
         val userCategories =
             database
                 .categoryDao()
@@ -323,18 +374,11 @@ class BudgetActivity : AppCompatActivity() {
                 .first()
 
 
-        // ========================================================
-        // CREATE BUDGET CARDS
-        // ========================================================
-
         budgets.forEach { budget ->
-
 
             val budgetView =
                 LayoutInflater
-                    .from(
-                        this
-                    )
+                    .from(this)
                     .inflate(
                         R.layout.item_budget,
                         budgetListContainer,
@@ -377,6 +421,7 @@ class BudgetActivity : AppCompatActivity() {
                         endDate = budget.endDate
                     )
 
+
             bindBudgetCard(
                 view = view,
                 budget = budget,
@@ -398,70 +443,55 @@ class BudgetActivity : AppCompatActivity() {
         userCategories: List<CategoryEntity>
     ) {
 
-
-        // ========================================================
-        // FIND VIEWS
-        // ========================================================
-
         val tvBudgetName =
             view.findViewById<TextView>(
                 R.id.tvBudgetName
             )
-
 
         val tvBudgetDate =
             view.findViewById<TextView>(
                 R.id.tvBudgetDate
             )
 
-
         val tvBudgetStatus =
             view.findViewById<TextView>(
                 R.id.tvBudgetStatus
             )
-
 
         val tvBudgetAmount =
             view.findViewById<TextView>(
                 R.id.tvBudgetAmount
             )
 
-
         val budgetProgress =
             view.findViewById<ProgressBar>(
                 R.id.budgetProgress
             )
-
 
         val tvSpent =
             view.findViewById<TextView>(
                 R.id.tvSpent
             )
 
-
         val tvBudgetRemaining =
             view.findViewById<TextView>(
                 R.id.tvBudgetRemaining
             )
-
 
         val btnToggleCategories =
             view.findViewById<TextView>(
                 R.id.btnToggleCategories
             )
 
-
         val categorySummary =
             view.findViewById<LinearLayout>(
                 R.id.categorySummary
             )
 
-
         val btnEditBudget =
             view.findViewById<TextView>(
                 R.id.btnEditBudget
             )
-
 
         val btnDeleteBudget =
             view.findViewById<TextView>(
@@ -470,7 +500,7 @@ class BudgetActivity : AppCompatActivity() {
 
 
         // ========================================================
-        // BASIC INFORMATION
+        // BASIC BUDGET INFORMATION
         // ========================================================
 
         tvBudgetName.text =
@@ -510,16 +540,13 @@ class BudgetActivity : AppCompatActivity() {
             (
                     budget.amount -
                             safeSpent
-                    )
-                .coerceAtLeast(
+                    ).coerceAtLeast(
                     0.0
                 )
 
 
         val progress =
-            if (
-                budget.amount > 0
-            ) {
+            if (budget.amount > 0) {
 
                 (
                         safeSpent /
@@ -559,7 +586,7 @@ class BudgetActivity : AppCompatActivity() {
 
 
         // ========================================================
-        // CATEGORY DETAILS
+        // CATEGORY SUMMARY
         // ========================================================
 
         loadCategorySummary(
@@ -606,25 +633,14 @@ class BudgetActivity : AppCompatActivity() {
         userCategories: List<CategoryEntity>
     ) {
 
-
-        // ========================================================
-        // RESET
-        // ========================================================
-
         categorySummary.removeAllViews()
-
 
         categorySummary.visibility =
             View.GONE
 
-
         toggleButton.visibility =
             View.GONE
 
-
-        // ========================================================
-        // GET BUDGET CATEGORIES
-        // ========================================================
 
         val budgetCategories =
             database
@@ -634,24 +650,16 @@ class BudgetActivity : AppCompatActivity() {
                 )
 
 
-        if (
-            budgetCategories.isEmpty()
-        ) {
-
+        if (budgetCategories.isEmpty()) {
             return
         }
 
-
-        // ========================================================
-        // CREATE CATEGORY VIEWS
-        // ========================================================
 
         var validCategoryCount =
             0
 
 
         budgetCategories.forEach { budgetCategory ->
-
 
             val category =
                 userCategories.find {
@@ -661,17 +669,10 @@ class BudgetActivity : AppCompatActivity() {
                 }
 
 
-            if (
-                category == null
-            ) {
-
+            if (category == null) {
                 return@forEach
             }
 
-
-            // ====================================================
-            // CATEGORY SPENDING
-            // ====================================================
 
             val categorySpent =
                 database
@@ -683,10 +684,6 @@ class BudgetActivity : AppCompatActivity() {
                         endDate = budget.endDate
                     )
 
-
-            // ====================================================
-            // CREATE CATEGORY VIEW
-            // ====================================================
 
             val categoryView =
                 createCategoryProgressView(
@@ -705,14 +702,7 @@ class BudgetActivity : AppCompatActivity() {
         }
 
 
-        // ========================================================
-        // SHOW TOGGLE
-        // ========================================================
-
-        if (
-            validCategoryCount > 0
-        ) {
-
+        if (validCategoryCount > 0) {
 
             toggleButton.visibility =
                 View.VISIBLE
@@ -722,45 +712,25 @@ class BudgetActivity : AppCompatActivity() {
                 "Show category details ($validCategoryCount) ▼"
 
 
-            // ====================================================
-            // TOGGLE CLICK
-            // ====================================================
-
             toggleButton.setOnClickListener {
-
 
                 val isExpanded =
                     categorySummary.visibility ==
                             View.VISIBLE
 
 
-                if (
-                    isExpanded
-                ) {
-
-
-                    // --------------------------------------------
-                    // COLLAPSE
-                    // --------------------------------------------
+                if (isExpanded) {
 
                     categorySummary.visibility =
                         View.GONE
 
-
                     toggleButton.text =
                         "Show category details ($validCategoryCount) ▼"
 
-
                 } else {
-
-
-                    // --------------------------------------------
-                    // EXPAND
-                    // --------------------------------------------
 
                     categorySummary.visibility =
                         View.VISIBLE
-
 
                     toggleButton.text =
                         "Hide category details ($validCategoryCount) ▲"
@@ -780,11 +750,6 @@ class BudgetActivity : AppCompatActivity() {
         limit: Double
     ): LinearLayout {
 
-
-        // ========================================================
-        // CONTAINER
-        // ========================================================
-
         val container =
             LinearLayout(
                 this
@@ -801,17 +766,10 @@ class BudgetActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
 
-                // Smaller spacing than before
                 topMargin =
-                    dpToPx(
-                        8
-                    )
+                    dpToPx(8)
             }
 
-
-        // ========================================================
-        // CATEGORY NAME
-        // ========================================================
 
         val categoryName =
             TextView(
@@ -844,10 +802,6 @@ class BudgetActivity : AppCompatActivity() {
         )
 
 
-        // ========================================================
-        // PROGRESS BAR
-        // ========================================================
-
         val progressBar =
             ProgressBar(
                 this,
@@ -859,15 +813,11 @@ class BudgetActivity : AppCompatActivity() {
         progressBar.layoutParams =
             LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                dpToPx(
-                    6
-                )
+                dpToPx(6)
             ).apply {
 
                 topMargin =
-                    dpToPx(
-                        5
-                    )
+                    dpToPx(5)
             }
 
 
@@ -876,9 +826,7 @@ class BudgetActivity : AppCompatActivity() {
 
 
         val progress =
-            if (
-                limit > 0
-            ) {
+            if (limit > 0) {
 
                 (
                         spent /
@@ -918,10 +866,6 @@ class BudgetActivity : AppCompatActivity() {
         )
 
 
-        // ========================================================
-        // SPENT / LIMIT TEXT
-        // ========================================================
-
         val amountText =
             TextView(
                 this
@@ -935,9 +879,7 @@ class BudgetActivity : AppCompatActivity() {
             ).apply {
 
                 topMargin =
-                    dpToPx(
-                        3
-                    )
+                    dpToPx(3)
             }
 
 
@@ -950,7 +892,7 @@ class BudgetActivity : AppCompatActivity() {
                 formatShortMoney(
                     limit
                 )
-            }"
+            } $userCurrency"
 
 
         amountText.textSize =
@@ -1012,10 +954,84 @@ class BudgetActivity : AppCompatActivity() {
         )
 
 
-        startActivity(
+        // IMPORTANT:
+        // Use Activity Result instead of startActivity()
+        // so AddBudgetActivity can return the newly created
+        // notification ID.
+        budgetEditResult.launch(
             intent
         )
     }
+
+
+    // ============================================================
+    // RECEIVE RESULT FROM ADD BUDGET
+    // ============================================================
+
+    private val budgetEditResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            // ----------------------------------------------------
+            // Make sure the edit Activity completed successfully.
+            // ----------------------------------------------------
+
+            if (
+                result.resultCode != RESULT_OK
+            ) {
+                return@registerForActivityResult
+            }
+
+
+            // ----------------------------------------------------
+            // Get notification ID returned by AddBudgetActivity.
+            // ----------------------------------------------------
+
+            val notificationId =
+                result.data?.getIntExtra(
+                    AddBudgetActivity.EXTRA_NEW_NOTIFICATION_ID,
+                    -1
+                ) ?: -1
+
+
+            // ----------------------------------------------------
+            // -1 means no NEW notification was created.
+            // ----------------------------------------------------
+
+            if (
+                notificationId == -1
+            ) {
+                return@registerForActivityResult
+            }
+
+
+            // ----------------------------------------------------
+            // Load notification from Room.
+            // ----------------------------------------------------
+
+            lifecycleScope.launch {
+
+                val notification =
+                    database
+                        .notificationDao()
+                        .getNotificationById(
+                            notificationId
+                        )
+
+
+                // ------------------------------------------------
+                // Show popup if notification exists.
+                // ------------------------------------------------
+
+                if (notification != null) {
+
+                    notificationPopupManager.show(
+                        notification
+                    )
+                }
+            }
+        }
 
 
     // ============================================================
@@ -1029,21 +1045,17 @@ class BudgetActivity : AppCompatActivity() {
         AlertDialog.Builder(
             this
         )
-
             .setTitle(
                 "Delete Budget?"
             )
-
             .setMessage(
                 "Are you sure you want to delete \"${budget.name}\"?\n\n" +
                         "The category limits for this budget will also be removed."
             )
-
             .setNegativeButton(
                 "Cancel",
                 null
             )
-
             .setPositiveButton(
                 "Delete"
             ) { _, _ ->
@@ -1052,7 +1064,6 @@ class BudgetActivity : AppCompatActivity() {
                     budget
                 )
             }
-
             .show()
     }
 
@@ -1069,7 +1080,6 @@ class BudgetActivity : AppCompatActivity() {
 
             try {
 
-
                 val existingBudget =
                     database
                         .budgetDao()
@@ -1078,16 +1088,13 @@ class BudgetActivity : AppCompatActivity() {
                         )
 
 
-                if (
-                    existingBudget == null
-                ) {
+                if (existingBudget == null) {
 
                     Toast.makeText(
                         this@BudgetActivity,
                         "Budget not found",
                         Toast.LENGTH_SHORT
                     ).show()
-
 
                     return@launch
                 }
@@ -1103,7 +1110,6 @@ class BudgetActivity : AppCompatActivity() {
                         "You cannot delete this budget",
                         Toast.LENGTH_SHORT
                     ).show()
-
 
                     return@launch
                 }
@@ -1122,10 +1128,7 @@ class BudgetActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-
-            } catch (
-                e: Exception
-            ) {
+            } catch (e: Exception) {
 
                 Toast.makeText(
                     this@BudgetActivity,
@@ -1138,21 +1141,27 @@ class BudgetActivity : AppCompatActivity() {
 
 
     // ============================================================
-    // UPDATE MONTH SUMMARY
+    // UPDATE BUDGET SUMMARY
     // ============================================================
+
     private fun updateBudgetSummary(
         budgets: List<Budget>
     ) {
 
         lifecycleScope.launch {
 
-            var totalBudget = 0.0
+            var totalBudget =
+                0.0
 
-            var totalSpent = 0.0
+            var totalSpent =
+                0.0
+
 
             budgets.forEach { budget ->
 
-                totalBudget += budget.amount
+                totalBudget +=
+                    budget.amount
+
 
                 val spent =
                     database
@@ -1163,15 +1172,22 @@ class BudgetActivity : AppCompatActivity() {
                             endDate = budget.endDate
                         )
 
+
                 totalSpent +=
-                    spent.coerceAtLeast(0.0)
+                    spent.coerceAtLeast(
+                        0.0
+                    )
             }
+
 
             val remaining =
                 (
                         totalBudget -
                                 totalSpent
-                        ).coerceAtLeast(0.0)
+                        ).coerceAtLeast(
+                        0.0
+                    )
+
 
             val progress =
                 if (totalBudget > 0) {
@@ -1182,24 +1198,34 @@ class BudgetActivity : AppCompatActivity() {
                                     100
                             )
                         .toInt()
-                        .coerceIn(0, 100)
+                        .coerceIn(
+                            0,
+                            100
+                        )
 
                 } else {
 
                     0
                 }
 
+
             tvTotalBudget.text =
-                formatMoney(totalBudget)
+                formatMoney(
+                    totalBudget
+                )
+
 
             tvBudgetSpent.text =
                 "${formatMoney(totalSpent)} spent"
 
+
             tvMonthRemaining.text =
                 "${formatMoney(remaining)} remaining"
 
+
             tvProgressPercent.text =
                 "$progress% used"
+
 
             monthBudgetProgress.progress =
                 progress
@@ -1215,13 +1241,11 @@ class BudgetActivity : AppCompatActivity() {
         budget: Budget
     ): String {
 
-
         val currentTime =
             System.currentTimeMillis()
 
 
         return when {
-
 
             currentTime <
                     budget.startDate ->
@@ -1250,7 +1274,6 @@ class BudgetActivity : AppCompatActivity() {
         amount: Double
     ): String {
 
-
         val formatter =
             NumberFormat.getNumberInstance(
                 Locale.US
@@ -1265,11 +1288,7 @@ class BudgetActivity : AppCompatActivity() {
             0
 
 
-        return "${
-            formatter.format(
-                amount
-            )
-        } MMK"
+        return "${formatter.format(amount)} $userCurrency"
     }
 
 
@@ -1281,17 +1300,14 @@ class BudgetActivity : AppCompatActivity() {
         amount: Double
     ): String {
 
-
         return when {
-
 
             amount >= 1_000_000 ->
 
                 String.format(
                     Locale.US,
                     "%.1fM",
-                    amount /
-                            1_000_000
+                    amount / 1_000_000
                 )
 
 
@@ -1300,8 +1316,7 @@ class BudgetActivity : AppCompatActivity() {
                 String.format(
                     Locale.US,
                     "%.0fK",
-                    amount /
-                            1_000
+                    amount / 1_000
                 )
 
 
@@ -1325,31 +1340,18 @@ class BudgetActivity : AppCompatActivity() {
         endDate: Long
     ): String {
 
-
         val start =
-            android
-                .text
-                .format
-                .DateFormat
-                .format(
-                    "MMM dd",
-                    Date(
-                        startDate
-                    )
-                )
+            android.text.format.DateFormat.format(
+                "MMM dd",
+                Date(startDate)
+            )
 
 
         val end =
-            android
-                .text
-                .format
-                .DateFormat
-                .format(
-                    "MMM dd",
-                    Date(
-                        endDate
-                    )
-                )
+            android.text.format.DateFormat.format(
+                "MMM dd",
+                Date(endDate)
+            )
 
 
         return "$start - $end"
@@ -1364,13 +1366,22 @@ class BudgetActivity : AppCompatActivity() {
         dp: Int
     ): Int {
 
-
         return (
                 dp *
-                        resources
-                            .displayMetrics
-                            .density
-                )
-            .toInt()
+                        resources.displayMetrics.density
+                ).toInt()
+    }
+
+
+    // ============================================================
+    // CLEANUP POPUP
+    // ============================================================
+
+    override fun onDestroy() {
+
+        notificationPopupManager.dismiss()
+
+        super.onDestroy()
     }
 }
+

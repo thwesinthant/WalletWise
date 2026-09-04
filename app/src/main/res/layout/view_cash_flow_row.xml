@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvRowLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/dosis_semibold"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp"
+        tools:text="Income" />
+
+    <TextView
+        android:id="@+id/tvRowAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/dosis_bold"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp"
+        tools:text="MMK 125,000.00" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.example.walletwise.dashboard.ProgressBarView
+            android:id="@+id/progressBar"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvRowPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:textSize="13sp"
+            tools:text="65%" />
+    </LinearLayout>
+</LinearLayout>

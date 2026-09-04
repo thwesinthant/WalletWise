@@ -17,11 +17,11 @@ interface CategoryDao {
 
     @Query(
         """
-        SELECT *
-        FROM categories
-        WHERE userId = :userId
-        ORDER BY sortOrder ASC, id ASC
-        """
+    SELECT *
+    FROM categories
+    WHERE user_id = :userId
+    ORDER BY sort_order ASC, category_id ASC
+    """
     )
     fun observeAll(
         userId: Int
@@ -33,10 +33,10 @@ interface CategoryDao {
 
     @Query(
         """
-        SELECT COUNT(*)
-        FROM categories
-        WHERE userId = :userId
-        """
+    SELECT COUNT(*)
+    FROM categories
+    WHERE user_id = :userId
+    """
     )
     suspend fun countByUserId(
         userId: Int
@@ -48,10 +48,10 @@ interface CategoryDao {
 
     @Query(
         """
-        SELECT MIN(sortOrder)
-        FROM categories
-        WHERE userId = :userId
-        """
+    SELECT MIN(sort_order)
+    FROM categories
+    WHERE user_id = :userId
+    """
     )
     suspend fun minSortOrder(
         userId: Int
@@ -66,12 +66,12 @@ interface CategoryDao {
 
     @Query(
         """
-        SELECT *
-        FROM categories
-        WHERE id = :categoryId
-          AND userId = :userId
-        LIMIT 1
-        """
+    SELECT *
+    FROM categories
+    WHERE category_id = :categoryId
+    AND user_id = :userId
+    LIMIT 1
+    """
     )
     suspend fun getCategoryById(
         categoryId: Long,

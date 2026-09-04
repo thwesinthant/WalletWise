@@ -1,13 +1,13 @@
 package com.example.walletwise.budget
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +17,10 @@ import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.entity.Budget
 import com.example.walletwise.entity.BudgetCategory
 import com.example.walletwise.entity.CategoryEntity
+import com.example.walletwise.entity.Notification
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -27,32 +30,82 @@ import java.util.Locale
 class AddBudgetActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_USER_ID = "USER_ID"
-        const val EXTRA_BUDGET_ID = "BUDGET_ID"
+
+        const val EXTRA_USER_ID =
+            "USER_ID"
+
+        const val EXTRA_BUDGET_ID =
+            "BUDGET_ID"
+
+        const val EXTRA_NEW_NOTIFICATION_ID =
+            "NEW_NOTIFICATION_ID"
     }
+
+
+    // ============================================================
+    // DATABASE
+    // ============================================================
 
     private lateinit var database: AppDatabase
 
-    private lateinit var etBudgetName: TextInputEditText
-    private lateinit var etBudgetAmount: TextInputEditText
-    private lateinit var etStartDate: TextInputEditText
-    private lateinit var etEndDate: TextInputEditText
 
-    private lateinit var categoryContainer: LinearLayout
-    private lateinit var btnAddCategory: Button
-    private lateinit var btnCreateBudget: Button
-    private lateinit var btnBack: View
+    // ============================================================
+    // USER
+    // ============================================================
 
     private var userId: Int = -1
+
+    private var userCurrency: String = "MMK"
+
+
+    // ============================================================
+    // VIEWS
+    // ============================================================
+
+    private lateinit var etBudgetName: TextInputEditText
+
+    private lateinit var etBudgetAmount: TextInputEditText
+
+    private lateinit var etStartDate: TextInputEditText
+
+    private lateinit var etEndDate: TextInputEditText
+
+    private lateinit var tilBudgetAmount: TextInputLayout
+
+    private lateinit var categoryContainer: LinearLayout
+
+    private lateinit var btnAddCategory: Button
+
+    private lateinit var btnCreateBudget: Button
+
+    private lateinit var btnBack: View
+
+
+    // ============================================================
+    // MODE
+    // ============================================================
 
     private var budgetId: Int = -1
 
     private var isEditMode = false
 
+
+    // ============================================================
+    // DATE
+    // ============================================================
+
     private var startDateMillis: Long = 0L
+
     private var endDateMillis: Long = 0L
 
-    private var userCategories: List<CategoryEntity> = emptyList()
+
+    // ============================================================
+    // CATEGORIES
+    // ============================================================
+
+    private var userCategories: List<CategoryEntity> =
+        emptyList()
+
 
     private val dateFormatter =
         SimpleDateFormat(
@@ -68,15 +121,13 @@ class AddBudgetActivity : AppCompatActivity() {
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
+
         super.onCreate(savedInstanceState)
 
         setContentView(
             R.layout.activity_add_budget
         )
 
-        // --------------------------------------------------------
-        // GET USER ID
-        // --------------------------------------------------------
 
         userId =
             intent.getIntExtra(
@@ -84,9 +135,6 @@ class AddBudgetActivity : AppCompatActivity() {
                 -1
             )
 
-        // --------------------------------------------------------
-        // GET BUDGET ID
-        // --------------------------------------------------------
 
         budgetId =
             intent.getIntExtra(
@@ -94,13 +142,10 @@ class AddBudgetActivity : AppCompatActivity() {
                 -1
             )
 
+
         isEditMode =
             budgetId != -1
 
-
-        // --------------------------------------------------------
-        // VALIDATE USER
-        // --------------------------------------------------------
 
         if (userId == -1) {
 
@@ -111,13 +156,10 @@ class AddBudgetActivity : AppCompatActivity() {
             ).show()
 
             finish()
+
             return
         }
 
-
-        // --------------------------------------------------------
-        // DATABASE
-        // --------------------------------------------------------
 
         database =
             AppDatabase.getDatabase(
@@ -125,27 +167,17 @@ class AddBudgetActivity : AppCompatActivity() {
             )
 
 
-        // --------------------------------------------------------
-        // BIND VIEWS
-        // --------------------------------------------------------
-
         bindViews()
-
-
-        // --------------------------------------------------------
-        // CLICK LISTENERS
-        // --------------------------------------------------------
 
         setupClickListeners()
 
 
-        // --------------------------------------------------------
-        // LOAD DATA
-        // --------------------------------------------------------
-
         lifecycleScope.launch {
 
+            loadUserCurrency()
+
             loadCategories()
+
 
             if (isEditMode) {
 
@@ -160,50 +192,63 @@ class AddBudgetActivity : AppCompatActivity() {
 
 
     // ============================================================
+    // LOAD USER CURRENCY
+    // ============================================================
+
+    private suspend fun loadUserCurrency() {
+
+        val user =
+            database
+                .userDao()
+                .getUserByIdOnce(userId)
+
+
+        userCurrency =
+            user
+                ?.currency
+                ?.takeIf {
+                    it.isNotBlank()
+                }
+                ?: "MMK"
+
+
+        tilBudgetAmount.suffixText =
+            userCurrency
+    }
+
+
+    // ============================================================
     // BIND VIEWS
     // ============================================================
 
     private fun bindViews() {
 
         btnBack =
-            findViewById(
-                R.id.btnBack
-            )
+            findViewById(R.id.btnBack)
 
         etBudgetName =
-            findViewById(
-                R.id.etBudgetName
-            )
+            findViewById(R.id.etBudgetName)
 
         etBudgetAmount =
-            findViewById(
-                R.id.etBudgetAmount
-            )
+            findViewById(R.id.etBudgetAmount)
 
         etStartDate =
-            findViewById(
-                R.id.etStartDate
-            )
+            findViewById(R.id.etStartDate)
 
         etEndDate =
-            findViewById(
-                R.id.etEndDate
-            )
+            findViewById(R.id.etEndDate)
+
+        tilBudgetAmount =
+            findViewById(R.id.tilBudgetAmount)
 
         categoryContainer =
-            findViewById(
-                R.id.categoryContainer
-            )
+            findViewById(R.id.categoryContainer)
 
         btnAddCategory =
-            findViewById(
-                R.id.btnAddCategory
-            )
+            findViewById(R.id.btnAddCategory)
 
         btnCreateBudget =
-            findViewById(
-                R.id.btnCreateBudget
-            )
+            findViewById(R.id.btnCreateBudget)
     }
 
 
@@ -213,39 +258,20 @@ class AddBudgetActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
 
-        // --------------------------------------------------------
-        // BACK
-        // --------------------------------------------------------
-
         btnBack.setOnClickListener {
-
             finish()
         }
 
 
-        // --------------------------------------------------------
-        // START DATE
-        // --------------------------------------------------------
-
         etStartDate.setOnClickListener {
-
             showStartDatePicker()
         }
 
 
-        // --------------------------------------------------------
-        // END DATE
-        // --------------------------------------------------------
-
         etEndDate.setOnClickListener {
-
             showEndDatePicker()
         }
 
-
-        // --------------------------------------------------------
-        // ADD CATEGORY
-        // --------------------------------------------------------
 
         btnAddCategory.setOnClickListener {
 
@@ -264,12 +290,7 @@ class AddBudgetActivity : AppCompatActivity() {
         }
 
 
-        // --------------------------------------------------------
-        // CREATE / UPDATE
-        // --------------------------------------------------------
-
         btnCreateBudget.setOnClickListener {
-
             createOrUpdateBudget()
         }
     }
@@ -299,14 +320,11 @@ class AddBudgetActivity : AppCompatActivity() {
             Calendar.getInstance()
 
 
-        // --------------------------------------------------------
-        // FIRST DAY OF CURRENT MONTH
-        // --------------------------------------------------------
-
         calendar.set(
             Calendar.DAY_OF_MONTH,
             1
         )
+
 
         startDateMillis =
             getStartOfDay(
@@ -314,16 +332,13 @@ class AddBudgetActivity : AppCompatActivity() {
             )
 
 
-        // --------------------------------------------------------
-        // LAST DAY OF CURRENT MONTH
-        // --------------------------------------------------------
-
         calendar.set(
             Calendar.DAY_OF_MONTH,
             calendar.getActualMaximum(
                 Calendar.DAY_OF_MONTH
             )
         )
+
 
         endDateMillis =
             getEndOfDay(
@@ -335,6 +350,10 @@ class AddBudgetActivity : AppCompatActivity() {
     }
 
 
+    // ============================================================
+    // UPDATE DATE FIELDS
+    // ============================================================
+
     private fun updateDateFields() {
 
         etStartDate.setText(
@@ -342,6 +361,7 @@ class AddBudgetActivity : AppCompatActivity() {
                 startDateMillis
             )
         )
+
 
         etEndDate.setText(
             dateFormatter.format(
@@ -352,7 +372,7 @@ class AddBudgetActivity : AppCompatActivity() {
 
 
     // ============================================================
-    // LOAD EXISTING BUDGET FOR EDIT
+    // LOAD BUDGET FOR EDIT
     // ============================================================
 
     private suspend fun loadBudgetForEdit() {
@@ -360,60 +380,45 @@ class AddBudgetActivity : AppCompatActivity() {
         val budget =
             database
                 .budgetDao()
-                .getBudgetById(
-                    budgetId
-                )
+                .getBudgetById(budgetId)
 
-
-        // --------------------------------------------------------
-        // BUDGET NOT FOUND
-        // --------------------------------------------------------
 
         if (budget == null) {
 
             Toast.makeText(
-                this@AddBudgetActivity,
+                this,
                 "Budget not found",
                 Toast.LENGTH_SHORT
             ).show()
 
             finish()
+
             return
         }
 
 
-        // --------------------------------------------------------
-        // SECURITY CHECK
-        // --------------------------------------------------------
-
         if (budget.userId != userId) {
 
             Toast.makeText(
-                this@AddBudgetActivity,
+                this,
                 "You cannot edit this budget",
                 Toast.LENGTH_SHORT
             ).show()
 
             finish()
+
             return
         }
 
-
-        // --------------------------------------------------------
-        // CHANGE BUTTON
-        // --------------------------------------------------------
 
         btnCreateBudget.text =
             "Update Budget"
 
 
-        // --------------------------------------------------------
-        // LOAD BASIC INFORMATION
-        // --------------------------------------------------------
-
         etBudgetName.setText(
             budget.name
         )
+
 
         etBudgetAmount.setText(
             budget.amount.toString()
@@ -423,16 +428,13 @@ class AddBudgetActivity : AppCompatActivity() {
         startDateMillis =
             budget.startDate
 
+
         endDateMillis =
             budget.endDate
 
 
         updateDateFields()
 
-
-        // --------------------------------------------------------
-        // LOAD CATEGORY LIMITS
-        // --------------------------------------------------------
 
         val budgetCategories =
             database
@@ -445,36 +447,16 @@ class AddBudgetActivity : AppCompatActivity() {
         categoryContainer.removeAllViews()
 
 
-        // --------------------------------------------------------
-        // ADD EXISTING CATEGORY ROWS
-        // --------------------------------------------------------
-
-        budgetCategories.forEach { budgetCategory ->
+        budgetCategories.forEach {
 
             addCategoryRow(
                 selectedCategoryId =
-                    budgetCategory.categoryId,
+                    it.categoryId,
+
                 categoryAmount =
-                    budgetCategory.limitAmount
+                    it.limitAmount
             )
         }
-
-        /*
-         * IMPORTANT:
-         *
-         * If the budget has NO category limits,
-         * we intentionally leave categoryContainer empty.
-         *
-         * This means:
-         *
-         * Budget
-         * ├── Total amount
-         * ├── Start date
-         * ├── End date
-         * └── No category limits
-         *
-         * This is a valid budget.
-         */
     }
 
 
@@ -497,19 +479,23 @@ class AddBudgetActivity : AppCompatActivity() {
                 )
 
 
-        // --------------------------------------------------------
-        // VIEWS
-        // --------------------------------------------------------
-
-        val spinner =
-            row.findViewById<Spinner>(
+        val categoryDropdown =
+            row.findViewById<MaterialAutoCompleteTextView>(
                 R.id.spCategory
             )
+
 
         val etCategoryAmount =
             row.findViewById<TextInputEditText>(
                 R.id.etCategoryAmount
             )
+
+
+        val tilCategoryAmount =
+            row.findViewById<TextInputLayout>(
+                R.id.tilCategoryAmount
+            )
+
 
         val btnRemove =
             row.findViewById<TextView>(
@@ -517,39 +503,31 @@ class AddBudgetActivity : AppCompatActivity() {
             )
 
 
-        // --------------------------------------------------------
-        // CATEGORY NAMES
-        // --------------------------------------------------------
+        tilCategoryAmount.suffixText =
+            userCurrency
+
 
         val categoryNames =
             userCategories.map {
-
                 it.label
             }
 
 
-        // --------------------------------------------------------
-        // SPINNER ADAPTER
-        // --------------------------------------------------------
-
         val adapter =
             ArrayAdapter(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.item_category_dropdown,
                 categoryNames
             )
 
-        adapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item
-        )
 
-        spinner.adapter =
-            adapter
+        categoryDropdown.setAdapter(adapter)
 
 
-        // --------------------------------------------------------
-        // SELECT EXISTING CATEGORY
-        // --------------------------------------------------------
+        categoryDropdown.setOnClickListener {
+            categoryDropdown.showDropDown()
+        }
+
 
         if (selectedCategoryId != null) {
 
@@ -563,16 +541,13 @@ class AddBudgetActivity : AppCompatActivity() {
 
             if (position >= 0) {
 
-                spinner.setSelection(
-                    position
+                categoryDropdown.setText(
+                    userCategories[position].label,
+                    false
                 )
             }
         }
 
-
-        // --------------------------------------------------------
-        // SET EXISTING CATEGORY LIMIT
-        // --------------------------------------------------------
 
         if (categoryAmount != null) {
 
@@ -582,25 +557,13 @@ class AddBudgetActivity : AppCompatActivity() {
         }
 
 
-        // --------------------------------------------------------
-        // REMOVE CATEGORY
-        // --------------------------------------------------------
-
         btnRemove.setOnClickListener {
 
-            categoryContainer.removeView(
-                row
-            )
+            categoryContainer.removeView(row)
         }
 
 
-        // --------------------------------------------------------
-        // ADD ROW
-        // --------------------------------------------------------
-
-        categoryContainer.addView(
-            row
-        )
+        categoryContainer.addView(row)
     }
 
 
@@ -617,61 +580,76 @@ class AddBudgetActivity : AppCompatActivity() {
             startDateMillis
 
 
-        DatePickerDialog(
-            this,
-            { _, year, month, day ->
+        val dialog =
+            DatePickerDialog(
+                this,
+                R.style.Theme_WalletWise_DatePicker,
+                { _, year, month, day ->
 
-                val selected =
-                    Calendar.getInstance()
+                    val selected =
+                        Calendar.getInstance()
 
+                    selected.set(
+                        year,
+                        month,
+                        day,
+                        0,
+                        0,
+                        0
+                    )
 
-                selected.set(
-                    year,
-                    month,
-                    day,
-                    0,
-                    0,
-                    0
-                )
-
-                selected.set(
-                    Calendar.MILLISECOND,
-                    0
-                )
-
-
-                startDateMillis =
-                    selected.timeInMillis
+                    selected.set(
+                        Calendar.MILLISECOND,
+                        0
+                    )
 
 
-                // ------------------------------------------------
-                // Automatically move end date if necessary
-                // ------------------------------------------------
-
-                if (
-                    endDateMillis <
-                    startDateMillis
-                ) {
-
-                    endDateMillis =
-                        getEndOfDay(
-                            startDateMillis
-                        )
-                }
+                    startDateMillis =
+                        selected.timeInMillis
 
 
-                updateDateFields()
-            },
-            calendar.get(
-                Calendar.YEAR
-            ),
-            calendar.get(
-                Calendar.MONTH
-            ),
-            calendar.get(
-                Calendar.DAY_OF_MONTH
+                    if (
+                        endDateMillis <
+                        startDateMillis
+                    ) {
+
+                        endDateMillis =
+                            getEndOfDay(
+                                startDateMillis
+                            )
+                    }
+
+
+                    updateDateFields()
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
             )
-        ).show()
+
+
+        dialog.setOnShowListener {
+
+            dialog.getButton(
+                DatePickerDialog.BUTTON_POSITIVE
+            ).setTextColor(
+                getColor(
+                    R.color.primary_500
+                )
+            )
+
+
+            dialog.getButton(
+                DatePickerDialog.BUTTON_NEGATIVE
+            ).setTextColor(
+                getColor(
+                    R.color.primary_500
+                )
+            )
+        }
+
+
+        dialog.show()
     }
 
 
@@ -688,104 +666,105 @@ class AddBudgetActivity : AppCompatActivity() {
             endDateMillis
 
 
-        DatePickerDialog(
-            this,
-            { _, year, month, day ->
+        val dialog =
+            DatePickerDialog(
+                this,
+                R.style.Theme_WalletWise_DatePicker,
+                { _, year, month, day ->
 
-                val selected =
-                    Calendar.getInstance()
+                    val selected =
+                        Calendar.getInstance()
 
+                    selected.set(
+                        year,
+                        month,
+                        day,
+                        23,
+                        59,
+                        59
+                    )
 
-                selected.set(
-                    year,
-                    month,
-                    day,
-                    23,
-                    59,
-                    59
-                )
-
-                selected.set(
-                    Calendar.MILLISECOND,
-                    999
-                )
-
-
-                val selectedEndDate =
-                    selected.timeInMillis
+                    selected.set(
+                        Calendar.MILLISECOND,
+                        999
+                    )
 
 
-                // ------------------------------------------------
-                // VALIDATE
-                // ------------------------------------------------
-
-                if (
-                    selectedEndDate <
-                    startDateMillis
-                ) {
-
-                    Toast.makeText(
-                        this,
-                        "End date cannot be before start date",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    return@DatePickerDialog
-                }
+                    val selectedEndDate =
+                        selected.timeInMillis
 
 
-                endDateMillis =
-                    selectedEndDate
+                    if (
+                        selectedEndDate <
+                        startDateMillis
+                    ) {
+
+                        Toast.makeText(
+                            this,
+                            "End date cannot be before start date",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        return@DatePickerDialog
+                    }
 
 
-                updateDateFields()
-            },
-            calendar.get(
-                Calendar.YEAR
-            ),
-            calendar.get(
-                Calendar.MONTH
-            ),
-            calendar.get(
-                Calendar.DAY_OF_MONTH
+                    endDateMillis =
+                        selectedEndDate
+
+
+                    updateDateFields()
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
             )
-        ).show()
+
+
+        dialog.setOnShowListener {
+
+            dialog.getButton(
+                DatePickerDialog.BUTTON_POSITIVE
+            ).setTextColor(
+                getColor(
+                    R.color.primary_500
+                )
+            )
+
+
+            dialog.getButton(
+                DatePickerDialog.BUTTON_NEGATIVE
+            ).setTextColor(
+                getColor(
+                    R.color.primary_500
+                )
+            )
+        }
+
+
+        dialog.show()
     }
 
 
     // ============================================================
-    // CREATE / UPDATE BUDGET
+    // CREATE OR UPDATE BUDGET
     // ============================================================
 
     private fun createOrUpdateBudget() {
 
-        // --------------------------------------------------------
-        // GET NAME
-        // --------------------------------------------------------
-
         val name =
-            etBudgetName
-                .text
+            etBudgetName.text
                 ?.toString()
                 ?.trim()
                 .orEmpty()
 
-
-        // --------------------------------------------------------
-        // GET AMOUNT
-        // --------------------------------------------------------
 
         val amountText =
-            etBudgetAmount
-                .text
+            etBudgetAmount.text
                 ?.toString()
                 ?.trim()
                 .orEmpty()
 
-
-        // ========================================================
-        // NAME VALIDATION
-        // ========================================================
 
         if (name.isEmpty()) {
 
@@ -797,10 +776,6 @@ class AddBudgetActivity : AppCompatActivity() {
             return
         }
 
-
-        // ========================================================
-        // AMOUNT VALIDATION
-        // ========================================================
 
         if (amountText.isEmpty()) {
 
@@ -831,10 +806,6 @@ class AddBudgetActivity : AppCompatActivity() {
         }
 
 
-        // ========================================================
-        // DATE VALIDATION
-        // ========================================================
-
         if (
             endDateMillis <
             startDateMillis
@@ -851,14 +822,7 @@ class AddBudgetActivity : AppCompatActivity() {
 
 
         // ========================================================
-        // READ CATEGORY LIMITS
-        //
-        // CATEGORY LIMITS ARE OPTIONAL.
-        //
-        // 0 categories = VALID
-        // 1 category   = VALID
-        // 2 categories = VALID
-        // etc.
+        // CATEGORY LIMITS
         // ========================================================
 
         val categoryLimits =
@@ -871,14 +835,11 @@ class AddBudgetActivity : AppCompatActivity() {
         ) {
 
             val row =
-                categoryContainer
-                    .getChildAt(
-                        index
-                    )
+                categoryContainer.getChildAt(index)
 
 
-            val spinner =
-                row.findViewById<Spinner>(
+            val categoryDropdown =
+                row.findViewById<MaterialAutoCompleteTextView>(
                     R.id.spCategory
                 )
 
@@ -889,18 +850,15 @@ class AddBudgetActivity : AppCompatActivity() {
                 )
 
 
-            // ----------------------------------------------------
-            // SPINNER VALIDATION
-            // ----------------------------------------------------
-
-            val selectedPosition =
-                spinner.selectedItemPosition
+            val selectedCategoryName =
+                categoryDropdown.text
+                    ?.toString()
+                    ?.trim()
+                    .orEmpty()
 
 
             if (
-                selectedPosition < 0 ||
-                selectedPosition >=
-                userCategories.size
+                selectedCategoryName.isEmpty()
             ) {
 
                 Toast.makeText(
@@ -909,23 +867,36 @@ class AddBudgetActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
 
+                categoryDropdown.requestFocus()
+
                 return
             }
 
 
             val category =
-                userCategories[
-                    selectedPosition
-                ]
+                userCategories.firstOrNull {
+
+                    it.label ==
+                            selectedCategoryName
+                }
 
 
-            // ----------------------------------------------------
-            // CATEGORY AMOUNT
-            // ----------------------------------------------------
+            if (category == null) {
+
+                Toast.makeText(
+                    this,
+                    "Please select a valid category",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                categoryDropdown.requestFocus()
+
+                return
+            }
+
 
             val limit =
-                amountInput
-                    .text
+                amountInput.text
                     ?.toString()
                     ?.trim()
                     ?.toDoubleOrNull()
@@ -982,8 +953,6 @@ class AddBudgetActivity : AppCompatActivity() {
 
         // ========================================================
         // CATEGORY TOTAL
-        //
-        // ONLY CHECK IF USER ACTUALLY ADDED CATEGORIES.
         // ========================================================
 
         val categoryTotal =
@@ -1008,35 +977,26 @@ class AddBudgetActivity : AppCompatActivity() {
 
 
         // ========================================================
-        // SAVE TO ROOM
+        // SAVE
         // ========================================================
 
         lifecycleScope.launch {
 
             try {
 
-                // =================================================
-                // CREATE NEW BUDGET
-                // =================================================
+                // ==================================================
+                // CREATE
+                // ==================================================
 
                 if (!isEditMode) {
 
                     val budget =
                         Budget(
-                            userId =
-                                userId,
-
-                            name =
-                                name,
-
-                            amount =
-                                totalAmount,
-
-                            startDate =
-                                startDateMillis,
-
-                            endDate =
-                                endDateMillis
+                            userId = userId,
+                            name = name,
+                            amount = totalAmount,
+                            startDate = startDateMillis,
+                            endDate = endDateMillis
                         )
 
 
@@ -1048,10 +1008,6 @@ class AddBudgetActivity : AppCompatActivity() {
                             )
                             .toInt()
 
-
-                    // ---------------------------------------------
-                    // INSERT CATEGORY LIMITS ONLY IF PRESENT
-                    // ---------------------------------------------
 
                     if (
                         categoryLimits.isNotEmpty()
@@ -1087,140 +1043,261 @@ class AddBudgetActivity : AppCompatActivity() {
                         "Budget created successfully",
                         Toast.LENGTH_SHORT
                     ).show()
+
+
+                    setResult(
+                        RESULT_OK
+                    )
+
+
+                    finish()
+
+                    return@launch
                 }
 
 
-                // =================================================
-                // UPDATE EXISTING BUDGET
-                // =================================================
+                // ==================================================
+                // EDIT
+                // ==================================================
 
-                else {
-
-                    val existingBudget =
-                        database
-                            .budgetDao()
-                            .getBudgetById(
-                                budgetId
-                            )
-
-
-                    // ---------------------------------------------
-                    // CHECK BUDGET EXISTS
-                    // ---------------------------------------------
-
-                    if (existingBudget == null) {
-
-                        Toast.makeText(
-                            this@AddBudgetActivity,
-                            "Budget not found",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        return@launch
-                    }
-
-
-                    // ---------------------------------------------
-                    // SECURITY CHECK
-                    // ---------------------------------------------
-
-                    if (
-                        existingBudget.userId !=
-                        userId
-                    ) {
-
-                        Toast.makeText(
-                            this@AddBudgetActivity,
-                            "You cannot edit this budget",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        return@launch
-                    }
-
-
-                    // ---------------------------------------------
-                    // UPDATED BUDGET
-                    // ---------------------------------------------
-
-                    val updatedBudget =
-                        existingBudget.copy(
-
-                            name =
-                                name,
-
-                            amount =
-                                totalAmount,
-
-                            startDate =
-                                startDateMillis,
-
-                            endDate =
-                                endDateMillis
-                        )
-
-
-                    // ---------------------------------------------
-                    // PREPARE CATEGORY LIMITS
-                    // ---------------------------------------------
-
-                    val budgetCategories =
-                        categoryLimits.map {
-
-                            BudgetCategory(
-
-                                budgetId =
-                                    budgetId,
-
-                                categoryId =
-                                    it.first,
-
-                                limitAmount =
-                                    it.second
-                            )
-                        }
-
-
-                    // ---------------------------------------------
-                    // UPDATE BUDGET + CATEGORIES
-                    //
-                    // This method should:
-                    //
-                    // 1. Update budget
-                    // 2. Delete old category limits
-                    // 3. Insert new category limits
-                    //
-                    // If categoryLimits is empty,
-                    // old category limits are deleted.
-                    // ---------------------------------------------
-
+                val existingBudget =
                     database
                         .budgetDao()
-                        .updateBudgetWithCategories(
-
-                            budget =
-                                updatedBudget,
-
-                            categories =
-                                budgetCategories
+                        .getBudgetById(
+                            budgetId
                         )
 
+
+                if (existingBudget == null) {
 
                     Toast.makeText(
                         this@AddBudgetActivity,
-                        "Budget updated successfully",
+                        "Budget not found",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                    return@launch
                 }
 
 
-                // =================================================
-                // FINISH
-                // =================================================
+                // ==================================================
+                // OWNERSHIP CHECK
+                // ==================================================
+
+                if (
+                    existingBudget.userId !=
+                    userId
+                ) {
+
+                    Toast.makeText(
+                        this@AddBudgetActivity,
+                        "You cannot edit this budget",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    return@launch
+                }
+
+
+                // ==================================================
+                // UPDATED BUDGET
+                // ==================================================
+
+                val updatedBudget =
+                    existingBudget.copy(
+
+                        name =
+                            name,
+
+                        amount =
+                            totalAmount,
+
+                        startDate =
+                            startDateMillis,
+
+                        endDate =
+                            endDateMillis
+                    )
+
+
+                // ==================================================
+                // UPDATED CATEGORY LIMITS
+                // ==================================================
+
+                val budgetCategories =
+                    categoryLimits.map {
+
+                        BudgetCategory(
+
+                            budgetId =
+                                budgetId,
+
+                            categoryId =
+                                it.first,
+
+                            limitAmount =
+                                it.second
+                        )
+                    }
+
+
+                // ==================================================
+                // UPDATE BUDGET + CATEGORIES
+                // ==================================================
+
+                database
+                    .budgetDao()
+                    .updateBudgetWithCategories(
+
+                        budget =
+                            updatedBudget,
+
+                        categories =
+                            budgetCategories
+                    )
+
+
+                // ==================================================
+                // CHECK OVERALL BUDGET EXCEEDED
+                //
+                // IMPORTANT:
+                // We check AFTER saving the new budget.
+                //
+                // Example:
+                // Old = 100,000
+                // New = 90,000
+                // Spent = 95,000
+                //
+                // 95,000 > 90,000
+                // => create notification
+                // ==================================================
+
+                var newNotificationId =
+                    -1
+
+
+                val totalSpent =
+                    database
+                        .transactionDao()
+                        .getBudgetExpense(
+
+                            userId =
+                                userId,
+
+                            startDate =
+                                updatedBudget.startDate,
+
+                            endDate =
+                                updatedBudget.endDate
+                        )
+
+
+                if (
+                    totalSpent >
+                    updatedBudget.amount
+                ) {
+
+                    val existingNotification =
+                        database
+                            .notificationDao()
+                            .countBudgetExceededNotification(
+
+                                userId =
+                                    userId,
+
+                                budgetId =
+                                    updatedBudget.budgetId
+                            )
+
+
+                    // ==================================================
+                    // DUPLICATE PREVENTION
+                    // ==================================================
+
+                    if (
+                        existingNotification == 0
+                    ) {
+
+                        val notification =
+                            Notification(
+
+                                userId =
+                                    userId,
+
+                                title =
+                                    "Budget Exceeded ⚠️",
+
+                                message =
+                                    "\"${updatedBudget.name}\" budget has been exceeded. " +
+                                            "You spent " +
+                                            "${formatMoney(totalSpent)} " +
+                                            "of " +
+                                            "${formatMoney(updatedBudget.amount)}.",
+
+                                type =
+                                    "BUDGET_EXCEEDED",
+
+                                referenceType =
+                                    "BUDGET",
+
+                                referenceId =
+                                    updatedBudget.budgetId,
+
+                                isRead =
+                                    false,
+
+                                timeAgo =
+                                    "Just now",
+
+                                createdAt =
+                                    System.currentTimeMillis()
+                                        .toString()
+                            )
+
+
+                        newNotificationId =
+                            database
+                                .notificationDao()
+                                .insertNotificationAndGetId(
+                                    notification
+                                )
+                                .toInt()
+                    }
+                }
+
+
+                // ==================================================
+                // RETURN RESULT TO BUDGET ACTIVITY
+                // ==================================================
+
+                val resultIntent =
+                    Intent().apply {
+
+                        putExtra(
+                            EXTRA_NEW_NOTIFICATION_ID,
+                            newNotificationId
+                        )
+                    }
+
+
+                setResult(
+                    RESULT_OK,
+                    resultIntent
+                )
+
+
+                Toast.makeText(
+                    this@AddBudgetActivity,
+                    "Budget updated successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+
 
                 finish()
 
-            } catch (e: Exception) {
+            } catch (
+                e: Exception
+            ) {
 
                 Toast.makeText(
                     this@AddBudgetActivity,
@@ -1229,6 +1306,23 @@ class AddBudgetActivity : AppCompatActivity() {
                 ).show()
             }
         }
+    }
+
+
+    // ============================================================
+    // FORMAT MONEY
+    // ============================================================
+
+    private fun formatMoney(
+        amount: Double
+    ): String {
+
+        return String.format(
+            Locale.US,
+            "%,.0f %s",
+            amount,
+            userCurrency
+        )
     }
 
 
@@ -1245,7 +1339,6 @@ class AddBudgetActivity : AppCompatActivity() {
 
         calendar.timeInMillis =
             time
-
 
         calendar.set(
             Calendar.HOUR_OF_DAY,
@@ -1267,7 +1360,6 @@ class AddBudgetActivity : AppCompatActivity() {
             0
         )
 
-
         return calendar.timeInMillis
     }
 
@@ -1285,7 +1377,6 @@ class AddBudgetActivity : AppCompatActivity() {
 
         calendar.timeInMillis =
             time
-
 
         calendar.set(
             Calendar.HOUR_OF_DAY,
@@ -1306,7 +1397,6 @@ class AddBudgetActivity : AppCompatActivity() {
             Calendar.MILLISECOND,
             999
         )
-
 
         return calendar.timeInMillis
     }

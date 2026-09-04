@@ -9,7 +9,7 @@ data class BudgetWithCategories(
     val budget: Budget,
 
     @Relation(
-        parentColumn = "budgetId",
+        parentColumn = "budget_id",
         entityColumn = "budget_id"
     )
     val categories: List<BudgetCategory>

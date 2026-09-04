@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+<!--    for dashboard -->
+    <style name="Theme.DashboardApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/screen_background</item>
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorPrimaryDark">@color/blue_primary_dark</item>
+        <item name="colorAccent">@color/blue_primary</item>
+        <item name="fontFamily">@font/dosis_regular</item>
+    </style>
+    <style name="ThemeOverlay.App.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="materialCalendarHeaderToggleButton">@style/Widget.App.DatePicker.HeaderToggleButton</item>
+    </style>
+    <style name="Widget.App.DatePicker.HeaderToggleButton" parent="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <!-- for add budget theme    -->
+    <style name="Theme.WalletWise.Starting" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/walletwise_logo_cleaned</item>
+
+        <item name="windowSplashScreenIconBackgroundColor">@color/splash_background</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.ExpenceAndBudgetTracker</item>
+
+    </style>
+
+    <style name="Theme.WalletWise.DatePicker"
+        parent="Theme.MaterialComponents.Light.Dialog.Alert">
+
+        <!-- Main accent -->
+        <item name="colorAccent">@color/primary_500</item>
+        <item name="colorControlActivated">@color/primary_500</item>
+        <item name="colorControlHighlight">@color/primary_100</item>
+        <item name="android:colorAccent">@color/primary_500</item>
+
+        <!-- Calendar/dialog text -->
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+
+        <!-- Action buttons -->
+        <item name="buttonBarPositiveButtonStyle">@style/WalletWiseDatePickerButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/WalletWiseDatePickerButton</item>
+
+    </style>
+
+    <style name="WalletWiseDatePickerButton"
+        parent="Widget.MaterialComponents.Button.TextButton">
+
+        <item name="android:textColor">@color/primary_500</item>
+        <item name="android:textAllCaps">false</item>
+
+    </style>
+
+<!--    for category -->
     <style name="DeleteCategoryDialogTheme" parent="Theme.Material3.DayNight.Dialog.Alert">
         <item name="android:windowBackground">@drawable/bg_dialog_rounded</item>
         <item name="android:textColorPrimary">@color/neutral_0</item>

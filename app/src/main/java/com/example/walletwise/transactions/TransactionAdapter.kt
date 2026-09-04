@@ -15,7 +15,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
+import android.graphics.Color
+import android.view.MenuItem
 class TransactionAdapter(
 
     private var rawList: List<Transaction> = emptyList(),
@@ -512,12 +513,36 @@ class TransactionAdapter(
             "Delete"
         )
 
+        // Force popup menu text to use the app's dark text color
+        for (i in 0 until popupMenu.menu.size()) {
+
+            val menuItem =
+                popupMenu.menu.getItem(i)
+
+            val spannable =
+                android.text.SpannableString(
+                    menuItem.title
+                )
+
+            spannable.setSpan(
+                android.text.style.ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        anchor.context,
+                        R.color.neutral_900
+                    )
+                ),
+                0,
+                spannable.length,
+                android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            menuItem.title =
+                spannable
+        }
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
 
-            when (
-                menuItem.itemId
-            ) {
+            when (menuItem.itemId) {
 
                 MENU_EDIT -> {
 
@@ -528,7 +553,6 @@ class TransactionAdapter(
                     true
                 }
 
-
                 MENU_DELETE -> {
 
                     onDeleteClick?.invoke(
@@ -538,12 +562,9 @@ class TransactionAdapter(
                     true
                 }
 
-
-                else ->
-                    false
+                else -> false
             }
         }
-
 
         popupMenu.show()
     }

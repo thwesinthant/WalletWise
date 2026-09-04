@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/page_background"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/white_card"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingTop="22dp"
+        android:paddingBottom="18dp">
+
+        <!-- WalletWise Branding -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/walletwise_logo"
+                android:scaleType="centerInside"
+                android:contentDescription="WalletWise logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="WalletWise"
+                android:textColor="@color/primary_500"
+                android:textSize="24sp"
+                android:fontFamily="@font/dosis_extrabold" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <!-- Illustration -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/illustration_track"
+            android:scaleType="centerInside"
+            android:contentDescription="Track, plan and achieve illustration" />
+
+        <!-- Page Indicator -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="5dp"
+                android:background="@drawable/dot_inactive"
+                android:layout_marginHorizontal="4dp" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="5dp"
+                android:background="@drawable/dot_active"
+                android:layout_marginHorizontal="4dp" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="5dp"
+                android:background="@drawable/dot_inactive"
+                android:layout_marginHorizontal="4dp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
+
+        <!-- Heading -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Track. Plan. Achieve."
+            android:textColor="@color/text_primary_light"
+            android:textSize="23sp"
+            android:gravity="center"
+            android:fontFamily="@font/dosis_extrabold" />
+
+        <!-- Description -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Easily track your income and expenses,\nset budgets, and reach your goals."
+            android:textColor="@color/text_secondary_light"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:fontFamily="@font/molengo_regular" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
+
+        <!-- Navigation Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/back2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Skip"
+                android:textColor="@color/primary_500"
+                android:textSize="14sp"
+                android:fontFamily="@font/dosis_semibold"
+                android:background="@drawable/outline_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/next2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Next"
+                android:textColor="@color/neutral_0"
+                android:textSize="14sp"
+                android:fontFamily="@font/dosis_semibold"
+                android:background="@drawable/primary_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+

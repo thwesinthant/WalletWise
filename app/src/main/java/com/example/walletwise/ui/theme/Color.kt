@@ -5,13 +5,13 @@ import androidx.compose.ui.graphics.Color
 // Primary (Blue)
 val Primary50 = Color(0xFFE8F0FE)
 val Primary100 = Color(0xFFC2D9FC)
-val Primary500 = Color(0xFF2472F0) // main brand blue
+val Primary500 = Color(0xFF2472F0)
 val Primary700 = Color(0xFF1447A8)
 val Primary900 = Color(0xFF082456)
 
-// Accent (Amber — complementary to blue)
+// Accent (Amber)
 val Accent100 = Color(0xFFFFE9C2)
-val Accent500 = Color(0xFFFFA800) // main accent
+val Accent500 = Color(0xFFFFA800)
 val Accent700 = Color(0xFFCC8600)
 
 // Semantic

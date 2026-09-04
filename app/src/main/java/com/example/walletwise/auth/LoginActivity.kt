@@ -64,10 +64,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
-        // Back button
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
 
         // Password visibility
         binding.btnTogglePassword.setOnClickListener {

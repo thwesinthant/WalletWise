@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = User::class,
-            parentColumns = ["userId"],
+            parentColumns = ["user_id"],
             childColumns = ["user_id"],
             onDelete = ForeignKey.CASCADE
         )
@@ -25,6 +25,7 @@ import androidx.room.PrimaryKey
 data class Budget(
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "budget_id")
     val budgetId: Int = 0,
 
     @ColumnInfo(name = "user_id")

@@ -39,7 +39,7 @@
 
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:paddingTop="54dp"
+            android:paddingTop="24dp"
             android:paddingBottom="30dp">
 
 
@@ -318,34 +318,29 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <!-- ===================================================== -->
-    <!-- BOTTOM NAVIGATION -->
-    <!-- ===================================================== -->
 
+    <!-- Bottom nav -->
     <LinearLayout
         android:id="@+id/bottomNav"
-
         android:layout_width="0dp"
-        android:layout_height="78dp"
-
-        android:background="@color/neutral_0"
-
-        android:elevation="4dp"
-
+        android:layout_height="82dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="12dp"
+        android:translationZ="12dp"
         android:gravity="center_vertical"
-
         android:orientation="horizontal"
-
-        android:paddingBottom="14dp"
-
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include
-            layout="@layout/layout_bottom_nav" />
+        <include layout="@layout/layout_bottom_nav" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

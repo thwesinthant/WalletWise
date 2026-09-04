@@ -5,11 +5,9 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import com.example.walletwise.R
-import com.example.walletwise.budget.AddBudgetActivity
 import com.example.walletwise.budget.BudgetActivity
 import com.example.walletwise.category.SelectCategoryActivity
 import com.example.walletwise.dashboard.DashboardActivity
-import com.example.walletwise.transactions.AddTransactionActivity
 import com.example.walletwise.goal.GoalActivity
 import com.example.walletwise.profile.ProfileActivity
 import com.example.walletwise.transactions.TransactionActivity
@@ -33,6 +31,7 @@ object BottomNavHelper {
     ) {
 
         val tabs = mapOf(
+
             NavTab.HOME to Triple(
                 R.id.navHome,
                 R.id.iconHome,
@@ -77,7 +76,11 @@ object BottomNavHelper {
             val label =
                 root.findViewById<TextView>(labelId)
 
-            // Highlight current tab
+
+            // =====================================================
+            // HIGHLIGHT CURRENT TAB
+            // =====================================================
+
             if (tab == current) {
 
                 icon.setBackgroundResource(
@@ -101,18 +104,32 @@ object BottomNavHelper {
                 )
             }
 
+
+            // =====================================================
+            // CLICK
+            // =====================================================
+
             container.setOnClickListener {
 
+                // Already on this screen
                 if (tab == current) {
                     return@setOnClickListener
                 }
 
+
                 // Make sure we have a valid user
                 if (userId == -1) {
+
                     return@setOnClickListener
                 }
 
+
                 onBeforeNavigate(tab)
+
+
+                // =================================================
+                // TARGET ACTIVITY
+                // =================================================
 
                 val targetClass = when (tab) {
 
@@ -123,14 +140,15 @@ object BottomNavHelper {
                         TransactionActivity::class.java
 
                     NavTab.BUDGETS ->
-                        SelectCategoryActivity::class.java
+                        BudgetActivity::class.java
 
                     NavTab.GOALS ->
-                        BudgetActivity::class.java
+                        GoalActivity::class.java
 
                     NavTab.SETTINGS ->
                         ProfileActivity::class.java
                 }
+
 
                 val intent =
                     Intent(
@@ -139,40 +157,20 @@ object BottomNavHelper {
                     )
 
 
-                // =====================================================
-                // CATEGORY MANAGEMENT
-                // =====================================================
+                // =================================================
+                // ALWAYS SEND USER_ID
+                // =================================================
 
-                if (tab == NavTab.BUDGETS) {
+                intent.putExtra(
+                    "USER_ID",
+                    userId
+                )
 
-                    /*
-                     * Open SelectCategoryActivity in MANAGE mode.
-                     */
-                    intent.putExtra(
-                        SelectCategoryActivity.EXTRA_SELECT_MODE,
-                        false
-                    )
 
-                    /*
-                     * SelectCategoryActivity uses EXTRA_USER_ID,
-                     * not "USER_ID".
-                     */
-                    intent.putExtra(
-                        SelectCategoryActivity.EXTRA_USER_ID,
-                        userId
-                    )
 
-                } else {
-
-                    /*
-                     * Other activities use "USER_ID".
-                     */
-                    intent.putExtra(
-                        "USER_ID",
-                        userId
-                    )
-                }
-
+                // =================================================
+                // HOME
+                // =================================================
 
                 if (tab == NavTab.HOME) {
 
@@ -181,7 +179,14 @@ object BottomNavHelper {
                                 Intent.FLAG_ACTIVITY_SINGLE_TOP
                 }
 
-                activity.startActivity(intent)
+
+                // =================================================
+                // START ACTIVITY
+                // =================================================
+
+                activity.startActivity(
+                    intent
+                )
             }
         }
     }
