@@ -70,8 +70,17 @@
             android:layout_marginEnd="20dp" />
 
         <include
-            android:id="@+id/budgetProgressCard"
-            layout="@layout/view_budget_progress"
+            android:id="@+id/topCategoriesCard"
+            layout="@layout/view_top_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp" />
+
+        <include
+            android:id="@+id/biggestTransactionsCard"
+            layout="@layout/view_biggest_transactions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

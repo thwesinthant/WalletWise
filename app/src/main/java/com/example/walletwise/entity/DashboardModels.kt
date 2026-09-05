@@ -29,14 +29,23 @@ data class AccountItem(
 /** One point on the Balance Trend line — one per month, oldest to newest. */
 data class MonthPoint(val label: String, val balance: Float)
 
-/** One category row inside the Budget Progress card. */
-data class BudgetProgressItem(
+/** One row in the Top Spending Categories card — this period's spend plus the swing vs the previous comparable period. */
+data class CategoryTrendItem(
     val categoryLabel: String,
-    val spentLabel: String,
-    val limitLabel: String,
-    val percent: Int,
-    val isOverBudget: Boolean,
+    val currentAmountLabel: String,
+    val changeLabel: String,
+    val isIncrease: Boolean,
     @ColorInt val color: Int
+)
+
+/** One row in the Biggest Transactions card. */
+data class BiggestTransactionItem(
+    val label: String,
+    val dateLabel: String,
+    val amountLabel: String,
+    val isIncome: Boolean,
+    @ColorInt val color: Int,
+    @ColorInt val iconBg: Int
 )
 
 /** Everything the analytics dashboard needs to bind a full refresh. */
@@ -61,14 +70,8 @@ data class DashboardUiState(
     val cashFlowExpense: String = "",
     val cashFlowExpensePercent: Int = 0,
     val accounts: List<AccountItem> = emptyList(),
-    val hasActiveBudget: Boolean = false,
-    val budgetName: String = "",
-    val budgetPeriodLabel: String = "",
-    val budgetSpentLabel: String = "",
-    val budgetLimitLabel: String = "",
-    val budgetOverallPercent: Int = 0,
-    val budgetIsOverBudget: Boolean = false,
-    val budgetItems: List<BudgetProgressItem> = emptyList()
+    val topCategoryTrends: List<CategoryTrendItem> = emptyList(),
+    val biggestTransactions: List<BiggestTransactionItem> = emptyList()
 )
 
 /**

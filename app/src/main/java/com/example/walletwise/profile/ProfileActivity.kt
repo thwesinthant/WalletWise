@@ -61,7 +61,7 @@ class ProfileActivity : AppCompatActivity() {
         BottomNavHelper.setup(
             activity = this,
             root = findViewById(android.R.id.content),
-            current = NavTab.SETTINGS,
+            current = NavTab.PROFILE,
             userId = userId
         )
 

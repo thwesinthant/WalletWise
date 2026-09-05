@@ -29,8 +29,10 @@
     <string name="last_30_days">LAST 30 DAYS</string>
     <string name="balance_by_accounts">Balance by Accounts</string>
     <string name="balance_by_accounts_subtitle">In which accounts do I have most of my money?</string>
-    <string name="budget_progress">Budget Progress</string>
-    <string name="budget_progress_subtitle">How much of my budget is left?</string>
-    <string name="no_active_budget">No active budget for this period. Create one to see your progress here.</string>
-    <string name="of_limit_format">of %1$s</string>
+    <string name="top_spending_categories">Top Spending Categories</string>
+    <string name="top_spending_categories_subtitle">How does this compare to last period?</string>
+    <string name="no_category_trend_data">Not enough data yet to compare periods.</string>
+    <string name="biggest_transactions">Biggest Transactions</string>
+    <string name="biggest_transactions_subtitle">Your largest income &amp; expenses this period</string>
+    <string name="no_biggest_transactions">No transactions in this period yet.</string>
 </resources>

@@ -118,47 +118,7 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- Tabs -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="18dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="Dashboard"
-                    android:fontFamily="@font/dosis_semibold"
-                    android:textColor="@color/neutral_900"
-                    android:textSize="12.5sp"
-                    android:paddingBottom="7dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Investments"
-                    android:fontFamily="@font/dosis_semibold"
-                    android:textColor="@color/neutral_500"
-                    android:textSize="12.5sp" />
-
-                <TextView
-                    android:id="@+id/btnAnalytics"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="Analytics"
-                    android:fontFamily="@font/dosis_semibold"
-                    android:textColor="@color/neutral_500"
-                    android:textSize="12.5sp"
-                    android:clickable="true"
-                    android:focusable="true" />
-            </LinearLayout>
 
             <!-- Balance card -->
             <LinearLayout
@@ -167,7 +127,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/bg_balance_card"
                 android:padding="20dp"
-                android:layout_marginBottom="18dp">
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -383,13 +343,225 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Analytics Preview -->
+
+            <LinearLayout
+                android:id="@+id/analyticsSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <!-- Section Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Financial Overview"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_900"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btnAnalytics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Analytics"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:textColor="@color/neutral_0"
+                        android:background="@drawable/bg_view_all_pill"
+                        android:textSize="12sp"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="7dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                </LinearLayout>
+
+                <!-- Analytics Card -->
+                <LinearLayout
+                    android:id="@+id/analyticsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_analytics_card"
+                    android:padding="18dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <!-- Card Top -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Analytics Icon -->
+                        <TextView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:background="@drawable/bg_analytics_icon"
+                            android:gravity="center"
+                            android:text="📊"
+                            android:textSize="18sp"
+                            android:includeFontPadding="false" />
+
+                        <!-- Title -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Your spending at a glance"
+                                android:fontFamily="@font/dosis_extrabold"
+                                android:textColor="@color/neutral_900"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Track income, expenses and spending trends"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_500"
+                                android:textSize="10.5sp" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow -->
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/bg_analytics_arrow"
+                            android:gravity="center"
+                            android:text="→"
+                            android:textColor="@color/primary_500"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/dosis_extrabold" />
+
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@color/neutral_100" />
+
+                    <!-- Mini Statistics -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Income -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Income"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_500"
+                                android:textSize="9.5sp" />
+
+                            <TextView
+                                android:id="@+id/tvAnalyticsIncome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="MMK 0.00"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:textColor="@color/income_green"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <!-- Expense -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Expenses"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_500"
+                                android:textSize="9.5sp" />
+
+                            <TextView
+                                android:id="@+id/tvAnalyticsExpense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="MMK 0.00"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:textColor="@color/expense_red"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <!-- Net -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Net"
+                                android:fontFamily="@font/molengo_regular"
+                                android:textColor="@color/neutral_500"
+                                android:textSize="9.5sp" />
+
+                            <TextView
+                                android:id="@+id/tvAnalyticsNet"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="MMK 0.00"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:textColor="@color/neutral_900"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
             <!-- ACCOUNTS -->
             <LinearLayout
                 android:id="@+id/accountsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="24dp">
 
                 <!-- Accounts header -->
 
@@ -490,6 +662,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+
 
             <!-- Quick actions -->
 <!--            <LinearLayout-->

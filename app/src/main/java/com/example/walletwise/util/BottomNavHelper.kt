@@ -17,7 +17,7 @@ enum class NavTab {
     TRANSACTION,
     BUDGETS,
     GOALS,
-    SETTINGS
+    PROFILE
 }
 
 object BottomNavHelper {
@@ -56,10 +56,10 @@ object BottomNavHelper {
                 R.id.labelGoals
             ),
 
-            NavTab.SETTINGS to Triple(
-                R.id.navSettings,
-                R.id.iconSettings,
-                R.id.labelSettings
+            NavTab.PROFILE to Triple(
+                R.id.navProfile,
+                R.id.iconProfile,
+                R.id.labelProfile
             )
         )
 
@@ -145,7 +145,7 @@ object BottomNavHelper {
                     NavTab.GOALS ->
                         GoalActivity::class.java
 
-                    NavTab.SETTINGS ->
+                    NavTab.PROFILE ->
                         ProfileActivity::class.java
                 }
 

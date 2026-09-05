@@ -18,6 +18,7 @@ import com.example.walletwise.account.AddEditAccountActivity
 import com.example.walletwise.account.DashboardAccountAdapter
 import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.entity.Transaction
+import com.example.walletwise.goal.GoalActivity
 import com.example.walletwise.notification.NotificationActivity
 import com.example.walletwise.notification.NotificationPopupManager
 import com.example.walletwise.profile.ProfileActivity
@@ -119,6 +120,9 @@ class DashboardActivity : AppCompatActivity() {
     private var notificationObserverInitialized = false
     private var latestNotificationId = 0
 
+    private lateinit var tvAnalyticsIncome: TextView
+    private lateinit var tvAnalyticsExpense: TextView
+    private lateinit var tvAnalyticsNet: TextView
 
     // =============================================================
     // ON CREATE
@@ -204,6 +208,21 @@ class DashboardActivity : AppCompatActivity() {
         incomeAmount =
             findViewById(
                 R.id.incomeAmount
+            )
+
+        tvAnalyticsIncome =
+            findViewById(
+                R.id.tvAnalyticsIncome
+            )
+
+        tvAnalyticsExpense =
+            findViewById(
+                R.id.tvAnalyticsExpense
+            )
+
+        tvAnalyticsNet =
+            findViewById(
+                R.id.tvAnalyticsNet
             )
 
         tvNotificationBadge =
@@ -864,8 +883,8 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         // ---------------------------------------------------------
-// ANALYTICS
-// ---------------------------------------------------------
+        // ANALYTICS
+        // ---------------------------------------------------------
 
         findViewById<TextView>(
             R.id.btnAnalytics
@@ -883,6 +902,14 @@ class DashboardActivity : AppCompatActivity() {
             )
 
             startActivity(intent)
+        }
+
+        findViewById<View>(R.id.analyticsCard).setOnClickListener {
+            startActivity(
+                Intent(this, DashboardAnalyticsActivity::class.java).apply {
+                    putExtra("USER_ID", currentUserId)
+                }
+            )
         }
     }
 
@@ -1077,6 +1104,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun updateFinancialUI() {
 
+        // Dashboard expense/income
         expenseAmount.text =
             formatCurrency(
                 latestExpense
@@ -1085,6 +1113,22 @@ class DashboardActivity : AppCompatActivity() {
         incomeAmount.text =
             formatCurrency(
                 latestIncome
+            )
+
+        // Analytics preview
+        tvAnalyticsIncome.text =
+            formatCurrency(
+                latestIncome
+            )
+
+        tvAnalyticsExpense.text =
+            formatCurrency(
+                latestExpense
+            )
+
+        tvAnalyticsNet.text =
+            formatCurrency(
+                latestIncome - latestExpense
             )
 
         updateWalletBalanceUI()

@@ -98,7 +98,7 @@ class AddTransactionActivity : AppCompatActivity() {
     // VIEWS
     // ============================================================
 
-    private lateinit var tvAmount: TextView
+    private lateinit var tvAmount: EditText
     private lateinit var tvExpense: TextView
     private lateinit var tvIncome: TextView
     private lateinit var tvTransfer: TextView
@@ -184,6 +184,28 @@ class AddTransactionActivity : AppCompatActivity() {
             R.layout.activity_add_transaction
         )
 
+        tvAmount = findViewById(R.id.tvAmount)
+
+        tvAmount.isFocusable = true
+        tvAmount.isFocusableInTouchMode = true
+
+// Amount uses the custom keypad, not the phone keyboard
+        tvAmount.showSoftInputOnFocus = false
+
+// Cursor should be visible
+        tvAmount.setCursorVisible(true)
+
+// Give Amount focus
+        tvAmount.requestFocus()
+
+// Put cursor at the end
+        tvAmount.setSelection(tvAmount.text.length)
+
+// Prevent the system keyboard from opening initially
+        window.setSoftInputMode(
+            android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        )
+
         // ========================================================
         // WINDOW INSETS
         // ========================================================
@@ -258,10 +280,6 @@ class AddTransactionActivity : AppCompatActivity() {
                 R.id.btnBack
             )
 
-        tvAmount =
-            findViewById(
-                R.id.tvAmount
-            )
 
         tvExpense =
             findViewById(
@@ -2858,15 +2876,16 @@ class AddTransactionActivity : AppCompatActivity() {
 
     private fun updateAmountDisplay() {
 
-        tvAmount.text =
+        tvAmount.setText(
             if (currentAmountStr.isEmpty()) {
-
                 "$userCurrency 0"
-
             } else {
-
                 "$userCurrency $currentAmountStr"
             }
+        )
+
+        // Put the cursor at the END of the amount
+        tvAmount.setSelection(tvAmount.text.length)
     }
 
     private fun formatAmount(

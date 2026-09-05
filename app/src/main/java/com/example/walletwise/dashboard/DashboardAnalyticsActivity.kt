@@ -237,29 +237,17 @@ class DashboardAnalyticsActivity : AppCompatActivity() {
                 val accountsFlow = database.accountDao().getAccountBalances(currentUserId)
                 val categoriesFlow = database.categoryDao().observeAll(currentUserId)
                 val transactionsFlow = database.transactionDao().getAllTransactions(currentUserId)
-                val budgetsFlow = database.budgetDao().getBudgetsByUser(currentUserId)
-                val budgetCategoriesFlow = database.budgetDao().getBudgetCategoriesForUser(currentUserId)
-
-                // kotlinx.coroutines' combine() only has direct overloads up to 5 flows,
-                // so the two budget flows are paired first rather than adding a
-                // Repository/ViewModel layer just to merge six sources.
-                val budgetDataFlow = combine(budgetsFlow, budgetCategoriesFlow) { budgets, budgetCategories ->
-                    budgets to budgetCategories
-                }
 
                 combine(
                     accountsFlow,
                     categoriesFlow,
                     transactionsFlow,
-                    budgetDataFlow,
                     selectedPeriodFlow
-                ) { accounts, categories, transactions, budgetData, period ->
+                ) { accounts, categories, transactions, period ->
                     buildDashboardUiState(
                         accounts = accounts,
                         categories = categories,
                         transactions = transactions,
-                        budgets = budgetData.first,
-                        budgetCategories = budgetData.second,
                         period = period,
                         currency = userCurrency
                     )
@@ -284,7 +272,8 @@ class DashboardAnalyticsActivity : AppCompatActivity() {
             items = state.expenseBreakdownItems
         )
         bindBalanceTrend(state)
-        bindBudgetCard(state)
+        bindTopCategoriesCard(state)
+        bindBiggestTransactionsCard(state)
         bindAccounts(state)
     }
 
@@ -391,62 +380,88 @@ class DashboardAnalyticsActivity : AppCompatActivity() {
         }
     }
 
-    // ---- Budget vs Actual ------------------------------------------------
+    // ---- Top spending categories (period-over-period) ---------------------
 
-    private fun bindBudgetCard(state: DashboardUiState) {
-        val cardRoot = findViewById<View>(R.id.budgetProgressCard)
+    private fun bindTopCategoriesCard(state: DashboardUiState) {
+        val cardRoot = findViewById<View>(R.id.topCategoriesCard)
+        val container = cardRoot.findViewById<LinearLayout>(R.id.topCategoriesContainer)
+        val emptyState = cardRoot.findViewById<TextView>(R.id.tvTopCategoriesEmptyState)
 
-        val summaryGroup = cardRoot.findViewById<View>(R.id.budgetSummaryGroup)
-        val emptyState = cardRoot.findViewById<TextView>(R.id.tvBudgetEmptyState)
+        container.removeAllViews()
 
-        if (!state.hasActiveBudget) {
-            summaryGroup.visibility = View.GONE
+        if (state.topCategoryTrends.isEmpty()) {
+            container.visibility = View.GONE
             emptyState.visibility = View.VISIBLE
-            cardRoot.findViewById<TextView>(R.id.tvBudgetTitle).text =
-                getString(R.string.budget_progress)
-            cardRoot.findViewById<TextView>(R.id.tvBudgetPeriod).text = ""
             return
         }
 
-        summaryGroup.visibility = View.VISIBLE
+        container.visibility = View.VISIBLE
         emptyState.visibility = View.GONE
 
-        cardRoot.findViewById<TextView>(R.id.tvBudgetTitle).text = state.budgetName
-        cardRoot.findViewById<TextView>(R.id.tvBudgetPeriod).text = state.budgetPeriodLabel
-        cardRoot.findViewById<TextView>(R.id.tvBudgetSpent).text = state.budgetSpentLabel
-        cardRoot.findViewById<TextView>(R.id.tvBudgetLimit).text =
-            getString(R.string.of_limit_format, "${state.budgetLimitLabel} budgeted")
+        state.topCategoryTrends.forEach { item ->
+            val row = LayoutInflater.from(this)
+                .inflate(R.layout.item_category_trend_row, container, false)
 
-        val overallColor = ContextCompat.getColor(
-            this,
-            if (state.budgetIsOverBudget) R.color.expense_red else R.color.blue_primary
-        )
-        cardRoot.findViewById<ProgressBarView>(R.id.budgetOverallProgressBar)
-            .setProgress(state.budgetOverallPercent / 100f, overallColor)
-        cardRoot.findViewById<TextView>(R.id.tvBudgetOverallPercent).apply {
-            text = "${state.budgetOverallPercent}%"
-            setTextColor(overallColor)
-        }
-
-        val itemsContainer = cardRoot.findViewById<LinearLayout>(R.id.budgetItemsContainer)
-        itemsContainer.removeAllViews()
-
-        state.budgetItems.forEach { item ->
-            val row = LayoutInflater.from(this).inflate(R.layout.item_budget_row, itemsContainer, false)
-            val rowColor = if (item.isOverBudget) ContextCompat.getColor(this, R.color.expense_red) else item.color
+            val changeColor = ContextCompat.getColor(
+                this,
+                if (item.isIncrease) R.color.expense_red else R.color.income_green
+            )
 
             (row.findViewById<View>(R.id.dotView).background.mutate() as GradientDrawable).setColor(item.color)
-            row.findViewById<TextView>(R.id.tvBudgetRowLabel).text = item.categoryLabel
-            row.findViewById<TextView>(R.id.tvBudgetRowPercent).apply {
-                text = "${item.percent}%"
-                setTextColor(rowColor)
+            row.findViewById<TextView>(R.id.tvCategoryTrendLabel).text = item.categoryLabel
+            row.findViewById<TextView>(R.id.tvCategoryTrendChange).apply {
+                text = item.changeLabel
+                setTextColor(changeColor)
             }
-            row.findViewById<ProgressBarView>(R.id.progressBar).setProgress(item.percent / 100f, rowColor)
-            row.findViewById<TextView>(R.id.tvBudgetRowSpent).text = "${item.spentLabel} spent"
-            row.findViewById<TextView>(R.id.tvBudgetRowLimit).text =
-                getString(R.string.of_limit_format, item.limitLabel)
+            row.findViewById<TextView>(R.id.tvCategoryTrendAmount).text =
+                "${item.currentAmountLabel} this period"
 
-            itemsContainer.addView(row)
+            container.addView(row)
+        }
+    }
+
+    // ---- Biggest transactions ---------------------------------------------
+
+    private fun bindBiggestTransactionsCard(state: DashboardUiState) {
+        val cardRoot = findViewById<View>(R.id.biggestTransactionsCard)
+        val container = cardRoot.findViewById<LinearLayout>(R.id.biggestTransactionsContainer)
+        val emptyState = cardRoot.findViewById<TextView>(R.id.tvBiggestTransactionsEmptyState)
+
+        container.removeAllViews()
+
+        if (state.biggestTransactions.isEmpty()) {
+            container.visibility = View.GONE
+            emptyState.visibility = View.VISIBLE
+            return
+        }
+
+        container.visibility = View.VISIBLE
+        emptyState.visibility = View.GONE
+
+        state.biggestTransactions.forEach { item ->
+            val row = LayoutInflater.from(this)
+                .inflate(R.layout.item_biggest_transaction_row, container, false)
+
+            val amountColor = ContextCompat.getColor(
+                this,
+                if (item.isIncome) R.color.income_green else R.color.expense_red
+            )
+
+            val iconBg = row.findViewById<FrameLayout>(R.id.ivBigTxIconBg)
+            (iconBg.background.mutate() as GradientDrawable).setColor(item.iconBg)
+
+            row.findViewById<ImageView>(R.id.ivBigTxIcon).apply {
+                setImageResource(if (item.isIncome) R.drawable.ic_arrow_upward else R.drawable.ic_arrow_downward)
+                setColorFilter(item.color)
+            }
+            row.findViewById<TextView>(R.id.tvBigTxLabel).text = item.label
+            row.findViewById<TextView>(R.id.tvBigTxDate).text = item.dateLabel
+            row.findViewById<TextView>(R.id.tvBigTxAmount).apply {
+                text = item.amountLabel
+                setTextColor(amountColor)
+            }
+
+            container.addView(row)
         }
     }
 

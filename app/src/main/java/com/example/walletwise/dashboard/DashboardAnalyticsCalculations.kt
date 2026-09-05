@@ -3,11 +3,10 @@ package com.example.walletwise.dashboard
 import android.graphics.Color
 import com.example.walletwise.entity.AccountBalance
 import com.example.walletwise.entity.AccountItem
+import com.example.walletwise.entity.BiggestTransactionItem
 import com.example.walletwise.entity.BreakdownItem
-import com.example.walletwise.entity.Budget
-import com.example.walletwise.entity.BudgetCategory
-import com.example.walletwise.entity.BudgetProgressItem
 import com.example.walletwise.entity.CategoryEntity
+import com.example.walletwise.entity.CategoryTrendItem
 import com.example.walletwise.entity.DashboardPeriod
 import com.example.walletwise.entity.DashboardUiState
 import com.example.walletwise.entity.DayBar
@@ -43,7 +42,7 @@ private val ACCOUNT_COLOR_PALETTE = listOf(
 
 private val monthLabelFormat = SimpleDateFormat("MMM", Locale.getDefault())
 private val dayLabelFormat = SimpleDateFormat("EEE", Locale.getDefault())
-private val budgetDateFormat = SimpleDateFormat("MMM d", Locale.getDefault())
+private val shortDateFormat = SimpleDateFormat("MMM d", Locale.getDefault())
 
 
 // =====================================================================
@@ -57,8 +56,6 @@ fun buildDashboardUiState(
     accounts: List<AccountBalance>,
     categories: List<CategoryEntity>,
     transactions: List<Transaction>,
-    budgets: List<Budget>,
-    budgetCategories: List<BudgetCategory>,
     period: DashboardPeriod,
     currency: String
 ): DashboardUiState {
@@ -73,6 +70,9 @@ fun buildDashboardUiState(
     val periodIncome = periodTx.filter { it.type == TYPE_INCOME }.sumOf { it.amount }
     val periodExpense = periodTx.filter { it.type == TYPE_EXPENSE }.sumOf { it.amount }
 
+    val (previousStart, previousEnd) = previousComparablePeriod(period, periodStart, periodEnd)
+    val previousTx = transactions.filter { it.createdAt in previousStart until previousEnd }
+
     val (last30Start, last30End) = last30DaysRange(now)
     val last30Tx = transactions.filter { it.createdAt in last30Start until last30End }
     val last30Income = last30Tx.filter { it.type == TYPE_INCOME }.sumOf { it.amount }
@@ -81,8 +81,8 @@ fun buildDashboardUiState(
     val bars = weekBars(transactions, now)
     val trend = monthlyTrend(transactions, accounts, now)
 
-    val activeBudget = budgets.firstOrNull { now in it.startDate until it.endDate }
-    val budgetSection = buildBudgetProgress(activeBudget, budgetCategories, transactions, categories, currency)
+    val categoryTrends = buildCategoryTrends(periodTx, previousTx, categories, currency)
+    val biggestTx = buildBiggestTransactions(periodTx, categories, currency)
 
     return DashboardUiState(
         periodLabel = labelFor(period),
@@ -114,14 +114,8 @@ fun buildDashboardUiState(
                 iconBg = withAlpha(color, 38)
             )
         },
-        hasActiveBudget = budgetSection != null,
-        budgetName = budgetSection?.name ?: "",
-        budgetPeriodLabel = budgetSection?.periodLabel ?: "",
-        budgetSpentLabel = budgetSection?.spentLabel ?: "",
-        budgetLimitLabel = budgetSection?.limitLabel ?: "",
-        budgetOverallPercent = budgetSection?.overallPercent ?: 0,
-        budgetIsOverBudget = budgetSection?.isOverBudget ?: false,
-        budgetItems = budgetSection?.items ?: emptyList()
+        topCategoryTrends = categoryTrends,
+        biggestTransactions = biggestTx
     )
 }
 
@@ -235,80 +229,88 @@ private fun breakdown(
 
 
 // =====================================================================
-// BUDGET VS ACTUAL (Budget Progress card)
+// TOP SPENDING CATEGORIES (period-over-period)
 //
-// Uses whichever Budget row has startDate <= now < endDate, same rule
-// as BudgetDao.getActiveBudget. Spending is measured against the
-// budget's OWN date range, not the period tabs — a budget always
-// tracks its own window regardless of which analytics tab is selected.
+// Ranks this period's expense categories by amount spent, and compares
+// each one to the same category's spend in the previous comparable
+// period (see previousComparablePeriod below) — a category with no
+// previous-period spend at all is labelled "New" rather than showing
+// a meaningless "+infinite%".
 // =====================================================================
 
-private data class BudgetSection(
-    val name: String,
-    val periodLabel: String,
-    val spentLabel: String,
-    val limitLabel: String,
-    val overallPercent: Int,
-    val isOverBudget: Boolean,
-    val items: List<BudgetProgressItem>
-)
-
-private fun buildBudgetProgress(
-    activeBudget: Budget?,
-    budgetCategories: List<BudgetCategory>,
-    transactions: List<Transaction>,
+private fun buildCategoryTrends(
+    currentTx: List<Transaction>,
+    previousTx: List<Transaction>,
     categories: List<CategoryEntity>,
-    currency: String
-): BudgetSection? {
-
-    if (activeBudget == null) return null
+    currency: String,
+    limit: Int = 5
+): List<CategoryTrendItem> {
 
     val categoryById = categories.associateBy { it.id }
 
-    val spentByCategory = transactions
-        .filter {
-            it.type == TYPE_EXPENSE &&
-                    it.categoryId != null &&
-                    it.createdAt in activeBudget.startDate until activeBudget.endDate
-        }
+    fun totalsByCategory(txs: List<Transaction>) = txs
+        .filter { it.type == TYPE_EXPENSE && it.categoryId != null }
         .groupBy { it.categoryId }
-        .mapValues { (_, txs) -> txs.sumOf { it.amount } }
+        .mapValues { (_, group) -> group.sumOf { it.amount } }
 
-    val categoryLimits = budgetCategories.filter { it.budgetId == activeBudget.budgetId }
+    val currentTotals = totalsByCategory(currentTx)
+    val previousTotals = totalsByCategory(previousTx)
 
-    val items = categoryLimits
-        .mapNotNull { limitRow ->
-            val category = categoryById[limitRow.categoryId] ?: return@mapNotNull null
-            val spent = spentByCategory[limitRow.categoryId] ?: 0.0
-            val percent = if (limitRow.limitAmount > 0)
-                ((spent / limitRow.limitAmount) * 100).roundToInt()
-            else 0
+    return currentTotals.entries
+        .sortedByDescending { it.value }
+        .take(limit)
+        .mapNotNull { (categoryId, currentAmount) ->
+            val category = categoryById[categoryId] ?: return@mapNotNull null
+            val previousAmount = previousTotals[categoryId] ?: 0.0
+            val isNew = previousAmount <= 0.0
+            val changePercent = if (isNew) null else ((currentAmount - previousAmount) / previousAmount) * 100
 
-            BudgetProgressItem(
+            CategoryTrendItem(
                 categoryLabel = category.label,
-                spentLabel = formatCurrency(spent, currency),
-                limitLabel = formatCurrency(limitRow.limitAmount, currency),
-                percent = percent,
-                isOverBudget = spent > limitRow.limitAmount,
+                currentAmountLabel = formatCurrency(currentAmount, currency),
+                changeLabel = if (isNew) "New" else formatSignedPercent(changePercent!!),
+                isIncrease = isNew || (changePercent != null && changePercent > 0),
                 color = category.tintColor
             )
         }
-        .sortedByDescending { it.percent }
+}
 
-    val totalLimit = categoryLimits.sumOf { it.limitAmount }
-    val totalSpent = categoryLimits.sumOf { spentByCategory[it.categoryId] ?: 0.0 }
-    val overallPercent = if (totalLimit > 0) ((totalSpent / totalLimit) * 100).roundToInt() else 0
 
-    return BudgetSection(
-        name = activeBudget.name,
-        periodLabel = "${budgetDateFormat.format(Date(activeBudget.startDate))} - " +
-                budgetDateFormat.format(Date(activeBudget.endDate - 1)),
-        spentLabel = formatCurrency(totalSpent, currency),
-        limitLabel = formatCurrency(totalLimit, currency),
-        overallPercent = overallPercent,
-        isOverBudget = totalSpent > totalLimit,
-        items = items
-    )
+// =====================================================================
+// BIGGEST TRANSACTIONS
+//
+// The largest income/expense entries in the selected period, by
+// absolute amount — outlier awareness the breakdown donuts can't show.
+// =====================================================================
+
+private fun buildBiggestTransactions(
+    periodTx: List<Transaction>,
+    categories: List<CategoryEntity>,
+    currency: String,
+    limit: Int = 5
+): List<BiggestTransactionItem> {
+
+    val categoryById = categories.associateBy { it.id }
+    val incomeColor = Color.parseColor("#2ED47A")
+    val expenseColor = Color.parseColor("#FF5A8A")
+
+    return periodTx
+        .filter { it.type == TYPE_INCOME || it.type == TYPE_EXPENSE }
+        .sortedByDescending { it.amount }
+        .take(limit)
+        .map { tx ->
+            val isIncome = tx.type == TYPE_INCOME
+            val category = tx.categoryId?.let { categoryById[it] }
+
+            BiggestTransactionItem(
+                label = category?.label ?: if (isIncome) "Income" else "Uncategorized",
+                dateLabel = shortDateFormat.format(Date(tx.createdAt)),
+                amountLabel = "${if (isIncome) "+" else "-"} ${formatCurrency(tx.amount, currency)}",
+                isIncome = isIncome,
+                color = category?.tintColor ?: if (isIncome) incomeColor else expenseColor,
+                iconBg = withAlpha(category?.tintColor ?: if (isIncome) incomeColor else expenseColor, 38)
+            )
+        }
 }
 
 
@@ -330,6 +332,39 @@ private fun rangeFor(period: DashboardPeriod): Pair<Long, Long> {
             startOfDay(cal.timeInMillis) to now + 1
         }
         is DashboardPeriod.Custom -> period.start to period.end
+    }
+}
+
+/**
+ * The previous period of equal length, for a fair like-for-like comparison —
+ * not just "the whole previous month/year", which would unfairly compare a
+ * partial current period (e.g. 5 days into this month) against a full one.
+ */
+private fun previousComparablePeriod(
+    period: DashboardPeriod,
+    periodStart: Long,
+    periodEnd: Long
+): Pair<Long, Long> {
+    val cal = Calendar.getInstance()
+    val elapsedDays = ((periodEnd - periodStart) / DAY_MILLIS).coerceAtLeast(1)
+
+    return when (period) {
+        DashboardPeriod.ThisMonth -> {
+            cal.timeInMillis = periodStart
+            cal.add(Calendar.MONTH, -1)
+            val prevStart = startOfDay(cal.timeInMillis)
+            prevStart to prevStart + elapsedDays * DAY_MILLIS
+        }
+        DashboardPeriod.ThisYear -> {
+            cal.timeInMillis = periodStart
+            cal.add(Calendar.YEAR, -1)
+            val prevStart = startOfDay(cal.timeInMillis)
+            prevStart to prevStart + elapsedDays * DAY_MILLIS
+        }
+        is DashboardPeriod.Custom -> {
+            val length = periodEnd - periodStart
+            (periodStart - length) to periodStart
+        }
     }
 }
 

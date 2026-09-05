@@ -118,7 +118,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/navSettings"
+        android:id="@+id/navProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -128,22 +128,23 @@
         android:focusable="true">
 
         <TextView
-            android:id="@+id/iconSettings"
+            android:id="@+id/iconProfile"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:gravity="center"
-            android:text="⚙️"
+            android:text="👤"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/labelSettings"
+            android:id="@+id/labelProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
+            android:text="Profile"
             android:fontFamily="@font/dosis_semibold"
             android:textColor="@color/neutral_500"
             android:textSize="10sp"
             android:layout_marginTop="5dp" />
+
     </LinearLayout>
 
 </merge>

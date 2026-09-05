@@ -165,26 +165,6 @@ interface BudgetDao {
 
 
     // ============================================================
-    // GET ALL BUDGET CATEGORIES FOR A USER (across every one of
-    // their budgets) — used by the Analytics screen's Budget vs
-    // Actual card, which combines this with getBudgetsByUser
-    // rather than adding a Repository/ViewModel layer.
-    // ============================================================
-
-    @Query(
-        """
-        SELECT budget_categories.*
-        FROM budget_categories
-        INNER JOIN budgets ON budgets.budget_id = budget_categories.budget_id
-        WHERE budgets.user_id = :userId
-        """
-    )
-    fun getBudgetCategoriesForUser(
-        userId: Int
-    ): Flow<List<BudgetCategory>>
-
-
-    // ============================================================
     // GET BUDGET CATEGORIES ONCE
     // ============================================================
 
