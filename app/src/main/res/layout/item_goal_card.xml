@@ -87,13 +87,10 @@
 
                     android:gravity="center"
 
-                    android:text="ACTIVE"
-                    android:textAllCaps="true"
-
-                    android:textSize="9sp"
-
-                    android:textColor="@color/neutral_0"
-
+                    android:text="Active"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:textColor="@color/primary_500"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_goal_status_active" />
 
             </LinearLayout>

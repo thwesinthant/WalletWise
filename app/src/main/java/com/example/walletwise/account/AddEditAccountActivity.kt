@@ -60,9 +60,7 @@ class AddEditAccountActivity : AppCompatActivity() {
         savedInstanceState: Bundle?
     ) {
 
-        super.onCreate(
-            savedInstanceState
-        )
+        super.onCreate(savedInstanceState)
 
         setContentView(
             R.layout.activity_add_edit_account
@@ -120,22 +118,22 @@ class AddEditAccountActivity : AppCompatActivity() {
         // =====================================================
 
         tvPageTitle =
-            findViewById<TextView>(
+            findViewById(
                 R.id.tvPageTitle
             )
 
         etAccountName =
-            findViewById<EditText>(
+            findViewById(
                 R.id.etAccountName
             )
 
         etOpeningBalance =
-            findViewById<EditText>(
+            findViewById(
                 R.id.etOpeningBalance
             )
 
         btnSaveAccount =
-            findViewById<TextView>(
+            findViewById(
                 R.id.btnSaveAccount
             )
 
@@ -153,7 +151,7 @@ class AddEditAccountActivity : AppCompatActivity() {
 
 
         // =====================================================
-        // EDIT MODE
+        // EDIT / ADD MODE
         // =====================================================
 
         if (accountId != -1) {
@@ -171,7 +169,7 @@ class AddEditAccountActivity : AppCompatActivity() {
 
 
         // =====================================================
-        // SAVE BUTTON
+        // SAVE
         // =====================================================
 
         btnSaveAccount.setOnClickListener {
@@ -193,6 +191,10 @@ class AddEditAccountActivity : AppCompatActivity() {
 
             try {
 
+                // -------------------------------------------------
+                // Get original account
+                // -------------------------------------------------
+
                 val account =
                     database
                         .accountDao()
@@ -202,11 +204,11 @@ class AddEditAccountActivity : AppCompatActivity() {
                         )
 
 
-                withContext(
-                    Dispatchers.Main
-                ) {
+                if (account == null) {
 
-                    if (account == null) {
+                    withContext(
+                        Dispatchers.Main
+                    ) {
 
                         Toast.makeText(
                             this@AddEditAccountActivity,
@@ -215,29 +217,72 @@ class AddEditAccountActivity : AppCompatActivity() {
                         ).show()
 
                         finish()
-
-                        return@withContext
                     }
 
-
-                    // =================================================
-                    // SAVE EXISTING ACCOUNT
-                    // =================================================
-
-                    existingAccount =
-                        account
+                    return@launch
+                }
 
 
-                    // =================================================
-                    // SHOW DATA
-                    // =================================================
+                // -------------------------------------------------
+                // Get calculated current balance
+                // -------------------------------------------------
+
+                val accountBalance =
+                    database
+                        .accountDao()
+                        .getAccountBalanceById(
+                            accountId,
+                            currentUserId
+                        )
+
+
+                if (accountBalance == null) {
+
+                    withContext(
+                        Dispatchers.Main
+                    ) {
+
+                        Toast.makeText(
+                            this@AddEditAccountActivity,
+                            "Unable to calculate account balance",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        finish()
+                    }
+
+                    return@launch
+                }
+
+
+                // -------------------------------------------------
+                // Save existing account
+                // -------------------------------------------------
+
+                existingAccount =
+                    account
+
+
+                // -------------------------------------------------
+                // Update UI
+                //
+                // IMPORTANT:
+                //
+                // Show CURRENT BALANCE, not OPENING BALANCE.
+                // -------------------------------------------------
+
+                withContext(
+                    Dispatchers.Main
+                ) {
 
                     etAccountName.setText(
                         account.name
                     )
 
                     etOpeningBalance.setText(
-                        account.openingBalance.toString()
+                        formatAmount(
+                            accountBalance.currentBalance
+                        )
                     )
                 }
 
@@ -267,7 +312,7 @@ class AddEditAccountActivity : AppCompatActivity() {
     private fun saveAccount() {
 
         // =====================================================
-        // GET INPUT
+        // GET NAME
         // =====================================================
 
         val name =
@@ -276,6 +321,16 @@ class AddEditAccountActivity : AppCompatActivity() {
                 .toString()
                 .trim()
 
+
+        // =====================================================
+        // GET BALANCE
+        //
+        // In ADD mode:
+        //     this is the opening balance.
+        //
+        // In EDIT mode:
+        //     this is the desired CURRENT balance.
+        // =====================================================
 
         val balanceText =
             etOpeningBalance
@@ -303,11 +358,11 @@ class AddEditAccountActivity : AppCompatActivity() {
         // VALIDATE BALANCE
         // =====================================================
 
-        val openingBalance =
+        val enteredBalance =
             balanceText.toDoubleOrNull()
 
 
-        if (openingBalance == null) {
+        if (enteredBalance == null) {
 
             etOpeningBalance.error =
                 "Enter a valid amount"
@@ -327,7 +382,7 @@ class AddEditAccountActivity : AppCompatActivity() {
 
 
         // =====================================================
-        // DATABASE OPERATION
+        // DATABASE
         // =====================================================
 
         lifecycleScope.launch(
@@ -340,10 +395,13 @@ class AddEditAccountActivity : AppCompatActivity() {
 
                     // =========================================
                     // ADD ACCOUNT
+                    //
+                    // Entered amount is the opening balance.
                     // =========================================
 
                     val newAccount =
                         Account(
+
                             userId =
                                 currentUserId,
 
@@ -351,7 +409,7 @@ class AddEditAccountActivity : AppCompatActivity() {
                                 name,
 
                             openingBalance =
-                                openingBalance
+                                enteredBalance
                         )
 
 
@@ -388,6 +446,46 @@ class AddEditAccountActivity : AppCompatActivity() {
                     }
 
 
+                    // =========================================
+                    // GET TRANSACTION EFFECT
+                    //
+                    // Example:
+                    //
+                    // Income       = +50,000
+                    // Transfer in  = +10,000
+                    // Expense      = -20,000
+                    // Transfer out = -5,000
+                    //
+                    // Effect = 35,000
+                    // =========================================
+
+                    val transactionEffect =
+                        database.accountDao().getTransactionEffect(accountId, currentUserId)
+
+
+                    // =========================================
+                    // CALCULATE NEW OPENING BALANCE
+                    //
+                    // Desired current balance
+                    //     = new opening balance
+                    //       + transaction effect
+                    //
+                    // Therefore:
+                    //
+                    // new opening balance
+                    //     = desired current balance
+                    //       - transaction effect
+                    // =========================================
+
+                    val newOpeningBalance =
+                        enteredBalance -
+                                transactionEffect
+
+
+                    // =========================================
+                    // UPDATE ACCOUNT
+                    // =========================================
+
                     val updatedAccount =
                         accountToUpdate.copy(
 
@@ -395,7 +493,7 @@ class AddEditAccountActivity : AppCompatActivity() {
                                 name,
 
                             openingBalance =
-                                openingBalance
+                                newOpeningBalance
                         )
 
 
@@ -407,9 +505,9 @@ class AddEditAccountActivity : AppCompatActivity() {
                 }
 
 
-                // =============================================
+                // =================================================
                 // SUCCESS
-                // =============================================
+                // =================================================
 
                 withContext(
                     Dispatchers.Main
@@ -437,7 +535,6 @@ class AddEditAccountActivity : AppCompatActivity() {
 
                 e.printStackTrace()
 
-
                 withContext(
                     Dispatchers.Main
                 ) {
@@ -451,5 +548,20 @@ class AddEditAccountActivity : AppCompatActivity() {
             }
         }
     }
-}
 
+
+    // =========================================================
+    // FORMAT AMOUNT
+    // =========================================================
+
+    private fun formatAmount(
+        amount: Double
+    ): String {
+
+        return String.format(
+            java.util.Locale.US,
+            "%.2f",
+            amount
+        )
+    }
+}

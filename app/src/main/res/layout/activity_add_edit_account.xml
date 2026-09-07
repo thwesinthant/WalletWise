@@ -88,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
+            android:id="@+id/tvBalanceLabel"
             android:text="Opening Balance"
             android:fontFamily="@font/dosis_extrabold"
             android:textColor="@color/neutral_900"

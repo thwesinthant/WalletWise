@@ -79,11 +79,11 @@ interface AccountDao {
 
 
     // =========================================================
-    // GET ACCOUNT BALANCES
+    // GET ALL ACCOUNT BALANCES
     //
-    // Balance =
+    // Current Balance =
     //
-    // opening_balance
+    // opening balance
     // + income
     // + transfer in
     // - expense
@@ -101,32 +101,37 @@ interface AccountDao {
                 a.opening_balance
 
                 + COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'INCOME'
                 ), 0)
 
                 + COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'TRANSFER_IN'
                 ), 0)
 
                 - COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'EXPENSE'
                 ), 0)
 
                 - COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'TRANSFER_OUT'
                 ), 0)
+
             ) AS current_balance
 
         FROM accounts a
@@ -156,32 +161,37 @@ interface AccountDao {
                 a.opening_balance
 
                 + COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'INCOME'
                 ), 0)
 
                 + COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'TRANSFER_IN'
                 ), 0)
 
                 - COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'EXPENSE'
                 ), 0)
 
                 - COALESCE((
-                    SELECT SUM(amount)
+                    SELECT SUM(t.amount)
                     FROM transactions t
                     WHERE t.account_id = a.account_id
+                    AND t.user_id = a.user_id
                     AND t.type = 'TRANSFER_OUT'
                 ), 0)
+
             ) AS current_balance
 
         FROM accounts a
@@ -196,4 +206,71 @@ interface AccountDao {
         accountId: Int,
         userId: Int
     ): AccountBalance?
+
+
+    // =========================================================
+    // GET TRANSACTION EFFECT
+    //
+    // Everything that happened after opening balance.
+    //
+    // transactionEffect =
+    //
+    // income
+    // + transfer in
+    // - expense
+    // - transfer out
+    //
+    // When editing the account's current balance:
+    //
+    // newOpeningBalance =
+    // desiredCurrentBalance - transactionEffect
+    // =========================================================
+
+    @Query(
+        """
+        SELECT
+
+            COALESCE((
+                SELECT SUM(t.amount)
+                FROM transactions t
+                WHERE t.account_id = :accountId
+                AND t.user_id = :userId
+                AND t.type = 'INCOME'
+            ), 0)
+
+            +
+
+            COALESCE((
+                SELECT SUM(t.amount)
+                FROM transactions t
+                WHERE t.account_id = :accountId
+                AND t.user_id = :userId
+                AND t.type = 'TRANSFER_IN'
+            ), 0)
+
+            -
+
+            COALESCE((
+                SELECT SUM(t.amount)
+                FROM transactions t
+                WHERE t.account_id = :accountId
+                AND t.user_id = :userId
+                AND t.type = 'EXPENSE'
+            ), 0)
+
+            -
+
+            COALESCE((
+                SELECT SUM(t.amount)
+                FROM transactions t
+                WHERE t.account_id = :accountId
+                AND t.user_id = :userId
+                AND t.type = 'TRANSFER_OUT'
+            ), 0)
+        """
+    )
+    suspend fun getTransactionEffect(
+        accountId: Int,
+        userId: Int
+    ): Double
 }

@@ -202,7 +202,7 @@ class GoalAdapter(
             // ==============================================
 
             holder.tvGoalStatus.text =
-                "COMPLETED"
+                "Completed"
 
 
             holder.tvGoalStatus.setTextColor(
@@ -234,7 +234,7 @@ class GoalAdapter(
             // ==============================================
 
             holder.tvGoalStatus.text =
-                "ACTIVE"
+                "Active"
 
 
             holder.tvGoalStatus.setTextColor(
