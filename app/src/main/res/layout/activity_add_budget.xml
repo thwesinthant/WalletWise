@@ -149,9 +149,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:inputType="textCapSentences"
-
                     android:fontFamily="@font/dosis_bold"
+
+                    android:inputType="textCapSentences"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -160,12 +160,11 @@
             <!-- ================================================= -->
             <!-- TOTAL BUDGET AMOUNT -->
             <!-- ================================================= -->
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBudgetAmount"
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
+                style="@style/Widget.MoneyMate.TextInputLayout"
+                android:layout_marginTop="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 

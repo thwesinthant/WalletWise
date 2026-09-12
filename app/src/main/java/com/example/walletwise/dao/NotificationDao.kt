@@ -10,36 +10,26 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NotificationDao {
 
-    // ============================================================
-    // INSERT NOTIFICATION
-    // ============================================================
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNotification(
         notification: Notification
     )
 
-    // ============================================================
-    // INSERT NOTIFICATION AND RETURN ID
-    // ============================================================
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNotificationAndGetId(
         notification: Notification
     ): Long
 
-    // ============================================================
-    // INSERT MULTIPLE
-    // ============================================================
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(
         notifications: List<Notification>
     )
 
-    // ============================================================
-    // GET USER NOTIFICATIONS
-    // ============================================================
 
     @Query(
         """
@@ -53,9 +43,7 @@ interface NotificationDao {
         userId: Int
     ): Flow<List<Notification>>
 
-    // ============================================================
-    // GET ONE NOTIFICATION
-    // ============================================================
+
 
     @Query(
         """
@@ -69,9 +57,6 @@ interface NotificationDao {
         notificationId: Int
     ): Notification?
 
-    // ============================================================
-    // MARK AS READ
-    // ============================================================
 
     @Query(
         """
@@ -84,9 +69,7 @@ interface NotificationDao {
         id: Int
     )
 
-    // ============================================================
-    // MARK ALL AS READ
-    // ============================================================
+
 
     @Query(
         """
@@ -100,9 +83,6 @@ interface NotificationDao {
         userId: Int
     )
 
-    // ============================================================
-    // DELETE SINGLE
-    // ============================================================
 
     @Query(
         """
@@ -114,9 +94,6 @@ interface NotificationDao {
         notificationId: Int
     )
 
-    // ============================================================
-    // CLEAR ALL
-    // ============================================================
 
     @Query(
         """
@@ -128,9 +105,6 @@ interface NotificationDao {
         userId: Int
     )
 
-    // ============================================================
-    // UNREAD COUNT
-    // ============================================================
 
     @Query(
         """
@@ -144,9 +118,7 @@ interface NotificationDao {
         userId: Int
     ): Flow<Int>
 
-    // ============================================================
-    // OVERALL BUDGET EXCEEDED CHECK
-    // ============================================================
+
 
     @Query(
         """
@@ -163,9 +135,7 @@ interface NotificationDao {
         budgetId: Int
     ): Int
 
-    // ============================================================
-    // CATEGORY BUDGET EXCEEDED CHECK
-    // ============================================================
+
 
     @Query(
         """
@@ -182,9 +152,7 @@ interface NotificationDao {
         budgetCategoryId: Int
     ): Int
 
-    // ============================================================
-    // GOAL COMPLETED CHECK
-    // ============================================================
+
 
     @Query(
         """

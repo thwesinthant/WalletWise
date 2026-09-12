@@ -12,9 +12,6 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.walletwise.R
 
-/**
- * Small modal shown when a category tile is tapped, letting the user edit or delete it.
- */
 class CategoryActionsBottomSheet(
     private val categoryLabel: String,
     private val onEdit: () -> Unit,

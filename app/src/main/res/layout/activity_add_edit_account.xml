@@ -103,7 +103,7 @@
             android:background="@drawable/bg_filter_unselected"
             android:paddingHorizontal="16dp"
             android:hint="0.00"
-            android:fontFamily="@font/molengo_regular"
+            android:fontFamily="@font/dosis_semibold"
             android:textColor="@color/neutral_900"
             android:textColorHint="@color/neutral_500"
             android:textSize="13sp"

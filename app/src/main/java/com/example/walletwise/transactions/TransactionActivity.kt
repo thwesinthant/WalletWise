@@ -3,6 +3,7 @@ package com.example.walletwise.transactions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -405,7 +406,7 @@ class TransactionActivity : AppCompatActivity() {
         // ADD TRANSACTION
         // ---------------------------------------------------------
 
-        findViewById<TextView>(
+        findViewById<ImageButton>(
             R.id.fabAddTransaction
         ).setOnClickListener {
 

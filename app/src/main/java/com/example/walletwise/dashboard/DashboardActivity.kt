@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -13,12 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.walletwise.R
 import com.example.walletwise.account.AccountActivity
-import com.example.walletwise.account.AccountAdapter
 import com.example.walletwise.account.AddEditAccountActivity
 import com.example.walletwise.account.DashboardAccountAdapter
 import com.example.walletwise.database.AppDatabase
 import com.example.walletwise.entity.Transaction
-import com.example.walletwise.goal.GoalActivity
 import com.example.walletwise.notification.NotificationActivity
 import com.example.walletwise.notification.NotificationPopupManager
 import com.example.walletwise.profile.ProfileActivity
@@ -818,7 +817,7 @@ class DashboardActivity : AppCompatActivity() {
         // ADD TRANSACTION
         // ---------------------------------------------------------
 
-        findViewById<TextView>(
+        findViewById<ImageButton>(
             R.id.fabAdd
         ).setOnClickListener {
 
@@ -1227,7 +1226,7 @@ class DashboardActivity : AppCompatActivity() {
             val transactionFlow =
                 database
                     .transactionDao()
-                    .getRecent10Transactions(
+                    .getRecent5Transactions(
                         currentUserId
                     )
 

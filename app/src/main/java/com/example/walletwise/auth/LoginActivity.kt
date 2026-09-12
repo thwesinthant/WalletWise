@@ -21,21 +21,31 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Auto-login: if a session exists, skip straight to Dashboard
-        if (SessionManager.isLoggedIn(this)) {
+        // Auto-login only when Remember Me was enabled
+        if (
+            SessionManager.isLoggedIn(this) &&
+            SessionManager.isRememberMeEnabled(this)
+        ) {
             val userId = SessionManager.getUserId(this)
-            val intent = Intent(this, DashboardActivity::class.java)
+
+            val intent =
+                Intent(this, DashboardActivity::class.java)
+
             intent.putExtra("USER_ID", userId)
+
             startActivity(intent)
             finish()
+
             return
         }
 
+        binding =
+            ActivityLoginBinding.inflate(layoutInflater)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        database = AppDatabase.getDatabase(this)
+        database =
+            AppDatabase.getDatabase(this)
 
         Toast.makeText(
             this,
@@ -55,15 +65,24 @@ class LoginActivity : AppCompatActivity() {
 
         // Go to Register
         binding.tvGoToSignUp.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent =
+                Intent(
+                    this,
+                    RegisterActivity::class.java
+                )
+
             startActivity(intent)
         }
 
         // Forgot Password
         binding.tvForgotPassword.setOnClickListener {
-            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    ForgotPasswordActivity::class.java
+                )
+            )
         }
-
 
         // Password visibility
         binding.btnTogglePassword.setOnClickListener {
@@ -73,35 +92,53 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser() {
 
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString()
+        val email =
+            binding.etEmail.text
+                .toString()
+                .trim()
+
+        val password =
+            binding.etPassword.text.toString()
 
         if (email.isEmpty()) {
-            binding.etEmail.error = "Enter your email"
+
+            binding.etEmail.error =
+                "Enter your email"
+
             binding.etEmail.requestFocus()
+
             return
         }
 
         if (password.isEmpty()) {
-            binding.etPassword.error = "Enter your password"
+
+            binding.etPassword.error =
+                "Enter your password"
+
             binding.etPassword.requestFocus()
+
             return
         }
 
         lifecycleScope.launch {
 
-            val user = database.userDao().login(
-                email = email,
-                password = PasswordUtils.hash(password)
-            )
+            val user =
+                database.userDao().login(
+                    email = email,
+                    password =
+                        PasswordUtils.hash(password)
+                )
 
             if (user != null) {
-                if (binding.cbRememberMe.isChecked) {
-                    SessionManager.saveUserSession(this@LoginActivity, user.userId)
-                } else {
-                    // in case a previous session lingers from an earlier "remember me" login
-                    SessionManager.clearSession(this@LoginActivity)
-                }
+
+                // Always keep the current logged-in user's ID.
+                // Remember Me only controls auto-login.
+                SessionManager.saveUserSession(
+                    context = this@LoginActivity,
+                    userId = user.userId,
+                    rememberMe =
+                        binding.cbRememberMe.isChecked
+                )
 
                 Toast.makeText(
                     this@LoginActivity,
@@ -109,12 +146,23 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-                intent.putExtra("USER_ID", user.userId)
+                val intent =
+                    Intent(
+                        this@LoginActivity,
+                        DashboardActivity::class.java
+                    )
+
+                intent.putExtra(
+                    "USER_ID",
+                    user.userId
+                )
+
                 startActivity(intent)
+
                 finish()
 
-            }  else {
+            } else {
+
                 Toast.makeText(
                     this@LoginActivity,
                     "Invalid email or password",
@@ -126,11 +174,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun togglePasswordVisibility() {
 
-        val currentType = binding.etPassword.inputType
+        val currentType =
+            binding.etPassword.inputType
 
         if (currentType == 129) {
+
             binding.etPassword.inputType = 1
+
         } else {
+
             binding.etPassword.inputType = 129
         }
 

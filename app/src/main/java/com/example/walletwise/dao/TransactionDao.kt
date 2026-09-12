@@ -60,27 +60,18 @@ interface TransactionDao {
     ): Flow<List<Transaction>>
 
 
-    // ============================================================
-    // GET RECENT 10 TRANSACTIONS
-    // ============================================================
-
     @Query(
         """
         SELECT *
         FROM transactions
         WHERE user_id = :userId
         ORDER BY created_at DESC
-        LIMIT 10
+        LIMIT 5
         """
     )
-    fun getRecent10Transactions(
+    fun getRecent5Transactions(
         userId: Int
     ): Flow<List<Transaction>>
-
-
-    // ============================================================
-    // GET SINGLE TRANSACTION
-    // ============================================================
 
     @Query(
         """
@@ -97,10 +88,6 @@ interface TransactionDao {
     ): Transaction?
 
 
-    // ============================================================
-    // GET TRANSFER PAIR
-    // ============================================================
-
     @Query(
         """
         SELECT *
@@ -116,10 +103,6 @@ interface TransactionDao {
     ): List<Transaction>
 
 
-    // ============================================================
-    // DELETE SINGLE TRANSACTION
-    // ============================================================
-
     @Query(
         """
         DELETE FROM transactions
@@ -132,10 +115,6 @@ interface TransactionDao {
         userId: Int
     )
 
-
-    // ============================================================
-    // DELETE COMPLETE TRANSFER
-    // ============================================================
 
     @Query(
         """
@@ -150,10 +129,6 @@ interface TransactionDao {
     )
 
 
-    // ============================================================
-    // TOTAL EXPENSE
-    // ============================================================
-
     @Query(
         """
         SELECT COALESCE(SUM(amount), 0)
@@ -166,10 +141,6 @@ interface TransactionDao {
         userId: Int
     ): Flow<Double>
 
-
-    // ============================================================
-    // TOTAL INCOME
-    // ============================================================
 
     @Query(
         """
@@ -184,9 +155,6 @@ interface TransactionDao {
     ): Flow<Double>
 
 
-    // ============================================================
-    // TOTAL EXPENSE FOR PERIOD
-    // ============================================================
 
     @Query(
         """
@@ -205,9 +173,6 @@ interface TransactionDao {
     ): Double
 
 
-    // ============================================================
-    // CATEGORY EXPENSE FOR PERIOD
-    // ============================================================
 
     @Query(
         """
@@ -228,9 +193,6 @@ interface TransactionDao {
     ): Double
 
 
-    // ============================================================
-    // UPDATE NORMAL TRANSACTION
-    // ============================================================
 
     @Query(
         """
@@ -258,10 +220,6 @@ interface TransactionDao {
     )
 
 
-    // ============================================================
-    // UPDATE TRANSFER TRANSACTION
-    // ============================================================
-
     @Query(
         """
         UPDATE transactions
@@ -285,10 +243,6 @@ interface TransactionDao {
         note: String?
     )
 
-
-    // ============================================================
-    // UPDATE COMPLETE TRANSFER
-    // ============================================================
 
     @RoomTransaction
     suspend fun updateTransfer(
@@ -318,10 +272,6 @@ interface TransactionDao {
     }
 
 
-    // ============================================================
-    // LATEST TRANSACTION DATE
-    // ============================================================
-
     @Query(
         """
         SELECT MAX(created_at)
@@ -333,18 +283,6 @@ interface TransactionDao {
         userId: Int
     ): Flow<Long?>
 
-
-    // ============================================================
-    // BUDGET EXPENSE
-    //
-    // Calculates ALL EXPENSE transactions belonging to the
-    // user's budget date range.
-    //
-    // IMPORTANT:
-    // There is intentionally NO budgetId parameter.
-    //
-    // The budget itself is identified by its date range.
-    // ============================================================
 
     @Query(
         """

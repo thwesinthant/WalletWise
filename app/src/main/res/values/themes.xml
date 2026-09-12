@@ -21,16 +21,20 @@
         <item name="android:layout_height">0dp</item>
     </style>
 
-    <!-- for add budget theme    -->
+     <!-- for splash screen -->
     <style name="Theme.WalletWise.Starting" parent="Theme.SplashScreen">
 
-        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenBackground">
+            @color/primary_100
+        </item>
 
-        <item name="windowSplashScreenAnimatedIcon">@drawable/walletwise_logo_cleaned</item>
+        <item name="windowSplashScreenAnimatedIcon">
+            @drawable/wallet_splash_logo
+        </item>
 
-        <item name="windowSplashScreenIconBackgroundColor">@color/splash_background</item>
-
-        <item name="postSplashScreenTheme">@style/Theme.ExpenceAndBudgetTracker</item>
+        <item name="postSplashScreenTheme">
+            @style/Theme.ExpenceAndBudgetTracker
+        </item>
 
     </style>
 

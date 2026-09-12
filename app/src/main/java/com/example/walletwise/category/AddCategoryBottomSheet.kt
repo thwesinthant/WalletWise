@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.walletwise.R
 import com.example.walletwise.entity.Category
 
-/**
- * Add/edit category dialog. Pass [existing] to pre-fill the form and switch the button
- * to "Update Category"; leave it null to create a brand new category.
- */
+
 class AddCategoryBottomSheet(
     private val existing: Category? = null,
     private val onSave: (Category) -> Unit

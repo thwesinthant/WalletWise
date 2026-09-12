@@ -76,8 +76,8 @@
                 <ImageView
                     android:id="@+id/imgLogo"
 
-                    android:layout_width="95dp"
-                    android:layout_height="95dp"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
 
                     android:adjustViewBounds="true"
 
@@ -85,7 +85,7 @@
 
                     android:scaleType="fitCenter"
 
-                    android:src="@drawable/walletwise_logo" />
+                    android:src="@drawable/wallet_icon_transparent" />
 
 
                 <TextView
@@ -144,7 +144,7 @@
 
             android:background="@drawable/bg_login_card"
 
-            android:elevation="7dp"
+            android:elevation="5dp"
 
             android:orientation="vertical"
 

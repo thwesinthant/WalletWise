@@ -3,6 +3,7 @@ package com.example.walletwise.category
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -81,18 +82,15 @@ class SelectCategoryActivity : AppCompatActivity() {
             database.categoryDao()
 
         // ========================================================
-        // TOOLBAR
+        // BACK BUTTON
         // ========================================================
 
-        val toolbar =
-            findViewById<MaterialToolbar>(
-                R.id.toolbar
+        val btnBack =
+            findViewById<ImageView>(
+                R.id.btnBack
             )
 
-        toolbar.title =
-            "Categories"
-
-        toolbar.setNavigationOnClickListener {
+        btnBack.setOnClickListener {
             finish()
         }
 

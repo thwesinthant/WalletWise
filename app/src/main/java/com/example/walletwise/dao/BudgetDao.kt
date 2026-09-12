@@ -13,11 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BudgetDao {
-
-    // ============================================================
-    // BUDGET
-    // ============================================================
-
     @Insert(
         onConflict = OnConflictStrategy.REPLACE
     )
@@ -25,22 +20,15 @@ interface BudgetDao {
         budget: Budget
     ): Long
 
-
     @Update
     suspend fun updateBudget(
         budget: Budget
     )
 
-
     @Delete
     suspend fun deleteBudget(
         budget: Budget
     )
-
-
-    // ============================================================
-    // GET ALL BUDGETS FOR USER
-    // ============================================================
 
     @Query(
         """
@@ -54,11 +42,6 @@ interface BudgetDao {
         userId: Int
     ): Flow<List<Budget>>
 
-
-    // ============================================================
-    // GET ONE BUDGET
-    // ============================================================
-
     @Query(
         """
         SELECT *
@@ -71,10 +54,6 @@ interface BudgetDao {
         budgetId: Int
     ): Budget?
 
-
-    // ============================================================
-    // GET ACTIVE BUDGET
-    // ============================================================
 
     @Query(
         """
@@ -93,10 +72,6 @@ interface BudgetDao {
     ): Budget?
 
 
-    // ============================================================
-    // CHECK OVERLAPPING BUDGET
-    // ============================================================
-
     @Query(
         """
         SELECT COUNT(*)
@@ -113,11 +88,6 @@ interface BudgetDao {
         startDate: Long,
         endDate: Long
     ): Int
-
-
-    // ============================================================
-    // BUDGET CATEGORIES
-    // ============================================================
 
     @Insert(
         onConflict = OnConflictStrategy.REPLACE
@@ -146,11 +116,6 @@ interface BudgetDao {
         budgetCategory: BudgetCategory
     )
 
-
-    // ============================================================
-    // GET BUDGET CATEGORIES
-    // ============================================================
-
     @Query(
         """
         SELECT *
@@ -162,11 +127,6 @@ interface BudgetDao {
     fun getBudgetCategories(
         budgetId: Int
     ): Flow<List<BudgetCategory>>
-
-
-    // ============================================================
-    // GET BUDGET CATEGORIES ONCE
-    // ============================================================
 
     @Query(
         """
@@ -181,10 +141,6 @@ interface BudgetDao {
     ): List<BudgetCategory>
 
 
-    // ============================================================
-    // DELETE ALL CATEGORY LIMITS FOR A BUDGET
-    // ============================================================
-
     @Query(
         """
         DELETE FROM budget_categories
@@ -194,11 +150,6 @@ interface BudgetDao {
     suspend fun deleteCategoriesForBudget(
         budgetId: Int
     )
-
-
-    // ============================================================
-    // INSERT BUDGET + CATEGORIES
-    // ============================================================
 
     @Transaction
     suspend fun insertBudgetWithCategories(
@@ -298,11 +249,6 @@ interface BudgetDao {
         }
     }
 
-
-    // ============================================================
-    // GET ALL ACTIVE BUDGETS
-    // ============================================================
-
     @Query(
         """
         SELECT *
@@ -317,11 +263,6 @@ interface BudgetDao {
         userId: Int,
         date: Long
     ): List<Budget>
-
-
-    // ============================================================
-    // DELETE BUDGET COMPLETELY
-    // ============================================================
 
     @Transaction
     suspend fun deleteBudgetCompletely(

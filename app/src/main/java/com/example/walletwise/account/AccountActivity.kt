@@ -3,6 +3,7 @@ package com.example.walletwise.account
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -20,43 +21,19 @@ import kotlinx.coroutines.withContext
 
 class AccountActivity : AppCompatActivity() {
 
-    // =========================================================
-    // USER
-    // =========================================================
 
     private var currentUserId: Int = -1
-
     private var userCurrency: String = "MMK"
-
-
-    // =========================================================
-    // DATABASE
-    // =========================================================
 
     private lateinit var database: AppDatabase
 
-
-    // =========================================================
-    // ADAPTER
-    // =========================================================
-
     private lateinit var accountAdapter: AccountAdapter
 
-
-    // =========================================================
     // VIEWS
-    // =========================================================
-
     private lateinit var rvAccounts: RecyclerView
-
     private lateinit var tvAccountSummary: TextView
-
     private lateinit var emptyAccountState: LinearLayout
 
-
-    // =========================================================
-    // ON CREATE
-    // =========================================================
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -70,11 +47,7 @@ class AccountActivity : AppCompatActivity() {
             R.layout.activity_account
         )
 
-
-        // =====================================================
         // USER ID
-        // =====================================================
-
         currentUserId =
             intent.getIntExtra(
                 "USER_ID",
@@ -95,21 +68,13 @@ class AccountActivity : AppCompatActivity() {
             return
         }
 
-
-        // =====================================================
         // DATABASE
-        // =====================================================
-
         database =
             AppDatabase.getDatabase(
                 applicationContext
             )
 
-
-        // =====================================================
         // FIND VIEWS
-        // =====================================================
-
         rvAccounts =
             findViewById(
                 R.id.rvAccounts
@@ -125,21 +90,12 @@ class AccountActivity : AppCompatActivity() {
                 R.id.emptyAccountState
             )
 
-
-        // =====================================================
-        // RECYCLER VIEW
-        // =====================================================
-
         rvAccounts.layoutManager =
             LinearLayoutManager(
                 this
             )
 
-
-        // =====================================================
         // ADAPTER
-        // =====================================================
-
         accountAdapter =
             AccountAdapter(
                 accounts = emptyList(),
@@ -158,10 +114,6 @@ class AccountActivity : AppCompatActivity() {
             accountAdapter
 
 
-        // =====================================================
-        // BACK
-        // =====================================================
-
         findViewById<View>(
             R.id.btnBack
         ).setOnClickListener {
@@ -169,28 +121,18 @@ class AccountActivity : AppCompatActivity() {
             finish()
         }
 
-
-        // =====================================================
-        // ADD ACCOUNT
-        // =====================================================
-
-        findViewById<TextView>(
+        findViewById<ImageButton>(
             R.id.btnAddAccount
         ).setOnClickListener {
 
             openAddAccount()
         }
 
-
-
         loadUserCurrency()
         observeAccounts()
     }
 
-    // =========================================================
 // LOAD USER CURRENCY
-// =========================================================
-
     private fun loadUserCurrency() {
 
         lifecycleScope.launch {
@@ -218,9 +160,7 @@ class AccountActivity : AppCompatActivity() {
         }
     }
 
-    // =========================================================
     // ADD ACCOUNT
-    // =========================================================
 
     private fun openAddAccount() {
 
@@ -243,10 +183,7 @@ class AccountActivity : AppCompatActivity() {
     }
 
 
-    // =========================================================
     // EDIT ACCOUNT
-    // =========================================================
-
     private fun openEditAccount(
         accountId: Int
     ) {
@@ -275,11 +212,7 @@ class AccountActivity : AppCompatActivity() {
         )
     }
 
-
-    // =========================================================
     // OBSERVE ACCOUNTS
-    // =========================================================
-
     private fun observeAccounts() {
 
         lifecycleScope.launch {
@@ -299,10 +232,7 @@ class AccountActivity : AppCompatActivity() {
     }
 
 
-    // =========================================================
     // UPDATE UI
-    // =========================================================
-
     private fun updateAccountUI(
         accounts: List<AccountBalance>
     ) {
@@ -350,11 +280,7 @@ class AccountActivity : AppCompatActivity() {
         }
     }
 
-
-    // =========================================================
     // ACCOUNT MENU
-    // =========================================================
-
     private fun showAccountMenu(
         account: AccountBalance
     ) {
@@ -409,10 +335,7 @@ class AccountActivity : AppCompatActivity() {
         val balance =
             account.currentBalance
 
-
-        // =========================================================
         // CHECK ACCOUNT BALANCE
-        // =========================================================
 
         if (kotlin.math.abs(balance) > 0.000001) {
 
@@ -443,11 +366,8 @@ class AccountActivity : AppCompatActivity() {
         }
 
 
-        // =========================================================
         // BALANCE IS ZERO
         // ALLOW DELETE
-        // =========================================================
-
         AlertDialog.Builder(
             this
         )
@@ -473,10 +393,7 @@ class AccountActivity : AppCompatActivity() {
     }
 
 
-    // =========================================================
     // DELETE ACCOUNT
-    // =========================================================
-
     private fun deleteAccount(
         account: AccountBalance
     ) {
@@ -486,10 +403,6 @@ class AccountActivity : AppCompatActivity() {
         ) {
 
             try {
-
-                // =================================================
-                // GET LATEST ACCOUNT BALANCE
-                // =================================================
 
                 val latestAccountBalance =
                     database
@@ -520,9 +433,7 @@ class AccountActivity : AppCompatActivity() {
                 }
 
 
-                // =================================================
                 // SAFETY CHECK
-                // =================================================
 
                 if (
                     kotlin.math.abs(
@@ -561,11 +472,6 @@ class AccountActivity : AppCompatActivity() {
                     return@launch
                 }
 
-
-                // =================================================
-                // GET ACCOUNT ENTITY
-                // =================================================
-
                 val accountEntity =
                     database
                         .accountDao()
@@ -573,11 +479,6 @@ class AccountActivity : AppCompatActivity() {
                             account.accountId,
                             currentUserId
                         )
-
-
-                // =================================================
-                // DELETE
-                // =================================================
 
                 if (accountEntity != null) {
 

@@ -9,6 +9,7 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -21,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.walletwise.R
 import com.example.walletwise.database.AppDatabase
+import com.example.walletwise.database.PresentationSeed
 import com.example.walletwise.entity.AccountItem
 import com.example.walletwise.entity.BreakdownItem
 import com.example.walletwise.entity.DashboardPeriod
@@ -79,7 +81,37 @@ class DashboardAnalyticsActivity : AppCompatActivity() {
             finish()
             return
         }
-
+//        if (currentUserId == 4) {
+//            lifecycleScope.launch {
+//                try {
+//                    val seeded = PresentationSeed.seedForPresentationUser(
+//                        applicationContext
+//                    )
+//
+//                    if (seeded) {
+//                        Toast.makeText(
+//                            this@DashboardAnalyticsActivity,
+//                            "Presentation data seeded successfully",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    } else {
+//                        Toast.makeText(
+//                            this@DashboardAnalyticsActivity,
+//                            "Presentation data already exists",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//
+//                } catch (e: Exception) {
+//                    Toast.makeText(
+//                        this@DashboardAnalyticsActivity,
+//                        "Seed failed: ${e.message}",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//            }
+//        }
+//
 
         database =
             AppDatabase.getDatabase(

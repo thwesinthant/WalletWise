@@ -1,17 +1,58 @@
+
 [
-  { "label": "Groceries",    "icon": "ic_category_groceries",    "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
-  { "label": "Travel",       "icon": "ic_category_travel",       "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
-  { "label": "Car",          "icon": "ic_category_car",          "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
-  { "label": "Home",         "icon": "ic_category_home",         "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
-  { "label": "Insurances",   "icon": "ic_category_insurances",   "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
-  { "label": "Education",    "icon": "ic_category_education",    "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
-  { "label": "Marketing",    "icon": "ic_category_marketing",    "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
-  { "label": "shopping",     "icon": "ic_category_shopping",     "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
-  { "label": "Internet",     "icon": "ic_category_internet",     "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
-  { "label": "Water",        "icon": "ic_category_water",        "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
-  { "label": "Rent",         "icon": "ic_category_rent",         "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
-  { "label": "Gym",          "icon": "ic_category_gym",          "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
-  { "label": "Subscription", "icon": "ic_category_subscription", "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
-  { "label": "Vacation",     "icon": "ic_category_vacation",     "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
-  { "label": "Other",        "icon": "ic_category_other",        "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" }
+  { "label": "Groceries",      "icon": "ic_category_groceries",      "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Dining",         "icon": "ic_category_dining",         "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Food & Drinks",  "icon": "ic_category_food",           "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+
+  { "label": "Travel",         "icon": "ic_category_travel",         "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Car",            "icon": "ic_category_car",            "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Fuel",           "icon": "ic_category_fuel",           "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Public Transport","icon": "ic_category_transport",     "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Taxi",           "icon": "ic_category_taxi",           "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Parking",        "icon": "ic_category_parking",        "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+
+  { "label": "Home",           "icon": "ic_category_home",           "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+  { "label": "Rent",           "icon": "ic_category_rent",           "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Electricity",    "icon": "ic_category_electricity",    "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Water",          "icon": "ic_category_water",          "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Internet",       "icon": "ic_category_internet",       "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Phone",          "icon": "ic_category_phone",          "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Home Maintenance","icon": "ic_category_maintenance",   "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+
+  { "label": "Shopping",       "icon": "ic_category_shopping",       "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Clothing",       "icon": "ic_category_clothing",       "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+  { "label": "Electronics",    "icon": "ic_category_electronics",    "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+
+  { "label": "Health",         "icon": "ic_category_health",          "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+  { "label": "Medicine",       "icon": "ic_category_medicine",        "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+  { "label": "Gym",            "icon": "ic_category_gym",             "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+
+  { "label": "Education",      "icon": "ic_category_education",       "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+  { "label": "Entertainment",  "icon": "ic_category_entertainment",   "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+  { "label": "Subscriptions",  "icon": "ic_category_subscription",    "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+
+  { "label": "Insurance",      "icon": "ic_category_insurance",        "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Taxes",          "icon": "ic_category_taxes",            "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Bank Fees",      "icon": "ic_category_bank",             "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+
+  { "label": "Gifts",          "icon": "ic_category_gifts",            "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+  { "label": "Family",         "icon": "ic_category_family",           "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Pets",           "icon": "ic_category_pets",             "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Charity",        "icon": "ic_category_charity",          "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+
+  { "label": "Vacation",       "icon": "ic_category_vacation",         "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Marketing",      "icon": "ic_category_marketing",        "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+
+  { "label": "Salary",         "icon": "ic_category_salary",            "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Freelance",      "icon": "ic_category_freelance",         "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+  { "label": "Business",       "icon": "ic_category_business",          "tintColor": "#3D7BD9", "bgColor": "#E4EEFC" },
+  { "label": "Bonus",          "icon": "ic_category_bonus",             "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Interest",       "icon": "ic_category_interest",          "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Investment",     "icon": "ic_category_investment",        "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" },
+  { "label": "Rental Income",  "icon": "ic_category_rental",            "tintColor": "#D97A3D", "bgColor": "#FBEBE0" },
+  { "label": "Refund",         "icon": "ic_category_refund",             "tintColor": "#3A9E5F", "bgColor": "#E3F5E9" },
+  { "label": "Gift Income",    "icon": "ic_category_gift_income",        "tintColor": "#D9536F", "bgColor": "#FBE5E9" },
+
+  { "label": "Other",          "icon": "ic_category_other",             "tintColor": "#8A5FD9", "bgColor": "#EEE7FB" }
 ]
+

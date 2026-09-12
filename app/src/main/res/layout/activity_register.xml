@@ -51,8 +51,8 @@
                 <ImageView
                     android:id="@+id/imgLogo"
 
-                    android:layout_width="95dp"
-                    android:layout_height="95dp"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
 
                     android:adjustViewBounds="true"
 
@@ -60,7 +60,7 @@
 
                     android:scaleType="fitCenter"
 
-                    android:src="@drawable/walletwise_logo" />
+                    android:src="@drawable/wallet_icon_transparent" />
 
 
                 <!-- Brand Name -->
@@ -119,11 +119,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="-26dp"
+            android:layout_marginTop="0dp"
 
             android:background="@drawable/bg_login_card"
 
-            android:elevation="7dp"
+            android:elevation="5dp"
 
             android:orientation="vertical"
 

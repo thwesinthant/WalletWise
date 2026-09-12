@@ -12,39 +12,21 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AccountDao {
 
-    // =========================================================
-    // INSERT
-    // =========================================================
 
     @Insert
     suspend fun insert(
         account: Account
     ): Long
 
-
-    // =========================================================
-    // UPDATE
-    // =========================================================
-
     @Update
     suspend fun update(
         account: Account
     )
 
-
-    // =========================================================
-    // DELETE
-    // =========================================================
-
     @Delete
     suspend fun delete(
         account: Account
     )
-
-
-    // =========================================================
-    // GET ACCOUNTS FOR USER
-    // =========================================================
 
     @Query(
         """
@@ -57,11 +39,6 @@ interface AccountDao {
     fun getAccountsForUser(
         userId: Int
     ): Flow<List<Account>>
-
-
-    // =========================================================
-    // GET ACCOUNT BY ID
-    // =========================================================
 
     @Query(
         """
@@ -89,7 +66,6 @@ interface AccountDao {
     // - expense
     // - transfer out
     // =========================================================
-
     @Query(
         """
         SELECT
@@ -144,11 +120,6 @@ interface AccountDao {
     fun getAccountBalances(
         userId: Int
     ): Flow<List<AccountBalance>>
-
-
-    // =========================================================
-    // GET SINGLE ACCOUNT BALANCE
-    // =========================================================
 
     @Query(
         """
@@ -206,25 +177,6 @@ interface AccountDao {
         accountId: Int,
         userId: Int
     ): AccountBalance?
-
-
-    // =========================================================
-    // GET TRANSACTION EFFECT
-    //
-    // Everything that happened after opening balance.
-    //
-    // transactionEffect =
-    //
-    // income
-    // + transfer in
-    // - expense
-    // - transfer out
-    //
-    // When editing the account's current balance:
-    //
-    // newOpeningBalance =
-    // desiredCurrentBalance - transactionEffect
-    // =========================================================
 
     @Query(
         """

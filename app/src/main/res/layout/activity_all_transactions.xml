@@ -226,28 +226,20 @@
 
     </LinearLayout>
 
-
-    <!-- ============================== -->
-    <!-- FLOATING ADD BUTTON -->
-    <!-- ============================== -->
-
-    <TextView
+    <ImageButton
         android:id="@+id/fabAddTransaction"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_fab_add"
+        android:src="@drawable/ic_add"
+        android:scaleType="center"
+        android:padding="0dp"
         android:elevation="8dp"
-        android:gravity="center"
-        android:text="+"
-        android:fontFamily="@font/dosis_extrabold"
-        android:textColor="@color/neutral_0"
-        android:textSize="26sp"
-        android:includeFontPadding="false"
+        android:contentDescription="Add transaction"
         android:clickable="true"
         android:focusable="true"
-        android:contentDescription="Add transaction"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

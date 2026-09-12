@@ -5,9 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
+//    ph data api
 //    private const val BASE_URL =
-//        "http://192.168.100.127/walletwise_api/"
+//        "http://10.207.67.131/walletwise_api/"
 
+    // emulator api
     private const val BASE_URL =
         "http://192.168.100.127/walletwise_api/"
 

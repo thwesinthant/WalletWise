@@ -59,16 +59,14 @@
                     android:textSize="21sp" />
 
                 <!-- Add -->
-                <TextView
+                <ImageButton
                     android:id="@+id/btnAddAccount"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
-                    android:gravity="center"
-                    android:text="+"
-                    android:textColor="@color/neutral_0"
-                    android:textSize="23sp"
-                    android:fontFamily="@font/dosis_extrabold"
                     android:background="@drawable/bg_fab_add"
+                    android:src="@drawable/ic_add"
+                    android:scaleType="center"
+                    android:padding="0dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:elevation="3dp"

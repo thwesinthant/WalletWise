@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -56,7 +57,7 @@ class BudgetActivity : AppCompatActivity() {
     // BUDGET LIST
     // ============================================================
 
-    private lateinit var btnAddBudget: TextView
+    private lateinit var btnAddBudget: ImageButton
 
     private lateinit var budgetListContainer: LinearLayout
 

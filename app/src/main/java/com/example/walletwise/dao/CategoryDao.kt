@@ -10,11 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CategoryDao {
-
-    // ============================================================
-    // OBSERVE ALL CATEGORIES FOR USER
-    // ============================================================
-
     @Query(
         """
     SELECT *
@@ -27,10 +22,6 @@ interface CategoryDao {
         userId: Int
     ): Flow<List<CategoryEntity>>
 
-    // ============================================================
-    // COUNT USER CATEGORIES
-    // ============================================================
-
     @Query(
         """
     SELECT COUNT(*)
@@ -41,10 +32,6 @@ interface CategoryDao {
     suspend fun countByUserId(
         userId: Int
     ): Int
-
-    // ============================================================
-    // GET MINIMUM SORT ORDER
-    // ============================================================
 
     @Query(
         """
@@ -78,36 +65,24 @@ interface CategoryDao {
         userId: Int
     ): CategoryEntity?
 
-    // ============================================================
-    // INSERT MULTIPLE CATEGORIES
-    // ============================================================
 
     @Insert
     suspend fun insertAll(
         categories: List<CategoryEntity>
     )
 
-    // ============================================================
-    // INSERT ONE CATEGORY
-    // ============================================================
 
     @Insert
     suspend fun insert(
         category: CategoryEntity
     ): Long
 
-    // ============================================================
-    // UPDATE CATEGORY
-    // ============================================================
 
     @Update
     suspend fun update(
         category: CategoryEntity
     )
 
-    // ============================================================
-    // DELETE CATEGORY
-    // ============================================================
 
     @Delete
     suspend fun delete(

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 
@@ -81,7 +82,7 @@ class GoalActivity : AppCompatActivity() {
 
     private lateinit var rvGoals: RecyclerView
 
-    private lateinit var btnAddGoal: View
+    private lateinit var btnAddGoal: ImageButton
 
     private lateinit var btnBack: View
 
